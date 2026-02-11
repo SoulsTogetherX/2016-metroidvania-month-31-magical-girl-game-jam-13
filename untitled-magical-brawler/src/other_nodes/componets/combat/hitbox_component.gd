@@ -13,6 +13,14 @@ signal made_collision
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	monitoring = false
+	monitorable = true
+#endregion
+
+
+
 #region Public Methods
 func enact_collision(
 	health : HealthComponent,

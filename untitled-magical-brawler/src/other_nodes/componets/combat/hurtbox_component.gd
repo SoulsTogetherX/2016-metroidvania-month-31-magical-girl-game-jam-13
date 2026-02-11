@@ -14,7 +14,9 @@ signal on_hit(collision : HitboxComponent, invic : InvincibilityComponent)
 
 
 #region Virtual Methods
-func _init() -> void:
+func _ready() -> void:
+	monitoring = true
+	monitorable = false
 	area_entered.connect(_on_area_enter)
 #endregion
 

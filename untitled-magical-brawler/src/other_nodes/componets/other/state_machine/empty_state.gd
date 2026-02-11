@@ -26,6 +26,8 @@ func state_name() -> StringName
 
 #region Public Methods (State Change)
 @abstract
+func state_passthrough(actor : Node) -> EmptyState
+@abstract
 func enter_state(actor : Node) -> void
 @abstract
 func exit_state() -> void

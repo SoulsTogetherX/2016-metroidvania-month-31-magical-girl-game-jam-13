@@ -8,7 +8,7 @@ class_name StateMachine extends Node
 
 
 #region Private Variables
-var _current_state : EmptyState
+var _current_state : EmptyState = null
 #endregion
 
 
@@ -38,7 +38,11 @@ func _change_state(new_state: EmptyState) -> void:
 		_current_state.exit()
 		_current_state.force_change.disconnect(_change_state)
 
-	_current_state = new_state
+	var check_state : EmptyState = new_state
+	while check_state:
+		_current_state = check_state
+		check_state = check_state.state_passthrough(actor)
+	
 	_current_state.force_change.connect(_change_state, CONNECT_DEFERRED)
 	_current_state.enter(actor)
 #endregion
