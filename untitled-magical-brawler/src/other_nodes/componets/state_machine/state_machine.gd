@@ -14,6 +14,9 @@ var _current_state : EmptyState
 
 
 #region Virtual Methods
+func _ready() -> void:
+	_change_state(starting_state)
+
 func _process(delta: float) -> void:
 	var new_state := _current_state.process_frame(delta)
 	if new_state:
