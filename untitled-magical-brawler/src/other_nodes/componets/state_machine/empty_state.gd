@@ -1,6 +1,12 @@
 @abstract
 class_name EmptyState extends Node
 
+#region Signals
+@warning_ignore("unused_signal")
+signal force_change(state : EmptyState)
+#endregion
+
+
 
 #region Virtual Methods
 @abstract

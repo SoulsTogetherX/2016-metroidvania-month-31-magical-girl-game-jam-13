@@ -36,7 +36,9 @@ func _unhandled_input(input: InputEvent) -> void:
 func _change_state(new_state: EmptyState) -> void:
 	if _current_state:
 		_current_state.exit()
+		_current_state.force_change.disconnect(_change_state)
 
 	_current_state = new_state
+	_current_state.force_change.connect(_change_state, CONNECT_DEFERRED)
 	_current_state.enter(actor)
 #endregion
