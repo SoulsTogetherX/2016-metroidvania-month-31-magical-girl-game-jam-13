@@ -2,13 +2,18 @@ class_name StateMachine extends Node
 
 
 #region External Variables
-@export var starting_state : EmptyState
-@export var actor : Node
+@export var starting_state : State
+@export var disabled : bool:
+	set(val):
+		if val == disabled:
+			return
+		disabled = val
+		_toggle_processes(!disabled)
 #endregion
 
 
 #region Private Variables
-var _current_state : EmptyState = null
+var _current_state : State = null
 #endregion
 
 
@@ -33,16 +38,37 @@ func _unhandled_input(input: InputEvent) -> void:
 
 
 #region Private Methods (Helper)
-func _change_state(new_state: EmptyState) -> void:
+func _change_state(new_state: State) -> void:
 	if _current_state:
-		_current_state.exit()
+		_current_state.exit_state()
 		_current_state.force_change.disconnect(_change_state)
-
-	var check_state : EmptyState = new_state
+	
+	if !new_state:
+		clear_state()
+		return
+	
+	var check_state : State = new_state
 	while check_state:
 		_current_state = check_state
-		check_state = check_state.state_passthrough(actor)
+		check_state = check_state.state_passthrough()
 	
 	_current_state.force_change.connect(_change_state, CONNECT_DEFERRED)
-	_current_state.enter(actor)
+	_current_state.enter_state()
+
+func _toggle_processes(toggle : bool) -> void:
+	if disabled:
+		return
+	
+	set_process(toggle)
+	set_process_unhandled_input(toggle)
+	set_physics_process(toggle)
+#endregion
+
+
+#region Public Methods (Helper)
+func force_state(new_state: State) -> void:
+	_change_state(new_state)
+func clear_state() -> void:
+	_current_state = null
+	_toggle_processes(false)
 #endregion
