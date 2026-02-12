@@ -1,4 +1,4 @@
-class_name InvincibilityComponent extends Area2D
+class_name InvincibilityComponent extends Node
 
 
 #region Signals
