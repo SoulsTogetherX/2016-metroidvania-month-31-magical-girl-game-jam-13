@@ -18,7 +18,12 @@ func begin_state(args : Dictionary) -> bool:
 	if !velocity:
 		return false
 	
-	velocity.force_velocity_y(gravity.get_jump_impulse(jump_height))
+	velocity.force_velocity_y(
+		GravityComponent.get_trajectory_impulse(
+			gravity.gravity,
+			jump_height
+		)
+	)
 	return true
 func end_state(args : Dictionary) -> void:
 	var velocity := get_velocity(args)
