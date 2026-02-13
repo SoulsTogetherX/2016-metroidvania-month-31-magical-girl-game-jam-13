@@ -1,14 +1,14 @@
-extends MachineState
+extends StateNode
 
 
 #region External Variables
 @export_group("Modules")
 @export var action_cache : ActionCacheComponent
-@export var task : TaskManager
+@export var task : VelocityTaskManager
 
 @export_group("States")
-@export var slowdown_state : MachineState
-@export var jump_state : MachineState
+@export var slowdown_state : StateNode
+@export var jump_state : StateNode
 
 @export_group("Other")
 @export var coyote_timer : Timer
@@ -38,7 +38,7 @@ func _disallow_jump() -> void:
 
 
 #region Public Virtual Methods
-func process_physics(_delta: float) -> MachineState:
+func process_physics(_delta: float) -> StateNode:
 	if _allow_jump && action_cache.is_jumping():
 		return jump_state
 	if action_cache.is_on_ground():

@@ -1,22 +1,22 @@
-extends MachineState
+extends StateNode
 
 
 #region External Variables
 @export_group("Modules")
 @export var action_cache : ActionCacheComponent
-@export var task : TaskManager
+@export var task : VelocityTaskManager
 
 @export_group("States")
-@export var idle_state : MachineState
-@export var move_state : MachineState
-@export var jump_state : MachineState
-@export var fall_state : MachineState
+@export var idle_state : StateNode
+@export var move_state : StateNode
+@export var jump_state : StateNode
+@export var fall_state : StateNode
 #endregion
 
 
 
 #region Public Virtual Methods
-func process_physics(_delta: float) -> MachineState:
+func process_physics(_delta: float) -> StateNode:
 	if action_cache.is_jumping():
 		return jump_state
 	if !action_cache.is_on_ground():
@@ -30,7 +30,7 @@ func process_physics(_delta: float) -> MachineState:
 
 
 #region Public Methods (State Change)
-func state_passthrough() -> MachineState:
+func state_passthrough() -> StateNode:
 	if action_cache.is_moving():
 		return move_state
 	if task.velocity.attempting_idle():

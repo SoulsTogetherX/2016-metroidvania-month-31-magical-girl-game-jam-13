@@ -7,19 +7,19 @@
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="5_uym1e"]
 [ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/state_machine.gd" id="5_xahdq"]
 [ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
-[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/state_manager/movement_manager/task_manager.gd" id="6_lqdhu"]
+[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/movement_manager/velocity_task_manager.gd" id="6_lqdhu"]
 [ext_resource type="Script" uid="uid://e6u6g1v5xrc0" path="res://src/other_nodes/componets/control/action_cache_component.gd" id="7_p2qdy"]
-[ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/state_manager/movement_manager/states/actions/jump_task.gd" id="9_0tyfe"]
-[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/state_manager/movement_manager/states/velocity/gravity_task.gd" id="9_ogtao"]
+[ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/actions/jump_task.gd" id="9_0tyfe"]
+[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/velocity/gravity_task.gd" id="9_ogtao"]
 [ext_resource type="Script" uid="uid://4tex7mgshe66" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_idle_state.gd" id="10_3c4mh"]
-[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/state_manager/movement_manager/states/actions/slowdown_task.gd" id="10_ogtao"]
-[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/state_manager/movement_manager/states/actions/walk_task.gd" id="11_a31ob"]
+[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/actions/slowdown_task.gd" id="10_ogtao"]
+[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/actions/walk_task.gd" id="11_a31ob"]
 [ext_resource type="Script" uid="uid://co2ga7r6maxo7" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_move_state.gd" id="11_p2qdy"]
 [ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_jump_state.gd" id="12_lqdhu"]
 [ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_slowdown_state.gd" id="12_t8d2k"]
-[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/state_manager/movement_manager/states/velocity/velocity_apply_task.gd" id="13_a31ob"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
 [ext_resource type="Script" uid="uid://bb1rurhmxqtqb" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_fall_state.gd" id="13_t8d2k"]
-[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/state_manager/movement_manager/states/processing/update_cache_on_actor.gd" id="14_5qgjf"]
+[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/processing/update_cache_on_actor.gd" id="14_5qgjf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwoq"]
 size = Vector2(128, 129)
@@ -63,45 +63,43 @@ script = ExtResource("7_p2qdy")
 wait_time = 0.1
 one_shot = true
 
-[node name="TaskManager" type="Node" parent="." unique_id=1794827042 node_paths=PackedStringArray("velocity")]
+[node name="VelocityTaskManager" type="Node" parent="." unique_id=1794827042 node_paths=PackedStringArray("velocity")]
 script = ExtResource("6_lqdhu")
 velocity = NodePath("../VelocityComponent")
 
-[node name="JumpTask" type="Node" parent="TaskManager" unique_id=112608991 node_paths=PackedStringArray("gravity")]
+[node name="JumpTask" type="Node" parent="VelocityTaskManager" unique_id=112608991 node_paths=PackedStringArray("gravity")]
 script = ExtResource("9_0tyfe")
 gravity = NodePath("../GravityTask/GravityComponent")
 
-[node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=1703085196]
+[node name="SlowdownTask" type="Node" parent="VelocityTaskManager" unique_id=1703085196]
 script = ExtResource("10_ogtao")
 
-[node name="WalkTask" type="Node" parent="TaskManager" unique_id=200243738]
+[node name="WalkTask" type="Node" parent="VelocityTaskManager" unique_id=200243738]
 script = ExtResource("11_a31ob")
 
-[node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("velocity", "gravity", "action_cache")]
+[node name="GravityTask" type="Node" parent="VelocityTaskManager" unique_id=1953513191 node_paths=PackedStringArray("gravity", "action_cache")]
 script = ExtResource("9_ogtao")
-velocity = NodePath("../../VelocityComponent")
 gravity = NodePath("GravityComponent")
 action_cache = NodePath("../../ActionCacheComponent")
 auto_start = true
 
-[node name="GravityComponent" type="Node" parent="TaskManager/GravityTask" unique_id=1508736019]
+[node name="GravityComponent" type="Node" parent="VelocityTaskManager/GravityTask" unique_id=1508736019]
 script = ExtResource("6_iw6ud")
 metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
 
-[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=473670275 node_paths=PackedStringArray("velocity", "actor")]
+[node name="VelocityApplyTask" type="Node" parent="VelocityTaskManager" unique_id=473670275 node_paths=PackedStringArray("actor")]
 script = ExtResource("13_a31ob")
-velocity = NodePath("../../VelocityComponent")
 actor = NodePath("../..")
 auto_start = true
 
-[node name="UpdateCacheTask" type="Node" parent="TaskManager" unique_id=1339140841 node_paths=PackedStringArray("action_cache", "input", "actor")]
+[node name="UpdateCacheTask" type="Node" parent="VelocityTaskManager" unique_id=1339140841 node_paths=PackedStringArray("action_cache", "input", "actor")]
 script = ExtResource("14_5qgjf")
 action_cache = NodePath("../../ActionCacheComponent")
 input = NodePath("PlayerInputComponent")
 actor = NodePath("../..")
 auto_start = true
 
-[node name="PlayerInputComponent" type="Node" parent="TaskManager/UpdateCacheTask" unique_id=1650477154]
+[node name="PlayerInputComponent" type="Node" parent="VelocityTaskManager/UpdateCacheTask" unique_id=1650477154]
 script = ExtResource("5_mjwoq")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1242106768 node_paths=PackedStringArray("starting_state")]
@@ -118,7 +116,7 @@ fall_state = NodePath("../Fall")
 [node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("action_cache", "task", "idle_state", "move_state", "jump_state", "fall_state")]
 script = ExtResource("12_t8d2k")
 action_cache = NodePath("../../ActionCacheComponent")
-task = NodePath("../../TaskManager")
+task = NodePath("../../VelocityTaskManager")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
@@ -127,7 +125,7 @@ fall_state = NodePath("../Fall")
 [node name="Move" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("action_cache", "task", "slowdown_state", "jump_state", "fall_state")]
 script = ExtResource("11_p2qdy")
 action_cache = NodePath("../../ActionCacheComponent")
-task = NodePath("../../TaskManager")
+task = NodePath("../../VelocityTaskManager")
 slowdown_state = NodePath("../Slowdown")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
@@ -135,13 +133,13 @@ fall_state = NodePath("../Fall")
 [node name="Jump" type="Node" parent="StateMachine" unique_id=365668129 node_paths=PackedStringArray("action_cache", "task", "fall_state")]
 script = ExtResource("12_lqdhu")
 action_cache = NodePath("../../ActionCacheComponent")
-task = NodePath("../../TaskManager")
+task = NodePath("../../VelocityTaskManager")
 fall_state = NodePath("../Fall")
 
 [node name="Fall" type="Node" parent="StateMachine" unique_id=71672483 node_paths=PackedStringArray("action_cache", "task", "slowdown_state", "jump_state", "coyote_timer")]
 script = ExtResource("13_t8d2k")
 action_cache = NodePath("../../ActionCacheComponent")
-task = NodePath("../../TaskManager")
+task = NodePath("../../VelocityTaskManager")
 slowdown_state = NodePath("../Slowdown")
 jump_state = NodePath("../Jump")
 coyote_timer = NodePath("CoyoteTimer")
