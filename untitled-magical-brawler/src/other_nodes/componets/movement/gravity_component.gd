@@ -41,8 +41,8 @@ func is_falling() -> bool:
 
 
 #region Public Methods (Helper)
-func get_inital_impulse(height : float) -> float:
+func get_jump_impulse(height : float) -> float:
 	return -sqrt(2 * gravity * height)
-func get_height(impulse : float) -> float:
+func get_max_jump_height(impulse : float) -> float:
 	return pow(impulse, 2) / (2 * gravity)
 #endregion
