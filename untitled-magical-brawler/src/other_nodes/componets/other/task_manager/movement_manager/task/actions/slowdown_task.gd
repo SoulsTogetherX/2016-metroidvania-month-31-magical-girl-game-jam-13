@@ -1,4 +1,4 @@
-extends ManagedTaskState
+extends VelocityTaskNode
 
 
 #region External Variables

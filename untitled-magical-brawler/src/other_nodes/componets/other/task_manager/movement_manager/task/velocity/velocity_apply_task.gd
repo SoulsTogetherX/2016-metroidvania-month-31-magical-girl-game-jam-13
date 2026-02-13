@@ -1,10 +1,7 @@
-extends ManagedTaskState
+extends VelocityTaskNode
 
 
 #region External Variables
-@export_group("Modules")
-@export var velocity : VelocityComponent
-
 @export_group("Other")
 @export var actor : CharacterBody2D
 #endregion
@@ -12,15 +9,16 @@ extends ManagedTaskState
 
 
 #region Public Virtual Methods
-func state_physics(_delta : float, _args : Dictionary) -> bool:
+func state_physics(_delta : float, args : Dictionary) -> bool:
+	var velocity := get_velocity(args)
 	velocity.apply_velocity(actor)
 	return true
 #endregion
 	
 
 #region Public Methods (Action States)
-func begin_state(_args : Dictionary) -> bool:
-	return actor != null && velocity != null
+func begin_state(args : Dictionary) -> bool:
+	return actor != null && get_velocity(args) != null
 #endregion
 
 

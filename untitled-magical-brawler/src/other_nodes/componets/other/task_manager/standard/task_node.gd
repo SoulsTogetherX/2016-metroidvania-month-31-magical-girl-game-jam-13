@@ -1,5 +1,5 @@
 @abstract
-class_name ManagedState extends Node
+class_name TaskNode extends Node
 
 
 #region Signals

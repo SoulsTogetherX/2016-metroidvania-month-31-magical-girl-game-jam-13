@@ -1,4 +1,4 @@
-extends ManagedTaskState
+extends TaskNode
 
 
 #region External Variables

@@ -1,19 +1,19 @@
-extends MachineState
+extends StateNode
 
 
 #region External Variables
 @export_group("Modules")
 @export var action_cache : ActionCacheComponent
-@export var task : TaskManager
+@export var task : VelocityTaskManager
 
 @export_group("States")
-@export var fall_state : MachineState
+@export var fall_state : StateNode
 #endregion
 
 
 
 #region Public Virtual Methods
-func process_physics(_delta: float) -> MachineState:
+func process_physics(_delta: float) -> StateNode:
 	if !action_cache.is_jumping():
 		return fall_state
 	return null

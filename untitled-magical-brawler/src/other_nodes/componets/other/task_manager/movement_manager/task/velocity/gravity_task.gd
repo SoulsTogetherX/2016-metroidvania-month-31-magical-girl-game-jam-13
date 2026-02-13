@@ -1,9 +1,8 @@
-extends ManagedTaskState
+extends VelocityTaskNode
 
 
 #region External Variables
 @export_group("Modules")
-@export var velocity : VelocityComponent
 @export var gravity : GravityComponent
 @export var action_cache : ActionCacheComponent
 #endregion
@@ -12,7 +11,9 @@ extends ManagedTaskState
 
 #region Public Virtual Methods
 func state_physics(delta : float, args : Dictionary) -> bool:
+	var velocity := get_velocity(args)
 	var is_on_ground : Callable
+	
 	if action_cache:
 		is_on_ground = action_cache.is_on_ground
 	else:
@@ -31,7 +32,7 @@ func state_physics(delta : float, args : Dictionary) -> bool:
 #region Public Methods (Action States)
 func begin_state(args : Dictionary) -> bool:
 	return (
-		velocity != null &&
+		get_velocity(args) != null &&
 		gravity != null &&
 		(
 			action_cache != null ||

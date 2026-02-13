@@ -1,8 +1,8 @@
 @abstract
-class_name ManagedTaskState extends ManagedState
+class_name VelocityTaskNode extends TaskNode
 
 
 #region Public Methods (Helper)
 func get_velocity(args : Dictionary) -> VelocityComponent:
-	return args.get(TaskManager.VELOCITY_NAME)
+	return args.get(VelocityTaskManager.VELOCITY_NAME)
 #endregion

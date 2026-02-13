@@ -1,5 +1,5 @@
 @tool
-class_name TaskManager extends StateManager
+class_name VelocityTaskManager extends TaskManager
 
 
 #region Constants
@@ -27,20 +27,20 @@ func _validate_property(property: Dictionary) -> void:
 
 
 #region Private Methods (Helper)
-func _update_states() -> void:
-	_stored_states.clear()
-	
-	for child : Node in get_children():
-		if child is ManagedTaskState:
-			_stored_states.set(
-				child.state_id(),
-				child
-			)
+func _create_task(
+	managed_state : TaskNode,
+	given_args : Dictionary
+) -> Task:
+	return Task.new(
+		managed_state,
+		given_args,
+		get_velocity_args if (managed_state is VelocityTaskNode) else get_args
+	)
 #endregion
 
 
 #region Public Methods (Helper)
-func get_args() -> Dictionary:
+func get_velocity_args() -> Dictionary:
 	return args.merged(
 		{
 			VELOCITY_NAME: velocity

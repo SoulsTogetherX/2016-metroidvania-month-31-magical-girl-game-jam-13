@@ -1,4 +1,4 @@
-class_name StateManager extends Node
+class_name TaskManager extends Node
 
 
 #region External Variables
@@ -22,7 +22,7 @@ class_name StateManager extends Node
 
 #region Private Variables
 var _running_tasks : Dictionary[StringName, Task]
-var _stored_states : Dictionary[StringName, ManagedState]
+var _stored_states : Dictionary[StringName, TaskNode]
 
 var _running : bool = false
 #endregion
@@ -50,13 +50,22 @@ func _register_states() -> void:
 	_stored_states.clear()
 	
 	for child : Node in get_children():
-		if child is ManagedState:
+		if child is TaskNode:
 			_stored_states[child.state_id()] = child
 func _auto_start_all() -> void:
-	for state : ManagedState in _stored_states.values():
-		prints(state.state_id(), state.auto_start)
+	for state : TaskNode in _stored_states.values():
 		if state.auto_start:
 			begin_task(state.state_id(), state.auto_start_args)
+
+func _create_task(
+	managed_state : TaskNode,
+	given_args : Dictionary
+) -> Task:
+	return Task.new(
+		managed_state,
+		given_args,
+		get_args
+	)
 
 func _update_proces_mode() -> void:
 	var running := !disabled && !_running_tasks.is_empty()
@@ -81,8 +90,8 @@ func begin_task(
 			return
 		end_task(state_id)
 	
-	var state : ManagedState = _stored_states.get(state_id)
-	var task : Task = Task.new(state, get_args, given_args)
+	var state : TaskNode = _stored_states.get(state_id)
+	var task : Task = _create_task(state, given_args)
 	if !task.begin_state():
 		return
 	
@@ -115,7 +124,7 @@ func tap_state(
 			return
 		end_task(state_id)
 	
-	var state : ManagedState = _stored_states.get(state_id)
+	var state : TaskNode = _stored_states.get(state_id)
 	var total_args := get_args().merged(extra_args)
 	
 	if !state.begin_state(total_args):
@@ -149,7 +158,7 @@ class Task:
 	#endregion
 	
 	#region Private Variables
-	var _state : ManagedState
+	var _state : TaskNode
 	var _extra_args : Dictionary
 	var _arg_cache : Dictionary
 	
@@ -159,13 +168,13 @@ class Task:
 	
 	#region Virtual Methods
 	func _init(
-		managed_state : ManagedState,
-		get_base_args : Callable,
-		given_args : Dictionary
+		managed_state : TaskNode,
+		given_args : Dictionary,
+		get_base_args : Callable
 	) -> void:
 		_extra_args  = given_args
-		_get_base_args = get_base_args
 		_state = managed_state
+		_get_base_args = get_base_args
 		
 		_state.force_stop.connect(force_stop.emit)
 		update_arg_cache()

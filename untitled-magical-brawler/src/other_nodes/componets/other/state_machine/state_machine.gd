@@ -11,12 +11,12 @@ class_name StateMachine extends Node
 		_toggle_processes(!disabled)
 
 @export_group("States")
-@export var starting_state : MachineState
+@export var starting_state : StateNode
 #endregion
 
 
 #region Private Variables
-var _current_state : MachineState = null
+var _current_state : StateNode = null
 #endregion
 
 
@@ -41,7 +41,7 @@ func _unhandled_input(input: InputEvent) -> void:
 
 
 #region Private Methods (Helper)
-func _change_state(new_state: MachineState) -> void:
+func _change_state(new_state: StateNode) -> void:
 	if _current_state:
 		_current_state.exit_state()
 		_current_state.force_change.disconnect(_change_state)
@@ -50,7 +50,7 @@ func _change_state(new_state: MachineState) -> void:
 		clear_state()
 		return
 	
-	var check_state : MachineState = new_state
+	var check_state : StateNode = new_state
 	while check_state:
 		_current_state = check_state
 		check_state = check_state.state_passthrough()
@@ -69,7 +69,7 @@ func _toggle_processes(toggle : bool) -> void:
 
 
 #region Public Methods (Helper)
-func force_state(new_state: MachineState) -> void:
+func force_state(new_state: StateNode) -> void:
 	_change_state(new_state)
 func clear_state() -> void:
 	_current_state = null
