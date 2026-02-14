@@ -70,7 +70,7 @@ func horizontal_movement(delta: float) -> void:
 func horizontal_slowdown(delta: float) -> void:
 	if !velocity:
 		return
-	var dir := velocity.move_direction()
+	var dir := velocity.move_direction().x
 	
 	velocity.lerp_hor_change(
 		0.0,

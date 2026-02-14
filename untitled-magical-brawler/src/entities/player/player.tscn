@@ -8,19 +8,19 @@
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="5_uym1e"]
 [ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/state_machine.gd" id="5_xahdq"]
 [ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
-[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/movement_manager/velocity_task_manager.gd" id="6_lqdhu"]
+[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/velocity/velocity_task_manager.gd" id="6_lqdhu"]
 [ext_resource type="Script" uid="uid://e6u6g1v5xrc0" path="res://src/other_nodes/componets/control/action_cache_component.gd" id="7_p2qdy"]
-[ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/actions/jump_task.gd" id="9_0tyfe"]
-[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/velocity/gravity_task.gd" id="9_ogtao"]
+[ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/jump_task.gd" id="9_0tyfe"]
+[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/gravity_task.gd" id="9_ogtao"]
 [ext_resource type="Script" uid="uid://4tex7mgshe66" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_idle_state.gd" id="10_3c4mh"]
-[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/actions/slowdown_task.gd" id="10_ogtao"]
-[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/actions/walk_task.gd" id="11_a31ob"]
+[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/slowdown_task.gd" id="10_ogtao"]
+[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/walk_task.gd" id="11_a31ob"]
 [ext_resource type="Script" uid="uid://co2ga7r6maxo7" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_move_state.gd" id="11_p2qdy"]
 [ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_jump_state.gd" id="12_lqdhu"]
 [ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_slowdown_state.gd" id="12_t8d2k"]
-[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
 [ext_resource type="Script" uid="uid://bb1rurhmxqtqb" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_fall_state.gd" id="13_t8d2k"]
-[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/movement_manager/task/processing/update_cache_on_actor.gd" id="14_5qgjf"]
+[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/processing/update_cache_on_actor.gd" id="14_5qgjf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwoq"]
 size = Vector2(128, 129)
@@ -36,7 +36,8 @@ metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
 [node name="Actor" type="CharacterBody2D" parent="." unique_id=539542931]
 position = Vector2(0, -63)
-collision_layer = 0
+collision_layer = 4
+collision_mask = 2
 
 [node name="GroundCollide" type="CollisionShape2D" parent="Actor" unique_id=1568380323]
 position = Vector2(-1, -0.5)
@@ -77,18 +78,10 @@ velocity = NodePath("../VelocityComponent")
 
 [node name="JumpTask" type="Node" parent="Actor/VelocityTaskManager" unique_id=112608991 node_paths=PackedStringArray("gravity")]
 script = ExtResource("9_0tyfe")
-jump_height = null
-jump_stopper_weight = null
 gravity = NodePath("../GravityTask/GravityComponent")
-auto_start = null
-auto_start_args = null
 
 [node name="SlowdownTask" type="Node" parent="Actor/VelocityTaskManager" unique_id=1703085196]
 script = ExtResource("10_ogtao")
-slowdown_flat = null
-slowdown_weight = null
-auto_start = null
-auto_start_args = null
 
 [node name="WalkTask" type="Node" parent="Actor/VelocityTaskManager" unique_id=200243738]
 script = ExtResource("11_a31ob")
@@ -98,7 +91,6 @@ script = ExtResource("9_ogtao")
 gravity = NodePath("GravityComponent")
 action_cache = NodePath("../../ActionCacheComponent")
 auto_start = true
-auto_start_args = null
 
 [node name="GravityComponent" type="Node" parent="Actor/VelocityTaskManager/GravityTask" unique_id=1508736019]
 script = ExtResource("6_iw6ud")

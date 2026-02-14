@@ -2,7 +2,9 @@ class_name Constants
 
 
 enum LAYERS {
-	GROUND = 0b0000000000000001,
-	PLAYER = 0b0000000000000010,
-	ENEMY  = 0b0000000000000100,
+	NONE = 0,
+	CAMERA = 1 << 0,
+	GROUND = 1 << 1,
+	PLAYER = 1 << 2,
+	ENEMY  = 1 << 3
 }

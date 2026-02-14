@@ -33,30 +33,34 @@ var _draw_snap_line : bool
 
 
 #region Virtual Methods
-func _ready() -> void:
-	if !_actor:
-		push_error("Error - No actor found in 'BaseEntityManager'")
-		return
-	if !_velocity:
-		push_error("Error - No velocity found in 'BaseEntityManager'")
-		return
-	if Engine.is_editor_hint():
-		return
-	_refresh_debugs()
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_READY:
+			_on_ready_notification()
+		NOTIFICATION_DRAW:
+			_on_draw_notification()
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name in [&"_actor", &"_velocity"]:
 		if owner != null:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
+#endregion
 
-func _draw() -> void:
-	if display_velocity:
+
+#region Private Methods (Notifcation Helper)
+func _on_ready_notification() -> void:
+	if !_actor:
+		push_error("Error - No actor found in 'BaseEntityManager'")
 		return
-	
+	if Engine.is_editor_hint():
+		return
+	_refresh_debugs()
+
+func _on_draw_notification() -> void:
 	if !Engine.is_editor_hint():
 		return
-	
 	if _draw_snap_line:
+		_draw_snap_line = false
 		draw_line(Vector2.ZERO, Vector2(0, SNAP_RAYCAST_LENGTH), Color.RED)
 #endregion
 
@@ -65,7 +69,7 @@ func _draw() -> void:
 func _refresh_debugs() -> void:
 	_refresh_display_velocity()
 func _refresh_display_velocity() -> void:
-	if !is_node_ready():
+	if !is_node_ready() || !_velocity:
 		return
 	
 	if display_velocity:
@@ -109,9 +113,29 @@ func _snap_to_ground() -> void:
 #endregion
 
 
+#region Public Methods (Checks)
+func has_velocity() -> bool:
+	return _velocity != null
+#endregion
+
+
+#region Public Methods (Velocity)
+func get_positon() -> Vector2:
+	return _actor.global_position
+func get_local_position() -> Vector2:
+	return _actor.position
+#endregion
+
+
 #region Public Methods (Velocity)
 func get_velocity() -> Vector2:
+	if !_velocity:
+		return Vector2.ZERO
+	
 	return _velocity.get_velocity()
 func predict_next_position(delta : float = 1.0) -> Vector2:
+	if !_velocity:
+		return Vector2.ZERO
+	
 	return _actor.global_position + _velocity.get_velocity() * delta
 #endregion

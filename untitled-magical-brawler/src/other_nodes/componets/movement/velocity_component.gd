@@ -2,33 +2,31 @@ class_name VelocityComponent extends Node
 
 
 #region Signals 
+signal velocity_changed_immediate
 signal velocity_changed
 #endregion
 
 
 #region Private Variables 
+var _velocity_changed_queue : bool = false
+
 var _velocity : Vector2:
 	get = get_velocity,
 	set = force_velocity
+var _direction : Vector2i
 #endregion
 
 
-
-#region Static Public Methods (Helper)
-static func damp_velocity(
-	v1 : Variant,
-	v2 : Variant,
-	weight : float,
-	delta : float
-) -> Variant:
-	return lerp(v1, v2, 1 - exp(-weight * delta))
-static func damp_velocityf(
-	v1 : float,
-	v2 : float,
-	weight : float,
-	delta : float
-) -> float:
-	return lerpf(v1, v2, 1 - exp(-weight * delta))
+#region Private Methods (Queue)
+func _queue_velocity_changed() -> void:
+	if _velocity_changed_queue:
+		return
+	_velocity_changed_queue = true
+	
+	call_deferred(&"_emit_velocity_changed")
+func _emit_velocity_changed() -> void:
+	_velocity_changed_queue = false
+	velocity_changed.emit()
 #endregion
 
 
@@ -42,7 +40,14 @@ func force_velocity(vec : Vector2) -> void:
 	if vec == _velocity:
 		return
 	_velocity = vec
-	velocity_changed.emit()
+	
+	if _velocity.x != 0.0:
+		_direction.x = signi(int(_velocity.x))
+	if _velocity.y != 0.0:
+		_direction.y = signi(int(_velocity.y))
+	
+	velocity_changed_immediate.emit()
+	_queue_velocity_changed()
 func force_velocity_x(val : float) -> void:
 	_velocity.x = val
 func force_velocity_y(val : float) -> void:
@@ -70,12 +75,12 @@ func impulse(flat : Vector2) -> void:
 func flat_hor_change(flat : float, delta : float = 1.0) -> void:
 	_velocity.x += flat * delta
 func lerp_hor_change(to : float, weight : float, delta : float = 1.0) -> void:
-	_velocity.x = damp_velocityf(_velocity.x, to, weight, delta)
+	_velocity.x = Utilities.dampf(_velocity.x, to, weight, delta)
 
 func flat_ver_change(flat : float, delta : float = 1.0) -> void:
 	_velocity.y += flat * delta
 func lerp_ver_change(to : float, weight : float, delta : float = 1.0) -> void:
-	_velocity.y = damp_velocityf(_velocity.y, to, weight, delta)
+	_velocity.y = Utilities.dampf(_velocity.y, to, weight, delta)
 #endregion
 
 
@@ -103,8 +108,10 @@ func attempting_rise() -> bool:
 func attempting_idle() -> bool:
 	return is_zero_approx(_velocity.x)
 
-func move_direction() -> float:
-	return signf(_velocity.x)
+func get_direction() -> Vector2i:
+	return _direction
+func move_direction() -> Vector2:
+	return _velocity.sign()
 func facing_right() -> bool:
 	return _velocity.x > 0
 #endregion
