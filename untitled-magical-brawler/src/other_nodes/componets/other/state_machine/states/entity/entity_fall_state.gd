@@ -3,7 +3,7 @@ extends StateNode
 
 #region External Variables
 @export_group("Modules")
-@export var action_cache : ActionCacheComponent
+@export var action_cache_c : ActionCacheComponent
 @export var task : VelocityTaskManager
 
 @export_group("States")
@@ -39,9 +39,9 @@ func _disallow_jump() -> void:
 
 #region Public Virtual Methods
 func process_physics(_delta: float) -> StateNode:
-	if _allow_jump && action_cache.is_jumping():
+	if _allow_jump && action_cache_c.is_jumping():
 		return jump_state
-	if action_cache.is_on_ground():
+	if action_cache_c.is_on_ground():
 		return slowdown_state
 	return null
 #endregion
@@ -57,8 +57,8 @@ func enter_state() -> void:
 	task.task_begin(
 		&"Walk_Task",
 		{
-			&"get_move_dir": action_cache.get_move_direction,
-			&"is_on_ground": action_cache.is_on_ground
+			&"get_move_dir": action_cache_c.get_move_direction,
+			&"is_on_ground": action_cache_c.is_on_ground
 		}
 	)
 func exit_state() -> void:

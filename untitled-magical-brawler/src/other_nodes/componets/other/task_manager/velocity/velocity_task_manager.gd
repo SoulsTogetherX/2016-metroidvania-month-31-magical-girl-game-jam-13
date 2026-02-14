@@ -9,7 +9,7 @@ const VELOCITY_NAME := &"__velocity_component__"
 
 #region External Variables
 @export_group("Modules")
-@export var velocity: VelocityComponent
+@export var velocity_c: VelocityComponent
 #endregion
 
 
@@ -43,7 +43,7 @@ func _create_task(
 func get_velocity_args() -> Dictionary:
 	return args.merged(
 		{
-			VELOCITY_NAME: velocity
+			VELOCITY_NAME: velocity_c
 		}
 	)
 #endregion
