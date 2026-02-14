@@ -11,21 +11,22 @@ extends VelocityTaskNode
 
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity := get_velocity(args)
-	var dir := velocity.move_direction().x
+	var velocity_c := get_velocity(args)
+	var dir : float = velocity_c.hor_direction()
+	var flat : float = args.get(&"slowdown_flat", slowdown_flat)
+	var weight : float = args.get(&"slowdown_weight", slowdown_weight)
 	
-	velocity.lerp_hor_change(
+	velocity_c.velocity.x = VelocityComponent.damp_velocityf(
+		velocity_c.get_velocity().x - (flat * dir * delta),
 		0.0,
-		slowdown_weight,
+		weight,
 		delta
 	)
 	
-	velocity.flat_hor_change(-slowdown_flat * dir, delta)
-	if dir < 0:
-		velocity.min_hor_velocity(0.0)
-	elif dir > 0:
-		velocity.max_hor_velocity(0.0)
-	
+	if velocity_c.velocity.x < 0:
+		velocity_c.min_hor_velocity(0.0)
+		return true
+	velocity_c.max_hor_velocity(0.0)
 	return true
 #endregion
 
@@ -34,8 +35,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 func task_begin(args : Dictionary) -> bool:
 	return get_velocity(args) != null
 func task_end(args : Dictionary) -> void:
-	var velocity := get_velocity(args)
-	velocity.force_velocity_x(0.0)
+	get_velocity(args).velocity.x = 0.0
 #endregion
 
 

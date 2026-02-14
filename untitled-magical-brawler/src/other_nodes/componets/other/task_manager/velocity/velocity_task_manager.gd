@@ -1,4 +1,3 @@
-@tool
 class_name VelocityTaskManager extends TaskManager
 
 
@@ -9,21 +8,9 @@ const VELOCITY_NAME := &"__velocity_component__"
 
 #region External Variables
 @export_group("Modules")
-@export var velocity: VelocityComponent
+@export var velocity_c: VelocityComponent
 #endregion
 
-
-
-#region Virtual Variables
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
-	super()
-
-func _validate_property(property: Dictionary) -> void:
-	if property.name == &"args":
-		property.usage &= ~PROPERTY_USAGE_EDITOR
-#endregion
 
 
 #region Private Methods (Helper)
@@ -43,7 +30,7 @@ func _create_task(
 func get_velocity_args() -> Dictionary:
 	return args.merged(
 		{
-			VELOCITY_NAME: velocity
+			VELOCITY_NAME: velocity_c
 		}
 	)
 #endregion

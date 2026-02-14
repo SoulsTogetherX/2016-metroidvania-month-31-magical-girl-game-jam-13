@@ -3,24 +3,19 @@ extends VelocityTaskNode
 
 #region External Variables
 @export_group("Modules")
-@export var gravity : GravityComponent
-@export var action_cache : ActionCacheComponent
+@export var gravity_c : GravityComponent
 #endregion
 
 
 
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity := get_velocity(args)
-	var is_on_ground : Callable
+	var velocity_c := get_velocity(args)
+	var grav : GravityComponent = args.get(&"gravity", gravity_c)
+	var is_on_ground : Callable = args.get(&"is_on_ground", Callable())
 	
-	if action_cache:
-		is_on_ground = action_cache.is_on_ground
-	else:
-		is_on_ground = args.get(&"is_on_ground")
-	
-	gravity.handle_gravity(
-		velocity,
+	grav.handle_gravity(
+		velocity_c,
 		!is_on_ground.call(),
 		delta
 	)
@@ -31,14 +26,18 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 
 #region Public Methods (Action States)
 func task_begin(args : Dictionary) -> bool:
-	return (
-		get_velocity(args) != null &&
-		gravity != null &&
-		(
-			action_cache != null ||
-			(args.get(&"is_on_ground") as Callable).is_valid()
-		)
-	)
+	if get_velocity(args) == null:
+		return false
+	
+	var grav : GravityComponent = args.get(&"gravity", gravity_c)
+	if grav == null:
+		return false
+	
+	var is_on_ground : Callable = args.get(&"is_on_ground", Callable())
+	if !is_on_ground.is_valid():
+		return false
+	
+	return true
 #endregion
 
 

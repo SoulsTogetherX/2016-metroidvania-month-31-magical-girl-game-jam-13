@@ -1,9 +1,9 @@
 class_name HealthComponent extends Node
 
 #region Signals
-signal max_health_changed(max_health : int)
+signal max_health_changed
 signal max_health_delta(delta : int)
-signal health_changed(health : int)
+signal health_changed
 signal health_delta(delta : int)
 
 signal damaged(delta : int)

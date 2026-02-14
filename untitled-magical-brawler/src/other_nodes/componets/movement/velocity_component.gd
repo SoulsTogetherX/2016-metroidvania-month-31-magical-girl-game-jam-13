@@ -32,12 +32,12 @@ func _emit_velocity_changed() -> void:
 
 #region Public Methods (Helper)
 func get_velocity() -> Vector2:
-	return _velocity
+	return velocity
 func get_normalized() -> Vector2:
-	return _velocity.normalized()
+	return velocity.normalized()
 
-func force_velocity(vec : Vector2) -> void:
-	if vec == _velocity:
+func set_velocity(vec : Vector2) -> void:
+	if vec == velocity:
 		return
 	_velocity = vec
 	
@@ -60,60 +60,84 @@ func apply_velocity(
 	body : CharacterBody2D,
 	update : bool = true
 ) -> void:
-	body.velocity = _velocity
+	if !body:
+		return
+	
+	body.velocity = velocity
 	body.move_and_slide()
 	
 	if update:
-		_velocity = body.velocity
+		velocity = body.velocity
 #endregion
 
 
 #region Public Methods (Velocity flat/lerp changes)
-func impulse(flat : Vector2) -> void:
-	_velocity += flat
+func flat_change(flat : Vector2, delta : float) -> void:
+	velocity += flat * delta
+func lerp_change(to : Vector2, weight : Vector2, delta : float) -> void:
+	velocity = damp_velocityv(velocity, to, weight, delta)
+func flat_changef(flat : float, delta : float) -> void:
+	velocity += Vector2(flat, flat) * delta
+func lerp_changef(to : Vector2, weight : float, delta : float) -> void:
+	velocity = Vector2(
+		damp_velocityf(velocity.x, to.x, weight, delta),
+		damp_velocityf(velocity.y, to.y, weight, delta)
+	)
 
-func flat_hor_change(flat : float, delta : float = 1.0) -> void:
-	_velocity.x += flat * delta
-func lerp_hor_change(to : float, weight : float, delta : float = 1.0) -> void:
-	_velocity.x = Utilities.dampf(_velocity.x, to, weight, delta)
+func flat_hor_change(flat : float, delta : float) -> void:
+	velocity.x += flat * delta
+func lerp_hor_change(to : float, weight : float, delta : float) -> void:
+	velocity.x = damp_velocityf(velocity.x, to, weight, delta)
 
-func flat_ver_change(flat : float, delta : float = 1.0) -> void:
-	_velocity.y += flat * delta
-func lerp_ver_change(to : float, weight : float, delta : float = 1.0) -> void:
-	_velocity.y = Utilities.dampf(_velocity.y, to, weight, delta)
+func flat_ver_change(flat : float, delta : float) -> void:
+	velocity.y += flat * delta
+func lerp_ver_change(to : float, weight : float, delta : float) -> void:
+	velocity.y = damp_velocityf(velocity.y, to, weight, delta)
 #endregion
 
 
 #region Public Methods (Velocity clamp)
+func min_velocity(min_val : Vector2) -> void:
+	velocity = velocity.min(min_val)
+func max_velocity(max_val : Vector2) -> void:
+	velocity = velocity.max(max_val)
+func min_velocityf(min_val : float) -> void:
+	velocity = velocity.minf(min_val)
+func max_velocityf(max_val : float) -> void:
+	velocity = velocity.maxf(max_val)
+
 func min_hor_velocity(min_val : float) -> void:
-	_velocity.x = minf(_velocity.x, min_val)
+	velocity.x = minf(velocity.x, min_val)
 func max_hor_velocity(min_val : float) -> void:
-	_velocity.x = maxf(_velocity.x, min_val)
+	velocity.x = maxf(velocity.x, min_val)
 
 func min_ver_velocity(min_val : float) -> void:
-	_velocity.y = minf(_velocity.y, min_val)
+	velocity.y = minf(velocity.y, min_val)
 func max_ver_velocity(min_val : float) -> void:
-	_velocity.y = maxf(_velocity.y, min_val)
+	velocity.y = maxf(velocity.y, min_val)
 #endregion
 
 
 #region Public Methods (Helper)
 func is_stationary() -> bool:
-	return _velocity.is_zero_approx()
+	return velocity.is_zero_approx()
 
 func attempting_fall() -> bool:
-	return _velocity.y > 0
+	return velocity.y > 0
 func attempting_rise() -> bool:
-	return _velocity.y < 0
+	return velocity.y < 0
 func attempting_idle() -> bool:
-	return is_zero_approx(_velocity.x)
+	return is_zero_approx(velocity.x)
 
-func get_direction() -> Vector2i:
+func vec_direction() -> Vector2i:
 	return _direction
-func move_direction() -> Vector2:
-	return _velocity.sign()
-func facing_right() -> bool:
-	return _velocity.x > 0
+func hor_direction() -> int:
+	return _direction.x
+func vec_direction() -> int:
+	return _direction.y
+
+func facing_left() -> bool:
+	return _direction.x < 0
 #endregion
 
 
@@ -121,7 +145,7 @@ func facing_right() -> bool:
 func draw_predicted_velocity(actor : Node2D, from : Vector2) -> void:
 	actor.draw_line(
 		from,
-		_velocity,
+		velocity,
 		Color.GREEN
 	)
 #endregion

@@ -3,17 +3,17 @@ extends VelocityTaskNode
 
 #region External Variables
 @export_group("Other")
-@export var actor : CharacterBody2D
+@export var actor : Node2D
 #endregion
 
 
 
 #region Public Virtual Methods
-func task_physics(_delta : float, args : Dictionary) -> bool:
+func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity_c := get_velocity(args)
-	var act : CharacterBody2D = args.get(&"actor", actor)
+	var act = args.get(&"actor", actor)
 	
-	velocity_c.apply_velocity(act)
+	act.position += velocity_c.get_velocity() * delta
 	return true
 #endregion
 	
@@ -23,8 +23,8 @@ func task_begin(args : Dictionary) -> bool:
 	if get_velocity(args) == null:
 		return false
 	
-	var act : CharacterBody2D = args.get(&"actor", actor)
-	if act == null:
+	var act = args.get(&"actor", null)
+	if (act == null || !(act is Node2D)) && !actor:
 		return false
 	
 	return true

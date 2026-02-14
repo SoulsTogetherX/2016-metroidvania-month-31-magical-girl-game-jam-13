@@ -26,6 +26,12 @@ static func get_required_trajectory_impulse(
 	gravity_c : float,
 	positon_c : Vector2
 ) -> Vector2:
+	if positon_c.x == 0.0:
+		return Vector2(
+			0,
+			get_trajectory_impulse(gravity_c, positon_c.y)
+		)
+	
 	var temp := positon_c.y + positon_c.length()
 	return Vector2.ONE.rotated(
 		atan(temp / positon_c.x)
