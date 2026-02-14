@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://t8ar1js7oorl"]
+
+[ext_resource type="Script" uid="uid://dcjmwrkpfht1e" path="res://src/entities/base_entity_manager.gd" id="1_4sqx3"]
+
+[node name="BaseEntityManager" type="Node2D" unique_id=156855588]
+script = ExtResource("1_4sqx3")
+metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
+
+[node name="Camera" type="Camera2D" parent="." unique_id=974521062]
+zoom = Vector2(0.4, 0.4)

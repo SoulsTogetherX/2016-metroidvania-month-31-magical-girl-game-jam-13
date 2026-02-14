@@ -13,7 +13,7 @@ extends TaskNode
 
 
 #region Public Virtual Methods
-func state_physics(_delta : float, _args : Dictionary) -> bool:
+func task_physics(_delta : float, _args : Dictionary) -> bool:
 	action_cache.progress_cache(
 		input.horizontal_moving(),
 		input.jumping(),
@@ -28,12 +28,12 @@ func state_physics(_delta : float, _args : Dictionary) -> bool:
 	
 
 #region Public Methods (Action States)
-func begin_state(_args : Dictionary) -> bool:
+func task_state(_args : Dictionary) -> bool:
 	return actor != null && action_cache != null
 #endregion
 
 
 #region Public Methods (Identifier)
-func state_id() -> StringName:
+func task_id() -> StringName:
 	return &"Update_Cache_Task"
 #endregion

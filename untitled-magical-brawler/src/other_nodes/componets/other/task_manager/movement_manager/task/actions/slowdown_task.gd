@@ -10,7 +10,7 @@ extends VelocityTaskNode
 
 
 #region Public Virtual Methods
-func state_physics(delta : float, args : Dictionary) -> bool:
+func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity := get_velocity(args)
 	var dir := velocity.move_direction()
 	
@@ -31,15 +31,15 @@ func state_physics(delta : float, args : Dictionary) -> bool:
 
 
 #region Public Methods (Action States)
-func begin_state(args : Dictionary) -> bool:
+func task_begin(args : Dictionary) -> bool:
 	return get_velocity(args) != null
-func end_state(args : Dictionary) -> void:
+func task_end(args : Dictionary) -> void:
 	var velocity := get_velocity(args)
 	velocity.force_velocity_x(0.0)
 #endregion
 
 
 #region Public Methods (Identifier)
-func state_id() -> StringName:
+func task_id() -> StringName:
 	return &"Slowdown_Task"
 #endregion

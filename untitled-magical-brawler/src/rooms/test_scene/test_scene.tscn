@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="PackedScene" uid="uid://co68h8eknlwnj" path="res://src/entities/player/player.tscn" id="2_0p3fg"]
-[ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/camera.tscn" id="3_2mblx"]
+[ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p3fg"]
 size = Vector2(12800, 128)
@@ -21,8 +21,7 @@ position = Vector2(640, 64)
 shape = SubResource("RectangleShape2D_0p3fg")
 
 [node name="Player" parent="." unique_id=539542931 instance=ExtResource("2_0p3fg")]
-position = Vector2(163, -103)
-collision_layer = 1
+display_velocity = true
 
-[node name="Camera" parent="Player" unique_id=1648607678 instance=ExtResource("3_2mblx")]
-zoom = Vector2(0.4, 0.4)
+[node name="FollowCamera" parent="Player" unique_id=1648607678 instance=ExtResource("3_2mblx")]
+position = Vector2(0, -102)

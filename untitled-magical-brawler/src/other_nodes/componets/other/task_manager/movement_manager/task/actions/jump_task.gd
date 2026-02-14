@@ -13,7 +13,7 @@ extends VelocityTaskNode
 
 
 #region Public Methods (Action States)
-func begin_state(args : Dictionary) -> bool:
+func task_begin(args : Dictionary) -> bool:
 	var velocity := get_velocity(args)
 	if !velocity:
 		return false
@@ -25,7 +25,7 @@ func begin_state(args : Dictionary) -> bool:
 		)
 	)
 	return true
-func end_state(args : Dictionary) -> void:
+func task_end(args : Dictionary) -> void:
 	var velocity := get_velocity(args)
 	
 	if !velocity.attempting_fall():
@@ -34,6 +34,6 @@ func end_state(args : Dictionary) -> void:
 
 
 #region Public Methods (Identifier)
-func state_id() -> StringName:
+func task_id() -> StringName:
 	return &"Jump_Task"
 #endregion

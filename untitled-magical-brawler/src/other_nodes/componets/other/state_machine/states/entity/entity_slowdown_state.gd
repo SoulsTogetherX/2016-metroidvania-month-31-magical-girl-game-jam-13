@@ -37,7 +37,7 @@ func state_passthrough() -> StateNode:
 		return idle_state
 	return null
 func enter_state() -> void:
-	task.begin_task(&"Slowdown_Task")
+	task.task_begin(&"Slowdown_Task")
 func exit_state() -> void:
-	task.end_task(&"Slowdown_Task")
+	task.task_end(&"Slowdown_Task")
 #endregion
