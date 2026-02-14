@@ -1,6 +1,11 @@
 class_name VelocityComponent extends Node
 
 
+#region Signals 
+signal velocity_changed
+#endregion
+
+
 #region Private Variables 
 var _velocity : Vector2:
 	get = get_velocity,
@@ -34,7 +39,10 @@ func get_normalized() -> Vector2:
 	return _velocity.normalized()
 
 func force_velocity(vec : Vector2) -> void:
+	if vec == _velocity:
+		return
 	_velocity = vec
+	velocity_changed.emit()
 func force_velocity_x(val : float) -> void:
 	_velocity.x = val
 func force_velocity_y(val : float) -> void:

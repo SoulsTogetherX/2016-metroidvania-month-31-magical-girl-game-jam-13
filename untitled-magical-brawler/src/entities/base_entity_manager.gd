@@ -10,8 +10,12 @@ var SNAP_RAYCAST_LENGTH := 500
 #region Export Variables
 @export_group("Debug")
 @export_tool_button("Snap To Ground") var snap_func = _snap_to_ground 
-@export var display_velocity : bool = false
-@export var display_health : bool = false
+@export var display_velocity : bool = false:
+	set(val):
+		if val == display_velocity:
+			return
+		display_velocity = val
+		_refresh_display_velocity()
 #endregion
 
 
@@ -19,7 +23,6 @@ var SNAP_RAYCAST_LENGTH := 500
 @export_group("Hidden Exports")
 @export var _actor: Node2D
 @export var _velocity: VelocityComponent
-@export var _health: HealthComponent
 #endregion
 
 
@@ -30,6 +33,17 @@ var _draw_snap_line : bool
 
 
 #region Virtual Methods
+func _ready() -> void:
+	if !_actor:
+		push_error("Error - No actor found in 'BaseEntityManager'")
+		return
+	if !_velocity:
+		push_error("Error - No velocity found in 'BaseEntityManager'")
+		return
+	if Engine.is_editor_hint():
+		return
+	_refresh_debugs()
+
 func _validate_property(property: Dictionary) -> void:
 	if property.name in [&"_actor", &"_velocity"]:
 		if owner != null:
@@ -37,8 +51,6 @@ func _validate_property(property: Dictionary) -> void:
 
 func _draw() -> void:
 	if display_velocity:
-		return
-	if display_health:
 		return
 	
 	if !Engine.is_editor_hint():
@@ -49,11 +61,32 @@ func _draw() -> void:
 #endregion
 
 
+#region Private Methods (Toggle)
+func _refresh_debugs() -> void:
+	_refresh_display_velocity()
+func _refresh_display_velocity() -> void:
+	if !is_node_ready():
+		return
+	
+	if display_velocity:
+		if !_actor.draw.is_connected(_draw_trajectory):
+			_actor.draw.connect(_draw_trajectory)
+		if !_velocity.velocity_changed.is_connected(_actor.queue_redraw):
+			_velocity.velocity_changed.connect(_actor.queue_redraw)
+		return
+	
+	if _actor.draw.is_connected(_draw_trajectory):
+		_actor.draw.disconnect(_draw_trajectory)
+	if _velocity.velocity_changed.is_connected(_actor.queue_redraw):
+		_velocity.velocity_changed.disconnect(_actor.queue_redraw)
+#endregion
+
+
 #region Private Methods (Debug Helper)
 func _draw_trajectory() -> void:
 	_actor.draw_line(
-		_actor.global_position,
-		_actor.global_position + _velocity.get_velocity(),
+		Vector2.ZERO,
+		_velocity.get_velocity(),
 		Color.GREEN
 	)
 #endregion
@@ -81,14 +114,4 @@ func get_velocity() -> Vector2:
 	return _velocity.get_velocity()
 func predict_next_position(delta : float = 1.0) -> Vector2:
 	return _actor.global_position + _velocity.get_velocity() * delta
-#endregion
-
-
-#region Public Methods (Health)
-func get_max_health() -> int:
-	return _health.get_health()
-func get_health() -> int:
-	return _health.get_health()
-func is_dead() -> bool:
-	return _health.is_dead()
 #endregion
