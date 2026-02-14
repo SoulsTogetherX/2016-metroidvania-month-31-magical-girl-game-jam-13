@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
 [ext_resource type="Script" uid="uid://bb1rurhmxqtqb" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_fall_state.gd" id="13_t8d2k"]
 [ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/velocity/task/processing/update_cache_on_actor.gd" id="14_5qgjf"]
+[ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_hurt_state.gd" id="17_fjj3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwoq"]
 size = Vector2(128, 129)
@@ -120,14 +121,9 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("action_cache_c", "task", "idle_state", "move_state", "jump_state", "fall_state")]
+[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("task")]
 script = ExtResource("12_t8d2k")
-action_cache_c = NodePath("../../ActionCacheComponent")
 task = NodePath("../../TaskManager")
-idle_state = NodePath("../Idle")
-move_state = NodePath("../Move")
-jump_state = NodePath("../Jump")
-fall_state = NodePath("../Fall")
 
 [node name="Move" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("action_cache_c", "task", "slowdown_state", "jump_state", "fall_state")]
 script = ExtResource("11_p2qdy")
@@ -153,4 +149,14 @@ coyote_timer = NodePath("CoyoteTimer")
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/Fall" unique_id=2030647644]
 wait_time = 0.15
+one_shot = true
+
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1462840384 node_paths=PackedStringArray("task", "idle_state", "timer")]
+script = ExtResource("17_fjj3i")
+task = NodePath("../../TaskManager")
+idle_state = NodePath("../Idle")
+timer = NodePath("../../ActionCacheComponent/JumpBuffer")
+
+[node name="HurtDelay" type="Timer" parent="StateMachine/Hurt" unique_id=2076375676]
+wait_time = 0.2
 one_shot = true

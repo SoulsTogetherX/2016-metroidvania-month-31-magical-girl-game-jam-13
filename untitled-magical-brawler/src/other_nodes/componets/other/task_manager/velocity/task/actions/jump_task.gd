@@ -3,8 +3,9 @@ extends VelocityTaskNode
 
 #region External Variables
 @export_group("Settings")
-@export var jump_height : float = 400
+@export var jump_offset := Vector2(0.0, 400.0)
 @export var jump_stopper_weight : float = 0.9
+@export_flags("Replace y:1", "Replace x:2") var replace_mask : int = 1
 
 @export_group("Modules")
 @export var gravity_c : GravityComponent
@@ -22,13 +23,25 @@ func task_begin(args : Dictionary) -> bool:
 	if grav == null:
 		return false
 	
-	var height : float = args.get(
-		&"jump_height", jump_height
-	)
-	velocity_c.velocity.y = GravityComponent.get_trajectory_impulse(
+	var offset : Vector2 = args.get(&"jump_offset", jump_offset)
+	var mask : int = args.get(&"replace_mask", replace_mask)
+	var impluse := GravityComponent.get_required_trajectory_impulse(
 		grav.gravity,
-		height
+		offset
 	)
+	
+	## Replace Y
+	if (mask & 1):
+		velocity_c.velocity.y = impluse.y
+	else:
+		velocity_c.velocity.y += impluse.y
+	
+	## Replace X
+	if (mask & 2):
+		velocity_c.velocity.x = impluse.x
+	else:
+		velocity_c.velocity.x += impluse.x
+	
 	return true
 func task_end(args : Dictionary) -> void:
 	var velocity_c := get_velocity(args)
