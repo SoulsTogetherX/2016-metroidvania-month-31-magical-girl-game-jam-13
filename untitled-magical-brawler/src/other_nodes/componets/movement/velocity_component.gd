@@ -10,6 +10,7 @@ signal velocity_changed
 var _velocity : Vector2:
 	get = get_velocity,
 	set = force_velocity
+var _direction : Vector2i
 #endregion
 
 
@@ -29,6 +30,16 @@ static func damp_velocityf(
 	delta : float
 ) -> float:
 	return lerpf(v1, v2, 1 - exp(-weight * delta))
+static func damp_velocityv(
+	v1 : Vector2,
+	v2 : Vector2,
+	weight : Vector2,
+	delta : float
+) -> Vector2:
+	return Vector2(
+		damp_velocityf(v1.x, v2.x, weight.x, delta),
+		damp_velocityf(v1.y, v2.y, weight.y, delta)
+	)
 #endregion
 
 
@@ -42,6 +53,12 @@ func force_velocity(vec : Vector2) -> void:
 	if vec == _velocity:
 		return
 	_velocity = vec
+	
+	if _velocity.x != 0.0:
+		_direction.x = signi(int(_velocity.x))
+	if _velocity.y != 0.0:
+		_direction.y = signi(int(_velocity.y))
+	
 	velocity_changed.emit()
 func force_velocity_x(val : float) -> void:
 	_velocity.x = val
@@ -103,8 +120,10 @@ func attempting_rise() -> bool:
 func attempting_idle() -> bool:
 	return is_zero_approx(_velocity.x)
 
-func move_direction() -> float:
-	return signf(_velocity.x)
+func get_direction() -> Vector2i:
+	return _direction
+func move_direction() -> Vector2:
+	return _velocity.sign()
 func facing_right() -> bool:
 	return _velocity.x > 0
 #endregion

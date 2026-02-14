@@ -12,7 +12,7 @@ extends VelocityTaskNode
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity := get_velocity(args)
-	var dir := velocity.move_direction()
+	var dir := velocity.move_direction().x
 	
 	velocity.lerp_hor_change(
 		0.0,
