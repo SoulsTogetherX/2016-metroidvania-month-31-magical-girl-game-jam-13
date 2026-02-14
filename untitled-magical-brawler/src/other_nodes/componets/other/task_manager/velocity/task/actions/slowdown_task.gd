@@ -16,7 +16,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 	var flat : float = args.get(&"slowdown_flat", slowdown_flat)
 	var weight : float = args.get(&"slowdown_weight", slowdown_weight)
 	
-	velocity_c.velocity.x = VelocityComponent.damp_velocityf(
+	velocity_c.velocity.x = Utilities.dampf(
 		velocity_c.get_velocity().x - (flat * dir * delta),
 		0.0,
 		weight,

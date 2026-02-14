@@ -38,7 +38,7 @@ func stop_jump() -> void:
 		return
 	
 	if !velocity_c.attempting_fall():
-		velocity_c.velocity.y = VelocityComponent.damp_velocityf(
+		velocity_c.velocity.y = Utilities.dampf(
 			velocity_c.velocity.y, 0.0, jump_stopper_weight, 1.0
 		)
 #endregion

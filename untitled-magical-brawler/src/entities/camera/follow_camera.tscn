@@ -23,10 +23,10 @@ script = ExtResource("2_lj0vn")
 script = ExtResource("2_w71rl")
 metadata/_custom_type_script = "uid://ui8sa21uexr7"
 
-[node name="TaskManager" type="Node" parent="." unique_id=1605066509 node_paths=PackedStringArray("velocity")]
+[node name="TaskManager" type="Node" parent="." unique_id=1605066509 node_paths=PackedStringArray("velocity_c")]
 unique_name_in_owner = true
 script = ExtResource("3_lj0vn")
-velocity = NodePath("../VelocityComponent")
+velocity_c = NodePath("../VelocityComponent")
 metadata/_custom_type_script = "uid://clhcvayfse4aa"
 
 [node name="ZoomCameraTask" type="Node" parent="TaskManager" unique_id=1528281379]

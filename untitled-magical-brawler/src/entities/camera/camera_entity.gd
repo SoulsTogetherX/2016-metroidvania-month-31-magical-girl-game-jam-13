@@ -22,11 +22,13 @@ extends BaseEntityManager
 
 #region Virtual Methods
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	_task_manager.task_begin(
 		&"Velocity_Apply_Task",
 		{ &"actor" : _actor }
 	)
-	
 	_change_target()
 #endregion
 

@@ -23,9 +23,8 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 		tar.global_position if tar else get_tar_pos.call()
 	)
 	
-	var desired := Vector2(
-		VelocityComponent.damp_velocityf(act.global_position.x, tar_pos.x, lerp_weight.x, delta),
-		VelocityComponent.damp_velocityf(act.global_position.y, tar_pos.y, lerp_weight.y, delta)
+	var desired := Utilities.dampv(
+		act.global_position, tar_pos, lerp_weight, delta
 	)
 	velocity_c.velocity = desired - act.global_position
 	

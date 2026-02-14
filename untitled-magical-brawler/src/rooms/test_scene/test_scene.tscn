@@ -28,10 +28,10 @@ display_velocity = true
 [node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
 target = NodePath("../Player")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1160241503]
+[node name="CameraBoundary" type="StaticBody2D" parent="." unique_id=1160241503]
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2" unique_id=508627585]
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="CameraBoundary" unique_id=508627585]
 position = Vector2(287, -261)
 build_mode = 1
-polygon = PackedVector2Array(-5548, -2274, 8105, -1841, 6807, 1118, -5227, 1551)
+polygon = PackedVector2Array(-5994, -1646, 6876, -1757, 6793, 1607, -6106, 1593)

@@ -7,12 +7,15 @@ signal velocity_changed
 #endregion
 
 
+#region Public Variables
+var velocity : Vector2:
+	get = get_velocity,
+	set = set_velocity
+#endregion
+
+
 #region Private Variables 
 var _velocity_changed_queue : bool = false
-
-var _velocity : Vector2:
-	get = get_velocity,
-	set = force_velocity
 var _direction : Vector2i
 #endregion
 
@@ -39,19 +42,15 @@ func get_normalized() -> Vector2:
 func set_velocity(vec : Vector2) -> void:
 	if vec == velocity:
 		return
-	_velocity = vec
+	velocity = vec
 	
-	if _velocity.x != 0.0:
-		_direction.x = signi(int(_velocity.x))
-	if _velocity.y != 0.0:
-		_direction.y = signi(int(_velocity.y))
+	if velocity.x != 0.0:
+		_direction.x = signi(int(velocity.x))
+	if velocity.y != 0.0:
+		_direction.y = signi(int(velocity.y))
 	
 	velocity_changed_immediate.emit()
 	_queue_velocity_changed()
-func force_velocity_x(val : float) -> void:
-	_velocity.x = val
-func force_velocity_y(val : float) -> void:
-	_velocity.y = val
 #endregion
 
 
@@ -75,24 +74,24 @@ func apply_velocity(
 func flat_change(flat : Vector2, delta : float) -> void:
 	velocity += flat * delta
 func lerp_change(to : Vector2, weight : Vector2, delta : float) -> void:
-	velocity = damp_velocityv(velocity, to, weight, delta)
+	velocity = Utilities.dampv(velocity, to, weight, delta)
 func flat_changef(flat : float, delta : float) -> void:
 	velocity += Vector2(flat, flat) * delta
 func lerp_changef(to : Vector2, weight : float, delta : float) -> void:
 	velocity = Vector2(
-		damp_velocityf(velocity.x, to.x, weight, delta),
-		damp_velocityf(velocity.y, to.y, weight, delta)
+		Utilities.dampf(velocity.x, to.x, weight, delta),
+		Utilities.dampf(velocity.y, to.y, weight, delta)
 	)
 
 func flat_hor_change(flat : float, delta : float) -> void:
 	velocity.x += flat * delta
 func lerp_hor_change(to : float, weight : float, delta : float) -> void:
-	velocity.x = damp_velocityf(velocity.x, to, weight, delta)
+	velocity.x = Utilities.dampf(velocity.x, to, weight, delta)
 
 func flat_ver_change(flat : float, delta : float) -> void:
 	velocity.y += flat * delta
 func lerp_ver_change(to : float, weight : float, delta : float) -> void:
-	velocity.y = damp_velocityf(velocity.y, to, weight, delta)
+	velocity.y = Utilities.dampf(velocity.y, to, weight, delta)
 #endregion
 
 
@@ -133,7 +132,7 @@ func vec_direction() -> Vector2i:
 	return _direction
 func hor_direction() -> int:
 	return _direction.x
-func vec_direction() -> int:
+func ver_direction() -> int:
 	return _direction.y
 
 func facing_left() -> bool:

@@ -48,7 +48,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 		weight = args.get(
 			&"air_weight", air_weight
 		)
-
+	
 	if signf(speed) != signf(velocity_c.get_velocity().x):
 		var s_weight : float = args.get(
 			&"slowdown_weight", slowdown_weight

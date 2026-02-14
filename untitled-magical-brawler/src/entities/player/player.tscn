@@ -24,7 +24,7 @@
 [ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_hurt_state.gd" id="17_fjj3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwoq"]
-size = Vector2(128, 129)
+size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uym1e"]
 size = Vector2(100, 100)
@@ -36,7 +36,7 @@ _velocity = NodePath("VelocityComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
 [node name="Actor" type="CharacterBody2D" parent="." unique_id=539542931]
-position = Vector2(0, -63)
+position = Vector2(0, -64)
 collision_layer = 4
 collision_mask = 2
 
@@ -44,7 +44,6 @@ collision_mask = 2
 texture = ExtResource("1_xahdq")
 
 [node name="GroundCollide" type="CollisionShape2D" parent="Actor" unique_id=1568380323]
-position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_mjwoq")
 
 [node name="HurtboxComponent" type="Area2D" parent="Actor" unique_id=1143519473 node_paths=PackedStringArray("health")]
@@ -122,9 +121,14 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("task")]
+[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("action_cache_c", "task", "idle_state", "move_state", "jump_state", "fall_state")]
 script = ExtResource("12_t8d2k")
+action_cache_c = NodePath("../../ActionCacheComponent")
 task = NodePath("../../TaskManager")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
 
 [node name="Move" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("action_cache_c", "task", "slowdown_state", "jump_state", "fall_state")]
 script = ExtResource("11_p2qdy")

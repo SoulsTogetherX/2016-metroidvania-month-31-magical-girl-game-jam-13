@@ -56,6 +56,7 @@ func update_collison_shape() -> void:
 	var camera_size := _camera.get_viewport_rect().size / _camera.zoom
 	_shape.size = camera_size
 	_collide.global_position = _camera.get_screen_center_position()
+	_collide.global_rotation = _camera.get_screen_rotation() - _camera.global_rotation
 
 func get_camera() -> Camera2D:
 	return _camera
