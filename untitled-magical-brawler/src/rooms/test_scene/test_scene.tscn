@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="PackedScene" uid="uid://co68h8eknlwnj" path="res://src/entities/player/player.tscn" id="2_0p3fg"]
-[ext_resource type="PackedScene" uid="uid://bj18hihvs33s0" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
+[ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p3fg"]
 size = Vector2(12800, 128)
@@ -10,6 +10,8 @@ size = Vector2(12800, 128)
 [node name="TestScene" type="Node2D" unique_id=1204055905]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=554752649]
+collision_layer = 2
+collision_mask = 0
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D" unique_id=667492297]
 position = Vector2(640, 64)
@@ -25,3 +27,11 @@ display_velocity = true
 
 [node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
 target = NodePath("../Player")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1160241503]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2" unique_id=508627585]
+position = Vector2(287, -261)
+build_mode = 1
+polygon = PackedVector2Array(-5548, -2274, 8105, -1841, 6807, 1118, -5227, 1551)

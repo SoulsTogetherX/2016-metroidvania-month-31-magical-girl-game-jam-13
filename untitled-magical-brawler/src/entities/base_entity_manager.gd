@@ -60,6 +60,7 @@ func _on_draw_notification() -> void:
 	if !Engine.is_editor_hint():
 		return
 	if _draw_snap_line:
+		_draw_snap_line = false
 		draw_line(Vector2.ZERO, Vector2(0, SNAP_RAYCAST_LENGTH), Color.RED)
 #endregion
 
@@ -109,6 +110,12 @@ func _snap_to_ground() -> void:
 	if !_draw_snap_line:
 		global_position.y = result.position.y
 	queue_redraw()
+#endregion
+
+
+#region Public Methods (Checks)
+func has_velocity() -> bool:
+	return _velocity != null
 #endregion
 
 

@@ -18,7 +18,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 	var get_tar_pos : Callable = args.get(&"get_target_pos", Callable())
 	var tar_pos : Vector2 = get_tar_pos.call()
 	
-	var desired := VelocityComponent.damp_velocityv(
+	var desired := Utilities.dampv(
 		act.global_position, tar_pos, lerp_weight, delta
 	)
 	velocity.force_velocity(
@@ -34,12 +34,12 @@ func task_begin(args : Dictionary) -> bool:
 	if get_velocity(args) == null:
 		return false
 	
-	var act = args.get(&"actor", null)
-	if (act == null || !(act is Node2D)) && !actor:
+	var act : Node2D = args.get(&"actor", actor)
+	if !act:
 		return false
 	
-	var get_target = args.get(&"get_target_pos", null)
-	if !(get_target is Callable) || !get_target.is_valid():
+	var get_target : Callable = args.get(&"get_target_pos", Callable())
+	if !get_target.is_valid():
 		return false
 	
 	return true

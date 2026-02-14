@@ -11,14 +11,23 @@ extends VelocityTaskNode
 #region Public Virtual Methods
 func task_physics(_delta : float, args : Dictionary) -> bool:
 	var velocity := get_velocity(args)
-	velocity.apply_velocity(actor)
+	var act : CharacterBody2D = args.get(&"actor", actor)
+	
+	velocity.apply_velocity(act)
 	return true
 #endregion
 	
 
 #region Public Methods (Action States)
 func task_begin(args : Dictionary) -> bool:
-	return actor != null && get_velocity(args) != null
+	if get_velocity(args) == null:
+		return false
+	
+	var act : CharacterBody2D = args.get(&"actor", actor)
+	if act == null:
+		return false
+	
+	return true
 #endregion
 
 

@@ -1,21 +1,23 @@
-[gd_scene format=3 uid="uid://bj18hihvs33s0"]
+[gd_scene format=3 uid="uid://t8ar1js7oorl"]
 
 [ext_resource type="Script" uid="uid://bwv01u2equka8" path="res://src/entities/camera/camera_entity.gd" id="1_gvk3k"]
+[ext_resource type="Script" uid="uid://bxmwpoislr5p4" path="res://src/entities/camera/camera_body.gd" id="2_lj0vn"]
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="2_w71rl"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/velocity/velocity_task_manager.gd" id="3_lj0vn"]
 [ext_resource type="Script" uid="uid://bsojra2kw8a8w" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/camera/zoom_camera.gd" id="4_paxy2"]
 [ext_resource type="Script" uid="uid://dpdvog0ao5lw3" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/lerp_to_target.gd" id="5_2td3j"]
 [ext_resource type="Script" uid="uid://cwkprmhjy6ps1" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/action/shake_task.gd" id="5_w71rl"]
-[ext_resource type="Script" uid="uid://dx2lbcrtpp4l2" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_add_task.gd" id="6_t8tvk"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="7_w71rl"]
 
 [node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity")]
 script = ExtResource("1_gvk3k")
-_actor = NodePath("Camera")
+_actor = NodePath("CameraBody")
 _velocity = NodePath("VelocityComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
-[node name="Camera" type="Camera2D" parent="." unique_id=1648607678]
-zoom = Vector2(0.4, 0.4)
+[node name="CameraBody" type="CharacterBody2D" parent="." unique_id=1083296371]
+collision_layer = 0
+script = ExtResource("2_lj0vn")
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=220146656]
 script = ExtResource("2_w71rl")
@@ -37,5 +39,5 @@ script = ExtResource("5_w71rl")
 script = ExtResource("5_2td3j")
 lerp_weight = Vector2(100, 100)
 
-[node name="VelocityAddTask" type="Node" parent="TaskManager" unique_id=1493572182]
-script = ExtResource("6_t8tvk")
+[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=1493572182]
+script = ExtResource("7_w71rl")

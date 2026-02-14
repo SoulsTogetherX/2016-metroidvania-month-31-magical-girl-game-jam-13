@@ -26,6 +26,7 @@ func _ready() -> void:
 		&"Velocity_Apply_Task",
 		{ &"actor" : _actor }
 	)
+	
 	_change_target()
 #endregion
 

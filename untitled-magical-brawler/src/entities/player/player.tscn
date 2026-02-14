@@ -36,7 +36,8 @@ metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
 [node name="Actor" type="CharacterBody2D" parent="." unique_id=539542931]
 position = Vector2(0, -63)
-collision_layer = 0
+collision_layer = 4
+collision_mask = 2
 
 [node name="GroundCollide" type="CollisionShape2D" parent="Actor" unique_id=1568380323]
 position = Vector2(-1, -0.5)

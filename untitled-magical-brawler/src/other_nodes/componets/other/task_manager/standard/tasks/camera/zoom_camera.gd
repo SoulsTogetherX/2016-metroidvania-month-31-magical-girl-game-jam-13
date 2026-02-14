@@ -21,7 +21,8 @@ var _zoom_tween : Tween
 
 #region Public Methods (Action States)
 func task_begin(args : Dictionary) -> bool:
-	if !actor:
+	var act : Node2D = args.get(&"actor", actor)
+	if !act:
 		return false
 	
 	var ease_arg : Tween.EaseType = args.get(&"ease_type", ease_type)
@@ -33,7 +34,7 @@ func task_begin(args : Dictionary) -> bool:
 	_zoom_tween.set_ease(ease_arg)
 	_zoom_tween.set_trans(trans_arg)
 	_zoom_tween.tween_property(
-		actor,
+		act,
 		"zoom",
 		zoom_arg,
 		duration_arg
