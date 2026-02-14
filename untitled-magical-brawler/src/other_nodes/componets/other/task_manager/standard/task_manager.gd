@@ -22,7 +22,7 @@ class_name TaskManager extends Node
 
 #region Private Variables
 var _running_tasks : Dictionary[StringName, Task]
-var _stored_states : Dictionary[StringName, TaskNode]
+var _stored_task : Dictionary[StringName, TaskNode]
 
 var _running : bool = false
 #endregion
@@ -31,31 +31,31 @@ var _running : bool = false
 
 #region Virtual Methods
 func _ready() -> void:
-	_register_states()
+	_register_task()
 	_auto_start_all()
-	child_entered_tree.connect(_register_states)
-	child_exiting_tree.connect(_register_states)
+	child_entered_tree.connect(_register_task)
+	child_exiting_tree.connect(_register_task)
 
 func _process(delta: float) -> void:
 	for task : Task in _running_tasks.values():
-		task.state_process(delta)
+		task.task_process(delta)
 func _physics_process(delta: float) -> void:
 	for task : Task in _running_tasks.values():
-		task.state_physics(delta)
+		task.task_physics(delta)
 #endregion
 
 
 #region Private Methods (Helper)
-func _register_states() -> void:
-	_stored_states.clear()
+func _register_task() -> void:
+	_stored_task.clear()
 	
 	for child : Node in get_children():
 		if child is TaskNode:
-			_stored_states[child.state_id()] = child
+			_stored_task[child.task_id()] = child
 func _auto_start_all() -> void:
-	for state : TaskNode in _stored_states.values():
+	for state : TaskNode in _stored_task.values():
 		if state.auto_start:
-			begin_task(state.state_id(), state.auto_start_args)
+			task_begin(state.task_id(), state.auto_start_args)
 
 func _create_task(
 	managed_state : TaskNode,
@@ -78,66 +78,66 @@ func _update_proces_mode() -> void:
 
 
 #region Public Methods (Task)
-func begin_task(
-	state_id : StringName,
+func task_begin(
+	task_id : StringName,
 	given_args : Dictionary = {},
 	overwrite : bool = false
 ) -> void:
-	if !state_exists(state_id):
+	if !state_exists(task_id):
 		return
-	if is_state_running(state_id):
+	if is_state_running(task_id):
 		if !overwrite:
 			return
-		end_task(state_id)
+		task_end(task_id)
 	
-	var state : TaskNode = _stored_states.get(state_id)
+	var state : TaskNode = _stored_task.get(task_id)
 	var task : Task = _create_task(state, given_args)
-	if !task.begin_state():
+	if !task.task_begin():
 		return
 	
-	task.force_stop.connect(end_task.bind(state_id))
-	_running_tasks.set(state_id, task)
+	task.force_stop.connect(task_end.bind(task_id))
+	_running_tasks.set(task_id, task)
 	
 	_update_proces_mode()
-func end_task(
-	state_id : StringName
+func task_end(
+	task_id : StringName
 ) -> void:
-	if !is_state_running(state_id):
+	if !is_state_running(task_id):
 		return
 	
-	var task : Task = _running_tasks.get(state_id)
-	task.end_state()
-	_running_tasks.erase(state_id)
+	var task : Task = _running_tasks.get(task_id)
+	task.task_end()
+	_running_tasks.erase(task_id)
 	
 	_update_proces_mode()
 
 
 func tap_state(
-	state_id : StringName,
+	task_id : StringName,
 	extra_args : Dictionary = {},
 	overwrite : bool = false
 ) -> void:
-	if !state_exists(state_id):
+	if !state_exists(task_id):
 		return
-	if is_state_running(state_id):
+	if is_state_running(task_id):
 		if !overwrite:
 			return
-		end_task(state_id)
+		task_end(task_id)
 	
-	var state : TaskNode = _stored_states.get(state_id)
+	var state : TaskNode = _stored_task.get(task_id)
 	var total_args := get_args().merged(extra_args)
 	
-	if !state.begin_state(total_args):
+	if !state.task_begin(total_args):
 		return
-	state.end_state(total_args)
+	state.task_end(total_args)
 #endregion
 
 
 #region Public Methods (Checks)
-func is_state_running(state_id : StringName) -> bool:
-	return _running_tasks.has(state_id)
-func state_exists(state_id : StringName) -> bool:
-	return _stored_states.has(state_id)
+func is_state_running(task_id : StringName) -> bool:
+	return _running_tasks.has(task_id)
+func state_exists(task_id : StringName) -> bool:
+	return _stored_task.has(task_id)
 #endregion
 
 
@@ -181,17 +181,17 @@ class Task:
 	#endregion
 	
 	#region Public Virtual Methods
-	func state_process(delta : float) -> bool:
-		return _state.state_process(delta, _arg_cache)
-	func state_physics(delta : float) -> bool:
-		return _state.state_physics(delta, _arg_cache)
+	func task_process(delta : float) -> bool:
+		return _state.task_process(delta, _arg_cache)
+	func task_physics(delta : float) -> bool:
+		return _state.task_physics(delta, _arg_cache)
 	#endregion
 
 	#region Public Methods (Action States)
-	func begin_state() -> bool:
-		return _state.begin_state(_arg_cache)
-	func end_state() -> void:
-		_state.end_state(_arg_cache)
+	func task_begin() -> bool:
+		return _state.task_begin(_arg_cache)
+	func task_end() -> void:
+		_state.task_end(_arg_cache)
 	#endregion
 
 	#region Public Methods (Helper)

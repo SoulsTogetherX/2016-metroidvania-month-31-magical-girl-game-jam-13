@@ -9,13 +9,13 @@ class_name GravityComponent extends Node
 #endregion
 
 
-#region Public Variables
+#region Private Variables
 var _is_falling : bool = false
 #endregion
 
 
 
-#region Public Methods (Helper)
+#region Static Methods (Helper)
 static func get_trajectory_impulse(
 	gravity_c : float,
 	height_c : float
@@ -67,7 +67,7 @@ static func get_offset(
 #endregion
 
 
-#region Virtual Methods
+#region Public Methods (Helper)
 func handle_gravity(
 	velocity : VelocityComponent,
 	in_air : bool,

@@ -16,22 +16,22 @@ signal force_stop
 
 
 #region Public Virtual Methods
-func state_process(_delta : float, _args : Dictionary) -> bool:
+func task_process(_delta : float, _args : Dictionary) -> bool:
 	return true
-func state_physics(_delta : float, _args : Dictionary) -> bool:
+func task_physics(_delta : float, _args : Dictionary) -> bool:
 	return true
 #endregion
 
 
 #region Public Methods (Action States)
-func begin_state(_args : Dictionary) -> bool:
+func task_begin(_args : Dictionary) -> bool:
 	return true
-func end_state(_args : Dictionary) -> void:
+func task_end(_args : Dictionary) -> void:
 	pass
 #endregion
 
 
 #region Public Methods (Identifier)
 @abstract
-func state_id() -> StringName
+func task_id() -> StringName
 #endregion

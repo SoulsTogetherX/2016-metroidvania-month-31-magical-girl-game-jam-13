@@ -22,8 +22,8 @@ func process_physics(_delta: float) -> StateNode:
 
 #region Public Methods (State Change)
 func enter_state() -> void:
-	task.begin_task(&"Jump_Task")
-	task.begin_task(
+	task.task_begin(&"Jump_Task")
+	task.task_begin(
 		&"Walk_Task",
 		{
 			&"get_move_dir": action_cache.get_move_direction,
@@ -31,6 +31,6 @@ func enter_state() -> void:
 		}
 	)
 func exit_state() -> void:
-	task.end_task(&"Jump_Task")
-	task.end_task(&"Walk_Task")
+	task.task_end(&"Jump_Task")
+	task.task_end(&"Walk_Task")
 #endregion

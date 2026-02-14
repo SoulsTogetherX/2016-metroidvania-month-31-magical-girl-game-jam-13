@@ -1,6 +1,11 @@
 class_name VelocityComponent extends Node
 
 
+#region Signals 
+signal velocity_changed
+#endregion
+
+
 #region Private Variables 
 var _velocity : Vector2:
 	get = get_velocity,
@@ -17,6 +22,13 @@ static func damp_velocity(
 	delta : float
 ) -> Variant:
 	return lerp(v1, v2, 1 - exp(-weight * delta))
+static func damp_velocityf(
+	v1 : float,
+	v2 : float,
+	weight : float,
+	delta : float
+) -> float:
+	return lerpf(v1, v2, 1 - exp(-weight * delta))
 #endregion
 
 
@@ -27,7 +39,10 @@ func get_normalized() -> Vector2:
 	return _velocity.normalized()
 
 func force_velocity(vec : Vector2) -> void:
+	if vec == _velocity:
+		return
 	_velocity = vec
+	velocity_changed.emit()
 func force_velocity_x(val : float) -> void:
 	_velocity.x = val
 func force_velocity_y(val : float) -> void:
@@ -55,12 +70,12 @@ func impulse(flat : Vector2) -> void:
 func flat_hor_change(flat : float, delta : float = 1.0) -> void:
 	_velocity.x += flat * delta
 func lerp_hor_change(to : float, weight : float, delta : float = 1.0) -> void:
-	_velocity.x = damp_velocity(_velocity.x, to, weight, delta)
+	_velocity.x = damp_velocityf(_velocity.x, to, weight, delta)
 
 func flat_ver_change(flat : float, delta : float = 1.0) -> void:
 	_velocity.y += flat * delta
 func lerp_ver_change(to : float, weight : float, delta : float = 1.0) -> void:
-	_velocity.y = damp_velocity(_velocity.y, to, weight, delta)
+	_velocity.y = damp_velocityf(_velocity.y, to, weight, delta)
 #endregion
 
 
@@ -92,4 +107,14 @@ func move_direction() -> float:
 	return signf(_velocity.x)
 func facing_right() -> bool:
 	return _velocity.x > 0
+#endregion
+
+
+#region Public Methods (Draw)
+func draw_predicted_velocity(actor : Node2D, from : Vector2) -> void:
+	actor.draw_line(
+		from,
+		_velocity,
+		Color.GREEN
+	)
 #endregion

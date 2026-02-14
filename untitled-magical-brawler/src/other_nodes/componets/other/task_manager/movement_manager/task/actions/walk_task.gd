@@ -19,7 +19,7 @@ extends VelocityTaskNode
 
 
 #region Public Virtual Methods
-func state_physics(delta : float, args : Dictionary) -> bool:
+func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity := get_velocity(args)
 	var get_move_dir : Callable = args.get(&"get_move_dir")
 	var is_on_ground : Callable = args.get(&"is_on_ground")
@@ -47,12 +47,12 @@ func state_physics(delta : float, args : Dictionary) -> bool:
 	
 
 #region Public Methods (Action States)
-func begin_state(args : Dictionary) -> bool:
+func task_begin(args : Dictionary) -> bool:
 	return get_velocity(args) != null
 #endregion
 
 
 #region Public Methods (Identifier)
-func state_id() -> StringName:
+func task_id() -> StringName:
 	return &"Walk_Task"
 #endregion
