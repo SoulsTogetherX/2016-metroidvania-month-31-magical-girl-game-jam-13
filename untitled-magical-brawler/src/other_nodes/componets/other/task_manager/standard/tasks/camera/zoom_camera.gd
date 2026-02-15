@@ -21,14 +21,24 @@ var _zoom_tween : Tween
 
 #region Public Methods (Action States)
 func task_begin(args : Dictionary) -> bool:
-	var act : Node2D = args.get(&"actor", actor)
-	if !act:
+	var act : Node2D = get_argument(
+		args, &"actor", actor
+	)
+	if act == null:
 		return false
 	
-	var ease_arg : Tween.EaseType = args.get(&"ease_type", ease_type)
-	var trans_arg : Tween.TransitionType = args.get(&"transition_type", transition_type)
-	var zoom_arg : Vector2 = args.get(&"zoom", zoom)
-	var duration_arg : float = args.get(&"duration", duration)
+	var ease_arg : Tween.EaseType = get_argument(
+		args, &"ease_type", ease_type
+	)
+	var trans_arg : Tween.TransitionType = get_argument(
+		args, &"transition_type", transition_type
+	)
+	var zoom_arg : Vector2 = get_argument(
+		args, &"zoom", zoom
+	)
+	var duration_arg : float = get_argument(
+		args, &"duration", duration
+	)
 	
 	_zoom_tween = create_tween()
 	_zoom_tween.set_ease(ease_arg)

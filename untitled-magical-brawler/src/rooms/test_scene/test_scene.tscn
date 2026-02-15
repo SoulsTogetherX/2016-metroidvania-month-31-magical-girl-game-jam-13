@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_3ttad"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/attack_effects/base_attack_effect.gd" id="6_nmdk6"]
 [ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/attack_effects/flat_attack_effect.gd" id="7_n718h"]
+[ext_resource type="Script" uid="uid://bgh34blcwhwjf" path="res://src/other_nodes/room_editor_tools/debug/fps_display.gd" id="8_wx32i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p3fg"]
 size = Vector2(12800, 128)
@@ -62,3 +63,15 @@ metadata/_custom_type_script = "uid://cxla1cqkag8lu"
 [node name="Icon" type="Sprite2D" parent="DamageTester" unique_id=1672272971]
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_iclql")
+
+[node name="FPSDisplayLabel" type="Label" parent="." unique_id=1300388526]
+top_level = true
+offset_left = -945.0
+offset_top = -669.0
+offset_right = -577.0
+offset_bottom = -586.0
+theme_override_font_sizes/font_size = 60
+text = "FPS: 105.0"
+horizontal_alignment = 1
+script = ExtResource("8_wx32i")
+metadata/_custom_type_script = "uid://bgh34blcwhwjf"

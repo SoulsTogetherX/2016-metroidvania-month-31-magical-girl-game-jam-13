@@ -57,7 +57,7 @@ func horizontal_movement(delta: float) -> void:
 	var speed : float = action_cache_m.get_move_direction()
 	var weight : float = 0.0
 
-	if action_cache_m.is_on_ground():
+	if action_cache_m.is_action(&"on_floor"):
 		acceleration *= ground_acceleration
 		speed *= ground_max_speed
 		weight = ground_weight
@@ -99,7 +99,7 @@ func handle_gravity(delta : float) -> void:
 	
 	gravity_c.handle_gravity(
 		velocity_c,
-		!action_cache_m.is_on_ground(),
+		!action_cache_m.is_action(&"on_floor"),
 		delta
 	)
 #endregion

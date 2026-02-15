@@ -13,6 +13,14 @@ const VELOCITY_NAME := &"__velocity_component__"
 
 
 
+#region Ready Methods
+func _ready() -> void:
+	super()
+	if !velocity_c:
+		push_error("No 'VelocityComponent' found")
+#endregion
+
+
 #region Private Methods (Helper)
 func _create_task(
 	managed_state : TaskNode,

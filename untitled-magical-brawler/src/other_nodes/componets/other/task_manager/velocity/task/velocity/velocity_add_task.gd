@@ -11,7 +11,7 @@ extends VelocityTaskNode
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity_c := get_velocity(args)
-	var act = args.get(&"actor", actor)
+	var act : Node2D = get_argument(args, &"actor", actor)
 	
 	act.position += velocity_c.get_velocity() * delta
 	return true
@@ -22,9 +22,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 func task_begin(args : Dictionary) -> bool:
 	if get_velocity(args) == null:
 		return false
-	
-	var act = args.get(&"actor", null)
-	if (act == null || !(act is Node2D)) && !actor:
+	if !(get_argument(args, &"actor", actor) is Node2D):
 		return false
 	
 	return true

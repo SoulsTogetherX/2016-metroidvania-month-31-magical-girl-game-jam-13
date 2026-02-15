@@ -21,39 +21,44 @@ extends VelocityTaskNode
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity_c := get_velocity(args)
-	var get_move_dir : Callable = args.get(&"get_move_dir")
-	var is_on_ground : Callable = args.get(&"is_on_ground")
+	var move_dir : float = get_argument(
+		args, &"move_dir", Callable()
+	)
+	var on_floor : bool = get_argument(
+		args, &"on_floor", Callable()
+	)
 	
-	var acceleration : float = get_move_dir.call()
-	var speed : float = get_move_dir.call()
+	var acceleration : float = move_dir
+	var speed : float = move_dir
 	var weight : float = 0.0
 
-	if is_on_ground.is_null() || !is_on_ground.is_valid() || is_on_ground.call():
-		acceleration *= args.get(
-			&"ground_acceleration", ground_acceleration
+	if on_floor:
+		acceleration *= get_argument(
+			args, &"ground_acceleration", ground_acceleration
 		)
-		speed *= args.get(
-			&"ground_max_speed", ground_max_speed
+		speed *= get_argument(
+			args, &"ground_max_speed", ground_max_speed
 		)
-		weight = args.get(
-			&"ground_weight", ground_weight
+		weight = get_argument(
+			args, &"ground_weight", ground_weight
 		)
 	else:
-		acceleration *= args.get(
-			&"air_acceleration", air_acceleration
+		acceleration *= get_argument(
+			args, &"air_acceleration", air_acceleration
 		)
-		speed *= args.get(
-			&"air_max_speed", air_max_speed
+		speed *= get_argument(
+			args, &"air_max_speed", air_max_speed
 		)
-		weight = args.get(
-			&"air_weight", air_weight
+		weight = get_argument(
+			args, &"air_weight", air_weight
 		)
 	
 	if signf(speed) != signf(velocity_c.get_velocity().x):
-		var s_weight : float = args.get(
-			&"slowdown_weight", slowdown_weight
+		var s_weight : float = get_argument(
+			args, &"slowdown_weight", slowdown_weight
 		)
 		velocity_c.lerp_hor_change(0.0, s_weight, delta)
+	
 	velocity_c.flat_hor_change(acceleration, delta)
 	velocity_c.lerp_hor_change(speed, weight, delta)
 	
@@ -65,13 +70,9 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 func task_begin(args : Dictionary) -> bool:
 	if get_velocity(args) == null:
 		return false
-	
-	var get_move_dir : Callable = args.get(&"get_move_dir", Callable())
-	if !get_move_dir.is_valid():
+	if !(get_argument(args, &"move_dir", Callable()) is float):
 		return false
-	
-	var is_on_ground : Callable = args.get(&"is_on_ground", Callable())
-	if !is_on_ground.is_valid():
+	if !(get_argument(args, &"on_floor", Callable()) is bool):
 		return false
 	
 	return true

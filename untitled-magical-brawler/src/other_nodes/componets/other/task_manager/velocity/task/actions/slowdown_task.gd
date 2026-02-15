@@ -13,8 +13,12 @@ extends VelocityTaskNode
 func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity_c := get_velocity(args)
 	var dir : float = velocity_c.hor_direction()
-	var flat : float = args.get(&"slowdown_flat", slowdown_flat)
-	var weight : float = args.get(&"slowdown_weight", slowdown_weight)
+	var flat : float = get_argument(
+		args, &"slowdown_flat", slowdown_flat
+	)
+	var weight : float = get_argument(
+		args, &"slowdown_weight", slowdown_weight
+	)
 	
 	velocity_c.velocity.x = Utilities.dampf(
 		velocity_c.get_velocity().x - (flat * dir * delta),

@@ -2,141 +2,153 @@ class_name ActionCacheComponent extends Node
 
 
 #region Enum
-enum QUICK_CHECK {
-	UNPRESSED     = 0b00,
-	JUST_PRESSED  = 0b01,
-	JUST_RELEASED = 0b10,
-	HELD          = 0b11,
+enum ACTION_STATE {
+	NONE     = 0b00,
+	STARTED  = 0b01,
+	FINISHED = 0b10,
+	HELD     = 0b11,
+}
+
+enum UPDATE_CALLBACK {
+	NONE     = 0b00,
+	PROCESS  = 0b01,
+	PHYSICS = 0b10
 }
 #endregion
 
 
 #region External Variables
-@export_group("Settings")
-@export var jump_number := 1
-
-@export_group("Other")
-@export var jump_buffer : Timer
+@export var update_rate : UPDATE_CALLBACK = UPDATE_CALLBACK.PROCESS:
+	set(val):
+		if val == update_rate:
+			return
+		update_rate = val
+		
+		if is_node_ready():
+			_refresh_update_rate()
 #endregion
 
 
 #region Private Variables
-var _jump_counter : int
-var _horizontal_cache : float
+var _action_toggle : Array[bool]
+var _action_state : Array[int]
+var _action_cache : Dictionary[StringName, int]
 
-var _on_jump : int
-var _on_ground : int
-var _on_ceiling : int
-var _on_wall : int
-var _on_move : int
-var _on_attack : int
+var _dir_value : Array[Vector2]
+var _dir_cache : Dictionary[StringName, int]
 #endregion
 
 
 
 #region Virtual Methods
-func _ready() -> void:
-	if jump_buffer:
-		jump_buffer.one_shot = true
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_READY:
+			_refresh_update_rate()
 #endregion
 
 
-#region Public Methods (Air Checks)
-func just_jumped() -> bool:
-	return _on_jump & QUICK_CHECK.JUST_PRESSED
-func just_stopped_jumping() -> bool:
-	return _on_jump & QUICK_CHECK.JUST_RELEASED
-func is_jumping() -> bool:
-	return _on_jump & QUICK_CHECK.HELD
-
-func just_landed() -> bool:
-	return _on_ground & QUICK_CHECK.JUST_PRESSED
-func just_airborn() -> bool:
-	return _on_ground & QUICK_CHECK.JUST_RELEASED
-func is_on_ground() -> bool:
-	return _on_ground & QUICK_CHECK.HELD
-
-func just_hit_ceiling() -> bool:
-	return _on_ceiling & QUICK_CHECK.JUST_PRESSED
-func just_fell_from_ceiling() -> bool:
-	return _on_ceiling & QUICK_CHECK.JUST_RELEASED
-func is_on_ceiling() -> bool:
-	return _on_ceiling & QUICK_CHECK.HELD
-#endregion
-
-
-#region Public Methods (Wall Checks)
-func just_on_wall() -> bool:
-	return _on_wall & QUICK_CHECK.JUST_PRESSED
-func just_off_wall() -> bool:
-	return _on_wall & QUICK_CHECK.JUST_RELEASED
-func is_on_wall() -> bool:
-	return _on_wall & QUICK_CHECK.HELD
-#endregion
-
-
-#region Public Methods (Movement Checks)
-func just_moved() -> bool:
-	return _on_move & QUICK_CHECK.JUST_PRESSED
-func just_stopped() -> bool:
-	return _on_move & QUICK_CHECK.JUST_RELEASED
-func is_moving() -> bool:
-	return _on_move & QUICK_CHECK.HELD
-#endregion
-
-
-#region Public Methods (Attack Checks)
-func just_attacked() -> bool:
-	return _on_attack & QUICK_CHECK.JUST_PRESSED
-func just_stopped_attacking() -> bool:
-	return _on_attack & QUICK_CHECK.JUST_RELEASED
-func is_attacking() -> bool:
-	return _on_attack & QUICK_CHECK.HELD
-#endregion
-
-
-#region Public Methods (Measurement)
-func get_move_direction() -> float:
-	return _horizontal_cache
-
-func get_jump_counter() -> int:
-	return _jump_counter
-#endregion
-
-
-#region Public Methods (Apply)
-func progress_cache(
-	horizontal_direction : float,
-	jumping : bool,
-	grounded : bool,
-	on_ceiling : bool,
-	on_wall : bool,
-	on_attack : bool
-) -> void:
-	_on_jump <<= 1
-	_on_ground <<= 1
-	_on_ceiling <<= 1
-	_on_wall <<= 1
-	_on_move <<= 1
-	_on_attack <<= 1
+#region Private Methods (Helper)
+func _refresh_update_rate() -> void:
+	if get_tree().process_frame.is_connected(update_all_cache):
+		get_tree().process_frame.disconnect(update_all_cache)
+	if get_tree().physics_frame.is_connected(update_all_cache):
+		get_tree().physics_frame.disconnect(update_all_cache)
 	
-	_horizontal_cache = signf(horizontal_direction)
-	if grounded:
-		_jump_counter = 0
+	match update_rate:
+		UPDATE_CALLBACK.PROCESS:
+			get_tree().process_frame.connect(update_all_cache)
+		UPDATE_CALLBACK.PHYSICS:
+			get_tree().physics_frame.connect(update_all_cache)
+
+func _get_action_index(action_name : StringName) -> int:
+	return _action_cache.get(action_name, -1)
+func _get_direction_index(dir_name : StringName) -> int:
+	return _dir_cache.get(dir_name, -1)
+
+func _insert_action(action_name : StringName, toggle : bool) -> void:
+	_action_cache[action_name] = _action_toggle.size()
+	_action_toggle.push_back(toggle)
 	
-	if jump_buffer:
-		if jumping && !is_jumping():
-			jump_buffer.start()
-		if grounded && !jump_buffer.is_stopped():
-			jumping = true
-			jump_buffer.stop()
+	if toggle:
+		_action_state.push_back(ACTION_STATE.STARTED)
+		return
+	_action_state.push_back(ACTION_STATE.NONE)
+func _insert_direction(dir_name : StringName, dir : Vector2) -> void:
+	_dir_cache[dir_name] = _dir_value.size()
+	_dir_value.push_back(dir)
+#endregion
+
+
+#region Public Methods (Action Cache)
+func clear_caches() -> void:
+	_action_toggle.clear()
+	_action_state.clear()
+	_action_cache.clear()
 	
-	_on_jump |= int(jumping && (_jump_counter <= jump_number || is_jumping()))
-	_on_ground |= int(grounded)
-	_on_ceiling |= int(on_ceiling)
-	_on_wall |= int(on_wall)
-	_on_move |= int(!is_zero_approx(_horizontal_cache))
-	_on_attack |= int(on_attack)
+	_dir_value.clear()
+	_dir_cache.clear()
+
+func update_all_cache() -> void:
+	_dir_value.fill(Vector2.ZERO)
+	for idx : int in range(_action_toggle.size()):
+		_action_state[idx] <<= 1
+		if _action_toggle[idx]:
+			_action_state[idx] |= 1
+
+func set_action(action_name : StringName, toggle : bool) -> void:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		_insert_action(action_name, toggle)
+		return
 	
-	_jump_counter += int(just_jumped())
+	_action_toggle[idx] = toggle
+	if toggle:
+		_action_state[idx] |= int(ACTION_STATE.STARTED)
+func set_direction(dir_name : StringName, dir : Vector2) -> void:
+	var idx := _get_direction_index(dir_name)
+	if idx == -1:
+		_insert_direction(dir_name, dir)
+		return
+	_dir_value[idx] = dir
+
+func is_action_toggled(action_name : StringName) -> bool:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		return false
+	return _action_toggle[idx]
+#endregion
+
+
+#region Public Methods (Action Checks)
+func is_action(action_name : StringName) -> bool:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		return false
+	
+	return ACTION_STATE.NONE != (_action_state[idx] & ACTION_STATE.HELD)
+func is_action_held(action_name : StringName) -> bool:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		return false
+	
+	return ACTION_STATE.HELD != (_action_state[idx] & ACTION_STATE.HELD)
+func is_action_started(action_name : StringName) -> bool:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		return false
+	
+	return ACTION_STATE.STARTED != (_action_state[idx] & ACTION_STATE.HELD)
+func is_action_finished(action_name : StringName) -> bool:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		return false
+	
+	return ACTION_STATE.FINISHED != (_action_state[idx] & ACTION_STATE.HELD)
+
+func get_direction(action_name : StringName) -> Vector2:
+	var idx := _get_direction_index(action_name)
+	if idx == -1:
+		return Vector2.ZERO
+	return _dir_value[idx]
 #endregion

@@ -13,14 +13,22 @@ extends TaskNode
 
 
 #region Public Virtual Methods
-func task_physics(_delta : float, _args : Dictionary) -> bool:
-	action_cache.progress_cache(
-		input.horizontal_moving(),
-		input.jumping(),
-		actor.is_on_floor(),
-		actor.is_on_ceiling(),
-		actor.is_on_wall(),
-		input.attacking()
+func task_physics(_delta : float, args : Dictionary) -> bool:
+	var act : Node2D = get_argument(args, &"actor", actor)
+	var cache : ActionCacheComponent = get_argument(
+		args, &"action_cache", action_cache
+	)
+	var player_input : PlayerInputComponent = get_argument(
+		args, &"player_input", input
+	)
+	
+	cache.progress_cache(
+		player_input.horizontal_moving(),
+		player_input.jumping(),
+		act.is_on_floor(),
+		act.is_on_ceiling(),
+		act.is_on_wall(),
+		player_input.attacking()
 	)
 	
 	return true
@@ -28,8 +36,14 @@ func task_physics(_delta : float, _args : Dictionary) -> bool:
 	
 
 #region Public Methods (Action States)
-func task_state(_args : Dictionary) -> bool:
-	return actor != null && action_cache != null
+func task_begin(args : Dictionary) -> bool:
+	if !(get_argument(args, &"actor", actor) is Node2D):
+		return false
+	if !(get_argument(args, &"action_cache", action_cache) is ActionCacheComponent):
+		return false
+	if !(get_argument(args, &"player_input", input) is PlayerInputComponent):
+		return false
+	return true
 #endregion
 
 

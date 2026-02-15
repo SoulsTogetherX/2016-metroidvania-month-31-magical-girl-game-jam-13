@@ -21,21 +21,21 @@ func _ready() -> void:
 #region Private Methods
 func _task_settup() -> void:
 	_task.task_begin(
-		"Gravity_Task",
+		&"Gravity_Task",
 		{
-			"is_on_ground": _action_cache_c.is_on_ground
+			&"on_floor": _action_cache_c.is_action.bind(&"on_floor")
 		}
 	)
 	_task.task_begin(
-		"Velocity_Apply_Task",
+		&"Velocity_Apply_Task",
 		{
-			"actor": _actor
+			&"actor": _actor
 		}
 	)
 	_task.task_begin(
-		"Update_Cache_Task",
+		&"Update_Cache_Task",
 		{
-			"actor": _actor
+			&"actor": _actor
 		}
 	)
 #endregion

@@ -42,7 +42,7 @@ func _change_target() -> void:
 		&"Lerp_To_Task",
 		{
 			&"actor" : _actor,
-			&"get_target_pos" : target.predict_next_position
+			&"target_pos" : target.predict_next_position
 		},
 		true
 	)

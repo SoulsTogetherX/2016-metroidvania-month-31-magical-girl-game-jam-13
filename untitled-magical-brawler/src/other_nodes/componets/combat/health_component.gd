@@ -1,6 +1,7 @@
 @tool
 class_name HealthComponent extends Node
 
+
 #region Signals
 signal max_health_changed
 signal max_health_delta(delta : int)

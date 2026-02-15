@@ -16,15 +16,21 @@ extends VelocityTaskNode
 #region Public Methods (Action States)
 func task_begin(args : Dictionary) -> bool:
 	var velocity_c := get_velocity(args)
-	if !velocity_c:
+	if velocity_c == null:
 		return false
 	
-	var grav : GravityComponent = args.get(&"gravity", gravity_c)
+	var grav : GravityComponent = get_argument(
+		args, &"gravity", gravity_c
+	)
 	if grav == null:
 		return false
 	
-	var offset : Vector2 = args.get(&"jump_offset", jump_offset)
-	var mask : int = args.get(&"replace_mask", replace_mask)
+	var offset : Vector2 = get_argument(
+		args, &"jump_offset", jump_offset
+	)
+	var mask : int = get_argument(
+		args, &"replace_mask", replace_mask
+	)
 	var impluse := GravityComponent.get_required_trajectory_impulse(
 		grav.gravity,
 		offset
@@ -45,8 +51,8 @@ func task_begin(args : Dictionary) -> bool:
 	return true
 func task_end(args : Dictionary) -> void:
 	var velocity_c := get_velocity(args)
-	var stopper : float = args.get(
-		&"jump_stopper_weight", jump_stopper_weight
+	var stopper : float = get_argument(
+		args, &"jump_stopper_weight", jump_stopper_weight
 	)
 	
 	if !velocity_c.attempting_fall():

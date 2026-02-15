@@ -6,7 +6,7 @@ extends StateNode
 @export var task : VelocityTaskManager
 
 @export_group("States")
-@export var idle_state : StateNode
+@export var end_state : StateNode
 
 @export_group("Other")
 @export var timer : Timer
