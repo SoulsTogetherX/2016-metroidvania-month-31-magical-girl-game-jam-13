@@ -3,9 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="PackedScene" uid="uid://co68h8eknlwnj" path="res://src/entities/player/player.tscn" id="2_0p3fg"]
 [ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
+[ext_resource type="Script" uid="uid://dnwgfwqocrpgn" path="res://src/other_nodes/room_editor_tools/camera_boundary.gd" id="4_t124o"]
+[ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_3ttad"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/attack_effects/base_attack_effect.gd" id="6_nmdk6"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/attack_effects/flat_attack_effect.gd" id="7_n718h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p3fg"]
 size = Vector2(12800, 128)
+
+[sub_resource type="Resource" id="Resource_n718h"]
+script = ExtResource("7_n718h")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ttad"]
+size = Vector2(128, 128)
 
 [node name="TestScene" type="Node2D" unique_id=1204055905]
 
@@ -22,6 +32,14 @@ texture = ExtResource("1_iclql")
 position = Vector2(640, 64)
 shape = SubResource("RectangleShape2D_0p3fg")
 
+[node name="CameraBoundary" type="StaticBody2D" parent="." unique_id=1489446853]
+script = ExtResource("4_t124o")
+metadata/_custom_type_script = "uid://dnwgfwqocrpgn"
+
+[node name="CameraCollider" type="CollisionPolygon2D" parent="CameraBoundary" unique_id=1318645287]
+build_mode = 1
+polygon = PackedVector2Array(8327, -2292, 8484, 1012, 1583, 338, -1520, 338, -7770, 1507, -7725, -2203)
+
 [node name="Player" parent="." unique_id=483210501 instance=ExtResource("2_0p3fg")]
 display_velocity = true
 display_health = true
@@ -30,10 +48,17 @@ display_health_offset = Vector2(0, -128)
 [node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
 target = NodePath("../Player")
 
-[node name="CameraBoundary" type="StaticBody2D" parent="." unique_id=1160241503]
+[node name="DamageTester" type="Area2D" parent="." unique_id=1654942989]
+position = Vector2(713, -365)
+collision_layer = 8
 collision_mask = 0
+monitoring = false
+script = ExtResource("5_3ttad")
+effects = Array[ExtResource("6_nmdk6")]([SubResource("Resource_n718h")])
+shape = SubResource("RectangleShape2D_3ttad")
+faction = 1
+metadata/_custom_type_script = "uid://cxla1cqkag8lu"
 
-[node name="CollisionPolygon" type="CollisionPolygon2D" parent="CameraBoundary" unique_id=508627585]
-position = Vector2(287, -261)
-build_mode = 1
-polygon = PackedVector2Array(-5994, -1646, 6876, -1757, 6793, 1607, -6106, 1593)
+[node name="Icon" type="Sprite2D" parent="DamageTester" unique_id=1672272971]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_iclql")

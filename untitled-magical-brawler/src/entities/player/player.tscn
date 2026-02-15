@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://bymclbi1pwet7" path="res://src/entities/player/player_entity.gd" id="1_5qgjf"]
 [ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/health_component.gd" id="1_peafg"]
 [ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_xahdq"]
-[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/hurtbox_component.gd" id="3_mjwoq"]
+[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
+[ext_resource type="Script" uid="uid://dbkx7pi6pjt8i" path="res://src/other_nodes/componets/combat/health_react_component.gd" id="5_fjj3i"]
 [ext_resource type="Script" uid="uid://d4m0ixcabd4fv" path="res://src/other_nodes/componets/control/player_input_component.gd" id="5_mjwoq"]
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="5_uym1e"]
 [ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/state_machine.gd" id="5_xahdq"]
@@ -25,7 +26,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwoq"]
 size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uym1e"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qgjf"]
 size = Vector2(100, 100)
 
 [sub_resource type="GDScript" id="GDScript_5qgjf"]
@@ -113,20 +114,24 @@ texture = ExtResource("1_xahdq")
 shape = SubResource("RectangleShape2D_mjwoq")
 
 [node name="HurtboxComponent" type="Area2D" parent="Actor" unique_id=1143519473 node_paths=PackedStringArray("health")]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 script = ExtResource("3_mjwoq")
 health = NodePath("../../HealthComponent")
+shape = SubResource("RectangleShape2D_5qgjf")
+faction = 0
 metadata/_custom_type_script = "uid://d4frh4mqr77xo"
-
-[node name="PlayerCollide" type="CollisionShape2D" parent="Actor/HurtboxComponent" unique_id=1143939995]
-shape = SubResource("RectangleShape2D_uym1e")
-debug_color = Color(0.99669963, 0, 0.19055969, 0.41960785)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1518608157]
 script = ExtResource("1_peafg")
 max_health = 10
 metadata/_custom_type_script = "uid://lqunqvr5fs"
+
+[node name="HealthReactComponent" type="Node" parent="HealthComponent" unique_id=580434456 node_paths=PackedStringArray("health_m")]
+script = ExtResource("5_fjj3i")
+health_m = NodePath("..")
+metadata/_custom_type_script = "uid://dbkx7pi6pjt8i"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
 script = ExtResource("5_uym1e")

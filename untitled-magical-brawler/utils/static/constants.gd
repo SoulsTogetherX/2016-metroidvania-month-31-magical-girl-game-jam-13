@@ -8,3 +8,9 @@ enum LAYERS {
 	PLAYER = 1 << 2,
 	ENEMY  = 1 << 3
 }
+
+enum FACTION {
+	PLAYER,
+	ENEMY,
+	NEUTRAL
+}
