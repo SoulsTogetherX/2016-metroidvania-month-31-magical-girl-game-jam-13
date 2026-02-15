@@ -9,7 +9,7 @@ extends BaseEntityManager
 			return
 		target = val
 		
-		if is_node_ready():
+		if is_node_ready() && !Engine.is_editor_hint():
 			_change_target()
 #endregion
 

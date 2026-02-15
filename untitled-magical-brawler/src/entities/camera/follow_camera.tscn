@@ -9,10 +9,10 @@
 [ext_resource type="Script" uid="uid://cwkprmhjy6ps1" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/action/shake_task.gd" id="5_w71rl"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="7_w71rl"]
 
-[node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity")]
+[node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity_m")]
 script = ExtResource("1_gvk3k")
 _actor = NodePath("CameraBody")
-_velocity = NodePath("VelocityComponent")
+_velocity_m = NodePath("VelocityComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
 [node name="CameraBody" type="CharacterBody2D" parent="." unique_id=1083296371]

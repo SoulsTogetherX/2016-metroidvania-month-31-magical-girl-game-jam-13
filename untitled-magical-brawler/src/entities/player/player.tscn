@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_slowdown_state.gd" id="12_t8d2k"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
 [ext_resource type="Script" uid="uid://bb1rurhmxqtqb" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_fall_state.gd" id="13_t8d2k"]
-[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/velocity/task/processing/update_cache_on_actor.gd" id="14_5qgjf"]
 [ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/states/entity/entity_hurt_state.gd" id="17_fjj3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwoq"]
@@ -29,10 +28,77 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uym1e"]
 size = Vector2(100, 100)
 
-[node name="Player" type="Node2D" unique_id=483210501 node_paths=PackedStringArray("_actor", "_velocity")]
+[sub_resource type="GDScript" id="GDScript_5qgjf"]
+script/source = "extends TaskNode
+
+
+#region External Variables
+@export_group(\"Modules\")
+@export var action_cache_c : ActionCacheComponent
+@export var input_c : PlayerInputComponent
+
+@export_group(\"Other\")
+@export var actor : CharacterBody2D
+#endregion
+
+
+
+#region Public Virtual Methods
+func task_physics(_delta : float, args : Dictionary) -> bool:
+	var act : CharacterBody2D = args.get(&\"actor\", actor)
+	var act_cache : ActionCacheComponent = args.get(
+		&\"action_cache\", action_cache_c
+	)
+	var input : PlayerInputComponent = args.get(
+		&\"input\", input_c
+	)
+	
+	act_cache.progress_cache(
+		input.horizontal_moving(),
+		input.jumping(),
+		act.is_on_floor(),
+		act.is_on_ceiling(),
+		act.is_on_wall(),
+		input.attacking()
+	)
+	
+	return true
+#endregion
+	
+
+#region Public Methods (Action States)
+func task_begin(args : Dictionary) -> bool:
+	var act : CharacterBody2D = args.get(&\"actor\", actor)
+	if act == null:
+		return false
+	
+	var act_cache : ActionCacheComponent = args.get(
+		&\"action_cache\", action_cache_c
+	)
+	if act_cache == null:
+		return false
+	
+	var input : PlayerInputComponent = args.get(
+		&\"input\", input_c
+	)
+	if input == null:
+		return false
+	
+	return true
+#endregion
+
+
+#region Public Methods (Identifier)
+func task_id() -> StringName:
+	return &\"Update_Cache_Task\"
+#endregion
+"
+
+[node name="Player" type="Node2D" unique_id=483210501 node_paths=PackedStringArray("_actor", "_velocity_m", "_health_m")]
 script = ExtResource("1_5qgjf")
 _actor = NodePath("Actor")
-_velocity = NodePath("VelocityComponent")
+_velocity_m = NodePath("VelocityComponent")
+_health_m = NodePath("HealthComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
 [node name="Actor" type="CharacterBody2D" parent="." unique_id=539542931]
@@ -59,6 +125,7 @@ debug_color = Color(0.99669963, 0, 0.19055969, 0.41960785)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1518608157]
 script = ExtResource("1_peafg")
+max_health = 10
 metadata/_custom_type_script = "uid://lqunqvr5fs"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
@@ -102,7 +169,7 @@ script = ExtResource("13_a31ob")
 auto_start = true
 
 [node name="UpdateCacheTask" type="Node" parent="TaskManager" unique_id=1339140841 node_paths=PackedStringArray("action_cache_c", "input_c")]
-script = ExtResource("14_5qgjf")
+script = SubResource("GDScript_5qgjf")
 action_cache_c = NodePath("../../ActionCacheComponent")
 input_c = NodePath("PlayerInputComponent")
 auto_start = true

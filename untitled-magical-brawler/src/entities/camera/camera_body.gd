@@ -2,6 +2,11 @@
 extends CharacterBody2D
 
 
+#region Constants
+const DEBUG_COLOR := Color(0.0, 1.0, 0.0, 0.0)
+#endregion
+
+
 #region External Variables
 @export var offset : Vector2:
 	set(val):
@@ -45,7 +50,7 @@ func _ready() -> void:
 	_collide.shape = _shape
 	add_child(_collide)
 	
-	_collide.debug_color = Color(0.0, 1.0, 0.0, 0.1)
+	_collide.debug_color = DEBUG_COLOR
 	
 	update_collison_shape()
 #endregion

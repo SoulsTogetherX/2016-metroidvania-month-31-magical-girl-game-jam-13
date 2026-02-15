@@ -22,8 +22,10 @@ texture = ExtResource("1_iclql")
 position = Vector2(640, 64)
 shape = SubResource("RectangleShape2D_0p3fg")
 
-[node name="Player" parent="." unique_id=539542931 instance=ExtResource("2_0p3fg")]
+[node name="Player" parent="." unique_id=483210501 instance=ExtResource("2_0p3fg")]
 display_velocity = true
+display_health = true
+display_health_offset = Vector2(0, -128)
 
 [node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
 target = NodePath("../Player")
