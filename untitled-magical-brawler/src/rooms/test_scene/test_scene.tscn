@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://byl1n8q7oju0q"]
 
-[ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_iclql"]
+[ext_resource type="Texture2D" uid="uid://bgoejk1jfk765" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="PackedScene" uid="uid://co68h8eknlwnj" path="res://src/entities/player/player.tscn" id="2_0p3fg"]
 [ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
+[ext_resource type="PackedScene" uid="uid://pe70we2oe3xe" path="res://src/UI/pause_menu/pause_menu.tscn" id="4_t124o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p3fg"]
 size = Vector2(12800, 128)
@@ -35,3 +36,7 @@ collision_mask = 0
 position = Vector2(287, -261)
 build_mode = 1
 polygon = PackedVector2Array(-5994, -1646, 6876, -1757, 6793, 1607, -6106, 1593)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1185018824]
+
+[node name="pause_menu" parent="CanvasLayer" unique_id=230580238 instance=ExtResource("4_t124o")]

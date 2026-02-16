@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://pe70we2oe3xe"]
 
-[ext_resource type="Script" uid="uid://du23l04aecl0c" path="res://src/UI/pause_menu.gd" id="1_dvare"]
-[ext_resource type="Shader" uid="uid://nfx100x5vswq" path="res://src/UI/pause_menu.gdshader" id="1_oimhm"]
+[ext_resource type="Script" uid="uid://du23l04aecl0c" path="res://src/UI/pause_menu/pause_menu.gd" id="1_dvare"]
+[ext_resource type="Shader" uid="uid://nfx100x5vswq" path="res://src/UI/pause_menu/pause_menu.gdshader" id="1_oimhm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dvare"]
 shader = ExtResource("1_oimhm")
 shader_parameter/lod = 0.0
 
 [sub_resource type="Animation" id="Animation_dvare"]
-length = 0.001
+length = 0.43333334
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,21 +89,23 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1662828110]
 modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -171.5
-offset_top = -112.0
-offset_right = 171.5
-offset_bottom = 112.0
+offset_left = -60.0
+offset_top = -50.5
+offset_right = 60.0
+offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1582199546]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="ResumeGameBtn" type="Button" parent="PanelContainer/VBoxContainer" unique_id=753787726]
 layout_mode = 2
@@ -121,3 +123,7 @@ text = "Quit Game
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1422048944]
 root_node = NodePath("../ColorRect")
 libraries/ = SubResource("AnimationLibrary_dvare")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ResumeGameBtn" to="." method="_on_resume_game_btn_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitGameBtn" to="." method="_on_quit_game_btn_pressed"]
