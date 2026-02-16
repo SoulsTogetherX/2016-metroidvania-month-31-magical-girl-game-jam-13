@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://co68h8eknlwnj"]
 
-[ext_resource type="Script" uid="uid://bymclbi1pwet7" path="res://src/entities/player/player_entity.gd" id="1_5qgjf"]
+[ext_resource type="Script" uid="uid://bymclbi1pwet7" path="res://src/entities/player/player_entity_manager.gd" id="1_5qgjf"]
 [ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/health_component.gd" id="1_peafg"]
 [ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_xahdq"]
+[ext_resource type="Script" uid="uid://c62i5oqcic4jf" path="res://src/entities/base_entity.gd" id="2_amj0e"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
 [ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
 [ext_resource type="Script" uid="uid://bv85cmng6fumu" path="res://src/other_nodes/componets/combat/damage_reaction/invincibility_component.gd" id="5_45xpv"]
@@ -119,6 +120,7 @@ func task_id() -> StringName:
 
 [node name="Player" type="Node2D" unique_id=483210501 node_paths=PackedStringArray("_actor", "_velocity_module", "_health_module")]
 script = ExtResource("1_5qgjf")
+start_brain_active = null
 _actor = NodePath("Actor")
 _velocity_module = NodePath("VelocityComponent")
 _health_module = NodePath("HealthComponent")
@@ -128,6 +130,8 @@ metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 position = Vector2(0, -64)
 collision_layer = 4
 collision_mask = 2
+script = ExtResource("2_amj0e")
+faction = 1
 
 [node name="Icon" type="Sprite2D" parent="Actor" unique_id=247358998]
 texture = ExtResource("1_xahdq")
@@ -144,7 +148,7 @@ knockback_module = NodePath("../../KnockbackComponent")
 health_module = NodePath("../../HealthComponent")
 invincibility_module = NodePath("../../InvincibilityComponent")
 shape = SubResource("RectangleShape2D_5qgjf")
-faction = 0
+faction = 1
 metadata/_custom_type_script = "uid://d4frh4mqr77xo"
 
 [node name="KnockbackComponent" type="Node" parent="." unique_id=1134931623 node_paths=PackedStringArray("velocity_module")]

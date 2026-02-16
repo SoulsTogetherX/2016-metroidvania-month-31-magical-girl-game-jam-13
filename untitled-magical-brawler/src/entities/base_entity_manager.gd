@@ -1,4 +1,5 @@
 @tool
+@abstract
 class_name BaseEntityManager extends Node2D
 
 
@@ -8,6 +9,9 @@ var SNAP_RAYCAST_LENGTH := 500
 
 
 #region Export Variables
+@export_group("Settings")
+@export var start_brain_active : bool = true
+
 @export_group("Debug")
 @export_tool_button("Snap To Ground") var snap_func = _snap_to_ground 
 
@@ -59,6 +63,10 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
 			_on_ready_notification()
+			
+			if Engine.is_editor_hint():
+				return
+			toggle_brain(start_brain_active)
 		NOTIFICATION_DRAW:
 			_on_draw_notification()
 
@@ -150,6 +158,13 @@ func _snap_to_ground() -> void:
 	if !_draw_snap_line:
 		global_position.y = result.position.y
 	queue_redraw()
+#endregion
+
+
+
+#region Public Methods (Accessor)
+@abstract
+func toggle_brain(toggle : bool = true) -> void
 #endregion
 
 

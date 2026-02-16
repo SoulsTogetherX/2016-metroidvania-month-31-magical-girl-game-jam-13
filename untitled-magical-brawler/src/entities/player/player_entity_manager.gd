@@ -18,6 +18,20 @@ func _ready() -> void:
 #endregion
 
 
+#region Public Virtual Methods
+func toggle_brain(toggle : bool = true) -> void:
+	if toggle:
+		_task.task_begin(
+			&"Update_Cache_Task",
+			{
+				&"actor": _actor
+			}
+		)
+		return
+	_task.task_end(&"Update_Cache_Task")
+#endregion
+
+
 #region Private Methods
 func _task_settup() -> void:
 	_task.task_begin(
@@ -28,12 +42,6 @@ func _task_settup() -> void:
 	)
 	_task.task_begin(
 		&"Velocity_Apply_Task",
-		{
-			&"actor": _actor
-		}
-	)
-	_task.task_begin(
-		&"Update_Cache_Task",
 		{
 			&"actor": _actor
 		}

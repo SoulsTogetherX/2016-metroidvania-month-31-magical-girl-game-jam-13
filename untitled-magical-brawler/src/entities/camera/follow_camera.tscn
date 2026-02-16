@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://t8ar1js7oorl"]
 
-[ext_resource type="Script" uid="uid://bwv01u2equka8" path="res://src/entities/camera/camera_entity.gd" id="1_gvk3k"]
-[ext_resource type="Script" uid="uid://bxmwpoislr5p4" path="res://src/entities/camera/camera_body.gd" id="2_lj0vn"]
+[ext_resource type="Script" uid="uid://bwv01u2equka8" path="res://src/entities/camera/camera_entity_manager.gd" id="1_gvk3k"]
+[ext_resource type="Script" uid="uid://bxmwpoislr5p4" path="res://src/entities/camera/camera_entity.gd" id="2_lj0vn"]
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="2_w71rl"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/velocity/velocity_task_manager.gd" id="3_lj0vn"]
 [ext_resource type="Script" uid="uid://bsojra2kw8a8w" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/camera/camera_zoom_task.gd" id="4_paxy2"]
@@ -11,11 +11,12 @@
 
 [node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity_module")]
 script = ExtResource("1_gvk3k")
-_actor = NodePath("CameraBody")
+start_brain_active = null
+_actor = NodePath("Camera")
 _velocity_module = NodePath("VelocityComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
-[node name="CameraBody" type="CharacterBody2D" parent="." unique_id=1083296371]
+[node name="Camera" type="CharacterBody2D" parent="." unique_id=1083296371]
 collision_layer = 0
 script = ExtResource("2_lj0vn")
 

@@ -46,12 +46,16 @@ build_mode = 1
 polygon = PackedVector2Array(8327, -2292, 8484, 1012, 1583, 338, -1520, 338, -7770, 1507, -7725, -2203)
 
 [node name="Player" parent="." unique_id=483210501 instance=ExtResource("2_0p3fg")]
+position = Vector2(-65, 0)
+start_brain_active = true
 display_velocity = true
 display_health = true
 display_health_offset = Vector2(0, -128)
 
 [node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
 target = NodePath("../Player")
+start_brain_active = true
+display_velocity = true
 
 [node name="DamageTester" type="Area2D" parent="." unique_id=1654942989]
 position = Vector2(713, -365)
@@ -61,7 +65,7 @@ monitoring = false
 script = ExtResource("5_3ttad")
 effects = Array[ExtResource("6_nmdk6")]([SubResource("Resource_uv8eo"), SubResource("Resource_4icc5")])
 shape = SubResource("RectangleShape2D_3ttad")
-faction = 1
+faction = 2
 metadata/_custom_type_script = "uid://cxla1cqkag8lu"
 
 [node name="Icon" type="Sprite2D" parent="DamageTester" unique_id=1672272971]
@@ -75,7 +79,7 @@ offset_top = -669.0
 offset_right = -577.0
 offset_bottom = -586.0
 theme_override_font_sizes/font_size = 60
-text = "FPS: 127.0"
+text = "FPS: 131.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"

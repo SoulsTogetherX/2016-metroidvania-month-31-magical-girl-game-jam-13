@@ -10,6 +10,7 @@ enum LAYERS {
 }
 
 enum FACTION {
+	NONE,
 	PLAYER,
 	ENEMY,
 	NEUTRAL

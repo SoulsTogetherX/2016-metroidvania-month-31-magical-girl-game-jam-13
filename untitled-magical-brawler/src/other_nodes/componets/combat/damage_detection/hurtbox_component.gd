@@ -43,6 +43,8 @@ func _refresh_faction() -> void:
 	collision_layer = 0
 	
 	match faction:
+		Constants.FACTION.NONE:
+			collision_mask = 0
 		Constants.FACTION.PLAYER:
 			collision_mask = Constants.LAYERS.ENEMY
 		Constants.FACTION.ENEMY:
