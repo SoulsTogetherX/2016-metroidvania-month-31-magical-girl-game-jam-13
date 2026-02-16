@@ -58,7 +58,7 @@ func zoom_action(
 	overwrite : bool = true
 ) -> void:
 	_task_manager.task_begin(
-		&"Zoom_Camera_Task",
+		&"Camera_Zoom_Task",
 		{
 			"actor" : _actor,
 			"zoom" : zoom,
@@ -79,7 +79,7 @@ func shake_action(
 	overwrite : bool = true
 ) -> void:
 	_task_manager.task_begin(
-		&"Shake_Task",
+		&"Camera_Shake_Task",
 		{
 			"actor" : _actor,
 			"start_strength" : start_strength,
@@ -91,5 +91,5 @@ func shake_action(
 		overwrite
 	)
 func stop_shake() -> void:
-	_task_manager.task_end(&"Shake_Task")
+	_task_manager.task_end(&"Camera_Shake_Task")
 #endregion

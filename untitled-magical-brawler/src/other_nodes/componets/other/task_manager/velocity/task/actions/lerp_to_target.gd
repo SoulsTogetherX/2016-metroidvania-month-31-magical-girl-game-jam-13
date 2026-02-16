@@ -14,7 +14,7 @@ extends VelocityTaskNode
 
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity_c := get_velocity(args)
+	var velocity_module := get_velocity(args)
 	var act : Node2D = get_argument(
 		args, &"actor", actor
 	)
@@ -22,8 +22,8 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 	var desired := Utilities.dampv(
 		act.global_position, tar_pos, lerp_weight, delta
 	)
-	velocity_c.velocity = desired - act.global_position
 	
+	velocity_module.velocity = desired - act.global_position
 	return true
 #endregion
 

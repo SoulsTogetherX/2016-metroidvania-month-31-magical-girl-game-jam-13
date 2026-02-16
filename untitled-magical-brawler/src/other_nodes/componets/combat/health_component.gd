@@ -3,9 +3,10 @@ class_name HealthComponent extends Node
 
 
 #region Signals
-signal max_health_changed
+signal max_health_changed(value : int)
+signal health_changed(value : int)
+
 signal max_health_delta(delta : int)
-signal health_changed
 signal health_delta(delta : int)
 
 signal damaged(delta : int)
@@ -55,7 +56,7 @@ func set_max_health(val : int) -> void:
 	if _health > _max_health:
 		_health = _max_health
 	
-	max_health_changed.emit()
+	max_health_changed.emit(_max_health)
 	max_health_delta.emit(delta)
 	
 	if Engine.is_editor_hint():
@@ -80,7 +81,7 @@ func set_health(val : int) -> void:
 	var delta := val - _health
 	_health = val
 	
-	health_changed.emit()
+	health_changed.emit(_health)
 	health_delta.emit(delta)
 	if delta < 0:
 		damaged.emit(-delta)
@@ -127,5 +128,5 @@ func initialize_health() -> void:
 	set_health(_max_health)
 
 func is_dead() -> bool:
-	return _health > 0
+	return _health == 0
 #endregion

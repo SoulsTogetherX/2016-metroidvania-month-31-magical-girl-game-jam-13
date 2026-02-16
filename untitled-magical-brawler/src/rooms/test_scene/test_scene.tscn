@@ -5,15 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
 [ext_resource type="Script" uid="uid://dnwgfwqocrpgn" path="res://src/other_nodes/room_editor_tools/camera_boundary.gd" id="4_t124o"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_3ttad"]
-[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/attack_effects/base_attack_effect.gd" id="6_nmdk6"]
-[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/attack_effects/flat_attack_effect.gd" id="7_n718h"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/effects/base_effect.gd" id="6_nmdk6"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="7_wx32i"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="8_uv8eo"]
 [ext_resource type="Script" uid="uid://bgh34blcwhwjf" path="res://src/other_nodes/room_editor_tools/debug/fps_display.gd" id="8_wx32i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p3fg"]
 size = Vector2(12800, 128)
 
-[sub_resource type="Resource" id="Resource_n718h"]
-script = ExtResource("7_n718h")
+[sub_resource type="Resource" id="Resource_uv8eo"]
+script = ExtResource("7_wx32i")
+
+[sub_resource type="Resource" id="Resource_4icc5"]
+script = ExtResource("8_uv8eo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ttad"]
 size = Vector2(128, 128)
@@ -55,7 +59,7 @@ collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("5_3ttad")
-effects = Array[ExtResource("6_nmdk6")]([SubResource("Resource_n718h")])
+effects = Array[ExtResource("6_nmdk6")]([SubResource("Resource_uv8eo"), SubResource("Resource_4icc5")])
 shape = SubResource("RectangleShape2D_3ttad")
 faction = 1
 metadata/_custom_type_script = "uid://cxla1cqkag8lu"
@@ -71,7 +75,7 @@ offset_top = -669.0
 offset_right = -577.0
 offset_bottom = -586.0
 theme_override_font_sizes/font_size = 60
-text = "FPS: 105.0"
+text = "FPS: 127.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"

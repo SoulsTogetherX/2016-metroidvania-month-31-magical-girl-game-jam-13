@@ -14,9 +14,12 @@ const DEBUG_COLOR := Color(0, 1, 0, 0.3)
 
 #region External Variables
 @export_group("Modules")
-@export var health : HealthComponent
+@export var knockback_module : KnockbackComponent
+@export var health_module : HealthComponent
+@export var invincibility_module : InvincibilityComponent
 
-@export_group("Destroy")
+@export_group("Settings")
+@export var collide_when_dead : bool = false
 @export_range(0, 1, 1, "or_greater") var destroy_on_collision_count : int = 0
 #endregion
 
@@ -60,9 +63,12 @@ func _refresh_collider() -> void:
 func _on_area_enter(collision : HitboxComponent) -> void:
 	if collision == null:
 		return
+	if !collide_when_dead && health_module && health_module.is_dead():
+		return
 	
-	var dir := (collision.global_position - global_position).normalized()
-	
-	collision.enact_collision(health, dir)
+	collision.enact_collision(CollisionInfoResource.new(
+		self.global_position - collision.global_position,
+		health_module, knockback_module, invincibility_module
+	))
 	on_hit.emit(collision)
 #endregion

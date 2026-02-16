@@ -4,15 +4,15 @@
 [ext_resource type="Script" uid="uid://bxmwpoislr5p4" path="res://src/entities/camera/camera_body.gd" id="2_lj0vn"]
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="2_w71rl"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/velocity/velocity_task_manager.gd" id="3_lj0vn"]
-[ext_resource type="Script" uid="uid://bsojra2kw8a8w" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/camera/zoom_camera.gd" id="4_paxy2"]
+[ext_resource type="Script" uid="uid://bsojra2kw8a8w" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/camera/camera_zoom_task.gd" id="4_paxy2"]
 [ext_resource type="Script" uid="uid://dpdvog0ao5lw3" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/lerp_to_target.gd" id="5_2td3j"]
-[ext_resource type="Script" uid="uid://cwkprmhjy6ps1" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/action/shake_task.gd" id="5_w71rl"]
+[ext_resource type="Script" uid="uid://cwkprmhjy6ps1" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/camera/camera_shake_task.gd" id="5_w71rl"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="7_w71rl"]
 
-[node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity_m")]
+[node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity_module")]
 script = ExtResource("1_gvk3k")
 _actor = NodePath("CameraBody")
-_velocity_m = NodePath("VelocityComponent")
+_velocity_module = NodePath("VelocityComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
 [node name="CameraBody" type="CharacterBody2D" parent="." unique_id=1083296371]
@@ -23,10 +23,10 @@ script = ExtResource("2_lj0vn")
 script = ExtResource("2_w71rl")
 metadata/_custom_type_script = "uid://ui8sa21uexr7"
 
-[node name="TaskManager" type="Node" parent="." unique_id=1605066509 node_paths=PackedStringArray("velocity_c")]
+[node name="TaskManager" type="Node" parent="." unique_id=1605066509 node_paths=PackedStringArray("velocity_module")]
 unique_name_in_owner = true
 script = ExtResource("3_lj0vn")
-velocity_c = NodePath("../VelocityComponent")
+velocity_module = NodePath("../VelocityComponent")
 metadata/_custom_type_script = "uid://clhcvayfse4aa"
 
 [node name="ZoomCameraTask" type="Node" parent="TaskManager" unique_id=1528281379]

@@ -20,7 +20,7 @@ extends VelocityTaskNode
 
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity_c := get_velocity(args)
+	var velocity_module := get_velocity(args)
 	var move_dir : float = get_argument(
 		args, &"move_dir", Callable()
 	)
@@ -53,14 +53,14 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 			args, &"air_weight", air_weight
 		)
 	
-	if signf(speed) != signf(velocity_c.get_velocity().x):
+	if signf(speed) != signf(velocity_module.get_velocity().x):
 		var s_weight : float = get_argument(
 			args, &"slowdown_weight", slowdown_weight
 		)
-		velocity_c.lerp_hor_change(0.0, s_weight, delta)
+		velocity_module.lerp_hor_change(0.0, s_weight, delta)
 	
-	velocity_c.flat_hor_change(acceleration, delta)
-	velocity_c.lerp_hor_change(speed, weight, delta)
+	velocity_module.flat_hor_change(acceleration, delta)
+	velocity_module.lerp_hor_change(speed, weight, delta)
 	
 	return true
 #endregion

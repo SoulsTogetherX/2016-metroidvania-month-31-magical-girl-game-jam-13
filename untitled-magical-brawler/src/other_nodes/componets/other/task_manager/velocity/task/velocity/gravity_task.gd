@@ -3,25 +3,23 @@ extends VelocityTaskNode
 
 #region External Variables
 @export_group("Modules")
-@export var gravity_c : GravityComponent
+@export var gravity_module : GravityComponent
 #endregion
 
 
 
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity_c := get_velocity(args)
+	var velocity_module := get_velocity(args)
 	var grav : GravityComponent = get_argument(
-		args, &"gravity", gravity_c
+		args, &"gravity", gravity_module
 	)
 	var on_floor : bool = get_argument(
 		args, &"on_floor", false
 	)
 	
 	grav.handle_gravity(
-		velocity_c,
-		!on_floor,
-		delta
+		velocity_module, !on_floor, delta
 	)
 	
 	return true
@@ -32,7 +30,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 func task_begin(args : Dictionary) -> bool:
 	if get_velocity(args) == null:
 		return false
-	if !(get_argument(args, &"gravity", gravity_c) is GravityComponent):
+	if !(get_argument(args, &"gravity", gravity_module) is GravityComponent):
 		return false
 	if !(get_argument(args, &"on_floor", Callable()) is bool):
 		return false

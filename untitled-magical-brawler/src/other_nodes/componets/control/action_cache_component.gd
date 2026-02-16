@@ -1,4 +1,11 @@
+@tool
 class_name ActionCacheComponent extends Node
+
+
+#region Signals
+signal action_started(action_name : StringName)
+signal action_finished(action_name : StringName)
+#endregion
 
 
 #region Enum
@@ -18,6 +25,7 @@ enum UPDATE_CALLBACK {
 
 
 #region External Variables
+@export_group("Settings")
 @export var update_rate : UPDATE_CALLBACK = UPDATE_CALLBACK.PROCESS:
 	set(val):
 		if val == update_rate:
@@ -30,12 +38,11 @@ enum UPDATE_CALLBACK {
 
 
 #region Private Variables
-var _action_toggle : Array[bool]
-var _action_state : Array[int]
+var _actions : Array[Action]
 var _action_cache : Dictionary[StringName, int]
 
-var _dir_value : Array[Vector2]
-var _dir_cache : Dictionary[StringName, int]
+var _states : Array[Variant]
+var _state_cache : Dictionary[StringName, int]
 #endregion
 
 
@@ -45,78 +52,77 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
 			_refresh_update_rate()
+			update_configuration_warnings()
 #endregion
 
 
 #region Private Methods (Helper)
 func _refresh_update_rate() -> void:
-	if get_tree().process_frame.is_connected(update_all_cache):
-		get_tree().process_frame.disconnect(update_all_cache)
-	if get_tree().physics_frame.is_connected(update_all_cache):
-		get_tree().physics_frame.disconnect(update_all_cache)
+	if get_tree().process_frame.is_connected(update_actions_cache):
+		get_tree().process_frame.disconnect(update_actions_cache)
+	if get_tree().physics_frame.is_connected(update_actions_cache):
+		get_tree().physics_frame.disconnect(update_actions_cache)
 	
 	match update_rate:
 		UPDATE_CALLBACK.PROCESS:
-			get_tree().process_frame.connect(update_all_cache)
+			get_tree().process_frame.connect(update_actions_cache)
 		UPDATE_CALLBACK.PHYSICS:
-			get_tree().physics_frame.connect(update_all_cache)
+			get_tree().physics_frame.connect(update_actions_cache)
 
 func _get_action_index(action_name : StringName) -> int:
 	return _action_cache.get(action_name, -1)
-func _get_direction_index(dir_name : StringName) -> int:
-	return _dir_cache.get(dir_name, -1)
-
-func _insert_action(action_name : StringName, toggle : bool) -> void:
-	_action_cache[action_name] = _action_toggle.size()
-	_action_toggle.push_back(toggle)
-	
-	if toggle:
-		_action_state.push_back(ACTION_STATE.STARTED)
-		return
-	_action_state.push_back(ACTION_STATE.NONE)
-func _insert_direction(dir_name : StringName, dir : Vector2) -> void:
-	_dir_cache[dir_name] = _dir_value.size()
-	_dir_value.push_back(dir)
+func _get_state_index(dir_name : StringName) -> int:
+	return _state_cache.get(dir_name, -1)
 #endregion
 
 
 #region Public Methods (Action Cache)
 func clear_caches() -> void:
-	_action_toggle.clear()
-	_action_state.clear()
+	_actions.clear()
 	_action_cache.clear()
 	
-	_dir_value.clear()
-	_dir_cache.clear()
+	_states.clear()
+	_state_cache.clear()
 
-func update_all_cache() -> void:
-	_dir_value.fill(Vector2.ZERO)
-	for idx : int in range(_action_toggle.size()):
-		_action_state[idx] <<= 1
-		if _action_toggle[idx]:
-			_action_state[idx] |= 1
+func update_actions_cache() -> void:
+	for action : Action in _actions:
+		action.state <<= 1
+		
+		if action.toggle:
+			action.state |= 1
+			continue
+		action_finished.emit(action.action_name)
 
 func set_action(action_name : StringName, toggle : bool) -> void:
 	var idx := _get_action_index(action_name)
 	if idx == -1:
-		_insert_action(action_name, toggle)
+		_action_cache[action_name] = _actions.size()
+		_actions.push_back(Action.new(action_name, toggle))
 		return
 	
-	_action_toggle[idx] = toggle
-	if toggle:
-		_action_state[idx] |= int(ACTION_STATE.STARTED)
-func set_direction(dir_name : StringName, dir : Vector2) -> void:
-	var idx := _get_direction_index(dir_name)
-	if idx == -1:
-		_insert_direction(dir_name, dir)
+	var action := _actions[idx]
+	if action.toggle == toggle:
 		return
-	_dir_value[idx] = dir
+	
+	action.toggle = toggle
+	if toggle:
+		action.state |= int(ACTION_STATE.STARTED)
+		action_started.emit(action_name)
+	
+	
+func set_state(state_name : StringName, val : Variant) -> void:
+	var idx := _get_state_index(state_name)
+	if idx == -1:
+		_state_cache[state_name] = _states.size()
+		_states.push_back(val)
+		return
+	_states[idx] = val
 
 func is_action_toggled(action_name : StringName) -> bool:
 	var idx := _get_action_index(action_name)
 	if idx == -1:
 		return false
-	return _action_toggle[idx]
+	return _actions[idx].toggle
 #endregion
 
 
@@ -125,30 +131,48 @@ func is_action(action_name : StringName) -> bool:
 	var idx := _get_action_index(action_name)
 	if idx == -1:
 		return false
-	
-	return ACTION_STATE.NONE != (_action_state[idx] & ACTION_STATE.HELD)
+	return _actions[idx].used()
 func is_action_held(action_name : StringName) -> bool:
 	var idx := _get_action_index(action_name)
 	if idx == -1:
 		return false
-	
-	return ACTION_STATE.HELD != (_action_state[idx] & ACTION_STATE.HELD)
+	return _actions[idx].compair(ACTION_STATE.HELD)
 func is_action_started(action_name : StringName) -> bool:
 	var idx := _get_action_index(action_name)
 	if idx == -1:
 		return false
-	
-	return ACTION_STATE.STARTED != (_action_state[idx] & ACTION_STATE.HELD)
+	return _actions[idx].compair(ACTION_STATE.STARTED)
 func is_action_finished(action_name : StringName) -> bool:
 	var idx := _get_action_index(action_name)
 	if idx == -1:
 		return false
-	
-	return ACTION_STATE.FINISHED != (_action_state[idx] & ACTION_STATE.HELD)
+	return _actions[idx].compair(ACTION_STATE.FINISHED)
 
-func get_direction(action_name : StringName) -> Vector2:
-	var idx := _get_direction_index(action_name)
+func get_state(state_name : StringName) -> Variant:
+	var idx := _get_state_index(state_name)
 	if idx == -1:
-		return Vector2.ZERO
-	return _dir_value[idx]
+		return null
+	return _states[idx]
+#endregion
+
+
+#region Inner Classes
+class Action:
+	var toggle : bool
+	var state : int
+	var action_name : StringName
+	
+	func _init(act_name : StringName, toggle_val : bool) -> void:
+		action_name = act_name
+		toggle = toggle_val
+		
+		if toggle_val:
+			state = ACTION_STATE.STARTED
+			return
+		state = ACTION_STATE.NONE
+	
+	func used() -> bool:
+		return ACTION_STATE.NONE != (state & ACTION_STATE.HELD)
+	func compair(comp : ACTION_STATE) -> bool:
+		return comp == (state & ACTION_STATE.HELD)
 #endregion

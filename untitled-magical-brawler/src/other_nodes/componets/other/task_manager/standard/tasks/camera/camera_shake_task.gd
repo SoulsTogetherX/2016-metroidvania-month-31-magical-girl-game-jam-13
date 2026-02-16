@@ -70,5 +70,5 @@ func task_end(_args : Dictionary) -> void:
 
 #region Public Methods (Identifier)
 func task_id() -> StringName:
-	return &"Shake_Task"
+	return &"Camera_Shake_Task"
 #endregion

@@ -3,7 +3,7 @@ extends BaseEntityManager
 
 
 #region OnReady Variables
-@onready var _action_cache_c: ActionCacheComponent = %ActionCacheComponent
+@onready var _action_cache_module: ActionCacheComponent = %ActionCacheModule
 @onready var _task: VelocityTaskManager = %TaskManager
 #endregion
 
@@ -23,7 +23,7 @@ func _task_settup() -> void:
 	_task.task_begin(
 		&"Gravity_Task",
 		{
-			&"on_floor": _action_cache_c.is_action.bind(&"on_floor")
+			&"on_floor": _action_cache_module.is_action.bind(&"on_floor")
 		}
 	)
 	_task.task_begin(

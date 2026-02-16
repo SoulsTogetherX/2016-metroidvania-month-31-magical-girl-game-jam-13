@@ -9,18 +9,18 @@ const FONT_WIDTH := 60
 
 #region External Variables
 @export_group("Modules")
-@export var health_m : HealthComponent:
+@export var health_module : HealthComponent:
 	set(val):
-		if val == health_m:
+		if val == health_module:
 			return
 		
-		if health_m:
-			health_m.max_health_changed.disconnect(_update_health_display)
-			health_m.health_changed.disconnect(_update_health_display)
-		health_m = val
-		if health_m:
-			health_m.max_health_changed.connect(_update_health_display)
-			health_m.health_changed.connect(_update_health_display)
+		if health_module:
+			health_module.max_health_changed.disconnect(_update_health_display)
+			health_module.health_changed.disconnect(_update_health_display)
+		health_module = val
+		if health_module:
+			health_module.max_health_changed.connect(_update_health_display.unbind(1))
+			health_module.health_changed.connect(_update_health_display.unbind(1))
 			_update_health_display()
 			return
 		_clear_health()
@@ -61,7 +61,7 @@ func _ready() -> void:
 	else:
 		_reposition_orign()
 	
-	if health_m:
+	if health_module:
 		_update_health_display()
 	else:
 		_clear_health()
@@ -79,7 +79,7 @@ func _reposition_orign() -> void:
 	global_position = Vector2.ZERO
 
 func _update_health_display() -> void:
-	text = "%d/%d" % [health_m.get_health(), health_m.get_max_health()]
+	text = "%d/%d" % [health_module.get_health(), health_module.get_max_health()]
 func _clear_health() -> void:
 	text = "N/A"
 	

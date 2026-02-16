@@ -42,8 +42,8 @@ var SNAP_RAYCAST_LENGTH := 500
 #region Private Export Variables
 @export_group("Hidden Exports")
 @export var _actor: Node2D
-@export var _velocity_m: VelocityComponent
-@export var _health_m: HealthComponent
+@export var _velocity_module: VelocityComponent
+@export var _health_module: HealthComponent
 #endregion
 
 
@@ -63,7 +63,7 @@ func _notification(what: int) -> void:
 			_on_draw_notification()
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in [&"_actor", &"_velocity_m", &"_health_m"]:
+	if property.name in [&"_actor", &"_velocity_module", &"_health_module"]:
 		if owner != null:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 #endregion
@@ -92,20 +92,20 @@ func _refresh_debugs() -> void:
 	_refresh_velocity_display()
 	_refresh_health_display()
 func _refresh_velocity_display() -> void:
-	if !is_node_ready() || !_velocity_m:
+	if !is_node_ready() || !_velocity_module:
 		return
 	
 	if display_velocity:
 		if !_actor.draw.is_connected(_draw_trajectory):
 			_actor.draw.connect(_draw_trajectory)
-		if !_velocity_m.velocity_changed.is_connected(_actor.queue_redraw):
-			_velocity_m.velocity_changed.connect(_actor.queue_redraw)
+		if !_velocity_module.velocity_changed.is_connected(_actor.queue_redraw):
+			_velocity_module.velocity_changed.connect(_actor.queue_redraw)
 		return
 	
 	if _actor.draw.is_connected(_draw_trajectory):
 		_actor.draw.disconnect(_draw_trajectory)
-	if _velocity_m.velocity_changed.is_connected(_actor.queue_redraw):
-		_velocity_m.velocity_changed.disconnect(_actor.queue_redraw)
+	if _velocity_module.velocity_changed.is_connected(_actor.queue_redraw):
+		_velocity_module.velocity_changed.disconnect(_actor.queue_redraw)
 func _refresh_health_display() -> void:
 	if !is_node_ready():
 		return
@@ -115,7 +115,7 @@ func _refresh_health_display() -> void:
 			_health_display = DebugHealthDisplayLabel.new()
 			add_child(_health_display)
 		
-		_health_display.health_m = _health_m
+		_health_display.health_module = _health_module
 		_health_display.follow = self
 		_health_display.follow_offset = display_health_offset
 		return
@@ -130,7 +130,7 @@ func _refresh_health_display() -> void:
 func _draw_trajectory() -> void:
 	_actor.draw_line(
 		Vector2.ZERO,
-		_velocity_m.get_velocity(),
+		_velocity_module.get_velocity(),
 		Color.GREEN
 	)
 #endregion
@@ -155,9 +155,9 @@ func _snap_to_ground() -> void:
 
 #region Public Methods (Checks)
 func has_velocity() -> bool:
-	return _velocity_m != null
+	return _velocity_module != null
 func has_health() -> bool:
-	return _health_m != null
+	return _health_module != null
 #endregion
 
 
@@ -171,31 +171,31 @@ func get_local_position() -> Vector2:
 
 #region Public Methods (Velocity)
 func get_velocity_compoenent() -> VelocityComponent:
-	return _velocity_m
+	return _velocity_module
 
 func get_velocity() -> Vector2:
-	if !_velocity_m:
+	if !_velocity_module:
 		return Vector2.ZERO
 	
-	return _velocity_m.get_velocity()
+	return _velocity_module.get_velocity()
 func predict_next_position(delta : float = 1.0) -> Vector2:
-	if !_velocity_m:
+	if !_velocity_module:
 		return Vector2.ZERO
 	
-	return _actor.global_position + _velocity_m.get_velocity() * delta
+	return _actor.global_position + _velocity_module.get_velocity() * delta
 #endregion
 
 
 #region Public Methods (Health)
 func get_health_compoenent() -> HealthComponent:
-	return _health_m
+	return _health_module
 
 func get_health() -> int:
-	if !_health_m:
+	if !_health_module:
 		return 0
-	return _health_m.get_health()
+	return _health_module.get_health()
 func get_max_health() -> int:
-	if !_health_m:
+	if !_health_module:
 		return 0
-	return _health_m.get_max_health()
+	return _health_module.get_max_health()
 #endregion

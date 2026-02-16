@@ -3,13 +3,13 @@ extends StateNode
 
 #region External Variables
 @export_group("Modules")
-@export var action_cache_c : ActionCacheComponent
+@export var action_cache_module : ActionCacheComponent
 @export var task : VelocityTaskManager
 
 @export_group("States")
-@export var slowdown_state : StateNode
 @export var jump_state : StateNode
 @export var fall_state : StateNode
+@export var stop_state : StateNode
 #endregion
 
 
@@ -27,8 +27,8 @@ func enter_state() -> void:
 	task.task_begin(
 		&"Walk_Task",
 		{
-			&"move_dir": func(): return action_cache_c.get_direction(&"movement").x,
-			&"on_floor": action_cache_c.is_action.bind(&"on_floor")
+			&"move_dir": action_cache_module.get_state.bind(&"h_movement"),
+			&"on_floor": action_cache_module.is_action.bind(&"on_floor")
 		}
 	)
 func exit_state() -> void:
@@ -38,11 +38,11 @@ func exit_state() -> void:
 
 #region Private Methods (Helper)
 func _check_state() -> StateNode:
-	if action_cache_c.is_action(&"jumping"):
+	if action_cache_module.is_action_started(&"jumping"):
 		return jump_state
-	if !action_cache_c.is_action(&"on_floor"):
+	if !action_cache_module.is_action(&"on_floor"):
 		return fall_state
-	if !action_cache_c.is_action(&"moving"):
-		return slowdown_state
+	if !action_cache_module.is_action(&"moving"):
+		return stop_state
 	return null
 #endregion

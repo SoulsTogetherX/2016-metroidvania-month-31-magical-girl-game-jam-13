@@ -59,5 +59,5 @@ func task_end(_args : Dictionary) -> void:
 
 #region Public Methods (Identifier)
 func task_id() -> StringName:
-	return &"Zoom_Camera_Task"
+	return &"Camera_Zoom_Task"
 #endregion

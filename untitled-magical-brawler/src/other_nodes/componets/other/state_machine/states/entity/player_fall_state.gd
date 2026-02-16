@@ -3,20 +3,16 @@ extends StateNode
 
 #region External Variables
 @export_group("Modules")
-@export var action_cache_c : ActionCacheComponent
+@export var action_cache_module : ActionCacheComponent
 @export var task : VelocityTaskManager
 
 @export_group("States")
-@export var slowdown_state : StateNode
 @export var jump_state : StateNode
+@export var land_state : StateNode
 
 @export_group("Other")
 @export var coyote_timer : Timer
-#endregion
-
-
-#region Private Variables
-var _allow_jump : bool
+@export var jump_buffer : Timer
 #endregion
 
 
@@ -27,13 +23,6 @@ func _ready() -> void:
 		return
 	
 	coyote_timer.one_shot = true
-	coyote_timer.timeout.connect(_disallow_jump)
-#endregion
-
-
-#region Private Methods
-func _disallow_jump() -> void:
-	_allow_jump = false
 #endregion
 
 
@@ -50,13 +39,14 @@ func enter_state() -> void:
 	if !coyote_timer:
 		return
 	
-	_allow_jump = true
-	coyote_timer.start()
+	if !action_cache_module.get_state(&"jumped"):
+		coyote_timer.start()
+	
 	task.task_begin(
 		&"Walk_Task",
 		{
-			&"move_dir": func(): return action_cache_c.get_direction(&"movement").x,
-			&"on_floor": action_cache_c.is_action.bind(&"on_floor")
+			&"move_dir": action_cache_module.get_state.bind(&"h_movement"),
+			&"on_floor": action_cache_module.is_action.bind(&"on_floor")
 		}
 	)
 func exit_state() -> void:
@@ -66,9 +56,24 @@ func exit_state() -> void:
 
 #region Private Methods (Helper)
 func _check_state() -> StateNode:
-	if _allow_jump && action_cache_c.is_action(&"jumping"):
-		return jump_state
-	if action_cache_c.is_action(&"on_floor"):
-		return slowdown_state
+	if action_cache_module.is_action_started(&"jumping"):
+		if (
+			!action_cache_module.get_state(&"has_jumped") &&
+			coyote_timer &&
+			!coyote_timer.is_stopped()
+		):
+			coyote_timer.stop()
+			return jump_state
+		
+		if jump_buffer:
+			jump_buffer.start()
+	
+	if action_cache_module.is_action(&"on_floor"):
+		if jump_buffer && !jump_buffer.is_stopped():
+			return jump_state
+		
+		action_cache_module.set_state(&"has_jumped", false)
+		return land_state
+	
 	return null
 #endregion

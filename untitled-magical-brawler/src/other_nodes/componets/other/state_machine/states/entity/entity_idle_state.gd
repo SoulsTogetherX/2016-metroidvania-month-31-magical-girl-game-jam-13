@@ -3,12 +3,14 @@ extends StateNode
 
 #region External Variables
 @export_group("Modules")
-@export var action_cache_c : ActionCacheComponent
+@export var action_cache_module : ActionCacheComponent
+@export var task : VelocityTaskManager
 
 @export_group("States")
-@export var move_state : StateNode
 @export var jump_state : StateNode
 @export var fall_state : StateNode
+@export var move_state : StateNode
+@export var slowdown_state : StateNode
 #endregion
 
 
@@ -27,11 +29,13 @@ func state_passthrough() -> StateNode:
 
 #region Private Methods (Helper)
 func _check_state() -> StateNode:
-	if action_cache_c.is_action(&"jumping"):
+	if action_cache_module.is_action_started(&"jumping"):
 		return jump_state
-	if !action_cache_c.is_action(&"on_floor"):
+	if !action_cache_module.is_action(&"on_floor"):
 		return fall_state
-	if action_cache_c.is_action(&"moving"):
+	if action_cache_module.is_action(&"moving"):
 		return move_state
+	if !task.velocity_module.attempting_idle():
+		return slowdown_state
 	return null
 #endregion

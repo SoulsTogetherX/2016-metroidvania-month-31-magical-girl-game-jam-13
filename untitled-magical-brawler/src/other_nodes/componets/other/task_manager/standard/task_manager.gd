@@ -33,8 +33,8 @@ var _running : bool = false
 func _ready() -> void:
 	_register_task()
 	_auto_start_all()
-	child_entered_tree.connect(_register_task)
-	child_exiting_tree.connect(_register_task)
+	child_entered_tree.connect(_register_task.unbind(1))
+	child_exiting_tree.connect(_register_task.unbind(1))
 
 func _process(delta: float) -> void:
 	for task : Task in _running_tasks.values():
