@@ -20,44 +20,44 @@ class_name MovementComponent extends Node
 
 
 @export_group("Modules")
-@export var velocity_c: VelocityComponent
-@export var gravity_c: GravityComponent
-@export var action_cache_m : ActionCacheComponent
+@export var velocity_module: VelocityComponent
+@export var gravity_module: GravityComponent
+@export var action_cache_module : ActionCacheComponent
 #endregion
 
 
 
 #region Public Methods (Jump)
 func jump() -> void:
-	if !velocity_c || !gravity_c:
+	if !velocity_module || !gravity_module:
 		return
 	
-	velocity_c.velocity.y = gravity_c.get_inital_impulse(jump_height)
+	velocity_module.velocity.y = gravity_module.get_inital_impulse(jump_height)
 func stop_jump() -> void:
-	if !velocity_c:
+	if !velocity_module:
 		return
 	
-	if !velocity_c.attempting_fall():
-		velocity_c.velocity.y = Utilities.dampf(
-			velocity_c.velocity.y, 0.0, jump_stopper_weight, 1.0
+	if !velocity_module.attempting_fall():
+		velocity_module.velocity.y = Utilities.dampf(
+			velocity_module.velocity.y, 0.0, jump_stopper_weight, 1.0
 		)
 #endregion
 
 
 #region Public Methods (Horizontal Movement)
 func stop_horizontal_movement() -> void:
-	if !velocity_c:
+	if !velocity_module:
 		return
-	velocity_c.velocity.x = 0.0
+	velocity_module.velocity.x = 0.0
 func horizontal_movement(delta: float) -> void:
-	if !velocity_c || !action_cache_m:
+	if !velocity_module || !action_cache_module:
 		return
 	
-	var acceleration : float = action_cache_m.get_move_direction()
-	var speed : float = action_cache_m.get_move_direction()
+	var acceleration : float = action_cache_module.get_move_direction()
+	var speed : float = action_cache_module.get_move_direction()
 	var weight : float = 0.0
 
-	if action_cache_m.is_on_ground():
+	if action_cache_module.is_action(&"on_floor"):
 		acceleration *= ground_acceleration
 		speed *= ground_max_speed
 		weight = ground_weight
@@ -66,40 +66,40 @@ func horizontal_movement(delta: float) -> void:
 		speed *= air_max_speed
 		weight = air_weight
 
-	if signf(speed) != signf(velocity_c.velocity.x):
-		velocity_c.lerp_hor_change(0.0, slowdown_weight, delta)
-	velocity_c.flat_hor_change(acceleration, delta)
-	velocity_c.lerp_hor_change(speed, weight, delta)
+	if signf(speed) != signf(velocity_module.velocity.x):
+		velocity_module.lerp_hor_change(0.0, slowdown_weight, delta)
+	velocity_module.flat_hor_change(acceleration, delta)
+	velocity_module.lerp_hor_change(speed, weight, delta)
 func horizontal_slowdown(delta: float) -> void:
-	if !velocity_c:
+	if !velocity_module:
 		return
-	var dir := velocity_c.hor_direction()
+	var dir := velocity_module.hor_direction()
 	
-	velocity_c.lerp_hor_change(
+	velocity_module.lerp_hor_change(
 		0.0,
 		slowdown_weight,
 		delta
 	)
 	
-	if !action_cache_m:
+	if !action_cache_module:
 		return
 	
-	velocity_c.flat_hor_change(-slowdown_flat * dir, delta)
+	velocity_module.flat_hor_change(-slowdown_flat * dir, delta)
 	if dir < 0:
-		velocity_c.min_hor_velocity(0.0)
+		velocity_module.min_hor_velocity(0.0)
 	elif dir > 0:
-		velocity_c.max_hor_velocity(0.0)
+		velocity_module.max_hor_velocity(0.0)
 #endregion
 
 
 #region Public Methods (Gravity)
 func handle_gravity(delta : float) -> void:
-	if !gravity_c:
+	if !gravity_module:
 		return
 	
-	gravity_c.handle_gravity(
-		velocity_c,
-		!action_cache_m.is_on_ground(),
+	gravity_module.handle_gravity(
+		velocity_module,
+		!action_cache_module.is_action(&"on_floor"),
 		delta
 	)
 #endregion
@@ -107,7 +107,7 @@ func handle_gravity(delta : float) -> void:
 
 #region Public Methods (Apply)
 func apply_velocity(body : CharacterBody2D) -> void:
-	if !velocity_c:
+	if !velocity_module:
 		return
-	velocity_c.apply_velocity(body)
+	velocity_module.apply_velocity(body)
 #endregion

@@ -1,95 +1,68 @@
 @tool
-extends BaseEntityManager
+extends BaseEntity
 
 
-#region OnReady Variables
-@export var target : BaseEntityManager:
-	set(val):
-		if val == target:
-			return
-		target = val
-		
-		if is_node_ready():
-			_change_target()
+#region Constants
+const DEBUG_COLOR := Color(0.0, 1.0, 0.0, 0.0)
 #endregion
 
 
-#region OnReady Variables
-@onready var _task_manager: VelocityTaskManager = %TaskManager
+#region External Variables
+@export var offset : Vector2:
+	set(val):
+		if val == offset:
+			return
+		offset = val
+		
+		if _camera:
+			_camera.offset = val
+			update_collison_shape()
+@export var zoom : Vector2 = Vector2(0.4, 0.4):
+	set(val):
+		if val == zoom || val.is_zero_approx():
+			return
+		zoom = val
+		
+		if _camera:
+			_camera.zoom = val
+			update_collison_shape()
+#endregion
+
+
+#region Private Variables
+var _camera: Camera2D
+
+var _collide: CollisionShape2D
+var _shape: RectangleShape2D
 #endregion
 
 
 
 #region Virtual Methods
 func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
+	_camera = Camera2D.new()
+	_camera.offset = offset
+	_camera.zoom = zoom
+	add_child(_camera)
 	
-	_task_manager.task_begin(
-		&"Velocity_Apply_Task",
-		{ &"actor" : _actor }
-	)
-	_change_target()
+	_shape = RectangleShape2D.new()
+	_collide = CollisionShape2D.new()
+	_collide.shape = _shape
+	add_child(_collide)
+	
+	_collide.debug_color = DEBUG_COLOR
+	
+	update_collison_shape()
 #endregion
 
 
-#region Private Methods
-func _change_target() -> void:
-	if !target:
-		_task_manager.task_end(&"Lerp_To_Task")
-		return
-	_task_manager.task_begin(
-		&"Lerp_To_Task",
-		{
-			&"actor" : _actor,
-			&"get_target_pos" : target.predict_next_position
-		},
-		true
-	)
-#endregion
+#region Public Methods
+func update_collison_shape() -> void:
+	var camera_size := _camera.get_viewport_rect().size / _camera.zoom
+	_shape.size = camera_size
+	_collide.global_position = _camera.get_screen_center_position()
+	_collide.global_rotation = _camera.get_screen_rotation() - _camera.global_rotation
 
-
-#region Public Methods (Actions)
-func zoom_action(
-	zoom : Vector2,
-	duration : float = 0.2,
-	ease_type : Tween.EaseType = Tween.EaseType.EASE_IN,
-	transition_type : Tween.TransitionType = Tween.TransitionType.TRANS_LINEAR,
-	overwrite : bool = true
-) -> void:
-	_task_manager.task_begin(
-		&"Zoom_Camera_Task",
-		{
-			"actor" : _actor,
-			"zoom" : zoom,
-			"duration" : duration,
-			"ease_type" : ease_type,
-			"transition_type" : transition_type
-		},
-		overwrite
-	)
-
-
-func shake_action(
-	start_strength : Vector2,
-	cutoff_strength : Vector2 = Vector2.ZERO,
-	dampen_weight : Vector2 = Vector2.ZERO,
-	dampen_flat : Vector2 = Vector2.ZERO,
-	offset : Vector2 = Vector2.ZERO,
-	overwrite : bool = true
-) -> void:
-	_task_manager.task_begin(
-		&"Shake_Task",
-		{
-			"actor" : _actor,
-			"start_strength" : start_strength,
-			"cutoff_strength" : cutoff_strength,
-			"dampen_weight" : dampen_weight,
-			"dampen_flat" : dampen_flat,
-			"offset" : offset
-		},
-		overwrite
-	)
-func stop_shake() -> void:
-	_task_manager.task_end(&"Shake_Task")
+func get_camera() -> Camera2D:
+	return _camera
 #endregion

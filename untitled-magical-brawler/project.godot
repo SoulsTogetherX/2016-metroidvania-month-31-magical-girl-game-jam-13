@@ -19,6 +19,18 @@ config/icon="res://assets/icon.svg"
 
 buses/default_bus_layout=""
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "orange",
+"res://assets/": "red",
+"res://resources/": "teal",
+"res://src/entities/": "green",
+"res://src/other_nodes/": "blue",
+"res://src/rooms/": "purple",
+"res://utils/": "yellow"
+}
+
 [input]
 
 player_jump={
