@@ -44,7 +44,8 @@ func _unhandled_input(input: InputEvent) -> void:
 func _change_state(new_state: StateNode) -> void:
 	if _current_state:
 		_current_state.exit_state()
-		_current_state.force_change.disconnect(_change_state)
+		_current_state._force_change.disconnect(_change_state)
+		_current_state._running = false
 	
 	if !new_state:
 		clear_state()
@@ -55,7 +56,8 @@ func _change_state(new_state: StateNode) -> void:
 		_current_state = check_state
 		check_state = check_state.state_passthrough()
 	
-	_current_state.force_change.connect(_change_state, CONNECT_DEFERRED)
+	_current_state._force_change.connect(_change_state, CONNECT_DEFERRED)
+	_current_state._running = true
 	_current_state.enter_state()
 
 func _toggle_processes(toggle : bool) -> void:

@@ -11,7 +11,7 @@
 
 [node name="FollowCamera" type="Node2D" unique_id=1404715539 node_paths=PackedStringArray("_actor", "_velocity_module")]
 script = ExtResource("1_gvk3k")
-start_brain_active = null
+zoom = null
 _actor = NodePath("Camera")
 _velocity_module = NodePath("VelocityComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"

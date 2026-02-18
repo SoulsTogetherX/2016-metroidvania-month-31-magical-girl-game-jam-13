@@ -1,4 +1,4 @@
-extends StateNode
+extends AnimationStateNode
 
 
 #region External Variables
@@ -15,6 +15,8 @@ extends StateNode
 #region Public Virtual Methods
 func process_physics(_delta: float) -> StateNode:
 	if !action_cache_module.is_action(&"jumping"):
+		return stop_state
+	if action_cache_module.is_action_started(&"on_floor"):
 		return stop_state
 	return null
 #endregion

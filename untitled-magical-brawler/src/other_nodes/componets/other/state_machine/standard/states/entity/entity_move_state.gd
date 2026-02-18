@@ -1,4 +1,4 @@
-extends StateNode
+extends AnimationStateNode
 
 
 #region External Variables
@@ -9,8 +9,7 @@ extends StateNode
 @export_group("States")
 @export var jump_state : StateNode
 @export var fall_state : StateNode
-@export var move_state : StateNode
-@export var slowdown_state : StateNode
+@export var stop_state : StateNode
 #endregion
 
 
@@ -24,6 +23,16 @@ func process_physics(_delta: float) -> StateNode:
 #region Public Methods (State Change)
 func state_passthrough() -> StateNode:
 	return _check_state()
+func enter_state() -> void:
+	task.task_begin(
+		&"Walk_Task",
+		{
+			&"move_dir": action_cache_module.get_state.bind(&"h_movement"),
+			&"on_floor": action_cache_module.is_action.bind(&"on_floor")
+		}
+	)
+func exit_state() -> void:
+	task.task_end(&"Walk_Task")
 #endregion
 
 
@@ -33,9 +42,7 @@ func _check_state() -> StateNode:
 		return jump_state
 	if !action_cache_module.is_action(&"on_floor"):
 		return fall_state
-	if action_cache_module.is_action(&"moving"):
-		return move_state
-	if !task.velocity_module.attempting_idle():
-		return slowdown_state
+	if !action_cache_module.is_action(&"moving"):
+		return stop_state
 	return null
 #endregion

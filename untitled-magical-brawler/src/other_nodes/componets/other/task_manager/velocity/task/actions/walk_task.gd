@@ -76,6 +76,15 @@ func task_begin(args : Dictionary) -> bool:
 		return false
 	
 	return true
+func end_begin(args : Dictionary) -> bool:
+	if get_velocity(args) == null:
+		return false
+	if !(get_argument(args, &"move_dir", Callable()) is float):
+		return false
+	if !(get_argument(args, &"on_floor", Callable()) is bool):
+		return false
+	
+	return true
 #endregion
 
 
