@@ -3,7 +3,7 @@ class_name FPSDisplayLabel extends Label
 
 
 #region Constants
-const FONT_WIDTH := 60
+const FONT_WIDTH := Constants.DEBUG_FONT_WIDTH
 #endregion
 
 

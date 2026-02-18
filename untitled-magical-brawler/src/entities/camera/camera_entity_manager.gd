@@ -2,7 +2,7 @@
 extends BaseEntityManager
 
 
-#region OnReady Variables
+#region External Variables
 @export var target : BaseEntityManager:
 	set(val):
 		if val == target:
@@ -11,6 +11,14 @@ extends BaseEntityManager
 		
 		if is_node_ready() && !Engine.is_editor_hint():
 			_change_target()
+@export var zoom : Vector2 = Vector2(0.4, 0.4):
+	set(val):
+		if val == zoom:
+			return
+		zoom = val
+		
+		if is_node_ready():
+			_actor.zoom = zoom
 #endregion
 
 
@@ -22,6 +30,7 @@ extends BaseEntityManager
 
 #region Virtual Methods
 func _ready() -> void:
+	_actor.zoom = zoom
 	if Engine.is_editor_hint():
 		return
 	
@@ -57,7 +66,7 @@ func _change_target() -> void:
 
 #region Public Methods (Actions)
 func zoom_action(
-	zoom : Vector2,
+	zoom_val : Vector2,
 	duration : float = 0.2,
 	ease_type : Tween.EaseType = Tween.EaseType.EASE_IN,
 	transition_type : Tween.TransitionType = Tween.TransitionType.TRANS_LINEAR,
@@ -67,7 +76,7 @@ func zoom_action(
 		&"Camera_Zoom_Task",
 		{
 			"actor" : _actor,
-			"zoom" : zoom,
+			"zoom" : zoom_val,
 			"duration" : duration,
 			"ease_type" : ease_type,
 			"transition_type" : transition_type

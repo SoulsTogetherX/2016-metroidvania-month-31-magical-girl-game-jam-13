@@ -1,4 +1,4 @@
-extends StateNode
+extends AnimationStateNode
 
 
 #region External Variables

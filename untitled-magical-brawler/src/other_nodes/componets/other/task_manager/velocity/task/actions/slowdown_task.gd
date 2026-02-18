@@ -12,7 +12,7 @@ extends VelocityTaskNode
 #region Public Virtual Methods
 func task_physics(delta : float, args : Dictionary) -> bool:
 	var velocity_module := get_velocity(args)
-	var dir : float = velocity_module.hor_direction()
+	var dir : float = velocity_module.get_hor_direction()
 	var flat : float = get_argument(
 		args, &"slowdown_flat", slowdown_flat
 	)
@@ -27,7 +27,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 		delta
 	)
 	
-	if velocity_module.velocity.x < 0:
+	if velocity_module.velocity.x > 0:
 		velocity_module.min_hor_velocity(0.0)
 		return true
 	velocity_module.max_hor_velocity(0.0)

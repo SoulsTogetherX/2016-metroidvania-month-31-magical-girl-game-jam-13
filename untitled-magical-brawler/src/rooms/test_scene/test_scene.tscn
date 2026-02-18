@@ -1,5 +1,6 @@
-[gd_scene format=3 uid="uid://byl1n8q7oju0q"]
+[gd_scene format=4 uid="uid://byl1n8q7oju0q"]
 
+[ext_resource type="TileSet" uid="uid://6nv32bdevd7d" path="res://assets/tilesets/test_tileset/test_tileset.tres" id="1_4icc5"]
 [ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="PackedScene" uid="uid://co68h8eknlwnj" path="res://src/entities/player/player.tscn" id="2_0p3fg"]
 [ext_resource type="PackedScene" uid="uid://t8ar1js7oorl" path="res://src/entities/camera/follow_camera.tscn" id="3_2mblx"]
@@ -23,19 +24,29 @@ script = ExtResource("8_uv8eo")
 size = Vector2(128, 128)
 
 [node name="TestScene" type="Node2D" unique_id=1204055905]
+scale = Vector2(0.6, 0.6)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=554752649]
+z_index = 1
 collision_layer = 2
 collision_mask = 0
 
-[node name="Icon" type="Sprite2D" parent="StaticBody2D" unique_id=667492297]
-position = Vector2(640, 64)
-scale = Vector2(100, 1)
-texture = ExtResource("1_iclql")
+[node name="TileMapLayer" type="TileMapLayer" parent="StaticBody2D" unique_id=1860633470]
+tile_map_data = PackedByteArray("AADm/wAAAQAAAAAAAADn/wAAAQAAAAAAAADo/wAAAQAAAAAAAADp/wAAAQAAAAAAAADq/wAAAQAAAAAAAADr/wAAAQAAAAAAAADs/wAAAQAAAAAAAADt/wAAAQAAAAAAAADu/wAAAQAAAAAAAADv/wAAAQAAAAAAAADw/wAAAQAAAAAAAADx/wAAAQAAAAAAAADy/wAAAQAAAAAAAADz/wAAAQAAAAAAAAD0/wAAAQAAAAAAAAD1/wAAAQAAAAAAAAD2/wAAAQAAAAAAAAD3/wAAAQAAAAAAAAD4/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD7/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wAAAQAAAAAAAAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAASAAAAAQAAAAAAAAATAAAAAQAAAAAAAAAUAAAAAQAAAAAAAAAVAAAAAQAAAAAAAAAWAAAAAQAAAAAAAAAXAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAZAAAAAQAAAAAAAAAaAAAAAQAAAAAAAAAbAAAAAQAAAAAAAAAcAAAAAQAAAAAAAAAdAAAAAQAAAAAAAAAeAAAAAQAAAAAAAAAfAAAAAQAAAAAAAAAIAP3/AQAAAAAAAAAJAP3/AQAAAAAAAAAKAP3/AQAAAAAAAAALAP3/AQAAAAAAAAAMAP3/AQAAAAAAAAANAP3/AQAAAAAAAAAOAP3/AQAAAAAAAAD2//z/AQAAAAAAAAD1//z/AQAAAAAAAAD0//z/AQAAAAAAAADz//z/AQAAAAAAAADy//z/AQAAAAAAAADx//z/AQAAAAAAAAA=")
+tile_set = ExtResource("1_4icc5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=443996301]
 position = Vector2(640, 64)
 shape = SubResource("RectangleShape2D_0p3fg")
+
+[node name="Player" parent="." unique_id=483210501 instance=ExtResource("2_0p3fg")]
+position = Vector2(-65, 0)
+display_health = true
+display_health_offset = Vector2(0, -420)
+
+[node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
+zoom = Vector2(0.4, 0.4)
+target = NodePath("../Player")
 
 [node name="CameraBoundary" type="StaticBody2D" parent="." unique_id=1489446853]
 script = ExtResource("4_t124o")
@@ -43,19 +54,7 @@ metadata/_custom_type_script = "uid://dnwgfwqocrpgn"
 
 [node name="CameraCollider" type="CollisionPolygon2D" parent="CameraBoundary" unique_id=1318645287]
 build_mode = 1
-polygon = PackedVector2Array(8327, -2292, 8484, 1012, 1583, 338, -1520, 338, -7770, 1507, -7725, -2203)
-
-[node name="Player" parent="." unique_id=483210501 instance=ExtResource("2_0p3fg")]
-position = Vector2(-65, 0)
-start_brain_active = true
-display_velocity = true
-display_health = true
-display_health_offset = Vector2(0, -128)
-
-[node name="FollowCamera" parent="." unique_id=1404715539 node_paths=PackedStringArray("target") instance=ExtResource("3_2mblx")]
-target = NodePath("../Player")
-start_brain_active = true
-display_velocity = true
+polygon = PackedVector2Array(8035, -3480, 8205, 1278.3333, 1588.3333, 546.6666, -1423.3333, 518.3333, -7138.333, 1785, -7138.333, -3283.3333)
 
 [node name="DamageTester" type="Area2D" parent="." unique_id=1654942989]
 position = Vector2(713, -365)
@@ -78,8 +77,8 @@ offset_left = -945.0
 offset_top = -669.0
 offset_right = -577.0
 offset_bottom = -586.0
-theme_override_font_sizes/font_size = 60
-text = "FPS: 131.0"
+theme_override_font_sizes/font_size = 120
+text = "FPS: 100.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"

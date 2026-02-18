@@ -2,15 +2,31 @@
 class_name TaskNode extends Node
 
 
-#region Signals
+#region Public Signals
 @warning_ignore("unused_signal")
-signal force_stop
+signal task_began
+@warning_ignore("unused_signal")
+signal task_finished
+#endregion
+
+
+#region Private Signals
+signal _force_start(
+	id : StringName, given_args : Dictionary, overwrite : bool
+)
+signal _force_end
 #endregion
 
 
 #region External Variables
+@export var disabled : bool
 @export var auto_start : bool
 @export var auto_start_args : Dictionary
+#endregion
+
+
+#region Private Variables
+var _running : bool
 #endregion
 
 
@@ -31,9 +47,27 @@ func task_end(_args : Dictionary) -> void:
 #endregion
 
 
+#region Public Methods (Accesser)
+func is_running() -> bool:
+	return _running
+func is_disabled() -> bool:
+	return disabled
+#endregion
+
+
 #region Public Methods (Identifier)
 @abstract
 func task_id() -> StringName
+#endregion
+
+
+#region Public Methods (Force State)
+func force_start_task(
+	given_args : Dictionary = {}, overwrite : bool = false
+) -> void:
+	_force_start.emit(task_id(), given_args, overwrite)
+func force_end_task() -> void:
+	_force_end.emit()
 #endregion
 
 
@@ -49,7 +83,7 @@ func get_argument(
 			push_error("No '%s' found" % arg)
 			return null
 		return val.call()
-	if !val:
+	if val == null:
 		push_error("No '%s' found" % arg)
 	return val
 func get_callable(
@@ -65,4 +99,11 @@ func get_callable(
 		push_error("No '%s' found" % arg)
 		return null
 	return val.callv(call_args)
+
+func get_task_manager() -> TaskManager:
+	var manager : TaskManager = get_parent()
+	if !manager:
+		push_error("TaskNode isn't a child of a 'TaskManager' node.")
+	
+	return manager
 #endregion

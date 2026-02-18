@@ -1,9 +1,15 @@
 @abstract
 class_name StateNode extends Node
 
-#region Signals
+
+#region Private Signals
 @warning_ignore("unused_signal")
-signal force_change(state : StateNode)
+signal _force_change(state : StateNode)
+#endregion
+
+
+#region Private Variables
+var _running : bool
 #endregion
 
 
@@ -25,4 +31,16 @@ func enter_state() -> void:
 	pass
 func exit_state() -> void:
 	pass
+#endregion
+
+
+#region Public Methods (Force State)
+func force_change(state : StateNode) -> void:
+	_force_change.emit(state)
+#endregion
+
+
+#region Public Methods (Accesser)
+func is_running() -> bool:
+	return _running
 #endregion
