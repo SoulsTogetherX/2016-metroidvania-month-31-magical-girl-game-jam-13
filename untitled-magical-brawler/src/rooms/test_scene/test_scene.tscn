@@ -26,6 +26,10 @@ size = Vector2(128, 128)
 [node name="TestScene" type="Node2D" unique_id=1204055905]
 scale = Vector2(0.6, 0.6)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2102837846]
+
+[node name="pause_menu" parent="CanvasLayer" unique_id=230580238 instance=ExtResource("4_t124o")]
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=554752649]
 z_index = 1
 collision_layer = 2
@@ -75,9 +79,7 @@ offset_top = -669.0
 offset_right = -577.0
 offset_bottom = -586.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 133.0"
+text = "FPS: 145.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
-
-[node name="pause_menu" parent="." unique_id=230580238 instance=ExtResource("4_t124o")]

@@ -24,6 +24,10 @@ buses/default_bus_layout="uid://casha78bfymda"
 BackgroundLoader="*uid://b2e0jkapc64dp"
 SoundManager="*uid://dsiqp2rs1fep5"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={

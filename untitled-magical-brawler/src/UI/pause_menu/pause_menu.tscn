@@ -72,9 +72,11 @@ _data = {
 [node name="pause_menu" type="Control" unique_id=230580238]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dvare")
@@ -90,16 +92,17 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1662828110]
 modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -150.0
-offset_right = 125.0
-offset_bottom = 100.0
+offset_left = -203.25
+offset_top = -162.75
+offset_right = 203.25
+offset_bottom = 162.75
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -115,7 +118,6 @@ axis_stretch_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1582199546]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 2
 
@@ -123,10 +125,13 @@ alignment = 2
 modulate = Color(0.12156863, 0.10980392, 0.08235294, 1)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 52
 text = "Paused"
 horizontal_alignment = 1
 uppercase = true
+
+[node name="Separator" type="Panel" parent="PanelContainer/VBoxContainer" unique_id=1872468466]
+layout_mode = 2
 
 [node name="ResumeGameBtn" type="Button" parent="PanelContainer/VBoxContainer" unique_id=753787726]
 modulate = Color(0, 0, 0, 1)
