@@ -1,34 +1,26 @@
 extends Control
 
-
 func _ready():
-	$AnimationPlayer.play("RESET")
-	
+	set_paused(true)
 
 func _process(_delta):
 	test_esc()
 
-
-func resume():
-	get_tree().paused = false
-	$AnimationPlayer.play_backwards("blur")
-	
-	
-func pause():
-	get_tree().paused = true
-	$AnimationPlayer.play("blur")
-	
-	
+func set_paused(value : bool):
+	if(get_tree().paused != value):
+		get_tree().paused = value
+		
+		
 func test_esc():
 	if Input.is_action_just_pressed("escape") and get_tree().paused:
-		resume()
+		set_paused(true)
 	elif Input.is_action_just_pressed("escape") and !get_tree().paused:
-		pause()
+		set_paused(false)
 
 
 #region on buttons pressed
 func _on_resume_game_btn_pressed() -> void:
-	resume()
+	set_paused(false)
 
 
 func _on_main_menu_btn_pressed() -> void:
