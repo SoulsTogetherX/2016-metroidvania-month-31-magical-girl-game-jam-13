@@ -21,9 +21,9 @@ func pause():
 	
 func test_esc():
 	if Input.is_action_just_pressed("escape") and get_tree().paused:
-		pause()
-	elif Input.is_action_just_pressed("escape") and !get_tree().paused:
 		resume()
+	elif Input.is_action_just_pressed("escape") and !get_tree().paused:
+		pause()
 
 
 #region on buttons pressed

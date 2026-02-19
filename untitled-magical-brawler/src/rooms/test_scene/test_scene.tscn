@@ -48,7 +48,6 @@ display_health_offset = Vector2(0, -420)
 script = null
 
 [node name="CameraBoundary" type="StaticBody2D" parent="." unique_id=1489446853]
-metadata/_custom_type_script = "uid://dnwgfwqocrpgn"
 
 [node name="CameraCollider" type="CollisionPolygon2D" parent="CameraBoundary" unique_id=1318645287]
 build_mode = 1
@@ -76,7 +75,7 @@ offset_top = -669.0
 offset_right = -577.0
 offset_bottom = -586.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 143.0"
+text = "FPS: 133.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
