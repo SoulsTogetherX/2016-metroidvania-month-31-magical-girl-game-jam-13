@@ -12,6 +12,11 @@ signal vertical_direction_changed
 #endregion
 
 
+#region External Variables
+@export var omnidirectional : bool = false
+#endregion
+
+
 #region Public Variables
 var velocity : Vector2:
 	get = get_velocity,
@@ -21,7 +26,7 @@ var velocity : Vector2:
 
 #region Private Variables 
 var _velocity_changed_queue : bool = false
-var _direction : Vector2i:
+var _direction : Vector2i = Vector2i.RIGHT:
 	set(val):
 		if val == _direction:
 			return
@@ -60,11 +65,21 @@ func set_velocity(vec : Vector2) -> void:
 		return
 	velocity = vec
 	
-	if !velocity.is_zero_approx():
-		_direction = velocity.sign()
+	overwrite_direction(velocity)
 	
 	velocity_changed_immediate.emit()
 	_queue_velocity_changed()
+
+func overwrite_direction(dir : Vector2i) -> void:
+	if omnidirectional:
+		if dir != Vector2i.ZERO:
+			_direction = dir.sign()
+		return
+	
+	if dir.x != 0:
+		_direction.x = signi(dir.x)
+	if dir.y != 0:
+		_direction.y = signi(dir.y)
 #endregion
 
 

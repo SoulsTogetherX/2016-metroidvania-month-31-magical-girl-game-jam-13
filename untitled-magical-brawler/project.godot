@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Untitled Magical Brawler"
-run/main_scene="uid://byl1n8q7oju0q"
+run/main_scene="uid://cepi7l2yq7v70"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
@@ -23,6 +23,11 @@ buses/default_bus_layout="uid://casha78bfymda"
 
 BackgroundLoader="*uid://b2e0jkapc64dp"
 SoundManager="*uid://dsiqp2rs1fep5"
+RoomManager="*uid://bv166q8suutld"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [file_customization]
 
@@ -30,6 +35,7 @@ folder_colors={
 "res://addons/": "orange",
 "res://assets/": "red",
 "res://resources/": "teal",
+"res://src/UI/": "pink",
 "res://src/entities/": "green",
 "res://src/other_nodes/": "blue",
 "res://src/rooms/": "purple",

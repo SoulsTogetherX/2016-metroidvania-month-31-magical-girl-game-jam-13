@@ -1,0 +1,55 @@
+@tool
+class_name EditorUtilities
+
+
+#region Confirm Child
+static func confirmed_child(
+	parent : Node,
+	property_name : StringName,
+	child_name : String,
+	create_node : Callable,
+	settup_node : Callable,
+	idx : int = -1
+) -> void:
+	if !parent:
+		return
+	
+	var child := parent.get_node_or_null(child_name)
+	if child == null:
+		child = create_node.call()
+		parent.add_child(child)
+		
+		child.owner = parent.owner
+		child.name = child_name
+	else:
+		settup_node.call(child)
+	
+	if idx >= 0:
+		parent.move_child.call_deferred(child, idx)
+	
+	child.tree_exited.connect(
+		EditorUtilities.confirmed_child.bind(
+			parent, property_name, child_name,
+			create_node, settup_node, idx
+		),
+		CONNECT_ONE_SHOT
+	)
+	
+	if !property_name.is_empty():
+		parent.set(property_name, child)
+#endregion
+
+
+#region Ground
+static func raycast_ground(from : Node2D, length : float) -> Dictionary:
+	var space_state := from.get_world_2d().direct_space_state
+	var origin := from.global_position
+	var end := from.global_position + Vector2(0, length)
+	
+	var query := PhysicsRayQueryParameters2D.create(origin, end)
+	query.collision_mask = Constants.COLLISION.GROUND
+	query.hit_from_inside = true
+	var result := space_state.intersect_ray(query)
+	
+	return result
+#endregion

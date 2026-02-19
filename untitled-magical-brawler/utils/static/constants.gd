@@ -4,7 +4,7 @@ class_name Constants
 const DEBUG_FONT_WIDTH := 120
 
 
-enum LAYERS {
+enum COLLISION {
 	NONE = 0,
 	CAMERA = 1 << 0,
 	GROUND = 1 << 1,

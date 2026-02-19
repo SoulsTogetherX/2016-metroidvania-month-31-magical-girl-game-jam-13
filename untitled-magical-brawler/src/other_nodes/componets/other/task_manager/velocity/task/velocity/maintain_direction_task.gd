@@ -15,26 +15,32 @@ enum AXIS {
 @export var flip_v : bool
 
 @export_group("Other")
-@export var sprite : AnimatedSprite2D
+@export var actor : Node2D
 #endregion
 
 
 
 #region Public Virtual Methods
-func task_physics(_delta : float, args : Dictionary) -> bool:
-	var spr : AnimatedSprite2D = get_argument(
-		args, &"sprite", sprite
-	)
-	spr.flip_h = get_argument(args, &"flip_h", flip_h)
-	spr.flip_v = get_argument(args, &"flip_v", flip_v)
+func task_process(_delta : float, args : Dictionary) -> bool:
+	var act : Node2D = get_argument(args, &"actor", actor)
+	var h_flip : bool = get_argument(args, &"flip_h", flip_h)
+	var v_flip : bool = get_argument(args, &"flip_v", flip_v)
 	
+	if actor is BaseEntity:
+		actor.change_direction(h_flip, v_flip)
+		return true
+	
+	act.scale = Vector2(
+		-1.0 if h_flip else 1.0,
+		-1.0 if v_flip else 1.0
+	)
 	return true
 #endregion
 
 
 #region Public Methods (Action States)
 func task_begin(args : Dictionary) -> bool:
-	if !(get_argument(args, &"sprite", sprite) is AnimatedSprite2D):
+	if !(get_argument(args, &"actor", actor) is Node2D):
 		return false
 	
 	return true

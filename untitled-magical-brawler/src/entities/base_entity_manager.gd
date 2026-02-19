@@ -45,7 +45,7 @@ var SNAP_RAYCAST_LENGTH := 500
 
 #region Private Export Variables
 @export_group("Hidden Exports")
-@export var _actor: Node2D
+@export var _actor: BaseEntity
 @export var _velocity_module: VelocityComponent
 @export var _health_module: HealthComponent
 #endregion
@@ -62,6 +62,7 @@ var _draw_snap_line : bool
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
+			_actor.set_manager(self)
 			_on_ready_notification()
 			
 			if Engine.is_editor_hint():
@@ -146,13 +147,9 @@ func _draw_trajectory() -> void:
 
 #region Private Methods (Helper)
 func _snap_to_ground() -> void:
-	var space_state := get_world_2d().direct_space_state
-	var origin := global_position
-	var end := global_position + Vector2(0, SNAP_RAYCAST_LENGTH)
-	
-	var query := PhysicsRayQueryParameters2D.create(origin, end)
-	query.collision_mask = Constants.LAYERS.GROUND
-	var result := space_state.intersect_ray(query)
+	var result := EditorUtilities.raycast_ground(
+		self, SNAP_RAYCAST_LENGTH
+	)
 	
 	_draw_snap_line = result.get(&"collider", null) == null
 	if !_draw_snap_line:
@@ -161,11 +158,11 @@ func _snap_to_ground() -> void:
 #endregion
 
 
-
 #region Public Methods (Accessor)
 @abstract
 func toggle_brain(toggle : bool = true) -> void
 #endregion
+
 
 
 #region Public Methods (Checks)
@@ -176,16 +173,19 @@ func has_health() -> bool:
 #endregion
 
 
-#region Public Methods (Velocity)
-func get_positon() -> Vector2:
+#region Public Methods (Position)
+func get_actor() -> BaseEntity:
+	return _actor
+
+func get_actor_positon() -> Vector2:
 	return _actor.global_position
-func get_local_position() -> Vector2:
+func get_actor_local_position() -> Vector2:
 	return _actor.position
 #endregion
 
 
 #region Public Methods (Velocity)
-func get_velocity_compoenent() -> VelocityComponent:
+func get_velocity_component() -> VelocityComponent:
 	return _velocity_module
 
 func get_velocity() -> Vector2:
@@ -197,12 +197,12 @@ func predict_next_position(delta : float = 1.0) -> Vector2:
 	if !_velocity_module:
 		return Vector2.ZERO
 	
-	return _actor.global_position + _velocity_module.get_velocity() * delta
+	return get_actor_positon() + _velocity_module.get_velocity() * delta
 #endregion
 
 
 #region Public Methods (Health)
-func get_health_compoenent() -> HealthComponent:
+func get_health_component() -> HealthComponent:
 	return _health_module
 
 func get_health() -> int:

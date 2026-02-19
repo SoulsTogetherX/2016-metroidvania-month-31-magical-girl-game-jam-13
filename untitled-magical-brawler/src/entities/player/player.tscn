@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bymclbi1pwet7" path="res://src/entities/player/player_entity_manager.gd" id="1_5qgjf"]
 [ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/health_component.gd" id="1_peafg"]
 [ext_resource type="Script" uid="uid://c62i5oqcic4jf" path="res://src/entities/base_entity.gd" id="2_amj0e"]
+[ext_resource type="Script" uid="uid://0rqvd0dran72" path="res://src/other_nodes/componets/room_persistent/room_startup_component.gd" id="2_t4js2"]
 [ext_resource type="SpriteFrames" uid="uid://b3bftuwc7kx51" path="res://assets/entities/player/resources/player_sprite_frames.tres" id="3_amj0e"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
 [ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
@@ -28,6 +29,12 @@
 [ext_resource type="Script" uid="uid://d26id7i6xpc3r" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/player_dead_state.gd" id="18_ngh1c"]
 [ext_resource type="Script" uid="uid://bo6mjfa68k27j" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/action/flash_task.gd" id="20_3d0mj"]
 [ext_resource type="Script" uid="uid://bx6efdmndowkm" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/maintain_direction_task.gd" id="27_33dyk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4js2"]
+size = Vector2(190.5, 399)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
+size = Vector2(120, 350)
 
 [sub_resource type="Animation" id="Animation_amj0e"]
 resource_name = "RESET"
@@ -213,12 +220,6 @@ _data = {
 &"running": SubResource("Animation_tvulh")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4js2"]
-size = Vector2(190.5, 399)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
-size = Vector2(120, 350)
-
 [sub_resource type="GDScript" id="GDScript_5qgjf"]
 script/source = "extends TaskNode
 
@@ -310,37 +311,42 @@ _velocity_module = NodePath("VelocityComponent")
 _health_module = NodePath("HealthComponent")
 metadata/_custom_type_script = "uid://dcjmwrkpfht1e"
 
-[node name="Actor" type="CharacterBody2D" parent="." unique_id=539542931]
-position = Vector2(0, -64)
+[node name="RoomStartupComponent" type="Node" parent="." unique_id=1249243726 node_paths=PackedStringArray("entity_manager")]
+script = ExtResource("2_t4js2")
+entity_manager = NodePath("..")
+
+[node name="Actor" type="CharacterBody2D" parent="." unique_id=539542931 node_paths=PackedStringArray("visual_piviot")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_amj0e")
-faction = 1
-
-[node name="Sprite" type="AnimatedSprite2D" parent="Actor" unique_id=1133366217]
-position = Vector2(0, -163)
-sprite_frames = ExtResource("3_amj0e")
-animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Actor/Sprite" unique_id=71332508]
-libraries/ = SubResource("AnimationLibrary_2cmg6")
+visual_piviot = NodePath("Visuals")
 
 [node name="GroundCollide" type="CollisionShape2D" parent="Actor" unique_id=1568380323]
-position = Vector2(0, -136.5)
+position = Vector2(0, -198.5)
 shape = SubResource("RectangleShape2D_t4js2")
 
-[node name="HurtboxComponent" type="Area2D" parent="Actor" unique_id=1143519473 node_paths=PackedStringArray("knockback_module", "health_module", "invincibility_module")]
-position = Vector2(0, -112)
+[node name="Visuals" type="Node2D" parent="Actor" unique_id=1229646187]
+
+[node name="HurtboxComponent" type="Area2D" parent="Actor/Visuals" unique_id=1143519473 node_paths=PackedStringArray("knockback_module", "health_module", "invincibility_module")]
+position = Vector2(0, -174)
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("3_mjwoq")
-knockback_module = NodePath("../../KnockbackComponent")
-health_module = NodePath("../../HealthComponent")
-invincibility_module = NodePath("../../InvincibilityComponent")
+knockback_module = NodePath("../../../KnockbackComponent")
+health_module = NodePath("../../../HealthComponent")
+invincibility_module = NodePath("../../../InvincibilityComponent")
 shape = SubResource("RectangleShape2D_33dyk")
 faction = 1
 metadata/_custom_type_script = "uid://d4frh4mqr77xo"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Actor/Visuals" unique_id=1133366217]
+sprite_frames = ExtResource("3_amj0e")
+animation = &"idle"
+offset = Vector2(0, -224)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Actor/Visuals/Sprite" unique_id=71332508]
+libraries/ = SubResource("AnimationLibrary_2cmg6")
 
 [node name="KnockbackComponent" type="Node" parent="." unique_id=1134931623 node_paths=PackedStringArray("velocity_module")]
 script = ExtResource("4_dao75")
@@ -383,7 +389,7 @@ metadata/_custom_type_script = "uid://e6u6g1v5xrc0"
 
 [node name="StateMachine" type="Node" parent="." unique_id=479517536 node_paths=PackedStringArray("animation_player", "starting_state")]
 script = ExtResource("12_amj0e")
-animation_player = NodePath("../Actor/Sprite/AnimationPlayer")
+animation_player = NodePath("../Actor/Visuals/Sprite/AnimationPlayer")
 starting_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://cbsbtae5bl2nj"
 
@@ -485,9 +491,9 @@ gravity_module = NodePath("../../GravityComponent")
 [node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=473670275]
 script = ExtResource("13_a31ob")
 
-[node name="MaintainDirectionTask" type="Node" parent="TaskManager" unique_id=844166488 node_paths=PackedStringArray("sprite")]
+[node name="MaintainDirectionTask" type="Node" parent="TaskManager" unique_id=844166488 node_paths=PackedStringArray("actor")]
 script = ExtResource("27_33dyk")
-sprite = NodePath("../../Actor/Sprite")
+actor = NodePath("../../Actor")
 
 [node name="UpdateCacheTask" type="Node" parent="TaskManager" unique_id=1339140841 node_paths=PackedStringArray("action_cache_c", "input_c")]
 script = SubResource("GDScript_5qgjf")

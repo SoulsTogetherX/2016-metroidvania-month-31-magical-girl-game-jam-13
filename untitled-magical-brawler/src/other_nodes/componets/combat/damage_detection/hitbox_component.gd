@@ -57,11 +57,11 @@ func _refresh_faction() -> void:
 		Constants.FACTION.NONE:
 			collision_layer = 0
 		Constants.FACTION.PLAYER:
-			collision_layer = Constants.LAYERS.PLAYER
+			collision_layer = Constants.COLLISION.PLAYER
 		Constants.FACTION.ENEMY:
-			collision_layer = Constants.LAYERS.ENEMY
+			collision_layer = Constants.COLLISION.ENEMY
 		Constants.FACTION.NEUTRAL:
-			collision_layer = Constants.LAYERS.PLAYER | Constants.LAYERS.ENEMY
+			collision_layer = Constants.COLLISION.PLAYER | Constants.COLLISION.ENEMY
 		_:
 			collision_layer = 0
 

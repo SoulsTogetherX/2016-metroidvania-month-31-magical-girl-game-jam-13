@@ -73,7 +73,7 @@ func _physics_process(_delta: float) -> void:
 
 #region External Variables
 func _reposition_to_follow() -> void:
-	global_position = follow_offset + follow.get_positon()
+	global_position = follow_offset + follow.get_actor_positon()
 	global_position.x -= size.x * 0.5
 func _reposition_orign() -> void:
 	global_position = Vector2.ZERO
