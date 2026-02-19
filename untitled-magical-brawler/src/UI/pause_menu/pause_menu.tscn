@@ -90,7 +90,7 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1662828110]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(250, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
