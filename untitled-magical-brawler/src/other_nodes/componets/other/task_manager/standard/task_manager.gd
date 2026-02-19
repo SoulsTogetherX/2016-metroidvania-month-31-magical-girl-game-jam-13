@@ -31,10 +31,10 @@ var _running : bool = false
 
 #region Virtual Methods
 func _ready() -> void:
-	_register_task()
+	_register_task_nodes()
 	_auto_start_all()
-	child_entered_tree.connect(_register_task)
-	child_exiting_tree.connect(_register_task)
+	child_entered_tree.connect(_register_task_node)
+	child_exiting_tree.connect(_unregister_task_node)
 
 func _process(delta: float) -> void:
 	for task : Task in _running_tasks.values():
@@ -45,13 +45,39 @@ func _physics_process(delta: float) -> void:
 #endregion
 
 
-#region Private Methods (Helper)
-func _register_task() -> void:
-	_stored_task.clear()
+#region Private Methods (Task Node Register)
+func _register_task_nodes() -> void:
+	_unregister_task_nodes()
 	
 	for child : Node in get_children():
 		if child is TaskNode:
 			_stored_task[child.task_id()] = child
+			child._force_start.connect(task_begin)
+func _unregister_task_nodes() -> void:
+	for task_node : TaskNode in _stored_task.values():
+		_stored_task[task_node.task_id()] = task_node
+		task_node._force_start.disconnect(task_begin)
+	
+	_stored_task.clear()
+
+func _register_task_node(node : Node) -> void:
+	if node is TaskNode:
+		if _stored_task.has(node.task_id()):
+			return
+		
+		_stored_task.set(node.task_id(), node)
+		node._force_start.connect(task_begin)
+func _unregister_task_node(node : Node) -> void:
+	if node is TaskNode:
+		if !_stored_task.has(node.task_id()):
+			return
+	
+		_stored_task.erase(node.task_id())
+		node._force_start.disconnect(task_begin)
+#endregion
+
+
+#region Private Methods (Helper)
 func _auto_start_all() -> void:
 	for state : TaskNode in _stored_task.values():
 		if state.auto_start:
@@ -90,12 +116,14 @@ func task_begin(
 			return
 		task_end(task_id)
 	
-	var state : TaskNode = _stored_task.get(task_id)
-	var task : Task = _create_task(state, given_args)
+	var node : TaskNode = _stored_task.get(task_id)
+	var task : Task = _create_task(node, given_args)
 	if !task.task_begin():
 		return
 	
+	node._running = true
 	task.force_stop.connect(task_end.bind(task_id))
+	node.task_began.emit()
 	_running_tasks.set(task_id, task)
 	
 	_update_proces_mode()
@@ -105,10 +133,12 @@ func task_end(
 	if !is_state_running(task_id):
 		return
 	
+	var node : TaskNode = _stored_task.get(task_id)
 	var task : Task = _running_tasks.get(task_id)
 	task.task_end()
-	_running_tasks.erase(task_id)
+	node._running = false
 	
+	_running_tasks.erase(task_id)
 	_update_proces_mode()
 
 
@@ -130,6 +160,13 @@ func tap_state(
 	if !state.task_begin(total_args):
 		return
 	state.task_end(total_args)
+
+func task_disable(task_id : StringName, toggle : bool) -> void:
+	if !state_exists(task_id):
+		return
+	
+	var state : TaskNode = _stored_task.get(task_id)
+	state.disabled = toggle
 #endregion
 
 
@@ -158,7 +195,7 @@ class Task:
 	#endregion
 	
 	#region Private Variables
-	var _state : TaskNode
+	var _node : TaskNode
 	var _extra_args : Dictionary
 	var _arg_cache : Dictionary
 	
@@ -168,30 +205,35 @@ class Task:
 	
 	#region Virtual Methods
 	func _init(
-		managed_state : TaskNode,
+		managed_node : TaskNode,
 		given_args : Dictionary,
 		get_base_args : Callable
 	) -> void:
 		_extra_args  = given_args
-		_state = managed_state
+		_node = managed_node
 		_get_base_args = get_base_args
 		
-		_state.force_stop.connect(force_stop.emit)
+		_node._force_end.connect(force_stop.emit)
 		update_arg_cache()
 	#endregion
 	
 	#region Public Virtual Methods
 	func task_process(delta : float) -> bool:
-		return _state.task_process(delta, _arg_cache)
+		if _node.disabled:
+			return true
+		return _node.task_process(delta, _arg_cache)
 	func task_physics(delta : float) -> bool:
-		return _state.task_physics(delta, _arg_cache)
+		if _node.disabled:
+			return true
+		return _node.task_physics(delta, _arg_cache)
 	#endregion
 
 	#region Public Methods (Action States)
 	func task_begin() -> bool:
-		return _state.task_begin(_arg_cache)
+		return _node.task_begin(_arg_cache)
 	func task_end() -> void:
-		_state.task_end(_arg_cache)
+		_node.task_end(_arg_cache)
+		_node.task_finished.emit()
 	#endregion
 
 	#region Public Methods (Helper)

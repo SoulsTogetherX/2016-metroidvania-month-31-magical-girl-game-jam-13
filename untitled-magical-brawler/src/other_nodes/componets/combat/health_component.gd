@@ -1,9 +1,12 @@
+@tool
 class_name HealthComponent extends Node
 
+
 #region Signals
-signal max_health_changed
+signal max_health_changed(value : int)
+signal health_changed(value : int)
+
 signal max_health_delta(delta : int)
-signal health_changed
 signal health_delta(delta : int)
 
 signal damaged(delta : int)
@@ -14,14 +17,14 @@ signal revived
 
 
 #region External Variables
-@export var max_health : int = 10:
+@export_range(1, 1, 1, "or_greater") var max_health : int:
 	get = get_max_health,
 	set = set_max_health
 #endregion
 
 
 #region Private Variables
-var _max_health : int
+var _max_health : int = 10
 var _health : int
 #endregion
 
@@ -35,7 +38,7 @@ var current_health : int:
 
 
 #region Virtual Methods
-func _init() -> void:
+func _ready() -> void:
 	initialize_health()
 #endregion
 
@@ -44,7 +47,7 @@ func _init() -> void:
 func get_max_health() -> int:
 	return _max_health
 func set_max_health(val : int) -> void:
-	val = maxi(0, val)
+	val = maxi(1, val)
 	if val == _max_health:
 		return
 	var delta := val - _max_health
@@ -55,17 +58,19 @@ func set_max_health(val : int) -> void:
 	
 	max_health_changed.emit(_max_health)
 	max_health_delta.emit(delta)
+	
+	if Engine.is_editor_hint():
+		initialize_health()
 func set_max_health_no_signal(val : int) -> void:
-	_max_health = maxi(0, val)
+	_max_health = maxi(1, val)
 #endregion
 
 
 #region Health Methods
-func initialize_health() -> void:
-	_health = _max_health
-
 func get_health() -> int:
 	return _health
+func get_health_ratio() -> float:
+	return float(_health) / float(_max_health)
 
 func set_health_no_signal(val : int) -> void:
 	_health = clampi(val, 0, max_health)
@@ -119,6 +124,9 @@ func full_heal() -> void:
 
 
 #region Other
+func initialize_health() -> void:
+	set_health(_max_health)
+
 func is_dead() -> bool:
-	return _health > 0
+	return _health == 0
 #endregion

@@ -17,57 +17,57 @@ var _is_falling : bool = false
 
 #region Static Methods (Helper)
 static func get_trajectory_impulse(
-	gravity_c : float,
-	height_c : float
+	gravity_val : float,
+	height : float
 ) -> float:
-	return -sqrt(2 * gravity_c * height_c)
+	return -sqrt(2 * gravity_val * height)
 ## Untested
 static func get_required_trajectory_impulse(
-	gravity_c : float,
-	positon_c : Vector2
+	gravity_val : float,
+	positon : Vector2
 ) -> Vector2:
-	if positon_c.x == 0.0:
+	if positon.x == 0.0:
 		return Vector2(
 			0,
-			get_trajectory_impulse(gravity_c, positon_c.y)
+			get_trajectory_impulse(gravity_val, positon.y)
 		)
 	
-	var temp := positon_c.y + positon_c.length()
+	var temp := positon.y + positon.length()
 	return Vector2.ONE.rotated(
-		atan(temp / positon_c.x)
-	) * sqrt(gravity_c * temp)
+		atan(temp / positon.x)
+	) * sqrt(gravity_val * temp)
 ## Untested
 static func get_required_trajectory_impulse_for_angle(
-	gravity_c : float,
-	positon_c : Vector2,
+	gravity_val : float,
+	positon : Vector2,
 	angle : float
 ) -> float:
 	var cos_angle := cos(angle)
 	var tan_angle := tan(angle)
 	
 	return sqrt(
-		(gravity_c * positon_c.x * positon_c.x) /
-		(2 * cos_angle * cos_angle * (positon_c.x * tan_angle - positon_c.y))
+		(gravity_val * positon.x * positon.x) /
+		(2 * cos_angle * cos_angle * (positon.x * tan_angle - positon.y))
 	)
 
 static func get_trajectory_max_height(
-	gravity_c : float,
-	impulse_c : float
+	gravity_val : float,
+	impulse : float
 ) -> float:
-	return pow(impulse_c, 2) / (2 * gravity_c)
+	return pow(impulse, 2) / (2 * gravity_val)
 static func get_trajectory_max_height_impulsed(
-	gravity_c : float,
-	impulse_c : Vector2
+	gravity_val : float,
+	impulse : Vector2
 ) -> float:
-	return get_trajectory_max_height(gravity_c, impulse_c.y)
+	return get_trajectory_max_height(gravity_val, impulse.y)
 
 static func get_offset(
-	gravity_c : float,
+	gravity_val : float,
 	time : float,
-	impulse_c : Vector2
+	impulse : Vector2
 ) -> Vector2:
-	var offset := time * impulse_c
-	offset.y += (gravity_c * time * time / 2)
+	var offset := time * impulse
+	offset.y += (gravity_val * time * time / 2)
 	
 	return offset
 #endregion

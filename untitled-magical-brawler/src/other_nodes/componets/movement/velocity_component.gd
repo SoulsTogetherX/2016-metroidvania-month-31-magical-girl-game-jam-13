@@ -1,9 +1,14 @@
+@tool
 class_name VelocityComponent extends Node
 
 
 #region Signals 
 signal velocity_changed_immediate
 signal velocity_changed
+
+signal direction_changed
+signal horizontal_direction_changed
+signal vertical_direction_changed
 #endregion
 
 
@@ -16,7 +21,18 @@ var velocity : Vector2:
 
 #region Private Variables 
 var _velocity_changed_queue : bool = false
-var _direction : Vector2i
+var _direction : Vector2i:
+	set(val):
+		if val == _direction:
+			return
+		var old_direction := _direction
+		_direction = val
+		
+		direction_changed.emit()
+		if val.x != old_direction.x:
+			horizontal_direction_changed.emit()
+		if val.y != old_direction.y:
+			vertical_direction_changed.emit()
 #endregion
 
 
@@ -44,10 +60,8 @@ func set_velocity(vec : Vector2) -> void:
 		return
 	velocity = vec
 	
-	if velocity.x != 0.0:
-		_direction.x = signi(int(velocity.x))
-	if velocity.y != 0.0:
-		_direction.y = signi(int(velocity.y))
+	if !velocity.is_zero_approx():
+		_direction = velocity.sign()
 	
 	velocity_changed_immediate.emit()
 	_queue_velocity_changed()
@@ -128,15 +142,17 @@ func attempting_rise() -> bool:
 func attempting_idle() -> bool:
 	return is_zero_approx(velocity.x)
 
-func vec_direction() -> Vector2i:
+func get_direction() -> Vector2i:
 	return _direction
-func hor_direction() -> int:
+func get_hor_direction() -> int:
 	return _direction.x
-func ver_direction() -> int:
+func get_ver_direction() -> int:
 	return _direction.y
 
 func facing_left() -> bool:
 	return _direction.x < 0
+func facing_up() -> bool:
+	return _direction.y < 0
 #endregion
 
 
