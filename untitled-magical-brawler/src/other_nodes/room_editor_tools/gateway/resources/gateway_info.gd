@@ -16,6 +16,10 @@ signal _cache_finished
 
 
 #region Enums
+enum AXIS {
+	X = 1,
+	Y = 2
+}
 enum PLAYER_STATES {
 	NORMAL,
 	JUMPING
@@ -62,6 +66,12 @@ enum PLAYER_STATES {
 		exit_pos = val
 		changed.emit()
 		exit_postion_changed.emit()
+@export_flags("X Offset:1", "Y Offset:2") var keep_offset : int:
+	set(val):
+		if val == keep_offset:
+			return
+		keep_offset = val
+		changed.emit()
 @export var facing_left : bool:
 	set(val):
 		if val == facing_left:
@@ -71,6 +81,10 @@ enum PLAYER_STATES {
 		direction_changed.emit()
 #endregion
 
+
+#region Private Variables
+var player_offset : Vector2
+#endregion
 
 
 #region Private Variables

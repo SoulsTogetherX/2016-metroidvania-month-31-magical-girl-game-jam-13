@@ -13,6 +13,7 @@ config_version=5
 config/name="Untitled Magical Brawler"
 run/main_scene="uid://cepi7l2yq7v70"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+run/max_fps=60
 config/icon="res://assets/icon.svg"
 
 [audio]
@@ -23,11 +24,19 @@ buses/default_bus_layout="uid://casha78bfymda"
 
 BackgroundLoader="*uid://b2e0jkapc64dp"
 SoundManager="*uid://dsiqp2rs1fep5"
+CameraZoneManager="*uid://bp2yrrt1gfn65"
 RoomManager="*uid://bv166q8suutld"
+PhantomCameraManager="*uid://duq6jhf6unyis"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 
@@ -78,6 +87,7 @@ player_attack={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 

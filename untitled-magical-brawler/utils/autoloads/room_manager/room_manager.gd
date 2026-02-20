@@ -32,6 +32,7 @@ func _on_room_startup(entrance : GatewayInfo) -> void:
 
 #region Public Methods (Register)
 func clear_registered() -> void:
+	CameraZoneManager.clear_registered()
 	_registered.clear()
 func register_gateway(gateway : GatewayInfo) -> void:
 	assert(!_registered.has(gateway.from_id), "Attempted to register an existing door id")

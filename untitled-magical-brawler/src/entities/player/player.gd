@@ -1,5 +1,5 @@
 @tool
-extends BaseEntityManager
+extends BaseEntity
 
 
 #region OnReady Variables
@@ -15,6 +15,7 @@ func _ready() -> void:
 		return
 	
 	_task_settup()
+	toggle_brain(true)
 #endregion
 
 
@@ -24,7 +25,7 @@ func toggle_brain(toggle : bool = true) -> void:
 		_task.task_begin(
 			&"Update_Cache_Task",
 			{
-				&"actor": _actor
+				&"actor": self
 			}
 		)
 		return
@@ -43,7 +44,7 @@ func _task_settup() -> void:
 	_task.task_begin(
 		&"Velocity_Apply_Task",
 		{
-			&"actor": _actor
+			&"actor": self
 		}
 	)
 	_task.task_begin(

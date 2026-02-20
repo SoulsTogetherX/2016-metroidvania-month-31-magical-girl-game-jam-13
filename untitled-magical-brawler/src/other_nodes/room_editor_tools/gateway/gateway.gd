@@ -40,12 +40,13 @@ var _gateway_marker : GatewayExitMarker2D
 
 #region Virtual Methods
 func _ready() -> void:
+	monitoring = true
 	monitorable = false
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
 	
 	if !Engine.is_editor_hint():
-		body_entered.connect(_on_player_enter.unbind(1))
+		body_entered.connect(_on_player_enter)
 		
 		RoomManager.register_gateway(gateway_info)
 		return
@@ -98,8 +99,11 @@ func _create_marker() -> GatewayExitMarker2D:
 
 
 #region Private Methods (Signal)
-func _on_player_enter() -> void:
+func _on_player_enter(body : BaseEntity) -> void:
 	assert(gateway_info, "Cannot enter a gateway with no attached exit.")
+	assert(body, "Invaild Entity detected in gateway.")
+	
+	gateway_info.player_offset = body.global_position - gateway_info.exit_pos
 	RoomManager.activate_gateway(gateway_info.to_id)
 
 func _on_marker_positon_changed() -> void:
