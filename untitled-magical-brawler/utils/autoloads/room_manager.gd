@@ -2,28 +2,9 @@ extends Node
 
 
 #region Private Variables
-var _fade_transtion : FadeCoverNode
 var _registered_infos : Array[GatewayInfo]
 #endregion
 
-
-
-#region Virtual Methods
-func _ready() -> void:
-	# Purely for testing purposes
-	await get_tree().root.ready
-	_fade_transtion = FadeCoverNode.new()
-	Global.game_controller.change_ui_scene_to_node(
-		_fade_transtion,
-		Constants.TRANSTION_ID
-	)
-	
-	# Purely for testing purposes
-	Global.game_controller.change_2d_scene_to_node(
-		(load("res://src/rooms/test_scenes/test_scene_1.tscn") as PackedScene).instantiate(),
-		Constants.ROOM_ID
-	)
-#endregion
 
 
 #region Public Methods (Register)
@@ -59,28 +40,42 @@ func activate_gateway(id : int) -> void:
 		!entrance.to_path.is_empty(),
 		 "Attempted entrance into a nonexistent room path"
 	)
-	clear_gateways()
 	
 	var scene : PackedScene = await entrance.get_room()
-	var node := scene.instantiate()
+	var room := scene.instantiate()
+	
+	await _pre_room_switch()
+	_room_switch(room)
+	room.ready.connect(
+		_post_room_switch.bind(entrance),
+		CONNECT_ONE_SHOT
+	)
+
+func _pre_room_switch() -> void:
+	clear_gateways()
 	
 	Global.get_current_room().set_deferred(
 		"process_mode", Node.PROCESS_MODE_DISABLED
 	)
+	Global.player.set_deferred(
+		"process_mode", Node.PROCESS_MODE_DISABLED
+	)
 	
-	await _fade_transtion.toggle_fade(true)
+	await Global.game_controller.get_ui_from_id(
+		Constants.TRANSTION_ID
+	).toggle_fade(true)
+func _room_switch(room : Node2D) -> void:
 	CameraZoneManager.request_snap()
 	Global.game_controller.change_2d_scene_to_node(
-		node, Constants.ROOM_ID,
+		room, Constants.ROOM_ID,
 		GameController.UNMOUNT_TYPE.DELETE
 	)
-	
-	node.ready.connect(
-		_connect_gateway.bind(entrance),
-		CONNECT_ONE_SHOT
-	)
-func _connect_gateway(entrance : GatewayInfo) -> void:
+func _post_room_switch(entrance : GatewayInfo) -> void:
 	var exit := _get_exit_by_id(entrance.exit_id)
+	
 	Global.player.global_position = exit.exit_pos
-	_fade_transtion.toggle_fade(false)
+	Global.player.process_mode = Node.PROCESS_MODE_INHERIT
+	await Global.game_controller.get_ui_from_id(
+		Constants.TRANSTION_ID
+	).toggle_fade(false)
 #endregion

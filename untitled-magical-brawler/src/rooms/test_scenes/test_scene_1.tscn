@@ -20,6 +20,7 @@
 script = ExtResource("12_5f1c8")
 to_path = "uid://dmd6qnsjk4gw4"
 exit_pos = Vector2(7680, 0)
+keep_offset = 2
 facing_left = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f1c8"]
@@ -36,12 +37,14 @@ size = Vector2(128, 128)
 
 [sub_resource type="Resource" id="Resource_lxi1k"]
 script = ExtResource("14_vil43")
+duration = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjl5p"]
 size = Vector2(3328, 1024)
 
 [sub_resource type="Resource" id="Resource_r5234"]
 script = ExtResource("14_vil43")
+duration = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vil43"]
 size = Vector2(9728, 2792)
@@ -57,7 +60,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 105.0"
+text = "FPS: 144.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -100,6 +103,7 @@ modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_iclql")
 
 [node name="Zone1" type="Area2D" parent="." unique_id=893557619]
+visible = false
 position = Vector2(6135, -1393)
 collision_layer = 0
 collision_mask = 4
@@ -120,6 +124,7 @@ position = Vector2(137, 881)
 shape = SubResource("RectangleShape2D_jjl5p")
 
 [node name="Zone2" type="Area2D" parent="." unique_id=722403585]
+visible = false
 position = Vector2(2867, -1393)
 collision_layer = 0
 collision_mask = 4

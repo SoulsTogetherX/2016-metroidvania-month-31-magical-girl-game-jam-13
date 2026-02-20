@@ -4,7 +4,7 @@ class_name GlobalCamera extends Camera2D
 #region OnReady Variables
 @onready var _phantom_camera_host: PhantomCameraHost = %PhantomCameraHost
 #endregion
-
+	
 
 
 #region Public Methods

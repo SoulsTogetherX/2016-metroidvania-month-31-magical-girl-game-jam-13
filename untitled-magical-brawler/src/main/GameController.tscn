@@ -1,15 +1,19 @@
 [gd_scene format=3 uid="uid://cns7a2pmlsie7"]
 
 [ext_resource type="Script" uid="uid://yojr73op28yi" path="res://src/main/game_controller.gd" id="1_cs0kd"]
+[ext_resource type="Script" uid="uid://fpfseuormqpv" path="res://src/main/load_presets.gd" id="1_mhaue"]
 
-[node name="GameController" type="Node" unique_id=417369024 node_paths=PackedStringArray("world_2d", "world_3d", "world_ui")]
+[node name="PresetLoader" type="Node" unique_id=272580906]
+script = ExtResource("1_mhaue")
+
+[node name="GameController" type="Node" parent="." unique_id=417369024 node_paths=PackedStringArray("world_2d", "world_3d", "world_ui")]
 script = ExtResource("1_cs0kd")
 world_2d = NodePath("World2D")
 world_3d = NodePath("World3D")
 world_ui = NodePath("UI")
 
-[node name="World2D" type="Node2D" parent="." unique_id=154800756]
+[node name="World2D" type="Node2D" parent="GameController" unique_id=154800756]
 
-[node name="World3D" type="Node3D" parent="." unique_id=1113175430]
+[node name="World3D" type="Node3D" parent="GameController" unique_id=1113175430]
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=983656864]
+[node name="UI" type="CanvasLayer" parent="GameController" unique_id=983656864]

@@ -53,6 +53,13 @@ func _ready() -> void:
 
 
 #region Virtual Methods
+func _destroy_all_nodes(
+	world : Node,
+	cache : Dictionary
+) -> void:
+	for child : Node in world.get_children():
+		child.queue_free()
+	cache.clear()
 func _change_scene_to_node(
 	node : Node,
 	world : Node,
@@ -86,6 +93,29 @@ func _change_scene_to_node(
 
 
 #region Public Methods (Change)
+func destroy_all_2d_nodes() -> void:
+	_destroy_all_nodes(world_2d, _world_2d_cache)
+func change_2d_scene_to_path(
+	path : String,
+	id : StringName,
+	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE
+) -> Node:
+	return change_2d_scene_to_packed(
+		await BackgroundLoader.request_resource(
+			path,
+			"PackedScene"
+		),
+		id,
+		mount_type
+	)
+func change_2d_scene_to_packed(
+	packed : PackedScene,
+	id : StringName,
+	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE
+) -> Node:
+	return change_2d_scene_to_node(
+		packed.instantiate(), id, mount_type
+	)
 func change_2d_scene_to_node(
 	node : Node2D,
 	id : StringName,
@@ -99,6 +129,30 @@ func change_2d_scene_to_node(
 		mount_type
 	)
 
+
+func destroy_all_3d_nodes() -> void:
+	_destroy_all_nodes(world_3d, _world_3d_cache)
+func change_3d_scene_to_path(
+	path : String,
+	id : StringName,
+	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE
+) -> Node:
+	return change_3d_scene_to_packed(
+		await BackgroundLoader.request_resource(
+			path,
+			"PackedScene"
+		),
+		id,
+		mount_type
+	)
+func change_3d_scene_to_packed(
+	packed : PackedScene,
+	id : StringName,
+	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE
+) -> Node:
+	return change_3d_scene_to_node(
+		packed.instantiate(), id, mount_type
+	)
 func change_3d_scene_to_node(
 	node : Node3D,
 	id : StringName,
@@ -112,6 +166,30 @@ func change_3d_scene_to_node(
 		mount_type
 	)
 
+
+func destroy_all_ui_nodes() -> void:
+	_destroy_all_nodes(world_ui, _world_ui_cache)
+func change_ui_scene_to_path(
+	path : String,
+	id : StringName,
+	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE
+) -> Node:
+	return change_ui_scene_to_packed(
+		await BackgroundLoader.request_resource(
+			path,
+			"PackedScene"
+		),
+		id,
+		mount_type
+	)
+func change_ui_scene_to_packed(
+	packed : PackedScene,
+	id : StringName,
+	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE
+) -> Node:
+	return change_ui_scene_to_node(
+		packed.instantiate(), id, mount_type
+	)
 func change_ui_scene_to_node(
 	node : Control,
 	id : StringName,
