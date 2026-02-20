@@ -16,7 +16,7 @@ var _phantom_camera : PhantomCamera2D
 
 
 #region Virtual Methods
-func _ready() -> void:
+func _init() -> void:
 	monitoring = true
 	monitorable = false
 	collision_layer = 0

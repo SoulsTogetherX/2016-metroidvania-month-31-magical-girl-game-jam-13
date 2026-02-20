@@ -14,7 +14,8 @@ extends Node
 
 #region Virtual Methods
 func _ready() -> void:
-	RoomManager.on_gateway_exit.connect(_on_gateway_exit)
+	pass
+	#RoomManager.on_gateway_exit.connect(_on_gateway_exit)
 #endregion
 
 

@@ -87,7 +87,6 @@ func _create_collider() -> CollisionShape2D:
 	
 	return node
 
-
 func _create_marker() -> GatewayExitMarker2D:
 	var node := GatewayExitMarker2D.new()
 	
