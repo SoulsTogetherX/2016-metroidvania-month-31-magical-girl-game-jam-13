@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://emwk5ctlqi1u" path="res://src/UI/fade_cover/fade_cover.gd" id="1_thogm"]
 
 [node name="FadeCover" type="ColorRect" unique_id=2080670926]
-visible = false
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,3 +12,4 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_thogm")
+duration = 0.1

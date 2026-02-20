@@ -38,13 +38,13 @@ size = Vector2(128, 128)
 script = ExtResource("14_vil43")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjl5p"]
-size = Vector2(3584, 1024)
+size = Vector2(3328, 1024)
 
 [sub_resource type="Resource" id="Resource_r5234"]
 script = ExtResource("14_vil43")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vil43"]
-size = Vector2(10240, 2792)
+size = Vector2(9728, 2792)
 
 [node name="TestScene_1" type="Node2D" unique_id=1298933192]
 script = ExtResource("1_jjl5p")
@@ -57,7 +57,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 145.0"
+text = "FPS: 105.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -100,7 +100,6 @@ modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_iclql")
 
 [node name="Zone1" type="Area2D" parent="." unique_id=893557619]
-visible = false
 position = Vector2(6135, -1393)
 collision_layer = 0
 collision_mask = 4
@@ -117,11 +116,10 @@ tween_on_load = false
 inactive_update_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone1" unique_id=661924388]
-position = Vector2(9, 881)
+position = Vector2(137, 881)
 shape = SubResource("RectangleShape2D_jjl5p")
 
 [node name="Zone2" type="Area2D" parent="." unique_id=722403585]
-visible = false
 position = Vector2(2867, -1393)
 collision_layer = 0
 collision_mask = 4
@@ -146,7 +144,7 @@ property_name = &"follow_target"
 metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone2" unique_id=2039652822]
-position = Vector2(-3635, -27)
+position = Vector2(-3891, -27)
 shape = SubResource("RectangleShape2D_vil43")
 
 [connection signal="direction_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_direction_changed"]

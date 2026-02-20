@@ -37,13 +37,13 @@ size = Vector2(128, 128)
 script = ExtResource("14_3fxrl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ri7j"]
-size = Vector2(2816, 1024)
+size = Vector2(2560, 1024)
 
 [sub_resource type="Resource" id="Resource_hx47o"]
 script = ExtResource("14_3fxrl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fxrl"]
-size = Vector2(9216, 2816)
+size = Vector2(8704, 2816)
 
 [node name="TestScene_2" type="Node2D" unique_id=471352108]
 script = ExtResource("1_3ri7j")
@@ -56,7 +56,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 145.0"
+text = "FPS: 57.0"
 horizontal_alignment = 1
 script = ExtResource("10_frlpf")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -98,7 +98,6 @@ modulate = Color(1, 0, 0, 1)
 texture = ExtResource("9_hx47o")
 
 [node name="Zone1" type="Area2D" parent="." unique_id=544108919]
-visible = false
 position = Vector2(-7023, -1350)
 collision_layer = 0
 collision_mask = 4
@@ -115,11 +114,10 @@ tween_on_load = false
 inactive_update_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone1" unique_id=1927131071]
-position = Vector2(751, 838)
+position = Vector2(623, 838)
 shape = SubResource("RectangleShape2D_3ri7j")
 
 [node name="Zone2" type="Area2D" parent="." unique_id=587140783]
-visible = false
 position = Vector2(-5103, -1393)
 collision_layer = 0
 collision_mask = 4
@@ -142,7 +140,7 @@ property_name = &"follow_target"
 metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone2" unique_id=787378226]
-position = Vector2(4847, -15)
+position = Vector2(5103, -15)
 shape = SubResource("RectangleShape2D_3fxrl")
 
 [connection signal="direction_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_direction_changed"]

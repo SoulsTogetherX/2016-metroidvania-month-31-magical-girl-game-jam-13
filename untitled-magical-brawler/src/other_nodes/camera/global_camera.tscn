@@ -14,9 +14,8 @@ script = ExtResource("1_bgehv")
 
 [node name="PhantomCameraHost" type="Node" parent="." unique_id=733490608]
 unique_name_in_owner = true
-process_mode = 4
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("1_y2co5")
-interpolation_mode = 3
+interpolation_mode = 2
 metadata/_custom_type_script = "uid://bd046eokvcnu2"

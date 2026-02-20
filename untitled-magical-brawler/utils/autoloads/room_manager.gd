@@ -1,14 +1,8 @@
 extends Node
 
 
-#region Signals
-const TRANSTION_ID := &"__transtion__"
-const ROOM_ID := &"__room__"
-#endregion
-
-
 #region Private Variables
-var _fade_transtion := preload("res://src/UI/fade_cover/fade_cover.tscn")
+var _fade_transtion : FadeCoverNode
 var _registered_infos : Array[GatewayInfo]
 #endregion
 
@@ -17,15 +11,17 @@ var _registered_infos : Array[GatewayInfo]
 #region Virtual Methods
 func _ready() -> void:
 	# Purely for testing purposes
-	
 	await get_tree().root.ready
+	_fade_transtion = FadeCoverNode.new()
+	Global.game_controller.change_ui_scene_to_node(
+		_fade_transtion,
+		Constants.TRANSTION_ID
+	)
+	
+	# Purely for testing purposes
 	Global.game_controller.change_2d_scene_to_node(
 		(load("res://src/rooms/test_scenes/test_scene_1.tscn") as PackedScene).instantiate(),
-		ROOM_ID
-	)
-	Global.game_controller.change_ui_scene_to_node(
-		_fade_transtion.instantiate(),
-		TRANSTION_ID
+		Constants.ROOM_ID
 	)
 #endregion
 
@@ -68,9 +64,14 @@ func activate_gateway(id : int) -> void:
 	var scene : PackedScene = await entrance.get_room()
 	var node := scene.instantiate()
 	
+	Global.get_current_room().set_deferred(
+		"process_mode", Node.PROCESS_MODE_DISABLED
+	)
+	
+	await _fade_transtion.toggle_fade(true)
 	CameraZoneManager.request_snap()
 	Global.game_controller.change_2d_scene_to_node(
-		node, ROOM_ID,
+		node, Constants.ROOM_ID,
 		GameController.UNMOUNT_TYPE.DELETE
 	)
 	
@@ -81,4 +82,5 @@ func activate_gateway(id : int) -> void:
 func _connect_gateway(entrance : GatewayInfo) -> void:
 	var exit := _get_exit_by_id(entrance.exit_id)
 	Global.player.global_position = exit.exit_pos
+	_fade_transtion.toggle_fade(false)
 #endregion

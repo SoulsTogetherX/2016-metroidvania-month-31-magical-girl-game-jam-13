@@ -32,7 +32,7 @@ func _ready() -> void:
 		func(_node): pass,
 		0
 	)
-	_phantom_camera.add_to_group(CameraZoneManager.CAMERA_ZONE_GROUP_NAME)
+	_phantom_camera.add_to_group(Constants.CAMERA_ZONE_GROUP_NAME)
 #endregion
 
 
