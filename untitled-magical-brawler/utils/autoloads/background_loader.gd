@@ -39,15 +39,10 @@ func request_resource(
 		return null
 	
 	var task = Task.new(resource_path)
-	task.finished.connect(_remove_task)
+	task.finished.connect(_remove_task.bind(task))
+	_tasks.append(task)
+	
 	return await task.finished
-
-func get_progress(resource_path : StringName) -> float:
-	var progress : Array
-	ResourceLoader.load_threaded_get_status(
-		resource_path, progress
-	)
-	return progress[0]
 #endregion
 
 
