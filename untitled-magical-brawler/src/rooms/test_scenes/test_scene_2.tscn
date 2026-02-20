@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://dmd6qnsjk4gw4"]
 
 [ext_resource type="Script" uid="uid://coaco4ykmwesx" path="res://src/rooms/room_base.gd" id="1_3ri7j"]
-[ext_resource type="TileSet" uid="uid://6nv32bdevd7d" path="res://assets/tilesets/test_tileset/test_tileset.tres" id="1_qh8os"]
+[ext_resource type="TileSet" uid="uid://6nv32bdevd7d" path="res://assets/tilesets/test_tileset/test_tileset_2.tres" id="1_qh8os"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_8p8dm"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/effects/base_effect.gd" id="6_3ri7j"]
 [ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="7_3fxrl"]
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="8_uwh81"]
-[ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="9_hx47o"]
+[ext_resource type="Texture2D" uid="uid://bgoejk1jfk765" path="res://assets/icon.svg" id="9_hx47o"]
 [ext_resource type="Script" uid="uid://bgh34blcwhwjf" path="res://src/other_nodes/room_editor_tools/debug/fps_display.gd" id="10_frlpf"]
 [ext_resource type="Script" uid="uid://cx8vpb8103j00" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="11_21nwj"]
 [ext_resource type="Script" uid="uid://bwbbfuu5x3o8i" path="res://src/other_nodes/room_editor_tools/gateway/resources/gateway_info.gd" id="12_o6pw8"]
@@ -59,7 +59,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 136.0"
+text = "FPS: 141.0"
 horizontal_alignment = 1
 script = ExtResource("10_frlpf")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
