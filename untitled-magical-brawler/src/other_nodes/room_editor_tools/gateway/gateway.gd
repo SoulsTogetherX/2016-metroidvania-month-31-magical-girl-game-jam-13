@@ -28,7 +28,6 @@ const EXIT_MARKER_NAME := "GatewayExit"
 			gateway_info.exit_postion_changed.connect(_update_marker_positon)
 			gateway_info.direction_changed.connect(_update_marker_direction)
 		update_configuration_warnings()
-@export var exit_position : Vector2
 #endregion
 
 
@@ -39,16 +38,15 @@ var _gateway_marker : GatewayExitMarker2D
 
 
 #region Virtual Methods
-func _ready() -> void:
+func _init() -> void:
 	monitoring = true
 	monitorable = false
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
-	
+func _ready() -> void:
 	if !Engine.is_editor_hint():
-		body_entered.connect(_on_player_enter)
-		
 		RoomManager.register_gateway(gateway_info)
+		body_entered.connect(_on_player_enter)
 		return
 	
 	EditorUtilities.confirmed_child(
@@ -103,7 +101,7 @@ func _on_player_enter(body : BaseEntity) -> void:
 	assert(body, "Invaild Entity detected in gateway.")
 	
 	gateway_info.player_offset = body.global_position - gateway_info.exit_pos
-	RoomManager.activate_gateway(gateway_info.to_id)
+	RoomManager.activate_gateway(gateway_info.exit_id)
 
 func _on_marker_positon_changed() -> void:
 	if !gateway_info || !_gateway_marker:

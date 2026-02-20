@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dwb3lsjj6k3ao" path="res://src/entities/player/player.gd" id="1_33dyk"]
 [ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/health_component.gd" id="1_peafg"]
-[ext_resource type="Script" uid="uid://0rqvd0dran72" path="res://src/other_nodes/componets/room_persistent/room_startup_component.gd" id="2_t4js2"]
 [ext_resource type="SpriteFrames" uid="uid://b3bftuwc7kx51" path="res://assets/entities/player/resources/player_sprite_frames.tres" id="3_amj0e"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
 [ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
@@ -310,10 +309,6 @@ script = ExtResource("1_33dyk")
 _visual_pivot = NodePath("VisualPivot")
 _velocity_module = NodePath("VelocityComponent")
 _health_module = NodePath("HealthComponent")
-
-[node name="RoomStartupComponent" type="Node" parent="." unique_id=1249243726 node_paths=PackedStringArray("entity")]
-script = ExtResource("2_t4js2")
-entity = NodePath("..")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=1229646187]
 

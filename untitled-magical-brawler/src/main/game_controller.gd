@@ -21,7 +21,7 @@ enum UNMOUNT_TYPE {
 @export_group("Worlds")
 @export var world_2d : Node2D
 @export var world_3d : Node3D
-@export var world_ui : Control
+@export var world_ui : CanvasLayer
 #endregion
 
 

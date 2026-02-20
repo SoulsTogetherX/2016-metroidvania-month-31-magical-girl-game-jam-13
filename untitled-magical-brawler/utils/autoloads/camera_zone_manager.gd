@@ -2,27 +2,30 @@
 extends Node
 
 
-#region Private Variables
-var _registered : Array[PhantomCamera2D]
-#endregion
+const CAMERA_ZONE_GROUP_NAME := &"__camera_zone__"
 
 
-
-#region Public Methods (Register)
-func clear_registered() -> void:
-	_registered.clear()
-func register_camera(phantom_camera : PhantomCamera2D) -> void:
-	assert(!(phantom_camera in _registered), "Attempted to register an existing camera")
-	_registered.append(phantom_camera)
-#endregion
+var _snap_requested : bool
 
 
-#region Public Methods (Prioirty)
-func clear_prioirties() -> void:
-	for camera : PhantomCamera2D in _registered:
-		camera.priority = 0
-func focus_camera(phantom_camera : PhantomCamera2D) -> void:
-	clear_prioirties()
-	if phantom_camera:
-		phantom_camera.priority = 1
+func request_snap() -> void:
+	_snap_requested = true
+
+#region Public Methods (Camera Focus)
+func unfocus_all() -> void:
+	for cam : PhantomCamera2D in get_tree().get_nodes_in_group(CAMERA_ZONE_GROUP_NAME):
+		cam.priority = 0
+func focus_camera(cam : PhantomCamera2D, snap : bool = false) -> void:
+	unfocus_all()
+	if !cam:
+		return
+	if !snap && !_snap_requested:
+		cam.priority = 1
+		return
+	_snap_requested = false
+	
+	var duration := cam.tween_duration
+	cam.tween_duration = 0.0
+	cam.priority = 1
+	cam.tween_duration = duration
 #endregion

@@ -22,6 +22,8 @@ func _init() -> void:
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
 	
+	body_entered.connect(_on_player_enter.unbind(1))
+func _ready() -> void:
 	EditorUtilities.confirmed_child(
 		self,
 		&"_phantom_camera",
@@ -30,9 +32,7 @@ func _init() -> void:
 		func(_node): pass,
 		0
 	)
-	
-	CameraZoneManager.register_camera(_phantom_camera)
-	body_entered.connect(_on_player_enter.unbind(1))
+	_phantom_camera.add_to_group(CameraZoneManager.CAMERA_ZONE_GROUP_NAME)
 #endregion
 
 

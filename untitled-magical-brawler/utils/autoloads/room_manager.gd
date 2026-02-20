@@ -1,20 +1,15 @@
-
 extends Node
 
 
 #region Signals
-signal on_gateway_exit(gateway : GatewayInfo)
-#endregion
-
-
-#region Signals
+const TRANSTION_ID := &"__transtion__"
 const ROOM_ID := &"__room__"
 #endregion
 
 
 #region Private Variables
-var _registered_gateways : Dictionary[int, GatewayInfo]
-var _current_entrence : GatewayInfo
+var _fade_transtion := preload("res://src/UI/fade_cover/fade_cover.tscn")
+var _registered_infos : Array[GatewayInfo]
 #endregion
 
 
@@ -28,53 +23,62 @@ func _ready() -> void:
 		(load("res://src/rooms/test_scenes/test_scene_1.tscn") as PackedScene).instantiate(),
 		ROOM_ID
 	)
+	Global.game_controller.change_ui_scene_to_node(
+		_fade_transtion.instantiate(),
+		TRANSTION_ID
+	)
 #endregion
 
 
-
 #region Public Methods (Register)
-func clear_registered() -> void:
-	CameraZoneManager.clear_registered()
-	_registered_gateways.clear()
-func register_gateway(gateway : GatewayInfo) -> void:
-	assert(!_registered_gateways.has(
-		gateway.from_id),
-		"Attempted to register an existing door id"
-	)
-	_registered_gateways[gateway.from_id] = gateway
-	_check_if_exiting_from(gateway)
+func clear_gateways() -> void:
+	_registered_infos.clear()
+func register_gateway(info : GatewayInfo) -> void:
+	_registered_infos.append(info)
+#endregion
 
-func _check_if_exiting_from(exit : GatewayInfo) -> void:
-	if _current_entrence && _current_entrence.to_id == exit.from_id:
-		on_gateway_exit.emit(exit)
+
+#region Public Methods (Access Registered)
+func _get_entrance_by_id(id : int) -> GatewayInfo:
+	for info : GatewayInfo in _registered_infos:
+		if info.id == id:
+			return info
+	return null
+func _get_exit_by_id(id : int) -> GatewayInfo:
+	for info : GatewayInfo in _registered_infos:
+		if info.exit_id == id:
+			return info
+	return null
 #endregion
 
 
 #region Public Methods (Activate)
 func activate_gateway(id : int) -> void:
+	var entrance := _get_entrance_by_id(id)
 	assert(
-		_registered_gateways.has(id),
+		entrance,
 		"Attempted entrance into a nonexistent door id"
 	)
-	var gateway : GatewayInfo = _registered_gateways.get(id)
 	assert(
-		!gateway.to_path.is_empty(),
+		!entrance.to_path.is_empty(),
 		 "Attempted entrance into a nonexistent room path"
 	)
+	clear_gateways()
 	
-	var scene : PackedScene = await gateway.get_room()
-	var node = scene.instantiate()
+	var scene : PackedScene = await entrance.get_room()
+	var node := scene.instantiate()
 	
-	clear_registered()
-	var old_room : Node2D = Global.game_controller.change_2d_scene_to_node(
-		node,
-		ROOM_ID,
-		GameController.UNMOUNT_TYPE.NONE
+	CameraZoneManager.request_snap()
+	Global.game_controller.change_2d_scene_to_node(
+		node, ROOM_ID,
+		GameController.UNMOUNT_TYPE.DELETE
 	)
 	
-	old_room.global_position += (
-		_current_entrence.exit_pos - gateway.exit_pos
+	node.ready.connect(
+		_connect_gateway.bind(entrance),
+		CONNECT_ONE_SHOT
 	)
-	
-	_current_entrence = gateway
+func _connect_gateway(entrance : GatewayInfo) -> void:
+	var exit := _get_exit_by_id(entrance.exit_id)
+	Global.player.global_position = exit.exit_pos
 #endregion
