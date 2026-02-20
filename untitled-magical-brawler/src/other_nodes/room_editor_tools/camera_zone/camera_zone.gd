@@ -16,12 +16,14 @@ var _phantom_camera : PhantomCamera2D
 
 
 #region Virtual Methods
-func _ready() -> void:
+func _init() -> void:
 	monitoring = true
 	monitorable = false
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
 	
+	body_entered.connect(_on_player_enter.unbind(1))
+func _ready() -> void:
 	EditorUtilities.confirmed_child(
 		self,
 		&"_phantom_camera",
@@ -30,9 +32,7 @@ func _ready() -> void:
 		func(_node): pass,
 		0
 	)
-	
-	CameraZoneManager.register_camera(_phantom_camera)
-	body_entered.connect(_on_player_enter.unbind(1))
+	_phantom_camera.add_to_group(Constants.CAMERA_ZONE_GROUP_NAME)
 #endregion
 
 

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bu76r6gwkw61j"]
+
+[ext_resource type="Script" uid="uid://cx6ju7g612bk7" path="res://src/other_nodes/camera/global_camera.gd" id="1_bgehv"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_y2co5"]
+
+[node name="GlobalCamera" type="Camera2D" unique_id=1580514438]
+top_level = true
+process_callback = 0
+limit_left = -7680
+limit_top = -5376
+limit_right = 8192
+limit_bottom = 512
+script = ExtResource("1_bgehv")
+
+[node name="PhantomCameraHost" type="Node" parent="." unique_id=733490608]
+unique_name_in_owner = true
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("1_y2co5")
+interpolation_mode = 2
+metadata/_custom_type_script = "uid://bd046eokvcnu2"

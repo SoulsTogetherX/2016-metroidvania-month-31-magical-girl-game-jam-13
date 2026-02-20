@@ -1,4 +1,5 @@
 @tool
+@abstract
 class_name BaseEntity extends Node2D
 
 
@@ -158,6 +159,9 @@ func change_direction(h_flip : bool, v_flip : bool) -> void:
 		-1.0 if h_flip else 1.0,
 		-1.0 if v_flip else 1.0
 	)
+
+@abstract
+func toggle_brain(toggle : bool) -> void
 #endregion
 
 

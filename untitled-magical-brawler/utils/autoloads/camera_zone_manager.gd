@@ -3,35 +3,32 @@ extends Node
 
 
 #region Private Variables
-var _registered : Array[PhantomCamera2D]
-var _snap_camera : bool = true
+var _snap_requested : bool
 #endregion
 
 
-#region Public Methods (Register)
-func clear_registered() -> void:
-	_snap_camera = true
-	_registered.clear()
-func register_camera(phantom_camera : PhantomCamera2D) -> void:
-	assert(!(phantom_camera in _registered), "Attempted to register an existing camera")
-	_registered.append(phantom_camera)
+
+#region Public Methods (Camera Focus)
+func unfocus_all() -> void:
+	for cam : PhantomCamera2D in get_tree().get_nodes_in_group(Constants.CAMERA_ZONE_GROUP_NAME):
+		cam.priority = 0
+func focus_camera(cam : PhantomCamera2D, snap : bool = false) -> void:
+	unfocus_all()
+	if !cam:
+		return
+	if !snap && !_snap_requested:
+		cam.priority = 1
+		return
+	_snap_requested = false
+	
+	var duration := cam.tween_duration
+	cam.tween_duration = 0.0
+	cam.priority = 1
+	cam.tween_duration = duration
 #endregion
 
 
-#region Public Methods (Prioirty)
-func clear_prioirties() -> void:
-	for camera : PhantomCamera2D in _registered:
-		camera.priority = 0
-func focus_camera(phantom_camera : PhantomCamera2D) -> void:
-	clear_prioirties()
-	if phantom_camera:
-		var duration : float
-		
-		if _snap_camera:
-			duration = phantom_camera.tween_resource.duration
-			phantom_camera.tween_resource.duration = 0.0
-		phantom_camera.priority = 1
-		if _snap_camera:
-			phantom_camera.tween_resource.duration = duration
-			_snap_camera = false
+#region Public Methods (Helper)
+func request_snap() -> void:
+	_snap_requested = true
 #endregion

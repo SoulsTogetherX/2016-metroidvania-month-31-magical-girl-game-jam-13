@@ -29,18 +29,18 @@ enum PLAYER_STATES {
 
 #region External Variables
 @export_group("Room")
-@export var from_id : int:
+@export var id : int:
 	set(val):
-		if val == from_id:
+		if val == id:
 			return
-		from_id = val
+		id = val
 		changed.emit()
 		destination_changed.emit()
-@export var to_id : int:
+@export var exit_id : int:
 	set(val):
-		if val == to_id:
+		if val == exit_id:
 			return
-		to_id = val
+		exit_id = val
 		changed.emit()
 		destination_changed.emit()
 @export_file("*.tscn") var to_path : String:

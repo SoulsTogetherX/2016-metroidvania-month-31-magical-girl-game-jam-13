@@ -11,7 +11,7 @@ signal direction_changed
 #region Constants
 const HOLOGRAM_RESOURCE_PATH := "res://assets/entities/player/resources/player_sprite_frames.tres"
 const HOLOGRAM_OFFSET := -224.0
-const HOLOGRAM_MODULATE := Color(0.2, 0.2, 0.8, 0.5)
+const HOLOGRAM_MODULATE := Color(0.7, 0.7, 0.2, 0.8)
 
 const SNAP_RAYCAST_LENGTH := 2000.0
 #endregion
