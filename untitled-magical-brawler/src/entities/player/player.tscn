@@ -567,7 +567,7 @@ animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
 begin = &"punch"
 
 [node name="AbilityTimer" type="Timer" parent="StateMachine/Ability" unique_id=422870052]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="Jump" type="Node" parent="StateMachine" unique_id=365668129 node_paths=PackedStringArray("action_cache_module", "stop_state")]
 script = ExtResource("12_lqdhu")

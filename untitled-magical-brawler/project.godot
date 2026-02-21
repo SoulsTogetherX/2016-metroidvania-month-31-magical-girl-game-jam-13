@@ -28,6 +28,7 @@ SoundManager="*uid://dsiqp2rs1fep5"
 CameraZoneManager="*uid://bp2yrrt1gfn65"
 RoomManager="*uid://bv166q8suutld"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+SaveManager="*uid://bxajorf1s246a"
 
 [display]
 
@@ -47,6 +48,7 @@ folder_colors={
 "res://resources/": "teal",
 "res://src/UI/": "pink",
 "res://src/entities/": "green",
+"res://src/main/": "gray",
 "res://src/other_nodes/": "blue",
 "res://src/rooms/": "purple",
 "res://utils/": "yellow"
