@@ -24,6 +24,7 @@ script = ExtResource("8_uv8eo")
 size = Vector2(128, 128)
 
 [node name="TestScene" type="Node2D" unique_id=1204055905]
+process_mode = 1
 scale = Vector2(0.6, 0.6)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2102837846]
@@ -79,7 +80,7 @@ offset_top = -669.0
 offset_right = -577.0
 offset_bottom = -586.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 145.0"
+text = "FPS: 102.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
