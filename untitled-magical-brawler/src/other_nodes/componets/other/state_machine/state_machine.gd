@@ -43,7 +43,7 @@ func _unhandled_input(input: InputEvent) -> void:
 #region Private Methods (Helper)
 func _change_state(new_state: StateNode) -> void:
 	if _current_state:
-		_current_state.exit_state()
+		_current_state._exit_state()
 		_current_state._force_change.disconnect(_change_state)
 		_current_state._running = false
 	
@@ -58,7 +58,7 @@ func _change_state(new_state: StateNode) -> void:
 	
 	_current_state._force_change.connect(_change_state, CONNECT_DEFERRED)
 	_current_state._running = true
-	_current_state.enter_state()
+	_current_state._enter_state()
 
 func _toggle_processes(toggle : bool) -> void:
 	if disabled:

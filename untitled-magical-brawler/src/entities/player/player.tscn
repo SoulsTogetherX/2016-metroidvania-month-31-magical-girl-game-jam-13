@@ -2,37 +2,45 @@
 
 [ext_resource type="Script" uid="uid://dwb3lsjj6k3ao" path="res://src/entities/player/player.gd" id="1_33dyk"]
 [ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/health_component.gd" id="1_peafg"]
+[ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="3_33dyk"]
 [ext_resource type="SpriteFrames" uid="uid://b3bftuwc7kx51" path="res://assets/entities/player/resources/player_sprite_frames.tres" id="3_amj0e"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
 [ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
 [ext_resource type="Script" uid="uid://bv85cmng6fumu" path="res://src/other_nodes/componets/combat/damage_reaction/invincibility_component.gd" id="5_45xpv"]
 [ext_resource type="Script" uid="uid://c544fknkgmh4w" path="res://src/other_nodes/componets/other/state_machine/force_state.gd" id="5_fjj3i"]
 [ext_resource type="Script" uid="uid://d4m0ixcabd4fv" path="res://src/other_nodes/componets/control/player_input_component.gd" id="5_mjwoq"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/effects/base_effect.gd" id="5_tvulh"]
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="5_uym1e"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="6_2cmg6"]
 [ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
 [ext_resource type="Script" uid="uid://e6u6g1v5xrc0" path="res://src/other_nodes/componets/control/action_cache_component.gd" id="7_p2qdy"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="7_snams"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/velocity/velocity_task_manager.gd" id="8_5qgjf"]
 [ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/jump_task.gd" id="9_0tyfe"]
 [ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/gravity_task.gd" id="9_ogtao"]
-[ext_resource type="Script" uid="uid://4tex7mgshe66" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/entity_idle_state.gd" id="10_3c4mh"]
+[ext_resource type="Script" uid="uid://4tex7mgshe66" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_idle_state.gd" id="10_3c4mh"]
 [ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/slowdown_task.gd" id="10_ogtao"]
 [ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/walk_task.gd" id="11_a31ob"]
-[ext_resource type="Script" uid="uid://co2ga7r6maxo7" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/entity_move_state.gd" id="11_p2qdy"]
-[ext_resource type="Script" uid="uid://dqd1h4huxrtts" path="res://src/other_nodes/componets/other/state_machine/animation/animation_state_machine.gd" id="12_amj0e"]
-[ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/entity_jump_state.gd" id="12_lqdhu"]
-[ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/entity_slowdown_state.gd" id="12_t8d2k"]
+[ext_resource type="Script" uid="uid://co2ga7r6maxo7" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_move_state.gd" id="11_p2qdy"]
+[ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_jump_state.gd" id="12_lqdhu"]
+[ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_slowdown_state.gd" id="12_t8d2k"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
-[ext_resource type="Script" uid="uid://vqmn4degnkv1" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/player_fall_state.gd" id="15_3d0mj"]
-[ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/entity_hurt_state.gd" id="17_fjj3i"]
-[ext_resource type="Script" uid="uid://d26id7i6xpc3r" path="res://src/other_nodes/componets/other/state_machine/standard/states/entity/player_dead_state.gd" id="18_ngh1c"]
+[ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/state_machine.gd" id="15_2cmg6"]
+[ext_resource type="Script" uid="uid://vqmn4degnkv1" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/player_fall_state.gd" id="15_3d0mj"]
+[ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_hurt_state.gd" id="17_fjj3i"]
+[ext_resource type="Script" uid="uid://dk2uca55dbflh" path="res://src/other_nodes/componets/other/state_machine/modules/animation_state_module.gd" id="17_snams"]
+[ext_resource type="Script" uid="uid://d26id7i6xpc3r" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/player_dead_state.gd" id="18_ngh1c"]
+[ext_resource type="Script" uid="uid://sf14nbivbae6" path="res://src/other_nodes/componets/other/state_machine/modules/task_state_module.gd" id="19_snams"]
 [ext_resource type="Script" uid="uid://bo6mjfa68k27j" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/action/flash_task.gd" id="20_3d0mj"]
+[ext_resource type="Script" uid="uid://b8hm5bjcv2jk4" path="res://src/other_nodes/componets/other/state_machine/modules/player_walk_task_state_module.gd" id="21_45rvh"]
+[ext_resource type="Script" uid="uid://boti8u8urrg1q" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/player_ability_state.gd" id="22_f610a"]
+[ext_resource type="Script" uid="uid://buxkxdjhjsym2" path="res://src/other_nodes/componets/other/state_machine/modules/disable_task_state_module.gd" id="25_xm7nl"]
 [ext_resource type="Script" uid="uid://bx6efdmndowkm" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/maintain_direction_task.gd" id="27_33dyk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
-size = Vector2(120, 350)
 
 [sub_resource type="Animation" id="Animation_amj0e"]
 resource_name = "RESET"
+length = 0.3
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -56,6 +64,47 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PunchHitboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_snams"]
+resource_name = "dead"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dead"]
 }
 
 [sub_resource type="Animation" id="Animation_2cmg6"]
@@ -175,6 +224,47 @@ tracks/1/keys = {
 "values": [&"jump"]
 }
 
+[sub_resource type="Animation" id="Animation_45rvh"]
+resource_name = "punch"
+length = 0.275
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"punch"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PunchHitboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.275),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="Animation" id="Animation_tvulh"]
 resource_name = "running"
 length = 0.71428573
@@ -208,15 +298,29 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cmg6"]
 _data = {
 &"RESET": SubResource("Animation_amj0e"),
+&"dead": SubResource("Animation_snams"),
 &"fall": SubResource("Animation_2cmg6"),
 &"hurt": SubResource("Animation_33dyk"),
 &"idle": SubResource("Animation_t4js2"),
 &"jump": SubResource("Animation_4tw7w"),
+&"punch": SubResource("Animation_45rvh"),
 &"running": SubResource("Animation_tvulh")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
+size = Vector2(120, 350)
+
+[sub_resource type="Resource" id="Resource_45rvh"]
+script = ExtResource("6_2cmg6")
+
+[sub_resource type="Resource" id="Resource_xm7nl"]
+script = ExtResource("7_snams")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tw7w"]
+size = Vector2(250, 100)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4js2"]
-size = Vector2(190.5, 399)
+size = Vector2(219.625, 399)
 
 [sub_resource type="GDScript" id="GDScript_5qgjf"]
 script/source = "extends TaskNode
@@ -255,6 +359,10 @@ func task_physics(_delta : float, args : Dictionary) -> bool:
 	act_cache.set_action(
 		&\"jumping\",
 		input.jumping()
+	)
+	act_cache.set_action(
+		&\"ability\",
+		input.activate_ability()
 	)
 	
 	act_cache.set_action(
@@ -312,6 +420,14 @@ _health_module = NodePath("HealthComponent")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=1229646187]
 
+[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=1133366217]
+sprite_frames = ExtResource("3_amj0e")
+animation = &"idle"
+offset = Vector2(0, -224)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=71332508]
+libraries/ = SubResource("AnimationLibrary_2cmg6")
+
 [node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=1143519473 node_paths=PackedStringArray("knockback_module", "health_module", "invincibility_module")]
 position = Vector2(0, -174)
 collision_layer = 0
@@ -325,13 +441,17 @@ shape = SubResource("RectangleShape2D_33dyk")
 faction = 1
 metadata/_custom_type_script = "uid://d4frh4mqr77xo"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=1133366217]
-sprite_frames = ExtResource("3_amj0e")
-animation = &"idle"
-offset = Vector2(0, -224)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=71332508]
-libraries/ = SubResource("AnimationLibrary_2cmg6")
+[node name="PunchHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=2087121274]
+position = Vector2(163, -138)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_33dyk")
+effects = Array[ExtResource("5_tvulh")]([SubResource("Resource_45rvh"), SubResource("Resource_xm7nl")])
+shape = SubResource("RectangleShape2D_4tw7w")
+faction = 1
+disabled = true
+metadata/_custom_type_script = "uid://cxla1cqkag8lu"
 
 [node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=1568380323]
 position = Vector2(0, -198.5)
@@ -376,57 +496,116 @@ script = ExtResource("7_p2qdy")
 update_rate = 0
 metadata/_custom_type_script = "uid://e6u6g1v5xrc0"
 
-[node name="StateMachine" type="Node" parent="." unique_id=479517536 node_paths=PackedStringArray("animation_player", "starting_state")]
-script = ExtResource("12_amj0e")
-animation_player = NodePath("../VisualPivot/Sprite/AnimationPlayer")
+[node name="StateMachine" type="Node" parent="." unique_id=479517536 node_paths=PackedStringArray("starting_state")]
+script = ExtResource("15_2cmg6")
 starting_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://cbsbtae5bl2nj"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=74776973 node_paths=PackedStringArray("action_cache_module", "task", "jump_state", "fall_state", "move_state", "slowdown_state")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=74776973 node_paths=PackedStringArray("action_cache_module", "task", "jump_state", "fall_state", "ability_state", "move_state", "slowdown_state")]
 script = ExtResource("10_3c4mh")
 action_cache_module = NodePath("../../ActionCacheModule")
 task = NodePath("../../TaskManager")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../PlayerFall")
+ability_state = NodePath("../Ability")
 move_state = NodePath("../Running")
 slowdown_state = NodePath("../Slowdown")
-start_animation_name = &"idle"
 
-[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("action_cache_module", "task", "jump_state", "fall_state", "move_state", "stop_state")]
+[node name="Animation" type="Node" parent="StateMachine/Idle" unique_id=769521148 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"idle"
+
+[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("action_cache_module", "velocity_c", "jump_state", "fall_state", "ability_state", "move_state", "stop_state")]
 script = ExtResource("12_t8d2k")
 action_cache_module = NodePath("../../ActionCacheModule")
-task = NodePath("../../TaskManager")
+velocity_c = NodePath("../../VelocityComponent")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../PlayerFall")
+ability_state = NodePath("../Ability")
 move_state = NodePath("../Running")
 stop_state = NodePath("../Idle")
-start_animation_name = &"idle"
 
-[node name="Running" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("action_cache_module", "task", "jump_state", "fall_state", "stop_state")]
+[node name="Animation" type="Node" parent="StateMachine/Slowdown" unique_id=67502184 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"idle"
+
+[node name="Task" type="Node" parent="StateMachine/Slowdown" unique_id=1118527549 node_paths=PackedStringArray("task_manager")]
+script = ExtResource("19_snams")
+task_manager = NodePath("../../../TaskManager")
+tasks = Array[StringName]([&"Slowdown_Task"])
+
+[node name="Running" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("action_cache_module", "jump_state", "ability_state", "fall_state", "stop_state")]
 script = ExtResource("11_p2qdy")
 action_cache_module = NodePath("../../ActionCacheModule")
-task = NodePath("../../TaskManager")
 jump_state = NodePath("../Jump")
+ability_state = NodePath("../Ability")
 fall_state = NodePath("../PlayerFall")
 stop_state = NodePath("../Slowdown")
-start_animation_name = &"running"
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=365668129 node_paths=PackedStringArray("action_cache_module", "task", "stop_state")]
+[node name="Animation" type="Node" parent="StateMachine/Running" unique_id=1789065644 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"running"
+
+[node name="PlayerWalkTask" type="Node" parent="StateMachine/Running" unique_id=112420077 node_paths=PackedStringArray("action_cache_module", "task_manager")]
+script = ExtResource("21_45rvh")
+action_cache_module = NodePath("../../../ActionCacheModule")
+task_manager = NodePath("../../../TaskManager")
+
+[node name="Ability" type="Node" parent="StateMachine" unique_id=1929276400 node_paths=PackedStringArray("action_cache_module", "velocity_c", "end_state", "timer")]
+script = ExtResource("22_f610a")
+action_cache_module = NodePath("../../ActionCacheModule")
+velocity_c = NodePath("../../VelocityComponent")
+end_state = NodePath("../Idle")
+timer = NodePath("AbilityTimer")
+
+[node name="Animation" type="Node" parent="StateMachine/Ability" unique_id=165083475 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"punch"
+
+[node name="AbilityTimer" type="Timer" parent="StateMachine/Ability" unique_id=422870052]
+wait_time = 0.5
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=365668129 node_paths=PackedStringArray("action_cache_module", "stop_state")]
 script = ExtResource("12_lqdhu")
 action_cache_module = NodePath("../../ActionCacheModule")
-task = NodePath("../../TaskManager")
 stop_state = NodePath("../PlayerFall")
-start_animation_name = &"jump"
 
-[node name="PlayerFall" type="Node" parent="StateMachine" unique_id=254368669 node_paths=PackedStringArray("action_cache_module", "task", "jump_state", "land_state", "coyote_timer", "jump_buffer")]
+[node name="Animation" type="Node" parent="StateMachine/Jump" unique_id=445466903 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"jump"
+
+[node name="Task" type="Node" parent="StateMachine/Jump" unique_id=979424954 node_paths=PackedStringArray("task_manager")]
+script = ExtResource("19_snams")
+task_manager = NodePath("../../../TaskManager")
+tasks = Array[StringName]([&"Jump_Task"])
+
+[node name="PlayerWalkTask" type="Node" parent="StateMachine/Jump" unique_id=226066150 node_paths=PackedStringArray("action_cache_module", "task_manager")]
+script = ExtResource("21_45rvh")
+action_cache_module = NodePath("../../../ActionCacheModule")
+task_manager = NodePath("../../../TaskManager")
+
+[node name="PlayerFall" type="Node" parent="StateMachine" unique_id=254368669 node_paths=PackedStringArray("action_cache_module", "jump_state", "land_state", "coyote_timer", "jump_buffer")]
 script = ExtResource("15_3d0mj")
 action_cache_module = NodePath("../../ActionCacheModule")
-task = NodePath("../../TaskManager")
 jump_state = NodePath("../Jump")
 land_state = NodePath("../Idle")
 coyote_timer = NodePath("CoyoteTimer")
 jump_buffer = NodePath("JumpBuffer")
-start_animation_name = &"fall"
+
+[node name="Animation" type="Node" parent="StateMachine/PlayerFall" unique_id=233833514 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"fall"
+
+[node name="PlayerWalkTask" type="Node" parent="StateMachine/PlayerFall" unique_id=66088107 node_paths=PackedStringArray("action_cache_module", "task_manager")]
+script = ExtResource("21_45rvh")
+action_cache_module = NodePath("../../../ActionCacheModule")
+task_manager = NodePath("../../../TaskManager")
 
 [node name="JumpBuffer" type="Timer" parent="StateMachine/PlayerFall" unique_id=1569241911]
 wait_time = 0.2
@@ -441,16 +620,36 @@ script = ExtResource("17_fjj3i")
 task = NodePath("../../TaskManager")
 stop_state = NodePath("../PlayerFall")
 timer = NodePath("HurtDelay")
-start_animation_name = &"hurt"
+
+[node name="Animation" type="Node" parent="StateMachine/Hurt" unique_id=1510715168 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"hurt"
+
+[node name="DisableTask" type="Node" parent="StateMachine/Hurt" unique_id=374291135 node_paths=PackedStringArray("task_manager")]
+script = ExtResource("25_xm7nl")
+task_manager = NodePath("../../../TaskManager")
+tasks = Array[StringName]([&"Maintain_Direction_Task"])
 
 [node name="HurtDelay" type="Timer" parent="StateMachine/Hurt" unique_id=2076375676]
 wait_time = 0.5
 one_shot = true
 
-[node name="Dead" type="Node" parent="StateMachine" unique_id=771187690 node_paths=PackedStringArray("action_cache_module", "task")]
+[node name="Dead" type="Node" parent="StateMachine" unique_id=771187690 node_paths=PackedStringArray("action_cache_module", "animation_player", "velocity_c")]
 script = ExtResource("18_ngh1c")
 action_cache_module = NodePath("../../ActionCacheModule")
-task = NodePath("../../TaskManager")
+animation_player = NodePath("../../VisualPivot/Sprite/AnimationPlayer")
+velocity_c = NodePath("../../VelocityComponent")
+
+[node name="Animation" type="Node" parent="StateMachine/Dead" unique_id=551834951 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("17_snams")
+animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
+begin = &"hurt"
+
+[node name="DisableTask" type="Node" parent="StateMachine/Dead" unique_id=303906307 node_paths=PackedStringArray("task_manager")]
+script = ExtResource("25_xm7nl")
+task_manager = NodePath("../../../TaskManager")
+tasks = Array[StringName]([&"Maintain_Direction_Task"])
 
 [node name="TaskManager" type="Node" parent="." unique_id=1286017632 node_paths=PackedStringArray("velocity_module")]
 unique_name_in_owner = true

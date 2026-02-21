@@ -1,4 +1,4 @@
-extends AnimationStateNode
+extends StateNode
 
 
 #region External Variables
@@ -22,15 +22,9 @@ func _force_end_state() -> void:
 
 #region Public Methods (State Change)
 func enter_state() -> void:
-	task.task_disable(&"Maintain_Direction_Task", true)
 	timer.timeout.connect(_force_end_state)
 	timer.start()
-	
-	#task.task_begin(&"Flash_Task")
 func exit_state() -> void:
-	task.task_disable(&"Maintain_Direction_Task", false)
 	timer.timeout.disconnect(_force_end_state)
 	timer.stop()
-	
-	#task.task_end(&"Flash_Task")
 #endregion
