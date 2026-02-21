@@ -63,7 +63,6 @@ func _load_game_ui() -> void:
 		FadeCoverNode.new(),
 		Constants.TRANSTION_ID
 	)
-	print(1)
 
 func _load_game_room(room_path : String) -> void:
 	var game := Global.game_controller
