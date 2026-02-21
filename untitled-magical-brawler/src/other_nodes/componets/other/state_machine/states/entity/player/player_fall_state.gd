@@ -1,10 +1,9 @@
-extends AnimationStateNode
+extends StateNode
 
 
 #region External Variables
 @export_group("Modules")
 @export var action_cache_module : ActionCacheComponent
-@export var task : VelocityTaskManager
 
 @export_group("States")
 @export var jump_state : StateNode
@@ -41,16 +40,6 @@ func enter_state() -> void:
 	
 	if !action_cache_module.get_state(&"jumped"):
 		coyote_timer.start()
-	
-	task.task_begin(
-		&"Walk_Task",
-		{
-			&"move_dir": action_cache_module.get_state.bind(&"h_movement"),
-			&"on_floor": action_cache_module.is_action.bind(&"on_floor")
-		}
-	)
-func exit_state() -> void:
-	task.task_end(&"Walk_Task")
 #endregion
 
 

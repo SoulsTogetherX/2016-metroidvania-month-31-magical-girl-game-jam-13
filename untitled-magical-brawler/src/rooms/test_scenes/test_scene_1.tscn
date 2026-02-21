@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cepi7l2yq7v70"]
 
-[ext_resource type="TileSet" uid="uid://6nv32bdevd7d" path="res://assets/tilesets/test_tileset/test_tileset.tres" id="1_4icc5"]
-[ext_resource type="Texture2D" uid="uid://duy8co0fugbsu" path="res://assets/icon.svg" id="1_iclql"]
+[ext_resource type="TileSet" uid="uid://6nv32bdevd7d" path="res://assets/tilesets/test_tileset/test_tileset_2.tres" id="1_4icc5"]
+[ext_resource type="Texture2D" uid="uid://bgoejk1jfk765" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="Script" uid="uid://coaco4ykmwesx" path="res://src/rooms/room_base.gd" id="1_jjl5p"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_3ttad"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/effects/base_effect.gd" id="6_nmdk6"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" uid="uid://bgh34blcwhwjf" path="res://src/other_nodes/room_editor_tools/debug/fps_display.gd" id="8_wx32i"]
 [ext_resource type="Script" uid="uid://cx8vpb8103j00" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="11_7yuiy"]
 [ext_resource type="Script" uid="uid://bwbbfuu5x3o8i" path="res://src/other_nodes/room_editor_tools/gateway/resources/gateway_info.gd" id="12_5f1c8"]
+[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="12_vil43"]
 [ext_resource type="Script" uid="uid://c1ojn44nvgt21" path="res://src/other_nodes/room_editor_tools/gateway/helper/gateway_exit_marker.gd" id="13_5f1c8"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_jjl5p"]
+[ext_resource type="Script" uid="uid://csjeqmuvvtkje" path="res://src/rooms/test_scenes/hit_detector.gd" id="13_lxi1k"]
 [ext_resource type="Script" uid="uid://dukqn0hyev23g" path="res://src/other_nodes/room_editor_tools/camera_zone/camera_zone.gd" id="14_lxi1k"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_vil43"]
 [ext_resource type="Script" uid="uid://cobb1ipksi4ot" path="res://src/other_nodes/componets/other/assign_player.gd" id="15_jjl5p"]
@@ -34,6 +36,9 @@ script = ExtResource("8_uv8eo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ttad"]
 size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxi1k"]
+size = Vector2(500, 500)
 
 [sub_resource type="Resource" id="Resource_lxi1k"]
 script = ExtResource("14_vil43")
@@ -60,7 +65,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 144.0"
+text = "FPS: 85.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -101,6 +106,25 @@ metadata/_custom_type_script = "uid://cxla1cqkag8lu"
 [node name="Icon" type="Sprite2D" parent="DamageTester" unique_id=1672272971]
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_iclql")
+
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=11227414]
+position = Vector2(-3840, -256)
+collision_layer = 0
+collision_mask = 12
+monitorable = false
+script = ExtResource("12_vil43")
+shape = SubResource("RectangleShape2D_lxi1k")
+metadata/_custom_type_script = "uid://d4frh4mqr77xo"
+
+[node name="Icon" type="Sprite2D" parent="HurtboxComponent" unique_id=562061348 node_paths=PackedStringArray("flash_timer")]
+modulate = Color(0, 0.6383165, 0.3674244, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_iclql")
+script = ExtResource("13_lxi1k")
+flash_timer = NodePath("../FlashTimer")
+
+[node name="FlashTimer" type="Timer" parent="HurtboxComponent" unique_id=783585381]
+wait_time = 0.1
 
 [node name="Zone1" type="Area2D" parent="." unique_id=893557619]
 visible = false
@@ -154,3 +178,4 @@ shape = SubResource("RectangleShape2D_vil43")
 
 [connection signal="direction_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_direction_changed"]
 [connection signal="position_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_positon_changed"]
+[connection signal="on_hit" from="HurtboxComponent" to="HurtboxComponent/Icon" method="_on_hurtbox_hit"]

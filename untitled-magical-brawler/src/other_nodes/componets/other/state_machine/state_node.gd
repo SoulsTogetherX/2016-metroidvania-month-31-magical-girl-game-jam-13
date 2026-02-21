@@ -10,8 +10,17 @@ signal _force_change(state : StateNode)
 
 #region Private Variables
 var _running : bool
+var _modules : Array[StateModule]
 #endregion
 
+
+
+#region Virtual Methods
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_READY:
+			_register_modules()
+#endregion
 
 
 #region Public Virtual Methods
@@ -21,6 +30,24 @@ func process_physics(_delta: float) -> StateNode:
 	return null
 func process_input(_input: InputEvent) -> StateNode:
 	return null
+#endregion
+
+
+#region Private Methods
+func _enter_state() -> void:
+	for module : StateModule in _modules:
+		module.enter_state()
+	enter_state()
+func _exit_state() -> void:
+	exit_state()
+	for module : StateModule in _modules:
+		module.exit_state()
+
+func _register_modules() -> void:
+	_modules.clear()
+	for child : Node in get_children():
+		if child is StateModule:
+			_modules.push_back(child)
 #endregion
 
 
@@ -43,4 +70,6 @@ func force_change(state : StateNode) -> void:
 #region Public Methods (Accesser)
 func is_running() -> bool:
 	return _running
+func get_all_modules() -> Array[StateModule]:
+	return _modules
 #endregion

@@ -1,4 +1,4 @@
-extends AnimationStateNode
+extends StateNode
 
 
 #region External Variables
@@ -9,6 +9,7 @@ extends AnimationStateNode
 @export_group("States")
 @export var jump_state : StateNode
 @export var fall_state : StateNode
+@export var ability_state : StateNode
 @export var move_state : StateNode
 @export var slowdown_state : StateNode
 #endregion
@@ -33,6 +34,8 @@ func _check_state() -> StateNode:
 		return jump_state
 	if !action_cache_module.is_action(&"on_floor"):
 		return fall_state
+	if action_cache_module.is_action_started(&"ability"):
+		return ability_state
 	if action_cache_module.is_action(&"moving"):
 		return move_state
 	if !task.velocity_module.attempting_idle():
