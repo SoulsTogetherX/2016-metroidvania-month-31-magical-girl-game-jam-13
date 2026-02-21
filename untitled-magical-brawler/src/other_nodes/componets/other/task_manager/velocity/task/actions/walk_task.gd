@@ -70,7 +70,7 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 func task_begin(args : Dictionary) -> bool:
 	if get_velocity(args) == null:
 		return false
-	if !(get_argument(args, &"move_dir", Callable()) is float):
+	if !(get_argument(args, &"move_dir", Callable()) is int):
 		return false
 	if !(get_argument(args, &"on_floor", Callable()) is bool):
 		return false

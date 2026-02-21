@@ -7,14 +7,14 @@
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
 [ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
 [ext_resource type="Script" uid="uid://bv85cmng6fumu" path="res://src/other_nodes/componets/combat/damage_reaction/invincibility_component.gd" id="5_45xpv"]
-[ext_resource type="Script" uid="uid://c544fknkgmh4w" path="res://src/other_nodes/componets/other/state_machine/force_state.gd" id="5_fjj3i"]
+[ext_resource type="Script" uid="uid://c544fknkgmh4w" path="res://src/other_nodes/componets/other/state_machine/base/extra/force_state.gd" id="5_fjj3i"]
 [ext_resource type="Script" uid="uid://d4m0ixcabd4fv" path="res://src/other_nodes/componets/control/player_input_component.gd" id="5_mjwoq"]
-[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://resources/combat/effects/base_effect.gd" id="5_tvulh"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://assets/resources/combat/effects/base_effect.gd" id="5_tvulh"]
 [ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="5_uym1e"]
-[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="6_2cmg6"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://assets/resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="6_2cmg6"]
 [ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
 [ext_resource type="Script" uid="uid://e6u6g1v5xrc0" path="res://src/other_nodes/componets/control/action_cache_component.gd" id="7_p2qdy"]
-[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="7_snams"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://assets/resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="7_snams"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/velocity/velocity_task_manager.gd" id="8_5qgjf"]
 [ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/velocity/task/actions/jump_task.gd" id="9_0tyfe"]
 [ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/gravity_task.gd" id="9_ogtao"]
@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_jump_state.gd" id="12_lqdhu"]
 [ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_slowdown_state.gd" id="12_t8d2k"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/velocity/task/velocity/velocity_apply_task.gd" id="13_a31ob"]
-[ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/state_machine.gd" id="15_2cmg6"]
+[ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/base/state_machine.gd" id="15_2cmg6"]
 [ext_resource type="Script" uid="uid://vqmn4degnkv1" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/player_fall_state.gd" id="15_3d0mj"]
 [ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/states/entity/general/entity_hurt_state.gd" id="17_fjj3i"]
 [ext_resource type="Script" uid="uid://dk2uca55dbflh" path="res://src/other_nodes/componets/other/state_machine/modules/animation_state_module.gd" id="17_snams"]
@@ -348,21 +348,39 @@ func task_physics(_delta : float, args : Dictionary) -> bool:
 	)
 	
 	act_cache.update_actions_cache()
-	act_cache.set_state(
-		&\"h_movement\",
-		input.horizontal_moving()
+	var move_dir := int(input.right_press()) - int(input.left_press())
+	
+#region Base Controls
+	act_cache.set_action(
+		&\"player_left\",
+		input.left_press()
 	)
+	act_cache.set_action(
+		&\"player_right\",
+		input.right_press()
+	)
+	act_cache.set_action(
+		&\"player_up\",
+		input.up_press()
+	)
+	act_cache.set_action(
+		&\"player_down\",
+		input.down_press()
+	)
+	act_cache.set_action(
+		&\"ability_use\",
+		input.activate_ability()
+	)
+	act_cache.set_action(
+		&\"ability_select\",
+		input.activate_ability_select()
+	)
+#endregion
+	
+#region Base States
 	act_cache.set_action(
 		&\"moving\",
-		!is_zero_approx(input.horizontal_moving())
-	)
-	act_cache.set_action(
-		&\"jumping\",
-		input.jumping()
-	)
-	act_cache.set_action(
-		&\"ability\",
-		input.activate_ability()
+		move_dir != 0
 	)
 	
 	act_cache.set_action(
@@ -377,6 +395,14 @@ func task_physics(_delta : float, args : Dictionary) -> bool:
 		&\"on_wall\",
 		act.is_on_wall()
 	)
+#endregion
+	
+#region Helper States
+	act_cache.set_state(
+		&\"h_direction\",
+		move_dir
+	)
+#endregion
 	
 	return true
 #endregion
@@ -501,10 +527,10 @@ script = ExtResource("15_2cmg6")
 starting_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://cbsbtae5bl2nj"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=74776973 node_paths=PackedStringArray("action_cache_module", "task", "jump_state", "fall_state", "ability_state", "move_state", "slowdown_state")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=74776973 node_paths=PackedStringArray("action_cache_module", "velocity_c", "jump_state", "fall_state", "ability_state", "move_state", "slowdown_state")]
 script = ExtResource("10_3c4mh")
 action_cache_module = NodePath("../../ActionCacheModule")
-task = NodePath("../../TaskManager")
+velocity_c = NodePath("../../VelocityComponent")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../PlayerFall")
 ability_state = NodePath("../Ability")

@@ -45,7 +45,7 @@ func enter_state() -> void:
 
 #region Private Methods (Helper)
 func _check_state() -> StateNode:
-	if action_cache_module.is_action_started(&"jumping"):
+	if action_cache_module.is_action_started(&"player_up"):
 		if (
 			!action_cache_module.get_state(&"has_jumped") &&
 			coyote_timer &&

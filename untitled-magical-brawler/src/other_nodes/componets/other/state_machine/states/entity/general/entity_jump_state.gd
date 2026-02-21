@@ -13,7 +13,7 @@ extends StateNode
 
 #region Public Virtual Methods
 func process_physics(_delta: float) -> StateNode:
-	if !action_cache_module.is_action(&"jumping"):
+	if !action_cache_module.is_action(&"player_up"):
 		return stop_state
 	if action_cache_module.is_action_started(&"on_floor"):
 		return stop_state

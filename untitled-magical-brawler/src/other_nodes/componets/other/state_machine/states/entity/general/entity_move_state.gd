@@ -28,11 +28,11 @@ func state_passthrough() -> StateNode:
 
 #region Private Methods (Helper)
 func _check_state() -> StateNode:
-	if action_cache_module.is_action_started(&"jumping"):
+	if action_cache_module.is_action_started(&"player_up"):
 		return jump_state
 	if !action_cache_module.is_action(&"on_floor"):
 		return fall_state
-	if action_cache_module.is_action_started(&"ability"):
+	if action_cache_module.is_action_started(&"player_ability"):
 		return ability_state
 	if !action_cache_module.is_action(&"moving"):
 		return stop_state

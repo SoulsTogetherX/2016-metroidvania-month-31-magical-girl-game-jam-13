@@ -5,10 +5,6 @@ class_name VelocityComponent extends Node
 #region Signals 
 signal velocity_changed_immediate
 signal velocity_changed
-
-signal direction_changed
-signal horizontal_direction_changed
-signal vertical_direction_changed
 #endregion
 
 
@@ -26,18 +22,7 @@ var velocity : Vector2:
 
 #region Private Variables 
 var _velocity_changed_queue : bool = false
-var _direction : Vector2i = Vector2i.RIGHT:
-	set(val):
-		if val == _direction:
-			return
-		var old_direction := _direction
-		_direction = val
-		
-		direction_changed.emit()
-		if val.x != old_direction.x:
-			horizontal_direction_changed.emit()
-		if val.y != old_direction.y:
-			vertical_direction_changed.emit()
+var _direction : Vector2i = Vector2i.RIGHT
 #endregion
 
 
@@ -88,7 +73,7 @@ func apply_velocity(
 	body : CharacterBody2D,
 	update : bool = true
 ) -> void:
-	if !body:
+	if body == null:
 		return
 	
 	body.velocity = velocity
