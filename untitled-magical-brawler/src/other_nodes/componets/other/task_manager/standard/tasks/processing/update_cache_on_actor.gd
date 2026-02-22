@@ -72,7 +72,7 @@ func task_physics(_delta : float) -> bool:
 	
 
 #region Public Methods (Action States)
-func task_passthrough(args : Dictionary) -> bool:
+func task_passthrough() -> bool:
 	_actor = args.get(&"actor", actor)
 	if _actor == null:
 		return false

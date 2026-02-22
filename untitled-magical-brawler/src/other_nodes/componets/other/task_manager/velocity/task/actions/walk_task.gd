@@ -65,9 +65,7 @@ func task_physics(delta : float) -> bool:
 	
 
 #region Public Methods (Action States)
-func task_passthrough(args : Dictionary) -> bool:
-	velocity_module = get_velocity(args)
-	
+func task_passthrough() -> bool:
 	_move_dir = args.get("move_dir", Callable())
 	if !_move_dir.is_valid() || !(_move_dir.call() is int):
 		return false

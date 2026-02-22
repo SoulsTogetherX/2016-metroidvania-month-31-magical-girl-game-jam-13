@@ -35,9 +35,7 @@ func task_physics(delta : float) -> bool:
 
 
 #region Public Methods (Action States)
-func task_passthrough(args : Dictionary) -> bool:
-	velocity_module = get_velocity(args)
-	
+func task_passthrough() -> bool:
 	_slowdown_flat = args.get(&"slowdown_flat", slowdown_flat)
 	_slowdown_weight = args.get(&"slowdown_weight", slowdown_weight)
 	return true
