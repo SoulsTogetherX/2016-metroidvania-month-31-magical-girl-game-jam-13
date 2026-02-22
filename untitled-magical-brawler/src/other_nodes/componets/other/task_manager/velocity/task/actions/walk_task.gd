@@ -17,47 +17,45 @@ extends VelocityTaskNode
 #endregion
 
 
+#region Private Variables
+var _move_dir : Callable
+var _on_floor : Callable
+
+var _ground_acceleration : float
+var _ground_max_speed : float
+var _ground_weight : float
+
+var _air_acceleration : float
+var _air_max_speed : float
+var _air_weight : float
+
+var _slowdown_weight : float
+#endregion
+
+
 
 #region Public Virtual Methods
-func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity_module := get_velocity(args)
-	var move_dir : float = get_argument(
-		args, &"move_dir", Callable()
-	)
-	var on_floor : bool = get_argument(
-		args, &"on_floor", Callable()
-	)
+func task_physics(delta : float) -> bool:
+	var move_dir : float = _move_dir.call()
+	var on_floor : bool = _on_floor.call()
 	
 	var acceleration : float = move_dir
 	var speed : float = move_dir
 	var weight : float = 0.0
 
 	if on_floor:
-		acceleration *= get_argument(
-			args, &"ground_acceleration", ground_acceleration
-		)
-		speed *= get_argument(
-			args, &"ground_max_speed", ground_max_speed
-		)
-		weight = get_argument(
-			args, &"ground_weight", ground_weight
-		)
+		acceleration *= _ground_acceleration
+		speed *= _ground_max_speed
+		weight = _ground_weight
 	else:
-		acceleration *= get_argument(
-			args, &"air_acceleration", air_acceleration
-		)
-		speed *= get_argument(
-			args, &"air_max_speed", air_max_speed
-		)
-		weight = get_argument(
-			args, &"air_weight", air_weight
-		)
+		acceleration *= _air_acceleration
+		speed *= _air_max_speed
+		weight = _air_weight
 	
 	if signf(speed) != signf(velocity_module.get_velocity().x):
-		var s_weight : float = get_argument(
-			args, &"slowdown_weight", slowdown_weight
+		velocity_module.lerp_hor_change(
+			0.0, _slowdown_weight, delta
 		)
-		velocity_module.lerp_hor_change(0.0, s_weight, delta)
 	
 	velocity_module.flat_hor_change(acceleration, delta)
 	velocity_module.lerp_hor_change(speed, weight, delta)
@@ -67,23 +65,25 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 	
 
 #region Public Methods (Action States)
-func task_begin(args : Dictionary) -> bool:
-	if get_velocity(args) == null:
+func task_passthrough(args : Dictionary) -> bool:
+	velocity_module = get_velocity(args)
+	
+	_move_dir = args.get("move_dir", Callable())
+	if !_move_dir.is_valid() || !(_move_dir.call() is int):
 		return false
-	if !(get_argument(args, &"move_dir", Callable()) is int):
-		return false
-	if !(get_argument(args, &"on_floor", Callable()) is bool):
+	_on_floor = args.get("on_floor", Callable())
+	if !_on_floor.is_valid() || !(_on_floor.call() is bool):
 		return false
 	
-	return true
-func end_begin(args : Dictionary) -> bool:
-	if get_velocity(args) == null:
-		return false
-	if !(get_argument(args, &"move_dir", Callable()) is float):
-		return false
-	if !(get_argument(args, &"on_floor", Callable()) is bool):
-		return false
+	_ground_acceleration = args.get("ground_acceleration", ground_acceleration)
+	_ground_max_speed = args.get("ground_max_speed", ground_max_speed)
+	_ground_weight = args.get("ground_weight", ground_weight)
 	
+	_air_acceleration = args.get("air_acceleration", air_acceleration)
+	_air_max_speed = args.get("air_max_speed", air_max_speed)
+	_air_weight = args.get("air_weight", air_weight)
+
+	_slowdown_weight = args.get("slowdown_weight", slowdown_weight)
 	return true
 #endregion
 

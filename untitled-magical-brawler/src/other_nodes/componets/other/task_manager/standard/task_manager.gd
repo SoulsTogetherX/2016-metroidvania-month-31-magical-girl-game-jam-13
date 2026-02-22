@@ -118,11 +118,13 @@ func task_begin(
 	
 	var node : TaskNode = _stored_task.get(task_id)
 	var task : Task = _create_task(node, given_args)
-	if !task.task_begin():
+	if !task.task_passthrough():
 		return
 	
 	node._running = true
 	task.force_stop.connect(task_end.bind(task_id))
+	
+	task.task_begin()
 	node.task_began.emit()
 	_running_tasks.set(task_id, task)
 	
@@ -154,12 +156,13 @@ func tap_state(
 			return
 		task_end(task_id)
 	
-	var state : TaskNode = _stored_task.get(task_id)
+	var node : TaskNode = _stored_task.get(task_id)
 	var total_args := get_args().merged(extra_args)
 	
-	if !state.task_begin(total_args):
+	if !node.task_passthrough(total_args):
 		return
-	state.task_end(total_args)
+	node.task_begin()
+	node.task_end()
 
 func task_disable(task_id : StringName, toggle : bool) -> void:
 	if !state_exists(task_id):
@@ -221,18 +224,20 @@ class Task:
 	func task_process(delta : float) -> bool:
 		if _node.disabled:
 			return true
-		return _node.task_process(delta, _arg_cache)
+		return _node.task_process(delta)
 	func task_physics(delta : float) -> bool:
 		if _node.disabled:
 			return true
-		return _node.task_physics(delta, _arg_cache)
+		return _node.task_physics(delta)
 	#endregion
 
 	#region Public Methods (Action States)
-	func task_begin() -> bool:
-		return _node.task_begin(_arg_cache)
+	func task_passthrough() -> bool:
+		return _node.task_passthrough(_arg_cache)
+	func task_begin() -> void:
+		_node.task_begin()
 	func task_end() -> void:
-		_node.task_end(_arg_cache)
+		_node.task_end()
 		_node.task_finished.emit()
 	#endregion
 

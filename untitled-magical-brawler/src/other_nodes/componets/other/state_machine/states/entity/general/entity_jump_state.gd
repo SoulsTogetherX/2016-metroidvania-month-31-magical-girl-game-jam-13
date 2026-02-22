@@ -1,10 +1,7 @@
-extends StateNode
+extends StateActionNode
 
 
 #region External Variables
-@export_group("Modules")
-@export var action_cache_module : ActionCacheComponent
-
 @export_group("States")
 @export var stop_state : StateNode
 #endregion
@@ -12,16 +9,18 @@ extends StateNode
 
 
 #region Public Virtual Methods
-func process_physics(_delta: float) -> StateNode:
-	if !action_cache_module.is_action(&"player_up"):
-		return stop_state
-	if action_cache_module.is_action_started(&"on_floor"):
-		return stop_state
-	return null
+func action_start(action_name : StringName) -> void:
+	match action_name:
+		&"on_floor":
+			force_change(stop_state)
+func action_finished(action_name : StringName) -> void:
+	match action_name:
+		&"player_up":
+			force_change(stop_state)
 #endregion
 
 
 #region Public Methods (State Change)
 func enter_state() -> void:
-	action_cache_module.set_state(&"has_jumped", true)
+	action_cache.set_value(&"has_jumped", true)
 #endregion

@@ -13,7 +13,6 @@ config_version=5
 config/name="Untitled Magical Brawler"
 run/main_scene="uid://cns7a2pmlsie7"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-run/max_fps=60
 config/icon="res://assets/icon.svg"
 
 [audio]

@@ -5,6 +5,9 @@ class_name VelocityComponent extends Node
 #region Signals 
 signal velocity_changed_immediate
 signal velocity_changed
+
+signal hor_velocity_changed
+signal ver_velocity_changed
 #endregion
 
 
@@ -21,7 +24,9 @@ var velocity : Vector2:
 
 
 #region Private Variables 
+var _old_velocity : Vector2
 var _velocity_changed_queue : bool = false
+
 var _direction : Vector2i = Vector2i.RIGHT
 #endregion
 
@@ -31,11 +36,17 @@ func _queue_velocity_changed() -> void:
 	if _velocity_changed_queue:
 		return
 	_velocity_changed_queue = true
+	_old_velocity = velocity
 	
 	call_deferred(&"_emit_velocity_changed")
 func _emit_velocity_changed() -> void:
 	_velocity_changed_queue = false
 	velocity_changed.emit()
+	
+	if _old_velocity.x != velocity.x:
+		hor_velocity_changed.emit()
+	if _old_velocity.y != velocity.y:
+		ver_velocity_changed.emit()
 #endregion
 
 
@@ -48,12 +59,11 @@ func get_normalized() -> Vector2:
 func set_velocity(vec : Vector2) -> void:
 	if vec == velocity:
 		return
+	_queue_velocity_changed()
 	velocity = vec
 	
 	overwrite_direction(velocity)
-	
 	velocity_changed_immediate.emit()
-	_queue_velocity_changed()
 
 func overwrite_direction(dir : Vector2i) -> void:
 	if omnidirectional:

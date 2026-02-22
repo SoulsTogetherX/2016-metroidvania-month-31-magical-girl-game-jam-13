@@ -7,18 +7,19 @@ extends VelocityTaskNode
 #endregion
 
 
+#region Private Variables
+var _on_floor : Callable
+
+var _gravity_module : GravityComponent
+#endregion
+
+
 
 #region Public Virtual Methods
-func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity_module := get_velocity(args)
-	var grav : GravityComponent = get_argument(
-		args, &"gravity", gravity_module
-	)
-	var on_floor : bool = get_argument(
-		args, &"on_floor", false
-	)
+func task_physics(delta : float) -> bool:
+	var on_floor : bool = _on_floor.call()
 	
-	grav.handle_gravity(
+	_gravity_module.handle_gravity(
 		velocity_module, !on_floor, delta
 	)
 	
@@ -27,12 +28,14 @@ func task_physics(delta : float, args : Dictionary) -> bool:
 
 
 #region Public Methods (Action States)
-func task_begin(args : Dictionary) -> bool:
-	if get_velocity(args) == null:
+func task_passthrough(args : Dictionary) -> bool:
+	velocity_module = get_velocity(args)
+	
+	_gravity_module = args.get(&"gravity", gravity_module)
+	if _gravity_module == null:
 		return false
-	if !(get_argument(args, &"gravity", gravity_module) is GravityComponent):
-		return false
-	if !(get_argument(args, &"on_floor", Callable()) is bool):
+	_on_floor = args.get(&"on_floor", Callable())
+	if !_on_floor.is_valid() || !(_on_floor.call() is bool):
 		return false
 	
 	return true

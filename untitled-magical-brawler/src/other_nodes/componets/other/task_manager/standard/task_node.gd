@@ -32,17 +32,19 @@ var _running : bool
 
 
 #region Public Virtual Methods
-func task_process(_delta : float, _args : Dictionary) -> bool:
+func task_process(_delta : float) -> bool:
 	return true
-func task_physics(_delta : float, _args : Dictionary) -> bool:
+func task_physics(_delta : float) -> bool:
 	return true
 #endregion
 
 
 #region Public Methods (Action States)
-func task_begin(_args : Dictionary) -> bool:
+func task_passthrough(_args : Dictionary) -> bool:
 	return true
-func task_end(_args : Dictionary) -> void:
+func task_begin() -> void:
+	return
+func task_end() -> void:
 	pass
 #endregion
 

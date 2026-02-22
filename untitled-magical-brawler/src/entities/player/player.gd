@@ -47,10 +47,4 @@ func _task_settup() -> void:
 			&"actor": self
 		}
 	)
-	_task.task_begin(
-		&"Maintain_Direction_Task",
-		{
-			&"flip_h": _velocity_module.facing_left
-		}
-	)
 #endregion
