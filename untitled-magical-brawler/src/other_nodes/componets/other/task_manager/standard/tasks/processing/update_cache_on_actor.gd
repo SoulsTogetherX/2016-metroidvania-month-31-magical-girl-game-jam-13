@@ -20,6 +20,12 @@ var _actor : CharacterBody2D
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
+
 #region Public Virtual Methods
 func task_physics(_delta : float) -> void:
 	var move_dir := int(_input_access.right_press()) - int(_input_access.left_press())

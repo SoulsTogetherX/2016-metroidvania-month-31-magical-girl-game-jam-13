@@ -13,6 +13,12 @@ var _actor : CharacterBody2D
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
+
 #region Public Virtual Methods
 func task_physics(_delta : float) -> void:
 	if velocity_module.velocity.is_zero_approx():

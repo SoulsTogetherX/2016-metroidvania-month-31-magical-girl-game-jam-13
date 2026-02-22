@@ -113,6 +113,13 @@ func _task_cache_remove(node : TaskNode) -> void:
 	
 	node._running = false
 
+func _update_process_mode(node : TaskNode) -> void:
+	_task_cache_remove(node)
+	_task_cache_add(node)
+#endregion
+
+
+#region Private Methods (Signal Connection)
 func _toggle_force_start(node : TaskNode, toggle : bool) -> void:
 	if toggle:
 		if !node._force_start.is_connected(task_begin):
@@ -134,6 +141,13 @@ func _toggle_disable(node : TaskNode, toggle : bool) -> void:
 		return
 	if node._disable_task.is_connected(task_disable):
 		node._disable_task.disconnect(task_disable)
+func _toggle_process_update(node : TaskNode, toggle : bool) -> void:
+	if toggle:
+		if !node._update_process.is_connected(_update_process_mode):
+			node._update_process.connect(_update_process_mode)
+		return
+	if node._update_process.is_connected(_update_process_mode):
+		node._update_process.disconnect(_update_process_mode)
 #endregion
 
 

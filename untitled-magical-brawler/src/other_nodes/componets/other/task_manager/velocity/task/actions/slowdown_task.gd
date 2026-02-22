@@ -15,6 +15,12 @@ var _slowdown_weight : float
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
+
 #region Public Virtual Methods
 func task_physics(delta : float) -> void:
 	var dir : float = velocity_module.get_hor_direction()
