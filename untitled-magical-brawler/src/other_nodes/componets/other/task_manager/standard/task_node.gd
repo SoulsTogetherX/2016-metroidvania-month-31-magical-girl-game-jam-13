@@ -47,13 +47,13 @@ var _running : bool
 
 
 #region Public Virtual Methods
-func task_process(_delta : float) -> bool:
-	return true
-func task_physics(_delta : float) -> bool:
-	return true
+func task_process(_delta : float) -> void:
+	return
+func task_physics(_delta : float) -> void:
+	return
 @warning_ignore("unused_parameter")
-func task_input(event: InputEvent) -> bool:
-	return true
+func task_input(event: InputEvent) -> void:
+	return
 #endregion
 
 
@@ -74,8 +74,10 @@ func force_end() -> void:
 	_force_stop.emit(task_id())
 
 func set_disabled(val : bool) -> void:
+	if val == disabled:
+		return
 	disabled = val
-	_force_stop.emit(task_id(), val)
+	_disable_task.emit(task_id(), val)
 #endregion
 
 

@@ -16,14 +16,12 @@ var _gravity_module : GravityComponent
 
 
 #region Public Virtual Methods
-func task_physics(delta : float) -> bool:
+func task_physics(delta : float) -> void:
 	var on_floor : bool = _on_floor.call()
 	
 	_gravity_module.handle_gravity(
 		velocity_module, !on_floor, delta
 	)
-	
-	return true
 #endregion
 
 
