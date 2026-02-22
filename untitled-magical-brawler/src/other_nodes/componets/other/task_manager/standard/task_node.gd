@@ -15,7 +15,8 @@ signal _force_start(
 	id : StringName, given_args : Dictionary, overwrite : bool
 )
 signal _force_stop(id : StringName)
-signal _disable_task(id : StringName, togle : bool)
+signal _disable_task(id : StringName, toggle : bool)
+signal _update_process(id : StringName)
 #endregion
 
 
@@ -29,9 +30,24 @@ signal _disable_task(id : StringName, togle : bool)
 @export var auto_start_args : Dictionary
 
 @export_group("Proccessing")
-@export var need_process : bool = false
-@export var need_physics : bool = false
-@export var need_input : bool = false
+@export var need_process : bool = false:
+	set(val):
+		if val == need_process:
+			return
+		need_process = val
+		_update_process_mode()
+@export var need_physics : bool = false:
+	set(val):
+		if val == need_physics:
+			return
+		need_physics = val
+		_update_process_mode()
+@export var need_input : bool = false:
+	set(val):
+		if val == need_input:
+			return
+		need_input = val
+		_update_process_mode()
 #endregion
 
 
@@ -42,18 +58,26 @@ var args : Dictionary
 
 #region Private Variables
 var _running : bool
+
+var _process_mode_queued : bool
+#endregion
+
+
+#region Private Methods
+func _update_process_mode() -> void:
+	_update_process.emit(self)
+	_process_mode_queued = false
 #endregion
 
 
 
 #region Public Virtual Methods
-func task_process(_delta : float) -> bool:
-	return true
-func task_physics(_delta : float) -> bool:
-	return true
-@warning_ignore("unused_parameter")
-func task_input(event: InputEvent) -> bool:
-	return true
+func task_process(_delta : float) -> void:
+	return
+func task_physics(_delta : float) -> void:
+	return
+func task_input(_event: InputEvent) -> void:
+	return
 #endregion
 
 
@@ -74,8 +98,15 @@ func force_end() -> void:
 	_force_stop.emit(task_id())
 
 func set_disabled(val : bool) -> void:
+	if val == disabled:
+		return
 	disabled = val
-	_force_stop.emit(task_id(), val)
+	_disable_task.emit(task_id(), val)
+func queue_process_update() -> void:
+	if _process_mode_queued:
+		return
+	_process_mode_queued = true
+	_update_process_mode.call_deferred()
 #endregion
 
 

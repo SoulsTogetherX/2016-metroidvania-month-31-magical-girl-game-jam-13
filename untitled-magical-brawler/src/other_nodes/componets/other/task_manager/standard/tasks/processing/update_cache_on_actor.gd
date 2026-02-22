@@ -20,11 +20,17 @@ var _actor : CharacterBody2D
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
+
 #region Public Virtual Methods
-func task_physics(_delta : float) -> bool:
+func task_physics(_delta : float) -> void:
 	var move_dir := int(_input_access.right_press()) - int(_input_access.left_press())
 	
-#region Base Controls
+	# Base Controls
 	_action_cache.set_action(
 		&"player_left", _input_access.left_press()
 	)
@@ -43,9 +49,18 @@ func task_physics(_delta : float) -> bool:
 	_action_cache.set_action(
 		&"ability_select", _input_access.activate_ability_select()
 	)
+	_action_cache.set_action(
+		&"player_down", _input_access.down_press()
+	)
+	_action_cache.set_action(
+		&"ability_use", _input_access.activate_ability()
+	)
+	_action_cache.set_action(
+		&"ability_select", _input_access.activate_ability_select()
+	)
 #endregion
 	
-#region Base States
+	# Base States
 	_action_cache.set_action(
 		&"moving", move_dir != 0
 	)
@@ -59,15 +74,11 @@ func task_physics(_delta : float) -> bool:
 	_action_cache.set_action(
 		&"on_wall", _actor.is_on_wall()
 	)
-#endregion
 	
-#region Helper States
+	# Helper States
 	action_cache.set_value(
 		&"h_direction", move_dir
 	)
-#endregion
-	
-	return true
 #endregion
 	
 

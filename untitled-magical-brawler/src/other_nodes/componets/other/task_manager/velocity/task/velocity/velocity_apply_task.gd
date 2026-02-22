@@ -13,11 +13,23 @@ var _actor : CharacterBody2D
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
+
 #region Public Virtual Methods
-func task_physics(_delta : float) -> bool:
-	velocity_module.apply_velocity(_actor)
+func task_physics(_delta : float) -> void:
+	if velocity_module.velocity.is_zero_approx():
+		set_disabled(true)
+		velocity_module.velocity_changed.connect(
+			set_disabled.bind(false),
+			CONNECT_ONE_SHOT
+		)
+		return
 	
-	return true
+	velocity_module.apply_velocity(_actor)
 #endregion
 	
 

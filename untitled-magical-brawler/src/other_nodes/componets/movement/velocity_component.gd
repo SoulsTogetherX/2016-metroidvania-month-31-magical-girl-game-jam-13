@@ -85,8 +85,6 @@ func apply_velocity(
 ) -> void:
 	if body == null:
 		return
-	if velocity.is_zero_approx():
-		return
 	
 	body.velocity = velocity
 	body.move_and_slide()

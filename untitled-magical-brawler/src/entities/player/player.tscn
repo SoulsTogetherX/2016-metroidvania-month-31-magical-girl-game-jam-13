@@ -31,7 +31,6 @@
 [ext_resource type="Script" uid="uid://sf14nbivbae6" path="res://src/other_nodes/componets/other/state_machine/modules/task_state_module.gd" id="19_snams"]
 [ext_resource type="Script" uid="uid://b8hm5bjcv2jk4" path="res://src/other_nodes/componets/other/state_machine/modules/player_walk_task_state_module.gd" id="21_45rvh"]
 [ext_resource type="Script" uid="uid://boti8u8urrg1q" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/player_ability_state.gd" id="22_f610a"]
-[ext_resource type="Script" uid="uid://buxkxdjhjsym2" path="res://src/other_nodes/componets/other/state_machine/modules/disable_task_state_module.gd" id="23_snams"]
 [ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/standard/tasks/processing/update_cache_on_actor.gd" id="33_45rvh"]
 
 [sub_resource type="Animation" id="Animation_amj0e"]
@@ -398,7 +397,6 @@ script = ExtResource("6_iw6ud")
 metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
 
 [node name="ActionCacheModule" type="Node" parent="." unique_id=1515441628]
-unique_name_in_owner = true
 script = ExtResource("7_p2qdy")
 metadata/_custom_type_script = "uid://e6u6g1v5xrc0"
 
@@ -422,11 +420,6 @@ script = ExtResource("17_snams")
 animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
 begin = &"idle"
 
-[node name="DisableTask" type="Node" parent="StateMachine/Idle" unique_id=255852714 node_paths=PackedStringArray("task_manager")]
-script = ExtResource("23_snams")
-task_manager = NodePath("../../../TaskManager")
-tasks = Array[StringName]([&"Gravity_Task"])
-
 [node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("velocity_module", "jump_state", "fall_state", "move_state", "stop_state", "action_cache")]
 script = ExtResource("12_t8d2k")
 velocity_module = NodePath("../../VelocityComponent")
@@ -445,11 +438,6 @@ begin = &"idle"
 script = ExtResource("19_snams")
 task_manager = NodePath("../../../TaskManager")
 tasks = Array[StringName]([&"Slowdown_Task"])
-
-[node name="DisableTask" type="Node" parent="StateMachine/Slowdown" unique_id=1201267152 node_paths=PackedStringArray("task_manager")]
-script = ExtResource("23_snams")
-task_manager = NodePath("../../../TaskManager")
-tasks = Array[StringName]([&"Gravity_Task"])
 
 [node name="Running" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("jump_state", "fall_state", "stop_state", "action_cache")]
 script = ExtResource("11_p2qdy")
@@ -580,8 +568,9 @@ need_physics = true
 script = ExtResource("11_a31ob")
 need_physics = true
 
-[node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("gravity_module")]
+[node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("action_cache", "gravity_module")]
 script = ExtResource("9_ogtao")
+action_cache = NodePath("../../ActionCacheModule")
 gravity_module = NodePath("../../GravityComponent")
 need_physics = true
 
