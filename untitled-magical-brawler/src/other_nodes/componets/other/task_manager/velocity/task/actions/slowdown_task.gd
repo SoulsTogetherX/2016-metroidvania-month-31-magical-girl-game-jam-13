@@ -15,8 +15,14 @@ var _slowdown_weight : float
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
+
 #region Public Virtual Methods
-func task_physics(delta : float) -> bool:
+func task_physics(delta : float) -> void:
 	var dir : float = velocity_module.get_hor_direction()
 	
 	velocity_module.velocity.x = Utilities.dampf(
@@ -28,9 +34,8 @@ func task_physics(delta : float) -> bool:
 	
 	if velocity_module.velocity.x > 0:
 		velocity_module.min_hor_velocity(0.0)
-		return true
+		return
 	velocity_module.max_hor_velocity(0.0)
-	return true
 #endregion
 
 

@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://pe70we2oe3xe"]
+
+[ext_resource type="Script" uid="uid://du23l04aecl0c" path="res://src/UI/pause_menu/pause_menu.gd" id="1_dvare"]
+[ext_resource type="Script" uid="uid://qyynh24u37dl" path="res://addons/FreeControl/src/CustomClasses/SizeController/MaxSizeContainer.gd" id="1_rs85n"]
+[ext_resource type="Texture2D" uid="uid://bgn37sxodxqd6" path="res://assets/UI/UI_background_prototype.png" id="3_81gm5"]
+[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="3_va7ec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81gm5"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MaxSizeContainer" type="Container" unique_id=961009455]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_dvare")
+max_size = Vector2(400, 300)
+metadata/_custom_type_script = "uid://qyynh24u37dl"
+
+[node name="BackgroundImage" type="NinePatchRect" parent="." unique_id=1755546458]
+layout_mode = 2
+texture = ExtResource("3_81gm5")
+patch_margin_left = 22
+patch_margin_top = 22
+patch_margin_right = 22
+patch_margin_bottom = 22
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=274270264]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 22
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=352844931]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1599144429]
+modulate = Color(0.12156863, 0.10980392, 0.08235294, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 52
+text = "Paused"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="MaxSizeContainer" type="Container" parent="MarginContainer/VBoxContainer" unique_id=1805793133]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("1_rs85n")
+max_size = Vector2(250, -1)
+metadata/_custom_type_script = "uid://qyynh24u37dl"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer" unique_id=1582199546]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="ResumeGameBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=267373742]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_va7ec")
+background = SubResource("StyleBoxFlat_81gm5")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/ResumeGameBtn" unique_id=1910388344]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/ResumeGameBtn/Margin" unique_id=541170948]
+layout_mode = 2
+text = "Resume Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=1437245593]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_va7ec")
+background = SubResource("StyleBoxFlat_81gm5")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/MainMenuBtn" unique_id=1826007627]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/MainMenuBtn/Margin" unique_id=1593911032]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitGameBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=1642249134]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_va7ec")
+background = SubResource("StyleBoxFlat_81gm5")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/QuitGameBtn" unique_id=1431092132]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/QuitGameBtn/Margin" unique_id=169896878]
+layout_mode = 2
+text = "Quit Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/ResumeGameBtn" to="." method="_on_resume_game_btn_pressed"]
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/QuitGameBtn" to="." method="_on_quit_game_btn_pressed"]

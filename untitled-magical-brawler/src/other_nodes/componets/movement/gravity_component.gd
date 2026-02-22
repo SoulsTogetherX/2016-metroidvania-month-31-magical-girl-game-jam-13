@@ -9,11 +9,6 @@ class_name GravityComponent extends Node
 #endregion
 
 
-#region Private Variables
-var _is_falling : bool = false
-#endregion
-
-
 
 #region Static Methods (Helper)
 static func get_trajectory_impulse(
@@ -76,23 +71,14 @@ static func get_offset(
 #region Public Methods (Helper)
 func handle_gravity(
 	velocity : VelocityComponent,
-	in_air : bool,
 	delta: float
 ) -> void:
-	if in_air:
-		velocity.flat_ver_change(gravity, delta)
-		
-		if velocity.attempting_fall() && velocity.get_velocity().y > gravity_max_speed:
-			velocity.lerp_ver_change(
-				gravity_max_speed,
-				gravity_weight,
-				delta
-			)
-	_is_falling = velocity.attempting_fall() && in_air
-#endregion
-
-
-#region Public Methods (Check)
-func is_falling() -> bool:
-	return _is_falling
+	velocity.flat_ver_change(gravity, delta)
+	
+	if velocity.attempting_fall() && velocity.get_velocity().y > gravity_max_speed:
+		velocity.lerp_ver_change(
+			gravity_max_speed,
+			gravity_weight,
+			delta
+		)
 #endregion

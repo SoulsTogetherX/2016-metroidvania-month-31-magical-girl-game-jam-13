@@ -3,7 +3,6 @@ extends BaseEntity
 
 
 #region OnReady Variables
-@onready var _action_cache_module: ActionCacheComponent = %ActionCacheModule
 @onready var _task: VelocityTaskManager = %TaskManager
 #endregion
 
@@ -35,12 +34,7 @@ func toggle_brain(toggle : bool = true) -> void:
 
 #region Private Methods
 func _task_settup() -> void:
-	_task.task_begin(
-		&"Gravity_Task",
-		{
-			&"on_floor": _action_cache_module.is_action.bind(&"on_floor")
-		}
-	)
+	_task.task_begin(&"Gravity_Task")
 	_task.task_begin(
 		&"Velocity_Apply_Task",
 		{
