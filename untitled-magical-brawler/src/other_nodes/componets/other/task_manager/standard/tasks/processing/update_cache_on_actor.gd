@@ -49,6 +49,16 @@ func task_physics(_delta : float) -> void:
 	_action_cache.set_action(
 		&"ability_select", _input_access.activate_ability_select()
 	)
+	_action_cache.set_action(
+		&"player_down", _input_access.down_press()
+	)
+	_action_cache.set_action(
+		&"ability_use", _input_access.activate_ability()
+	)
+	_action_cache.set_action(
+		&"ability_select", _input_access.activate_ability_select()
+	)
+#endregion
 	
 	# Base States
 	_action_cache.set_action(

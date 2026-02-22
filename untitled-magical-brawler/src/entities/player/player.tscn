@@ -456,6 +456,11 @@ script = ExtResource("21_45rvh")
 action_cache_module = NodePath("../../../ActionCacheModule")
 task_manager = NodePath("../../../TaskManager")
 
+[node name="DisableTask" type="Node" parent="StateMachine/Running" unique_id=1969962462 node_paths=PackedStringArray("task_manager")]
+script = ExtResource("23_snams")
+task_manager = NodePath("../../../TaskManager")
+tasks = Array[StringName]([&"Gravity_Task"])
+
 [node name="Ability" type="Node" parent="StateMachine" unique_id=1929276400 node_paths=PackedStringArray("action_cache_module", "velocity_c", "end_state", "timer")]
 script = ExtResource("22_f610a")
 action_cache_module = NodePath("../../ActionCacheModule")
