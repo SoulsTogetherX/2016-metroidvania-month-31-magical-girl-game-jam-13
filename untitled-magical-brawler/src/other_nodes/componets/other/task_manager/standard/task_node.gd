@@ -10,18 +10,33 @@ signal task_finished
 #endregion
 
 
-#region Private Signals
+#region Public Signals
 signal _force_start(
 	id : StringName, given_args : Dictionary, overwrite : bool
 )
-signal _force_end
+signal _force_stop(id : StringName)
+signal _disable_task(id : StringName, togle : bool)
 #endregion
 
 
 #region External Variables
-@export var disabled : bool
+@export_group("Settings")
+@export var disabled : bool:
+	set = set_disabled
+
+@export_group("Auto Start")
 @export var auto_start : bool
 @export var auto_start_args : Dictionary
+
+@export_group("Proccessing")
+@export var need_process : bool = false
+@export var need_physics : bool = false
+@export var need_input : bool = false
+#endregion
+
+
+#region External Variables
+var args : Dictionary
 #endregion
 
 
@@ -32,18 +47,35 @@ var _running : bool
 
 
 #region Public Virtual Methods
-func task_process(_delta : float, _args : Dictionary) -> bool:
+func task_process(_delta : float) -> bool:
 	return true
-func task_physics(_delta : float, _args : Dictionary) -> bool:
+func task_physics(_delta : float) -> bool:
+	return true
+@warning_ignore("unused_parameter")
+func task_input(event: InputEvent) -> bool:
 	return true
 #endregion
 
 
 #region Public Methods (Action States)
-func task_begin(_args : Dictionary) -> bool:
+func task_passthrough() -> bool:
 	return true
-func task_end(_args : Dictionary) -> void:
+func task_begin() -> void:
+	return
+func task_end() -> void:
 	pass
+#endregion
+
+
+#region Public Methods (Helper)
+func force_start(given_args : Dictionary, overwrite : bool) -> void:
+	_force_start.emit(task_id(), given_args, overwrite)
+func force_end() -> void:
+	_force_stop.emit(task_id())
+
+func set_disabled(val : bool) -> void:
+	disabled = val
+	_force_stop.emit(task_id(), val)
 #endregion
 
 
@@ -61,45 +93,7 @@ func task_id() -> StringName
 #endregion
 
 
-#region Public Methods (Force State)
-func force_start_task(
-	given_args : Dictionary = {}, overwrite : bool = false
-) -> void:
-	_force_start.emit(task_id(), given_args, overwrite)
-func force_end_task() -> void:
-	_force_end.emit()
-#endregion
-
-
 #region Public Methods (Helper)
-func get_argument(
-	args : Dictionary,
-	arg : StringName,
-	default : Variant = null
-) -> Variant:
-	var val : Variant = args.get(arg, default)
-	if val is Callable:
-		if !val.is_valid():
-			push_error("No '%s' found" % arg)
-			return null
-		return val.call()
-	if val == null:
-		push_error("No '%s' found" % arg)
-	return val
-func get_callable(
-	args : Dictionary,
-	arg : StringName,
-	call_args : Array[Variant] = []
-) -> Variant:
-	var val : Variant = args.get(arg, Callable())
-	if !(val is Callable):
-		push_error("No '%s' found" % arg)
-		return null
-	if !val.is_valid():
-		push_error("No '%s' found" % arg)
-		return null
-	return val.callv(call_args)
-
 func get_task_manager() -> TaskManager:
 	var manager : TaskManager = get_parent()
 	if !manager:

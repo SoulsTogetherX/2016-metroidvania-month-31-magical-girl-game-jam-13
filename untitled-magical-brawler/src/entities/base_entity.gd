@@ -1,6 +1,6 @@
 @tool
 @abstract
-class_name BaseEntity extends Node2D
+class_name BaseEntity extends CharacterBody2D
 
 
 #region Constant
@@ -177,7 +177,7 @@ func has_health() -> bool:
 func get_velocity_component() -> VelocityComponent:
 	return _velocity_module
 
-func get_velocity() -> Vector2:
+func get_entity_velocity() -> Vector2:
 	if !_velocity_module:
 		return Vector2.ZERO
 	

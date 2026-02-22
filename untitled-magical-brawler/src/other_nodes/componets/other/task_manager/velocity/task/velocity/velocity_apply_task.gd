@@ -7,24 +7,24 @@ extends VelocityTaskNode
 #endregion
 
 
+#region Private Variables
+var _actor : CharacterBody2D
+#endregion
+
+
 
 #region Public Virtual Methods
-func task_physics(_delta : float, args : Dictionary) -> bool:
-	var velocity_module := get_velocity(args)
-	var act : CharacterBody2D = get_argument(
-		args, &"actor", actor
-	)
+func task_physics(_delta : float) -> bool:
+	velocity_module.apply_velocity(_actor)
 	
-	velocity_module.apply_velocity(act)
 	return true
 #endregion
 	
 
 #region Public Methods (Action States)
-func task_begin(args : Dictionary) -> bool:
-	if get_velocity(args) == null:
-		return false
-	if !(get_argument(args, &"actor", actor) is CharacterBody2D):
+func task_passthrough() -> bool:
+	_actor = args.get(&"actor", actor)
+	if _actor == null:
 		return false
 	
 	return true

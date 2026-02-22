@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu76r6gwkw61j"]
 
 [ext_resource type="Script" uid="uid://cx6ju7g612bk7" path="res://src/other_nodes/camera/global_camera.gd" id="1_bgehv"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_y2co5"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/panel/updater/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_y2co5"]
 
 [node name="GlobalCamera" type="Camera2D" unique_id=1580514438]
 top_level = true

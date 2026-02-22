@@ -1,11 +1,11 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://b3bftuwc7kx51"]
 
-[ext_resource type="Texture2D" uid="uid://dnfi0jvi3q1n3" path="res://assets/entities/player/spritesheets/Death_Sheet.png" id="1_drn7s"]
-[ext_resource type="Texture2D" uid="uid://b77ku185rskey" path="res://assets/entities/player/spritesheets/Hurt Sheet.png" id="1_m5pgj"]
-[ext_resource type="Texture2D" uid="uid://dyvr3wxrjvtk2" path="res://assets/entities/player/spritesheets/Idle Sheet.png" id="2_yg0vm"]
-[ext_resource type="Texture2D" uid="uid://cldkn12ish8oc" path="res://assets/entities/player/spritesheets/Jump Sheet.png" id="3_drn7s"]
-[ext_resource type="Texture2D" uid="uid://nrbuynnqrckc" path="res://assets/entities/player/spritesheets/Running Sheet.png" id="4_ogcc1"]
-[ext_resource type="Texture2D" uid="uid://cnj1u33sdklhk" path="res://assets/entities/player/spritesheets/Punch_Sheet.png" id="5_ogcc1"]
+[ext_resource type="Texture2D" uid="uid://c4opt8v0siiuy" path="res://assets/entities/player/spritesheets/Death_Sheet.png" id="1_drn7s"]
+[ext_resource type="Texture2D" uid="uid://g78ocrbh08p" path="res://assets/entities/player/spritesheets/Hurt Sheet.png" id="1_m5pgj"]
+[ext_resource type="Texture2D" uid="uid://dnym7i2mrc0ed" path="res://assets/entities/player/spritesheets/Idle Sheet.png" id="2_yg0vm"]
+[ext_resource type="Texture2D" uid="uid://v5cw5bj1li2o" path="res://assets/entities/player/spritesheets/Jump Sheet.png" id="3_drn7s"]
+[ext_resource type="Texture2D" uid="uid://ch1c30h8h6m2b" path="res://assets/entities/player/spritesheets/Running Sheet.png" id="4_ogcc1"]
+[ext_resource type="Texture2D" uid="uid://c0gigg57fulvg" path="res://assets/entities/player/spritesheets/Punch_Sheet.png" id="5_ogcc1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lq70k"]
 atlas = ExtResource("1_drn7s")

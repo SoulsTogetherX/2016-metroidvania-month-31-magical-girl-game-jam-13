@@ -12,51 +12,49 @@ extends VelocityTaskNode
 #endregion
 
 
+#region Private Variables
+var _jump_offset : Vector2
+var _jump_stopper_weight : float
+var _replace_mask : int
+
+var _gravity_module : GravityComponent
+#endregion
+
+
 
 #region Public Methods (Action States)
-func task_begin(args : Dictionary) -> bool:
-	var velocity_module := get_velocity(args)
-	if velocity_module == null:
+func task_passthrough() -> bool:
+	_gravity_module = args.get(&"gravity", gravity_module)
+	if _gravity_module == null:
 		return false
 	
-	var grav : GravityComponent = get_argument(
-		args, &"gravity", gravity_module
-	)
-	if grav == null:
-		return false
+	_jump_offset = args.get(&"jump_offset", jump_offset)
+	_jump_stopper_weight = args.get(&"jump_stopper_weight", jump_stopper_weight)
+	_replace_mask = args.get(&"replace_mask", replace_mask)
 	
-	var offset : Vector2 = get_argument(
-		args, &"jump_offset", jump_offset
-	)
-	var mask : int = get_argument(
-		args, &"replace_mask", replace_mask
-	)
+	return true
+
+func task_begin() -> void:
 	var impluse := GravityComponent.get_required_trajectory_impulse(
-		grav.gravity,
-		offset
+		_gravity_module.gravity, _jump_offset
 	)
 	
 	## Replace Y
-	if (mask & 1):
+	if (_replace_mask & 1):
 		velocity_module.velocity.y = impluse.y
 	else:
 		velocity_module.velocity.y += impluse.y
 	
 	## Replace X
-	if (mask & 2):
+	if (_replace_mask & 2):
 		velocity_module.velocity.x = impluse.x
 	else:
 		velocity_module.velocity.x += impluse.x
-	
-	return true
-func task_end(args : Dictionary) -> void:
-	var velocity_module := get_velocity(args)
-	var stopper : float = get_argument(
-		args, &"jump_stopper_weight", jump_stopper_weight
-	)
-	
+func task_end() -> void:
 	if !velocity_module.attempting_fall():
-		velocity_module.lerp_ver_change(0.0, stopper, 1.0)
+		velocity_module.lerp_ver_change(
+			0.0, _jump_stopper_weight, 1.0
+		)
 #endregion
 
 

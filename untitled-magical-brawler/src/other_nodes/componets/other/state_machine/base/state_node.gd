@@ -8,6 +8,14 @@ signal _force_change(state : StateNode)
 #endregion
 
 
+#region External Variables
+@export_group("Proccessing")
+@export var need_process : bool = false
+@export var need_physics : bool = false
+@export var need_input : bool = false
+#endregion
+
+
 #region Private Variables
 var _running : bool
 var _modules : Array[StateModule]

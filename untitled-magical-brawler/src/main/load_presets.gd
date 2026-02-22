@@ -52,6 +52,12 @@ func _load_game_objects() -> void:
 	game.change_2d_scene_to_node(
 		Global.player, Constants.PLAYER_ID
 	)
+	
+	# Stress-Testing performance
+	#for i : int in range(100):
+	#	game.change_2d_scene_to_node(
+	#		load(PLAYER_PACKED).instantiate(), Constants.PLAYER_ID + str(i)
+	#	)
 	game.change_2d_scene_to_node(
 		Global.camera, Constants.CAMERA_ID
 	)

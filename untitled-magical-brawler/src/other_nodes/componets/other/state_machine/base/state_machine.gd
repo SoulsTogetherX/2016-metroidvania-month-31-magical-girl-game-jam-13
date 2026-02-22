@@ -48,6 +48,7 @@ func _change_state(new_state: StateNode) -> void:
 		_current_state._running = false
 	
 	if !new_state:
+		_sync_processing_to_state(null)
 		clear_state()
 		return
 	
@@ -56,9 +57,19 @@ func _change_state(new_state: StateNode) -> void:
 		_current_state = check_state
 		check_state = check_state.state_passthrough()
 	
+	_sync_processing_to_state(_current_state)
 	_current_state._force_change.connect(_change_state, CONNECT_DEFERRED)
 	_current_state._running = true
 	_current_state._enter_state()
+func _sync_processing_to_state(state: StateNode) -> void:
+	if state == null:
+		set_process(false)
+		set_physics_process(false)
+		set_process_unhandled_input(false)
+		return
+	set_process(state.need_process)
+	set_physics_process(state.need_physics)
+	set_process_unhandled_input(state.need_input)
 
 func _toggle_processes(toggle : bool) -> void:
 	if disabled:

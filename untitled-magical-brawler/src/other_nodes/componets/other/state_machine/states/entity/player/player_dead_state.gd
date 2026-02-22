@@ -1,31 +1,27 @@
-extends StateNode
+extends StateActionNode
 
 
 #region External Variables
 @export_group("Modules")
-@export var action_cache_module : ActionCacheComponent
 @export var animation_player : AnimationPlayer
-@export var velocity_c : VelocityComponent
-#endregion
-
-
-#region External Variables
-var _animation_check : bool = false
+@export var velocity_module : VelocityComponent
+@export var h_direction_module : HDirectionComponent
 #endregion
 
 
 
 #region Public Virtual Methods
-func process_physics(_delta: float) -> StateNode:
-	if action_cache_module.is_action_started(&"on_floor") && _animation_check:
-		velocity_c.velocity = Vector2.ZERO
-		animation_player.play(&"dead")
-		_animation_check = false
-	return null
+func action_start(action_name : StringName) -> void:
+	match action_name:
+		&"on_floor":
+			velocity_module.velocity = Vector2.ZERO
+			animation_player.play(&"dead")
 #endregion
 
 
 #region Public Methods (State Change)
 func enter_state() -> void:
-	_animation_check = true
+	h_direction_module.disable = true
+func exit_state() -> void:
+	h_direction_module.disable = false
 #endregion
