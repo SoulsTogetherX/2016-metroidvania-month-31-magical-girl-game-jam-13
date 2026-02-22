@@ -27,7 +27,7 @@ const FONT_WIDTH := Constants.DEBUG_FONT_WIDTH
 
 
 @export_group("Other")
-@export var follow : BaseEntityManager:
+@export var follow : BaseEntity:
 	set(val):
 		if val == follow:
 			return
@@ -73,7 +73,7 @@ func _physics_process(_delta: float) -> void:
 
 #region External Variables
 func _reposition_to_follow() -> void:
-	global_position = follow_offset + follow.get_positon()
+	global_position = follow_offset + follow.global_position
 	global_position.x -= size.x * 0.5
 func _reposition_orign() -> void:
 	global_position = Vector2.ZERO

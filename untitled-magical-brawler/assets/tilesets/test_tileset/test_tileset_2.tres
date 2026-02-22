@@ -1,21 +1,16 @@
-[gd_resource type="TileSet" format=3 uid="uid://b36q3j5p4frh0"]
+[gd_resource type="TileSet" format=3 uid="uid://6nv32bdevd7d"]
 
-[ext_resource type="Texture2D" uid="uid://bvnxqausbyy44" path="res://assets/tilesets/test_tileset/test_tileset.png" id="1_6a8k8"]
+[ext_resource type="Texture2D" uid="uid://bcxo8dmspa34v" path="res://assets/tilesets/test_tileset/test_tileset_2.png" id="1_wd5vr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f38qi"]
-texture = ExtResource("1_6a8k8")
-margins = Vector2i(82, 36)
-texture_region_size = Vector2i(225, 225)
-1:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
+texture = ExtResource("1_wd5vr")
+texture_region_size = Vector2i(256, 256)
+use_texture_padding = false
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-112.5, -112.5, 112.5, -112.5, 112.5, 112.5, -112.5, 112.5)
 
 [resource]
-tile_size = Vector2i(225, 225)
-sources/0 = SubResource("TileSetAtlasSource_f38qi")
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_f38qi")

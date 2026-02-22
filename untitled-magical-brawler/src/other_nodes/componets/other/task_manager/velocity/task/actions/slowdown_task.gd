@@ -8,38 +8,44 @@ extends VelocityTaskNode
 #endregion
 
 
+#region Private Variables
+var _slowdown_flat : float
+var _slowdown_weight : float
+#endregion
+
+
+
+#region Virtual Methods
+func _ready() -> void:
+	need_physics = true
+#endregion
+
 
 #region Public Virtual Methods
-func task_physics(delta : float, args : Dictionary) -> bool:
-	var velocity_module := get_velocity(args)
+func task_physics(delta : float) -> void:
 	var dir : float = velocity_module.get_hor_direction()
-	var flat : float = get_argument(
-		args, &"slowdown_flat", slowdown_flat
-	)
-	var weight : float = get_argument(
-		args, &"slowdown_weight", slowdown_weight
-	)
 	
 	velocity_module.velocity.x = Utilities.dampf(
-		velocity_module.get_velocity().x - (flat * dir * delta),
-		0.0,
-		weight,
-		delta
+		velocity_module.get_velocity().x - (
+			_slowdown_flat * dir * delta
+		),
+		0.0, _slowdown_weight, delta
 	)
 	
 	if velocity_module.velocity.x > 0:
 		velocity_module.min_hor_velocity(0.0)
-		return true
+		return
 	velocity_module.max_hor_velocity(0.0)
-	return true
 #endregion
 
 
 #region Public Methods (Action States)
-func task_begin(args : Dictionary) -> bool:
-	return get_velocity(args) != null
-func task_end(args : Dictionary) -> void:
-	get_velocity(args).velocity.x = 0.0
+func task_passthrough() -> bool:
+	_slowdown_flat = args.get(&"slowdown_flat", slowdown_flat)
+	_slowdown_weight = args.get(&"slowdown_weight", slowdown_weight)
+	return true
+func task_end() -> void:
+	velocity_module.velocity.x = 0.0
 #endregion
 
 
