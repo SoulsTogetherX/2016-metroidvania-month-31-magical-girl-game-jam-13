@@ -43,6 +43,16 @@ func task_physics(_delta : float) -> void:
 	_action_cache.set_action(
 		&"player_down", _input_access.down_press()
 	)
+	
+	# Special Controls
+	_action_cache.set_action(
+		&"player_jump", _input_access.jump_press()
+	)
+	_action_cache.set_action(
+		&"player_attack", _input_access.attack_press()
+	)
+	
+	# Ability Controls
 	_action_cache.set_action(
 		&"ability_use", _input_access.activate_ability()
 	)

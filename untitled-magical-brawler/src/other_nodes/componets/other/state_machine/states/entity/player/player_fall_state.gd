@@ -24,7 +24,7 @@ func _ready() -> void:
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> void:
 	match action_name:
-		&"player_up":
+		&"player_jump":
 			if (
 				!action_cache.get_value(&"has_jumped") &&
 				coyote_timer &&

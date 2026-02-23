@@ -123,28 +123,28 @@ func _update_process_mode(node : TaskNode) -> void:
 func _toggle_force_start(node : TaskNode, toggle : bool) -> void:
 	if toggle:
 		if !node._force_start.is_connected(task_begin):
-			node._force_start.connect(task_begin)
+			node._force_start.connect(task_begin, CONNECT_DEFERRED)
 		return
 	if node._force_start.is_connected(task_begin):
 		node._force_start.disconnect(task_begin)
 func _toggle_force_stop(node : TaskNode, toggle : bool) -> void:
 	if toggle:
 		if !node._force_stop.is_connected(task_end):
-			node._force_stop.connect(task_end)
+			node._force_stop.connect(task_end, CONNECT_DEFERRED)
 		return
 	if node._force_stop.is_connected(task_end):
 		node._force_stop.disconnect(task_end)
 func _toggle_disable(node : TaskNode, toggle : bool) -> void:
 	if toggle:
 		if !node._disable_task.is_connected(task_disable):
-			node._disable_task.connect(task_disable)
+			node._disable_task.connect(task_disable, CONNECT_DEFERRED)
 		return
 	if node._disable_task.is_connected(task_disable):
 		node._disable_task.disconnect(task_disable)
 func _toggle_process_update(node : TaskNode, toggle : bool) -> void:
 	if toggle:
 		if !node._update_process.is_connected(_update_process_mode):
-			node._update_process.connect(_update_process_mode)
+			node._update_process.connect(_update_process_mode, CONNECT_DEFERRED)
 		return
 	if node._update_process.is_connected(_update_process_mode):
 		node._update_process.disconnect(_update_process_mode)
@@ -228,7 +228,7 @@ func task_disable(task_id : StringName, toggle : bool) -> void:
 		return
 	
 	var node : TaskNode = _stored_task.get(task_id)
-	node.disabled = toggle
+	node._disabled = toggle
 	
 	if toggle:
 		_task_cache_remove(node)

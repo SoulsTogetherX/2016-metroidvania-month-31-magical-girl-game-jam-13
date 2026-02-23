@@ -8,7 +8,11 @@ class_name StateMachine extends Node
 		if val == disabled:
 			return
 		disabled = val
-		_toggle_processes(!disabled)
+		
+		if disabled:
+			_disable_processes()
+			return
+		_sync_processing_to_state(_current_state)
 
 @export_group("States")
 @export var starting_state : StateNode
@@ -48,7 +52,6 @@ func _change_state(new_state: StateNode) -> void:
 		_current_state._running = false
 	
 	if !new_state:
-		_sync_processing_to_state(null)
 		clear_state()
 		return
 	
@@ -57,27 +60,23 @@ func _change_state(new_state: StateNode) -> void:
 		_current_state = check_state
 		check_state = check_state.state_passthrough()
 	
-	_sync_processing_to_state(_current_state)
+	if !disabled:
+		_sync_processing_to_state(_current_state)
 	_current_state._force_change.connect(_change_state, CONNECT_DEFERRED)
 	_current_state._running = true
 	_current_state._enter_state()
 func _sync_processing_to_state(state: StateNode) -> void:
 	if state == null:
-		set_process(false)
-		set_physics_process(false)
-		set_process_unhandled_input(false)
+		_disable_processes()
 		return
 	set_process(state.need_process)
 	set_physics_process(state.need_physics)
 	set_process_unhandled_input(state.need_input)
 
-func _toggle_processes(toggle : bool) -> void:
-	if disabled:
-		return
-	
-	set_process(toggle)
-	set_process_unhandled_input(toggle)
-	set_physics_process(toggle)
+func _disable_processes() -> void:
+	set_process(false)
+	set_process_unhandled_input(false)
+	set_physics_process(false)
 #endregion
 
 
@@ -86,5 +85,5 @@ func force_state(new_state: StateNode) -> void:
 	_change_state(new_state)
 func clear_state() -> void:
 	_current_state = null
-	_toggle_processes(false)
+	_disable_processes()
 #endregion

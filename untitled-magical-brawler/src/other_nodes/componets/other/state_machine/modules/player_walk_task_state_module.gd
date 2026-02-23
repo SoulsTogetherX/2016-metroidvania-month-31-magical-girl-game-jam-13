@@ -11,6 +11,9 @@ extends StateModule
 
 #region Public Methods (State Change)
 func enter_state() -> void:
+	if action_cache_module.get_value(&"hault_input"):
+		return
+	
 	task_manager.task_begin(
 		&"Walk_Task",
 		{

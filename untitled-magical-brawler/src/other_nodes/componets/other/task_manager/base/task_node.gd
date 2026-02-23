@@ -23,7 +23,8 @@ signal _update_process(id : StringName)
 #region External Variables
 @export_group("Settings")
 @export var disabled : bool:
-	set = set_disabled
+	set = set_disabled,
+	get = get_disabled
 
 @export_group("Auto Start")
 @export var auto_start : bool
@@ -58,6 +59,7 @@ var args : Dictionary
 
 #region Private Variables
 var _running : bool
+var _disabled : bool
 
 var _process_mode_queued : bool
 #endregion
@@ -98,10 +100,13 @@ func force_end() -> void:
 	_force_stop.emit(task_id())
 
 func set_disabled(val : bool) -> void:
-	if val == disabled:
+	if val == _disabled:
 		return
-	disabled = val
+	_disabled = val
 	_disable_task.emit(task_id(), val)
+func get_disabled() -> bool:
+	return _disabled
+
 func queue_process_update() -> void:
 	if _process_mode_queued:
 		return
@@ -114,7 +119,7 @@ func queue_process_update() -> void:
 func is_running() -> bool:
 	return _running
 func is_disabled() -> bool:
-	return disabled
+	return _disabled
 #endregion
 
 

@@ -8,6 +8,7 @@ extends StateActionNode
 @export_group("States")
 @export var jump_state : StateNode
 @export var fall_state : StateNode
+@export var grounded_attack_state : StateNode
 @export var move_state : StateNode
 @export var slowdown_state : StateNode
 #endregion
@@ -24,7 +25,9 @@ func _velocity_changed() -> void:
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> void:
 	match action_name:
-		&"player_up":
+		&"player_attack":
+			force_change(grounded_attack_state)
+		&"player_jump":
 			force_change(jump_state)
 		&"moving":
 			force_change(move_state)
@@ -37,7 +40,7 @@ func action_finished(action_name : StringName) -> void:
 
 #region Public Methods (State Change)
 func state_passthrough() -> StateNode:
-	if action_cache.is_action(&"moving"):
+	if !action_cache.get_value(&"hault_input") && action_cache.is_action(&"moving"):
 		return move_state
 	if !action_cache.is_action(&"on_floor"):
 		return fall_state

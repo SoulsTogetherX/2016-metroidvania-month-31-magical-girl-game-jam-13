@@ -32,10 +32,13 @@ func task_physics(delta : float) -> void:
 		0.0, _slowdown_weight, delta
 	)
 	
-	if velocity_module.velocity.x > 0:
+	if dir > 0:
+		velocity_module.max_hor_velocity(0.0)
+	else:
 		velocity_module.min_hor_velocity(0.0)
-		return
-	velocity_module.max_hor_velocity(0.0)
+	
+	if is_zero_approx(velocity_module.velocity.x):
+		force_end()
 #endregion
 
 

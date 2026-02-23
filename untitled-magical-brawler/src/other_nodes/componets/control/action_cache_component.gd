@@ -33,11 +33,18 @@ var _values_cache : Dictionary[StringName, int]
 #endregion
 
 
+#region External Variables
+@export var starting_value : Dictionary
+#endregion
+
+
 
 #region Virtual Methods
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
+			for value_name : StringName in starting_value:
+				set_value(value_name, starting_value[value_name])
 			update_configuration_warnings()
 #endregion
 

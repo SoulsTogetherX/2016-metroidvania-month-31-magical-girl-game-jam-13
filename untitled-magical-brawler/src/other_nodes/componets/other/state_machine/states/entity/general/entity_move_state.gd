@@ -5,6 +5,7 @@ extends StateActionNode
 @export_group("States")
 @export var jump_state : StateNode
 @export var fall_state : StateNode
+@export var grounded_attack_state : StateNode
 @export var stop_state : StateNode
 #endregion
 
@@ -13,7 +14,9 @@ extends StateActionNode
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> void:
 	match action_name:
-		&"player_up":
+		&"player_attack":
+			force_change(grounded_attack_state)
+		&"player_jump":
 			force_change(jump_state)
 func action_finished(action_name : StringName) -> void:
 	match action_name:
@@ -28,6 +31,8 @@ func action_finished(action_name : StringName) -> void:
 func state_passthrough() -> StateNode:
 	if !action_cache.is_action(&"on_floor"):
 		return fall_state
+	if action_cache.get_value(&"hault_input"):
+		return stop_state
 	
 	return null
 #endregion
