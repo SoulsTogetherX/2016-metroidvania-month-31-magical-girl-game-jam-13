@@ -11,9 +11,9 @@ extends StateActionNode
 
 
 #region Public Virtual Methods
-func action_start(action_name : StringName) -> void:
+func action_finished(action_name : StringName) -> void:
 	match action_name:
-		&"on_floor":
+		&"in_air":
 			velocity_module.velocity = Vector2.ZERO
 			animation_player.play(&"dead")
 #endregion

@@ -46,19 +46,34 @@ func _unhandled_input(input: InputEvent) -> void:
 
 #region Private Methods (Helper)
 func _change_state(new_state: StateNode) -> void:
+	# Not allowed to reenter same state
+	if _current_state == new_state:
+		return
+	
+	# Goes through passthrough
+	var check_state : StateNode = new_state
+	var states : Array[StateNode]
+	if new_state:
+		while new_state:
+			check_state = new_state
+			new_state = new_state.state_passthrough()
+			states.push_back(check_state)
+			# If passthrough gives the same state, stop.
+			# Avoids infinite loop.
+			if _current_state == check_state:
+				prints(_current_state, states)
+				push_error("Possible Infinite State Loop Found")
+				return
+	
 	if _current_state:
 		_current_state._exit_state()
 		_current_state._force_change.disconnect(_change_state)
 		_current_state._running = false
 	
-	if !new_state:
+	if !check_state:
 		clear_state()
 		return
-	
-	var check_state : StateNode = new_state
-	while check_state:
-		_current_state = check_state
-		check_state = check_state.state_passthrough()
+	_current_state = check_state
 	
 	if !disabled:
 		_sync_processing_to_state(_current_state)

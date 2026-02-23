@@ -36,7 +36,9 @@ func action_start(action_name : StringName) -> void:
 			
 			if jump_buffer:
 				jump_buffer.start()
-		&"on_floor":
+func action_finished(action_name : StringName) -> void:
+	match action_name:
+		&"in_air":
 			if jump_buffer && !jump_buffer.is_stopped():
 				force_change(jump_state)
 				return
@@ -47,7 +49,7 @@ func action_start(action_name : StringName) -> void:
 
 #region Public Methods (State Change)
 func state_passthrough() -> StateNode:
-	if action_cache.is_action(&"on_floor"):
+	if !action_cache.is_action(&"in_air"):
 		return land_state
 	return null
 

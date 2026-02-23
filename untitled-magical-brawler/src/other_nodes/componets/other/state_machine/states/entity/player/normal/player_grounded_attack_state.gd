@@ -19,18 +19,20 @@ func _end_punch() -> void:
 
 #region Public Methods (State Change)
 func state_passthrough() -> StateNode:
-	if !action_cache.is_action(&"on_floor"):
-		return stop_state
-	if action_cache.get_value(&"hault_input"):
+	if action_cache.is_action(&"in_air"):
 		return stop_state
 	
 	return null
 
 func enter_state() -> void:
-	action_cache.set_action(&"hault_input", true)
+	action_cache.set_action(&"hault_input_checks", true)
 	punch_delay.timeout.connect(_end_punch)
 	punch_delay.start()
 func exit_state() -> void:
 	punch_delay.timeout.disconnect(_end_punch)
-	action_cache.set_action(&"hault_input", false)
+	action_cache.set_action(&"hault_input_checks", false)
+	
+	action_cache.force_action_signal.call_deferred(
+		&"player_jump"
+	)
 #endregion

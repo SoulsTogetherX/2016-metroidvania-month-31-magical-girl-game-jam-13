@@ -56,9 +56,3 @@ func task_end() -> void:
 			0.0, _jump_stopper_weight, 1.0
 		)
 #endregion
-
-
-#region Public Methods (Identifier)
-func task_id() -> StringName:
-	return &"Jump_Task"
-#endregion

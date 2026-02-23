@@ -50,9 +50,3 @@ func task_passthrough() -> bool:
 func task_end() -> void:
 	velocity_module.velocity.x = 0.0
 #endregion
-
-
-#region Public Methods (Identifier)
-func task_id() -> StringName:
-	return &"Slowdown_Task"
-#endregion

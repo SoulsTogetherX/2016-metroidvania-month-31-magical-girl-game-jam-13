@@ -3,16 +3,12 @@ extends StateActionNode
 
 #region External Variables
 @export_group("Modules")
-@export var force_state_machine : StateMachine
 @export var health_module : HealthComponent
 @export var ability_cache : AbilityCacheModule
 
 @export_group("States")
 @export var select_state : StateNode
 @export var ability_state : StateNode
-
-@export_group("Force States")
-@export var hault_state : StateNode
 #endregion
 
 
@@ -27,20 +23,21 @@ func action_start(action_name : StringName) -> void:
 	match action_name:
 		&"ability_select":
 			var ability := ability_cache.get_current_ability()
-			if !ability.is_vaild(action_cache):
+			if ability == null || !ability.is_vaild(action_cache):
 				return
 			
 			force_change(select_state)
 		&"ability_use":
+			if ability_cache.is_empty():
+				return
+			
 			force_change(ability_state)
 #endregion
 
 
 #region Public Methods (State Change)
 func enter_state() -> void:
-	action_cache.set_value(&"hault_input", false)
-	force_state_machine.force_state(hault_state)
+	action_cache.set_value(&"hault_input_checks", false)
 func exit_state() -> void:
-	action_cache.set_value(&"hault_input", true)
-	force_state_machine.force_state(hault_state)
+	action_cache.set_value(&"hault_input_checks", true)
 #endregion

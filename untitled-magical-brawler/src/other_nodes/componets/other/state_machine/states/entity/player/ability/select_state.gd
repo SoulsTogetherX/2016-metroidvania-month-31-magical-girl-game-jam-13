@@ -2,8 +2,11 @@ extends StateActionNode
 
 
 #region External Variables
+@export_group("Modules")
+@export var ability_cache : AbilityCacheModule
+
 @export_group("States")
-@export var stop_state : StateNode
+@export var normal_state : StateNode
 #endregion
 
 
@@ -12,15 +15,9 @@ extends StateActionNode
 func action_start(action_name : StringName) -> void:
 	match action_name:
 		&"player_left":
-			print("left")
+			ability_cache.prev()
 		&"player_right":
-			print("right")
+			ability_cache.next()
 		&"ability_use":
-			force_change(stop_state)
-#endregion
-
-
-#region Public Methods (State Change)
-func state_passthrough() -> StateNode:
-	return null
+			force_change(normal_state)
 #endregion

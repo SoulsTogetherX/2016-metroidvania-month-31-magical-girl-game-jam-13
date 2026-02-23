@@ -12,11 +12,11 @@ signal task_finished
 
 #region Public Signals
 signal _force_start(
-	id : StringName, given_args : Dictionary, overwrite : bool
+	node : TaskNode, given_args : Dictionary, overwrite : bool
 )
-signal _force_stop(id : StringName)
-signal _disable_task(id : StringName, toggle : bool)
-signal _update_process(id : StringName)
+signal _force_stop(node : TaskNode)
+signal _disable_task(node : TaskNode, toggle : bool)
+signal _update_process(node : TaskNode)
 #endregion
 
 
@@ -95,15 +95,15 @@ func task_end() -> void:
 
 #region Public Methods (Helper)
 func force_start(given_args : Dictionary, overwrite : bool) -> void:
-	_force_start.emit(task_id(), given_args, overwrite)
+	_force_start.emit(self, given_args, overwrite)
 func force_end() -> void:
-	_force_stop.emit(task_id())
+	_force_stop.emit(self)
 
 func set_disabled(val : bool) -> void:
 	if val == _disabled:
 		return
 	_disabled = val
-	_disable_task.emit(task_id(), val)
+	_disable_task.emit(self, val)
 func get_disabled() -> bool:
 	return _disabled
 
@@ -120,12 +120,6 @@ func is_running() -> bool:
 	return _running
 func is_disabled() -> bool:
 	return _disabled
-#endregion
-
-
-#region Public Methods (Identifier)
-@abstract
-func task_id() -> StringName
 #endregion
 
 

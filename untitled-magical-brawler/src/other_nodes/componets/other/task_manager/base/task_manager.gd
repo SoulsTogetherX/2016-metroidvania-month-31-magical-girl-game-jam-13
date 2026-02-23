@@ -18,7 +18,7 @@ var _physics_cache : Array[TaskNode]
 var _process_cache : Array[TaskNode]
 var _input_cache : Array[TaskNode]
 
-var _stored_task : Dictionary[StringName, TaskNode]
+var _stored_tasks : Dictionary[TaskNode, TaskNode]
 #endregion
 
 
@@ -48,35 +48,33 @@ func _register_task_nodes() -> void:
 	
 	for node : Node in get_children():
 		if node is TaskNode:
-			_stored_task[node.task_id()] = node
+			_stored_tasks.set(node, node)
 			_toggle_force_start(node, true)
 			_toggle_disable(node, true)
 func _unregister_task_nodes() -> void:
-	for node : TaskNode in _stored_task.values():
-		_stored_task[node.task_id()] = node
-		
+	for node : TaskNode in _stored_tasks:
 		_toggle_force_start(node, false)
 		_toggle_force_stop(node, false)
 		_toggle_disable(node, false)
 	
-	_stored_task.clear()
+	_stored_tasks.clear()
 	_task_cache_clear()
 
 func _register_task_node(node : Node) -> void:
 	if node is TaskNode:
-		if _stored_task.has(node.task_id()):
+		if _stored_tasks.has(node):
 			return
 		
-		_stored_task.set(node.task_id(), node)
+		_stored_tasks.set(node, node)
 		node._force_start.connect(task_begin)
 		_toggle_force_start(node, true)
 		_toggle_disable(node, true)
 func _unregister_task_node(node : Node) -> void:
 	if node is TaskNode:
-		if !_stored_task.has(node.task_id()):
+		if !_stored_tasks.has(node):
 			return
 	
-		_stored_task.erase(node.task_id())
+		_stored_tasks.erase(node)
 		_task_cache_remove(node)
 		
 		_toggle_force_start(node, false)
@@ -153,7 +151,7 @@ func _toggle_process_update(node : TaskNode, toggle : bool) -> void:
 
 #region Private Methods (Helper)
 func _auto_start_all() -> void:
-	for state : TaskNode in _stored_task.values():
+	for state : TaskNode in _stored_tasks:
 		if state.auto_start:
 			task_begin(state.task_id(), state.auto_start_args)
 
@@ -166,18 +164,17 @@ func _update_proces_mode() -> void:
 
 #region Public Methods (Task)
 func task_begin(
-	task_id : StringName,
+	node : TaskNode,
 	given_args : Dictionary = {},
 	overwrite : bool = false
 ) -> void:
-	if !task_exists(task_id):
+	if !task_exists(node):
 		return
-	if is_task_running(task_id):
+	if is_task_running(node):
 		if !overwrite:
 			return
-		task_end(task_id)
+		task_end(node)
 	
-	var node : TaskNode = _stored_task.get(task_id)
 	_task_adjust_args(node, given_args)
 	if !node.task_passthrough():
 		return
@@ -189,12 +186,11 @@ func task_begin(
 	node.task_begin()
 	_update_proces_mode()
 func task_end(
-	task_id : StringName
+	node : TaskNode
 ) -> void:
-	if !is_task_running(task_id):
+	if !is_task_running(node):
 		return
 	
-	var node : TaskNode = _stored_task.get(task_id)
 	_toggle_force_start(node, true)
 	_toggle_force_stop(node, false)
 	_task_cache_remove(node)
@@ -204,18 +200,17 @@ func task_end(
 
 
 func tap_state(
-	task_id : StringName,
+	node : TaskNode,
 	given_args : Dictionary = {},
 	overwrite : bool = false
 ) -> void:
-	if !task_exists(task_id):
+	if !task_exists(node):
 		return
-	if is_task_running(task_id):
+	if is_task_running(node):
 		if !overwrite:
 			return
-		task_end(task_id)
+		task_end(node)
 	
-	var node : TaskNode = _stored_task.get(task_id)
 	_task_adjust_args(node, given_args)
 	
 	if !node.task_passthrough():
@@ -223,11 +218,10 @@ func tap_state(
 	node.task_begin()
 	node.task_end()
 
-func task_disable(task_id : StringName, toggle : bool) -> void:
-	if !task_exists(task_id):
+func task_disable(node : TaskNode, toggle : bool) -> void:
+	if !task_exists(node):
 		return
 	
-	var node : TaskNode = _stored_task.get(task_id)
 	node._disabled = toggle
 	
 	if toggle:
@@ -238,10 +232,10 @@ func task_disable(task_id : StringName, toggle : bool) -> void:
 
 
 #region Public Methods (Checks)
-func is_task_running(task_id : StringName) -> bool:
-	if !task_exists(task_id):
+func is_task_running(node : TaskNode) -> bool:
+	if !task_exists(node):
 		return false
-	return _stored_task.get(task_id)._running
-func task_exists(task_id : StringName) -> bool:
-	return _stored_task.has(task_id)
+	return node._running
+func task_exists(node : TaskNode) -> bool:
+	return _stored_tasks.has(node)
 #endregion

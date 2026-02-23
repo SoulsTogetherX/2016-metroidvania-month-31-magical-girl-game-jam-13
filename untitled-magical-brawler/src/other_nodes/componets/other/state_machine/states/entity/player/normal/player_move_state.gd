@@ -14,14 +14,14 @@ extends StateActionNode
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> void:
 	match action_name:
+		&"in_air":
+			force_change(fall_state)
 		&"player_attack":
 			force_change(grounded_attack_state)
 		&"player_jump":
 			force_change(jump_state)
 func action_finished(action_name : StringName) -> void:
 	match action_name:
-		&"on_floor":
-			force_change(fall_state)
 		&"moving":
 			force_change(stop_state)
 #endregion
@@ -29,10 +29,8 @@ func action_finished(action_name : StringName) -> void:
 
 #region Public Methods (State Change)
 func state_passthrough() -> StateNode:
-	if !action_cache.is_action(&"on_floor"):
+	if action_cache.is_action(&"in_air"):
 		return fall_state
-	if action_cache.get_value(&"hault_input"):
-		return stop_state
 	
 	return null
 #endregion

@@ -23,20 +23,20 @@ func _ready() -> void:
 
 
 #region Private Methods
-func _action_finished(action_name : StringName) -> void:
+func _action_started(action_name : StringName) -> void:
 	match action_name:
-		&"on_floor":
-			_action_cache.action_finished.disconnect(_action_finished)
+		&"in_air":
+			_action_cache.action_started.disconnect(_action_started)
 			set_disabled(false)
 #endregion
 
 
 #region Public Virtual Methods
 func task_physics(delta : float) -> void:
-	var on_floor := _action_cache.is_action(&"on_floor")
-	if on_floor:
+	var in_air := _action_cache.is_action(&"in_air")
+	if !in_air:
 		set_disabled(true)
-		_action_cache.action_finished.connect(_action_finished)
+		_action_cache.action_started.connect(_action_started)
 		return
 	
 	_gravity_module.handle_gravity(
@@ -55,10 +55,4 @@ func task_passthrough() -> bool:
 		return false
 	
 	return true
-#endregion
-
-
-#region Public Methods (Identifier)
-func task_id() -> StringName:
-	return &"Gravity_Task"
 #endregion

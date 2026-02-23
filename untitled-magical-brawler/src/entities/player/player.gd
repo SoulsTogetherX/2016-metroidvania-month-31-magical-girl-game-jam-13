@@ -3,7 +3,13 @@ extends BaseEntity
 
 
 #region OnReady Variables
-@onready var _task: VelocityTaskManager = %TaskManager
+# Task Manager Tasks
+@onready var _task_manager: TaskManager = %TaskManager
+
+# Important Tasks
+@onready var _gravity_task: TaskNode = %GravityTask
+@onready var _velocity_apply_task: TaskNode = %VelocityApplyTask
+@onready var _update_cache_task: TaskNode = %UpdateCacheTask
 #endregion
 
 
@@ -21,22 +27,22 @@ func _ready() -> void:
 #region Public Virtual Methods
 func toggle_brain(toggle : bool = true) -> void:
 	if toggle:
-		_task.task_begin(
-			&"Update_Cache_Task",
+		_task_manager.task_begin(
+			_update_cache_task,
 			{
 				&"actor": self
 			}
 		)
 		return
-	_task.task_end(&"Update_Cache_Task")
+	_task_manager.task_end(_update_cache_task)
 #endregion
 
 
 #region Private Methods
 func _task_settup() -> void:
-	_task.task_begin(&"Gravity_Task")
-	_task.task_begin(
-		&"Velocity_Apply_Task",
+	_task_manager.task_begin(_gravity_task)
+	_task_manager.task_begin(
+		_velocity_apply_task,
 		{
 			&"actor": self
 		}

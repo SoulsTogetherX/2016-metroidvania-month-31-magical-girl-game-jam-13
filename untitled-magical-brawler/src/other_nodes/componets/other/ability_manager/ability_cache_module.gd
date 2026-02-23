@@ -1,12 +1,10 @@
-@tool
 class_name AbilityCacheModule extends Node
 
 
-#region External Variables
-@export_group("Abilties")
-@export var abilties : Array[AbilityResource]:
+#region Public Variables
+@export var abilties : Array[AbilityData]:
 	set = set_abilities
-@export var abilty_idx : int:
+var abilty_idx : int:
 	set = set_abilty_idx,
 	get = get_abilty_idx
 #endregion
@@ -19,16 +17,15 @@ var _abilty_idx : int
 
 
 #region Public Methods
-func set_abilities(val : Array[AbilityResource]) -> void:
+func set_abilities(val : Array[AbilityData]) -> void:
 	abilties = val
-	for idx : int in range(abilties.size()):
-		if abilties[idx] == null:
-			abilties[idx] = AbilityResource.new()
-	
 	if abilties.is_empty():
 		_abilty_idx = -1
 		return
+	
 	_abilty_idx = posmod(abilty_idx, abilties.size())
+func has_ability() -> void:
+	pass
 
 func set_abilty_idx(val : int) -> void:
 	if abilties.is_empty():
@@ -42,10 +39,12 @@ func get_abilty_idx() -> int:
 
 
 #region Public Methods (Helper)
-func get_current_ability() -> AbilityResource:
-	if abilties.is_empty():
+func get_current_ability() -> AbilityData:
+	if is_empty():
 		return null
 	return abilties[_abilty_idx]
+func is_empty() -> bool:
+	return abilties.is_empty()
 
 func prev() -> void:
 	set_abilty_idx(_abilty_idx - 1) 

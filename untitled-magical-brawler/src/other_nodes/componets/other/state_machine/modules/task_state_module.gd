@@ -6,16 +6,16 @@ extends StateModule
 @export var task_manager : TaskManager
 
 @export_group("Tasks")
-@export var tasks : Array[StringName]
+@export var tasks : Array[TaskNode]
 #endregion
 
 
 
 #region Public Methods (State Change)
 func enter_state() -> void:
-	for task : StringName in tasks:
+	for task : TaskNode in tasks:
 		task_manager.task_begin(task)
 func exit_state() -> void:
-	for task : StringName in tasks:
+	for task : TaskNode in tasks:
 		task_manager.task_end(task)
 #endregion

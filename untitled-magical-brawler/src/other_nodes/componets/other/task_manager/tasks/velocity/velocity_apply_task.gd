@@ -49,9 +49,3 @@ func task_begin() -> void:
 func task_end() -> void:
 	velocity_module.velocity_changed.disconnect(_velocity_changes)
 #endregion
-
-
-#region Public Methods (Identifier)
-func task_id() -> StringName:
-	return &"Velocity_Apply_Task"
-#endregion
