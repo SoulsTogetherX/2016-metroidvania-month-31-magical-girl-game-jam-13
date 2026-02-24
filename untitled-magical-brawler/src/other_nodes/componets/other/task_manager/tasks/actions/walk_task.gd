@@ -2,9 +2,6 @@ extends VelocityTaskNode
 
 
 #region External Variables
-@export_group("Entity")
-@export var entity : BaseEntity
-
 @export_group("Movement")
 @export var acceleration : float = 2000
 @export var max_speed : float = 5000
@@ -16,6 +13,10 @@ extends VelocityTaskNode
 @export_group("Velocity Reset")
 @export var reset_on_begin : bool = false
 @export var reset_on_end : bool = false
+
+@export_group("Other")
+@export var entity : BaseEntity
+@export var ray_cast : RayCast2D
 #endregion
 
 
@@ -45,7 +46,10 @@ func task_physics(delta : float) -> void:
 	if entity && !is_zero_approx(move_dir):
 		entity.change_direction(move_dir < 0, false)
 	
-	if signf(move_dir) != signf(velocity_module.get_velocity().x):
+	if ray_cast && !ray_cast.is_colliding():
+		velocity_module.velocity.x = 0.0
+		return
+	elif signf(move_dir) != signf(velocity_module.get_velocity().x):
 		velocity_module.lerp_hor_change(
 			0.0, _slowdown_weight, delta
 		)

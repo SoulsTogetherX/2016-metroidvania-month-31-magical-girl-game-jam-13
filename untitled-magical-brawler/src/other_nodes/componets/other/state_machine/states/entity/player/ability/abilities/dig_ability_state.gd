@@ -27,13 +27,18 @@ func action_start(action_name : StringName) -> void:
 			if !ability_cache.can_end({&"collide": ground_collide}):
 				return
 			
-			exit_manual_modules()
-			await animation_player.animation_finished
-			force_change(normal_state)
+			settup_exit_state()
 #endregion
 
 
 #region Public Methods (State Change)
 func enter_state() -> void:
+	ground_ray_cast.enabled = true
 	enter_manual_modules()
+func settup_exit_state() -> void:
+	ground_ray_cast.enabled = false
+	exit_manual_modules()
+	
+	await animation_player.animation_finished
+	force_change(normal_state)
 #endregion

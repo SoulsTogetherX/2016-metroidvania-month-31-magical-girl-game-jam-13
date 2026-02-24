@@ -127,6 +127,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../HurtboxComponent:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_snams"]
 resource_name = "dead"
@@ -200,10 +212,22 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("../HurtboxComponent:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -253,14 +277,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("../HurtboxComponent:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0001),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, false]
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_2cmg6"]
@@ -847,16 +883,17 @@ need_physics = true
 
 [node name="AirMoveTask" type="Node" parent="TaskManager" unique_id=116377760 node_paths=PackedStringArray("entity")]
 script = ExtResource("11_a31ob")
-entity = NodePath("../..")
 weight = 0.7
+entity = NodePath("../..")
 need_physics = true
 
-[node name="DigMoveTask" type="Node" parent="TaskManager" unique_id=192365737 node_paths=PackedStringArray("entity")]
+[node name="DigMoveTask" type="Node" parent="TaskManager" unique_id=192365737 node_paths=PackedStringArray("entity", "ray_cast")]
 script = ExtResource("11_a31ob")
-entity = NodePath("../..")
 max_speed = 2000.0
 reset_on_begin = true
 reset_on_end = true
+entity = NodePath("../..")
+ray_cast = NodePath("../../VisualPivot/GroundRayCast")
 need_physics = true
 
 [node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("action_cache", "gravity_module")]
