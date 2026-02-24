@@ -2,8 +2,18 @@ extends StateActionNode
 
 
 #region External Variables
+@export_group("Modules")
+@export var ability_cache : AbilityCacheModule
+
 @export_group("States")
 @export var normal_state : StateNode
+
+@export_group("Collsion")
+@export var ground_ray_cast : RayCast2D
+@export var ground_collide : CollisionShape2D
+
+@export_group("Other")
+@export var animation_player: AnimationPlayer
 #endregion
 
 
@@ -12,11 +22,18 @@ extends StateActionNode
 func action_start(action_name : StringName) -> void:
 	match action_name:
 		&"ability_use":
+			if animation_player.is_playing():
+				return
+			if !ability_cache.can_end({&"collide": ground_collide}):
+				return
+			
+			exit_manual_modules()
+			await animation_player.animation_finished
 			force_change(normal_state)
 #endregion
 
 
-#region Public Methods (State Change)da
-func state_passthrough() -> StateNode:
-	return null
+#region Public Methods (State Change)
+func enter_state() -> void:
+	enter_manual_modules()
 #endregion

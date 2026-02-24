@@ -54,6 +54,12 @@ func _get_action_index(action_name : StringName) -> int:
 	return _actions_cache.get(action_name, -1)
 func _get_value_index(dir_name : StringName) -> int:
 	return _values_cache.get(dir_name, -1)
+
+func _force_action_signal(act : Action) -> void:
+	if act.toggle:
+		action_started.emit(act.action_name)
+		return
+	action_finished .emit(act.action_name)
 #endregion
 
 
@@ -109,11 +115,11 @@ func force_action_signal(action_name : StringName) -> void:
 	if idx == -1:
 		return
 	
-	var act := _actions[idx]
-	if act.toggle:
-		action_started.emit(act.action_name)
-		return
-	action_finished .emit(act.action_name)
+	_force_action_signal(_actions[idx])
+func force_all_action_signals() -> void:
+	for act : Action in _actions:
+		prints(act.action_name, act.toggle)
+		_force_action_signal(act)
 #endregion
 
 

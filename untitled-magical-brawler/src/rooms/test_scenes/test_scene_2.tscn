@@ -23,7 +23,7 @@ exit_pos = Vector2(-7424, 0)
 keep_offset = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p8dm"]
-size = Vector2(256, 1024)
+size = Vector2(256, 1135)
 
 [sub_resource type="Resource" id="Resource_3ri7j"]
 script = ExtResource("7_3fxrl")
@@ -39,14 +39,14 @@ script = ExtResource("14_3fxrl")
 duration = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ri7j"]
-size = Vector2(2560, 1024)
+size = Vector2(2560, 1077)
 
 [sub_resource type="Resource" id="Resource_hx47o"]
 script = ExtResource("14_3fxrl")
 duration = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fxrl"]
-size = Vector2(8704, 2816)
+size = Vector2(8704, 2908)
 
 [node name="TestScene_2" type="Node2D" unique_id=471352108]
 script = ExtResource("1_3ri7j")
@@ -59,7 +59,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 10.0"
+text = "FPS: 70.0"
 horizontal_alignment = 1
 script = ExtResource("10_frlpf")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -78,7 +78,7 @@ gateway_info = SubResource("Resource_61abt")
 metadata/_custom_type_script = "uid://cx8vpb8103j00"
 
 [node name="GatewayCollider" type="CollisionShape2D" parent="Gateway" unique_id=383579121]
-position = Vector2(-128, -512)
+position = Vector2(-128, -519.5)
 shape = SubResource("RectangleShape2D_8p8dm")
 
 [node name="GatewayExit" type="Marker2D" parent="Gateway" unique_id=378568585]
@@ -118,7 +118,7 @@ tween_on_load = false
 inactive_update_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone1" unique_id=1927131071]
-position = Vector2(623, 838)
+position = Vector2(623, 864.5)
 shape = SubResource("RectangleShape2D_3ri7j")
 
 [node name="Zone2" type="Area2D" parent="." unique_id=587140783]
@@ -147,7 +147,7 @@ property_name = &"follow_target"
 metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone2" unique_id=787378226]
-position = Vector2(5103, -15)
+position = Vector2(5103, 31)
 shape = SubResource("RectangleShape2D_3fxrl")
 
 [connection signal="direction_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_direction_changed"]

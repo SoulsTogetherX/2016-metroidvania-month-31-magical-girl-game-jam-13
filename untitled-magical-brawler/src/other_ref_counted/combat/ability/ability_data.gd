@@ -3,11 +3,6 @@ class_name AbilityData extends Resource #RefCounted
 
 
 #region Private Signals
-signal _request_end
-#endregion
-
-
-#region Private Signals
 enum ABILITY_TYPE {
 	DIG,
 }
@@ -15,20 +10,11 @@ enum ABILITY_TYPE {
 
 
 
-#region Public Methods (State Change)
-func ability_passthrough(_action_cache : ActionCacheComponent) -> bool:
+#region Public Methods (Can Checks)
+func can_start(_arg : Dictionary = {}) -> bool:
 	return true
-
-func ability_start() -> void:
-	pass
-func ability_end() -> void:
-	pass
-#endregion
-
-
-#region Public Methods (Force Change)
-func force_end() -> void:
-	_request_end.emit()
+func can_end(_arg : Dictionary = {}) -> bool:
+	return true
 #endregion
 
 

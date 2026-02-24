@@ -3,8 +3,17 @@ class_name DigAbility extends AbilityData
 
 
 #region Public Methods (State Change)
-func is_vaild(_action_cache : ActionCacheComponent) -> bool:
-	return true
+func can_start(arg : Dictionary = {}) -> bool:
+	return arg.get(&"on_ground", false)
+func can_end(arg : Dictionary = {}) -> bool:
+	var collide : CollisionShape2D = arg.get(&"collide", null)
+	if !collide:
+		return false
+		
+	return Utilities.manual_collide_check(
+		collide, true, false,
+		Constants.COLLISION.GROUND
+	).is_empty()
 #endregion
 
 

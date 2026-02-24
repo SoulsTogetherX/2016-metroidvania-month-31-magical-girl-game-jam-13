@@ -25,12 +25,10 @@ func state_passthrough() -> StateNode:
 	return null
 
 func enter_state() -> void:
-	action_cache.set_action(&"hault_input_checks", true)
 	punch_delay.timeout.connect(_end_punch)
 	punch_delay.start()
 func exit_state() -> void:
 	punch_delay.timeout.disconnect(_end_punch)
-	action_cache.set_action(&"hault_input_checks", false)
 	
 	action_cache.force_action_signal.call_deferred(
 		&"player_jump"

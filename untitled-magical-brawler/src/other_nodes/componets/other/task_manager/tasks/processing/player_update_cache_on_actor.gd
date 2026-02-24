@@ -55,18 +55,13 @@ func task_physics(_delta : float) -> void:
 	)
 	
 	# Input Checks
-	if _action_cache.get_value(&"hault_input_checks"):
-		_action_cache.set_action(&"moving", false)
-		_action_cache.set_action(&"player_jump", false)
-		_action_cache.set_action(&"player_attack", false)
-	else:
-		_action_cache.set_action(&"moving", move_dir != 0)
-		_action_cache.set_action(
-			&"player_jump", Input.is_action_pressed(&"player_jump")
-		)
-		_action_cache.set_action(
-			&"player_attack", Input.is_action_pressed(&"player_attack")
-		)
+	_action_cache.set_action(&"moving", move_dir != 0)
+	_action_cache.set_action(
+		&"player_jump", Input.is_action_pressed(&"player_jump")
+	)
+	_action_cache.set_action(
+		&"player_attack", Input.is_action_pressed(&"player_attack")
+	)
 	
 	# States Checks
 	_action_cache.set_action(

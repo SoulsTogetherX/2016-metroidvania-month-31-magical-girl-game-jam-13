@@ -24,8 +24,6 @@ func set_abilities(val : Array[AbilityData]) -> void:
 		return
 	
 	_abilty_idx = posmod(abilty_idx, abilties.size())
-func has_ability() -> void:
-	pass
 
 func set_abilty_idx(val : int) -> void:
 	if abilties.is_empty():
@@ -36,6 +34,17 @@ func get_abilty_idx() -> int:
 	return _abilty_idx
 #endregion
 
+
+#region Public Methods (Can Checks)
+func can_start(args : Dictionary = {}) -> bool:
+	if is_empty():
+		return false
+	return get_current_ability().can_start(args)
+func can_end(args : Dictionary = {}) -> bool:
+	if is_empty():
+		return false
+	return get_current_ability().can_end(args)
+#endregion
 
 
 #region Public Methods (Helper)

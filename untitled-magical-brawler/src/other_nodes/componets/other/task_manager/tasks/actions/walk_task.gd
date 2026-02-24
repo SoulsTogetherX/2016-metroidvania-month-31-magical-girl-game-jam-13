@@ -2,6 +2,9 @@ extends VelocityTaskNode
 
 
 #region External Variables
+@export_group("Entity")
+@export var entity : BaseEntity
+
 @export_group("Movement")
 @export var acceleration : float = 2000
 @export var max_speed : float = 5000
@@ -9,11 +12,17 @@ extends VelocityTaskNode
 
 @export_group("Slowdown")
 @export var slowdown_weight : float = 20.0
+
+@export_group("Velocity Reset")
+@export var reset_on_begin : bool = false
+@export var reset_on_end : bool = false
 #endregion
 
 
 #region Private Variables
 var _move_dir : Callable
+
+var _entity : BaseEntity
 
 var _acceleration : float
 var _max_speed : float
@@ -33,6 +42,8 @@ func _ready() -> void:
 #region Public Virtual Methods
 func task_physics(delta : float) -> void:
 	var move_dir : float = _move_dir.call()
+	if entity && !is_zero_approx(move_dir):
+		entity.change_direction(move_dir < 0, false)
 	
 	if signf(move_dir) != signf(velocity_module.get_velocity().x):
 		velocity_module.lerp_hor_change(
@@ -54,10 +65,21 @@ func task_passthrough() -> bool:
 	if !_move_dir.is_valid() || !(_move_dir.call() is int):
 		return false
 	
+	_entity = args.get("entity", null)
+	
 	_acceleration = args.get("acceleration", acceleration)
 	_max_speed = args.get("max_speed", max_speed)
 	_weight = args.get("weight", weight)
 
 	_slowdown_weight = args.get("slowdown_weight", slowdown_weight)
 	return true
+
+func task_begin() -> void:
+	if !reset_on_begin:
+		return
+	velocity_module.velocity.x = 0.0
+func task_end() -> void:
+	if !reset_on_end:
+		return
+	velocity_module.velocity.x = 0
 #endregion

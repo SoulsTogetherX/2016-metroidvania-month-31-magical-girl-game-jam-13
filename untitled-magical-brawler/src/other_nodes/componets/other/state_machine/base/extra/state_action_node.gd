@@ -9,17 +9,31 @@ class_name StateActionNode extends StateNode
 
 
 
-#region Private Methods
-func _enter_state() -> void:
+#region Private Methods (Signal)
+func _connect_action_cache() -> void:
 	if action_cache:
 		action_cache.action_started.connect(action_start)
 		action_cache.action_finished.connect(action_finished)
-	super()
-func _exit_state() -> void:
+func _disconnect_action_cache() -> void:
 	if action_cache:
 		action_cache.action_started.disconnect(action_start)
 		action_cache.action_finished.disconnect(action_finished)
+#endregion
+
+
+#region Private Methods (Helper)
+func _enter_state() -> void:
+	_connect_action_cache()
 	super()
+func _exit_state() -> void:
+	_disconnect_action_cache()
+	super()
+
+func _disable_state(toggle : bool) -> void:
+	if toggle:
+		_disconnect_action_cache()
+		return
+	_connect_action_cache()
 #endregion
 
 

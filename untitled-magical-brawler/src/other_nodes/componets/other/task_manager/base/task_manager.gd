@@ -17,19 +17,11 @@ class_name TaskManager extends Node
 var _physics_cache : Array[TaskNode]
 var _process_cache : Array[TaskNode]
 var _input_cache : Array[TaskNode]
-
-var _stored_tasks : Dictionary[TaskNode, TaskNode]
 #endregion
 
 
 
 #region Virtual Methods
-func _ready() -> void:
-	_register_task_nodes()
-	_auto_start_all()
-	child_entered_tree.connect(_register_task_node)
-	child_exiting_tree.connect(_unregister_task_node)
-
 func _process(delta: float) -> void:
 	for task : TaskNode in _process_cache:
 		task.task_process(delta)
@@ -39,47 +31,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	for task : TaskNode in _input_cache:
 		task.task_input(event)
-#endregion
-
-
-#region Private Methods (Task Node Register)
-func _register_task_nodes() -> void:
-	_unregister_task_nodes()
-	
-	for node : Node in get_children():
-		if node is TaskNode:
-			_stored_tasks.set(node, node)
-			_toggle_force_start(node, true)
-			_toggle_disable(node, true)
-func _unregister_task_nodes() -> void:
-	for node : TaskNode in _stored_tasks:
-		_toggle_force_start(node, false)
-		_toggle_force_stop(node, false)
-		_toggle_disable(node, false)
-	
-	_stored_tasks.clear()
-	_task_cache_clear()
-
-func _register_task_node(node : Node) -> void:
-	if node is TaskNode:
-		if _stored_tasks.has(node):
-			return
-		
-		_stored_tasks.set(node, node)
-		node._force_start.connect(task_begin)
-		_toggle_force_start(node, true)
-		_toggle_disable(node, true)
-func _unregister_task_node(node : Node) -> void:
-	if node is TaskNode:
-		if !_stored_tasks.has(node):
-			return
-	
-		_stored_tasks.erase(node)
-		_task_cache_remove(node)
-		
-		_toggle_force_start(node, false)
-		_toggle_force_stop(node, false)
-		_toggle_disable(node, false)
 #endregion
 
 
@@ -150,11 +101,6 @@ func _toggle_process_update(node : TaskNode, toggle : bool) -> void:
 
 
 #region Private Methods (Helper)
-func _auto_start_all() -> void:
-	for state : TaskNode in _stored_tasks:
-		if state.auto_start:
-			task_begin(state.task_id(), state.auto_start_args)
-
 func _update_proces_mode() -> void:
 	set_process(!disabled && !_process_cache.is_empty())
 	set_physics_process(!disabled && !_physics_cache.is_empty())
@@ -168,7 +114,7 @@ func task_begin(
 	given_args : Dictionary = {},
 	overwrite : bool = false
 ) -> void:
-	if !task_exists(node):
+	if node == null:
 		return
 	if is_task_running(node):
 		if !overwrite:
@@ -181,6 +127,7 @@ func task_begin(
 	
 	_toggle_force_start(node, false)
 	_toggle_force_stop(node, true)
+	_toggle_disable(node, true)
 	_task_cache_add(node)
 	
 	node.task_begin()
@@ -193,6 +140,7 @@ func task_end(
 	
 	_toggle_force_start(node, true)
 	_toggle_force_stop(node, false)
+	_toggle_disable(node, false)
 	_task_cache_remove(node)
 	
 	node.task_end()
@@ -204,7 +152,7 @@ func tap_state(
 	given_args : Dictionary = {},
 	overwrite : bool = false
 ) -> void:
-	if !task_exists(node):
+	if node == null:
 		return
 	if is_task_running(node):
 		if !overwrite:
@@ -219,7 +167,7 @@ func tap_state(
 	node.task_end()
 
 func task_disable(node : TaskNode, toggle : bool) -> void:
-	if !task_exists(node):
+	if node == null:
 		return
 	
 	node._disabled = toggle
@@ -233,9 +181,7 @@ func task_disable(node : TaskNode, toggle : bool) -> void:
 
 #region Public Methods (Checks)
 func is_task_running(node : TaskNode) -> bool:
-	if !task_exists(node):
+	if node == null:
 		return false
 	return node._running
-func task_exists(node : TaskNode) -> bool:
-	return _stored_tasks.has(node)
 #endregion

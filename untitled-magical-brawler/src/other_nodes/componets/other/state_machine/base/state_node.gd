@@ -41,15 +41,20 @@ func process_input(_input: InputEvent) -> StateNode:
 #endregion
 
 
-#region Private Methods
+#region Private Methods (Helper)
 func _enter_state() -> void:
 	for module : StateModule in _modules:
-		module.enter_state()
+		if module.auto_call:
+			module.enter_state()
 	enter_state()
 func _exit_state() -> void:
 	exit_state()
 	for module : StateModule in _modules:
-		module.exit_state()
+		if module.auto_call:
+			module.exit_state()
+func _disable_state(toggle : bool) -> void:
+	_running = toggle
+	disable_state(toggle)
 
 func _register_modules() -> void:
 	_modules.clear()
@@ -66,6 +71,9 @@ func enter_state() -> void:
 	pass
 func exit_state() -> void:
 	pass
+
+func disable_state(_toggle : bool) -> void:
+	pass
 #endregion
 
 
@@ -78,6 +86,15 @@ func force_change(state : StateNode) -> void:
 #region Public Methods (Accesser)
 func is_running() -> bool:
 	return _running
+
 func get_all_modules() -> Array[StateModule]:
 	return _modules
+func enter_manual_modules() -> void:
+	for module : StateModule in _modules:
+		if !module.auto_call:
+			module.enter_state()
+func exit_manual_modules() -> void:
+	for module : StateModule in _modules:
+		if !module.auto_call:
+			module.exit_state()
 #endregion

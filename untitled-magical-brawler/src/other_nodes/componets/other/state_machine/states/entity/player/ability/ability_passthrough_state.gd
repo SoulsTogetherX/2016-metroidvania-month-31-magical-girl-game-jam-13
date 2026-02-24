@@ -22,8 +22,9 @@ func state_passthrough() -> StateNode:
 	var ability := ability_cache.get_current_ability()
 	match ability.get_ability_type():
 		ABILITY_TYPE.DIG:
-			return dig_ability_state
+			if ability.can_start({ "on_ground": !action_cache.is_action(&"in_air") }):
+				return dig_ability_state
 	
-	push_error("This shouldn't ever happen, but I'm writing this just in case.")
-	return normal_state
+	force_change.call_deferred(normal_state)
+	return null
 #endregion

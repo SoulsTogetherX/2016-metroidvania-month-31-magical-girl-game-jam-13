@@ -18,6 +18,6 @@ func action_start(action_name : StringName) -> void:
 			ability_cache.prev()
 		&"player_right":
 			ability_cache.next()
-		&"ability_use":
+		&"ability_select":
 			force_change(normal_state)
 #endregion

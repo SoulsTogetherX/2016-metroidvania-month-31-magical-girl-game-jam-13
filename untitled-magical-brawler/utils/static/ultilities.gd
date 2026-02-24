@@ -29,53 +29,20 @@ static func dampv(
 #endregion
 
 
-#region Polygons
-static func is_polygon_in_bounds(
-	inner : PackedVector2Array,
-	outer : PackedVector2Array
-) -> bool:
-	# Checks if any lines of the camera's poly intersects
-	# the bound poly
-	for i : int in range(inner.size()):
-		var c1 := inner[i]
-		var c2 := inner[(i + 1) % 4]
-		
-		for j : int in range(outer.size()):
-			var b1 := outer[j]
-			var b2 := outer[(j + 1) % outer.size()]
-			
-			if Geometry2D.segment_intersects_segment(c1, c2, b1, b2):
-				return false
+#region Collide
+static func manual_collide_check(
+	collide : CollisionShape2D, bodies : bool,
+	areas : bool, mask : int
+) -> Array[Vector2]:
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape_rid = collide.shape.get_rid()
+	query.transform = collide.get_global_transform().translated_local(
+		Vector2(0, -collide.shape.size.y * 0.5)
+	)
+	query.collide_with_bodies = bodies
+	query.collide_with_areas = areas
+	query.collision_mask = mask
 	
-	# Finds any point guaranteed to be in the polygon
-	var tri := Geometry2D.triangulate_polygon(inner)
-	var centroid := (inner[tri[0]] + inner[tri[1]] + inner[tri[2]]) / 3
-	
-	# If no intersections, then the rect is inside poly if
-	# rect's center-point is inside.
-	Geometry2D.is_point_in_polygon(centroid, outer)
-	return false
-
-static func get_polygon_intersections(
-	p1 : PackedVector2Array,
-	p2 : PackedVector2Array
-) -> PackedInt32Array:
-	var ret : PackedInt32Array
-	
-	# Retrives all lines of the camera's poly intersects
-	# the bound poly
-	for i : int in range(p1.size()):
-		var c1 := p1[i]
-		var c2 := p1[(i + 1) % p1.size()]
-		
-		for j : int in range(p2.size()):
-			var b1 := p2[j]
-			var b2 := p2[(j + 1) % p2.size()]
-			
-			if Geometry2D.segment_intersects_segment(c1, c2, b1, b2):
-				ret.append_array([
-					i, (i + 1) % p1.size(),
-					j, (j + 1) % p2.size()
-				])
-	return ret
+	var space_state := collide.get_world_2d().direct_space_state
+	return space_state.collide_shape(query)
 #endregion

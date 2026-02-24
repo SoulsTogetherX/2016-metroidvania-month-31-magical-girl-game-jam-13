@@ -5,7 +5,6 @@ extends StateActionNode
 @export_group("Modules")
 @export var animation_player : AnimationPlayer
 @export var velocity_module : VelocityComponent
-@export var h_direction_module : HDirectionComponent
 #endregion
 
 
@@ -16,12 +15,4 @@ func action_finished(action_name : StringName) -> void:
 		&"in_air":
 			velocity_module.velocity = Vector2.ZERO
 			animation_player.play(&"dead")
-#endregion
-
-
-#region Public Methods (State Change)
-func enter_state() -> void:
-	h_direction_module.disable = true
-func exit_state() -> void:
-	h_direction_module.disable = false
 #endregion
