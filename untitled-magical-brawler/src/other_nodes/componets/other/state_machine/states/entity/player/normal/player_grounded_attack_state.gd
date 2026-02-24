@@ -18,12 +18,6 @@ func _end_punch() -> void:
 
 
 #region Public Methods (State Change)
-func state_passthrough() -> StateNode:
-	if action_cache.is_action(&"in_air"):
-		return stop_state
-	
-	return null
-
 func enter_state() -> void:
 	punch_delay.timeout.connect(_end_punch)
 	punch_delay.start()

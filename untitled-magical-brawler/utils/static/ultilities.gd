@@ -34,10 +34,12 @@ static func manual_collide_check(
 	collide : CollisionShape2D, bodies : bool,
 	areas : bool, mask : int
 ) -> Array[Vector2]:
+	var shape := collide.shape
 	var query = PhysicsShapeQueryParameters2D.new()
-	query.shape_rid = collide.shape.get_rid()
+	
+	query.shape_rid = shape.get_rid()
 	query.transform = collide.get_global_transform().translated_local(
-		Vector2(0, -collide.shape.size.y * 0.5)
+		Vector2(0, -shape.get_rect().size.y * 0.5)
 	)
 	query.collide_with_bodies = bodies
 	query.collide_with_areas = areas

@@ -69,11 +69,11 @@ func _change_state(new_state: StateNode, passthrough : bool = true) -> void:
 		if new_state:
 			while new_state:
 				check_state = new_state
-				new_state = new_state.state_passthrough()
+				new_state = new_state._state_passthrough()
 				
 				# If passthrough gives the same state, stop.
 				# Avoids infinite loop.
-				if _current_state == check_state:
+				if _current_state == check_state && new_state != null:
 					push_error("Possible Infinite State Loop Found")
 					return
 	

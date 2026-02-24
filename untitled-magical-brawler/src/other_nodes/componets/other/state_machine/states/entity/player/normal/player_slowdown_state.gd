@@ -6,9 +6,6 @@ extends StateActionNode
 @export var velocity_module : VelocityComponent
 
 @export_group("States")
-@export var jump_state : StateNode
-@export var fall_state : StateNode
-@export var grounded_attack_state : StateNode
 @export var move_state : StateNode
 @export var stop_state : StateNode
 #endregion
@@ -25,12 +22,6 @@ func _velocity_changed() -> void:
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> void:
 	match action_name:
-		&"player_attack":
-			force_change(grounded_attack_state)
-		&"player_jump":
-			force_change(jump_state)
-		&"in_air":
-			force_change(fall_state)
 		&"moving":
 			force_change(move_state)
 #endregion
@@ -40,8 +31,6 @@ func action_start(action_name : StringName) -> void:
 func state_passthrough() -> StateNode:
 	if action_cache.is_action(&"moving"):
 		return move_state
-	if action_cache.is_action(&"in_air"):
-		return fall_state
 	
 	return null
 

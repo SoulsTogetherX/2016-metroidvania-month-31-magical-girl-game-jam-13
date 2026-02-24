@@ -16,3 +16,11 @@ func action_finished(action_name : StringName) -> void:
 			velocity_module.velocity = Vector2.ZERO
 			animation_player.play(&"dead")
 #endregion
+
+
+#region Public Methods (State Change)
+func enter_state() -> void:
+	action_cache.set_value(&"stable_state", true)
+func exit_state() -> void:
+	action_cache.set_value(&"stable_state", false)
+#endregion

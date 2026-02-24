@@ -3,8 +3,8 @@ class_name GravityComponent extends Node
 
 #region External Variables
 @export_group("Settings")
-@export var gravity : float = 4000
-@export var gravity_max_speed : float = 8000
+@export var gravity : float = 8000
+@export var gravity_max_speed : float = 16000
 @export var gravity_weight : float = 0.8
 #endregion
 
@@ -77,8 +77,6 @@ func handle_gravity(
 	
 	if velocity.attempting_fall() && velocity.get_velocity().y > gravity_max_speed:
 		velocity.lerp_ver_change(
-			gravity_max_speed,
-			gravity_weight,
-			delta
+			gravity_max_speed, gravity_weight, delta
 		)
 #endregion

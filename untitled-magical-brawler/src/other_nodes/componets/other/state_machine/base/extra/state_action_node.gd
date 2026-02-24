@@ -12,12 +12,12 @@ class_name StateActionNode extends StateNode
 #region Private Methods (Signal)
 func _connect_action_cache() -> void:
 	if action_cache:
-		action_cache.action_started.connect(action_start)
-		action_cache.action_finished.connect(action_finished)
+		action_cache.action_started.connect(_action_start)
+		action_cache.action_finished.connect(_action_finished)
 func _disconnect_action_cache() -> void:
 	if action_cache:
-		action_cache.action_started.disconnect(action_start)
-		action_cache.action_finished.disconnect(action_finished)
+		action_cache.action_started.disconnect(_action_start)
+		action_cache.action_finished.disconnect(_action_finished)
 #endregion
 
 
@@ -28,6 +28,27 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	_disconnect_action_cache()
 	super()
+
+func _action_start(action_name : StringName) -> void:
+	var state : StateNode
+	for con : StateConditional in _conditionals:
+		if con is StateActionConditional:
+			state = con.action_start(action_name)
+			if state != null:
+				force_change(state)
+				return
+	
+	action_start(action_name)
+func _action_finished(action_name : StringName) -> void:
+	var state : StateNode
+	for con : StateConditional in _conditionals:
+		if con is StateActionConditional:
+			state = con.action_finished(action_name)
+			if state != null:
+				force_change(state)
+				return
+	
+	action_finished(action_name)
 
 func _disable_state(toggle : bool) -> void:
 	if toggle:
