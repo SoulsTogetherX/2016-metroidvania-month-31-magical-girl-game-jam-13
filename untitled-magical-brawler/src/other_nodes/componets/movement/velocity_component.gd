@@ -57,7 +57,7 @@ func get_normalized() -> Vector2:
 	return velocity.normalized()
 
 func set_velocity(vec : Vector2) -> void:
-	if vec == velocity:
+	if vec.is_equal_approx(velocity):
 		return
 	_queue_velocity_changed()
 	velocity = vec

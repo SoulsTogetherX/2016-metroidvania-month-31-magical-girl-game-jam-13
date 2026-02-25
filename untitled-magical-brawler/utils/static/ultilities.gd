@@ -29,53 +29,64 @@ static func dampv(
 #endregion
 
 
-#region Polygons
-static func is_polygon_in_bounds(
-	inner : PackedVector2Array,
-	outer : PackedVector2Array
-) -> bool:
-	# Checks if any lines of the camera's poly intersects
-	# the bound poly
-	for i : int in range(inner.size()):
-		var c1 := inner[i]
-		var c2 := inner[(i + 1) % 4]
-		
-		for j : int in range(outer.size()):
-			var b1 := outer[j]
-			var b2 := outer[(j + 1) % outer.size()]
-			
-			if Geometry2D.segment_intersects_segment(c1, c2, b1, b2):
-				return false
+#region Collide
+static func manual_collide_check(
+	collide : CollisionShape2D, bodies : bool,
+	areas : bool, mask : int
+) -> Array[Vector2]:
+	var shape := collide.shape
 	
-	# Finds any point guaranteed to be in the polygon
-	var tri := Geometry2D.triangulate_polygon(inner)
-	var centroid := (inner[tri[0]] + inner[tri[1]] + inner[tri[2]]) / 3
+	return shape_collide_check(
+		collide.get_world_2d().direct_space_state,
+		collide.get_global_transform().translated_local(
+			Vector2(0, -shape.get_rect().size.y * 0.5)
+		),
+		shape, bodies, areas, mask
+	)
+static func shape_collide_check(
+	world : PhysicsDirectSpaceState2D, transform : Transform2D,
+	shape : Shape2D, bodies : bool,
+	areas : bool, mask : int
+) -> Array[Vector2]:
+	var query = PhysicsShapeQueryParameters2D.new()
 	
-	# If no intersections, then the rect is inside poly if
-	# rect's center-point is inside.
-	Geometry2D.is_point_in_polygon(centroid, outer)
-	return false
+	query.shape_rid = shape.get_rid()
+	query.transform = transform
+	query.collide_with_bodies = bodies
+	query.collide_with_areas = areas
+	query.collision_mask = mask
+	
+	return world.collide_shape(query)
 
-static func get_polygon_intersections(
-	p1 : PackedVector2Array,
-	p2 : PackedVector2Array
-) -> PackedInt32Array:
-	var ret : PackedInt32Array
+static func collide_point_manual(
+	world : PhysicsDirectSpaceState2D,
+	position : Vector2, mask : int,
+	bodies : bool = true, areas : bool = false,
+	canvas_instance_id : int = 0
+) -> Array[Dictionary]:
+	var query := PhysicsPointQueryParameters2D.new()
+	query.collision_mask = mask
+	query.position = position
+	query.collide_with_bodies = bodies
+	query.collide_with_areas = areas
+	query.canvas_instance_id = canvas_instance_id
+
+	return world.intersect_point(query)
+
+static func raycast_manual(
+	from : Node2D, length : float,
+	mask : int, bodies : bool = true,
+	areas : bool = false, hit_from_inside : bool = true
+) -> Dictionary:
+	var space_state := from.get_world_2d().direct_space_state
+	var origin := from.global_position
+	var end := from.global_position + Vector2(0, length)
 	
-	# Retrives all lines of the camera's poly intersects
-	# the bound poly
-	for i : int in range(p1.size()):
-		var c1 := p1[i]
-		var c2 := p1[(i + 1) % p1.size()]
-		
-		for j : int in range(p2.size()):
-			var b1 := p2[j]
-			var b2 := p2[(j + 1) % p2.size()]
-			
-			if Geometry2D.segment_intersects_segment(c1, c2, b1, b2):
-				ret.append_array([
-					i, (i + 1) % p1.size(),
-					j, (j + 1) % p2.size()
-				])
-	return ret
+	var query := PhysicsRayQueryParameters2D.create(origin, end)
+	query.hit_from_inside = hit_from_inside
+	query.collide_with_bodies = bodies
+	query.collide_with_areas = areas
+	query.collision_mask = mask
+	
+	return space_state.intersect_ray(query)
 #endregion

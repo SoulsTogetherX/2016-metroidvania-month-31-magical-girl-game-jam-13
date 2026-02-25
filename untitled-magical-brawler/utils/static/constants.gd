@@ -23,13 +23,13 @@ enum COLLISION {
 	CAMERA = 1 << 0,
 	GROUND = 1 << 1,
 	PLAYER = 1 << 2,
-	ENEMY  = 1 << 3
+	ENEMY  = 1 << 3,
+	COLLECTABLE  = 1 << 3
 }
 
 enum FACTION {
-	NONE,
-	PLAYER,
-	ENEMY,
-	NEUTRAL
+	PLAYER = 1 << 0,
+	ENEMY = 1 << 1,
+	COLLECTABLE = 1 << 2,
 }
 #endregion

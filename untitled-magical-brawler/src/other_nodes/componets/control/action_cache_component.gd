@@ -33,11 +33,18 @@ var _values_cache : Dictionary[StringName, int]
 #endregion
 
 
+#region External Variables
+@export var starting_value : Dictionary
+#endregion
+
+
 
 #region Virtual Methods
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
+			for value_name : StringName in starting_value:
+				set_value(value_name, starting_value[value_name])
 			update_configuration_warnings()
 #endregion
 
@@ -47,6 +54,12 @@ func _get_action_index(action_name : StringName) -> int:
 	return _actions_cache.get(action_name, -1)
 func _get_value_index(dir_name : StringName) -> int:
 	return _values_cache.get(dir_name, -1)
+
+func _force_action_signal(act : Action) -> void:
+	if act.toggle:
+		action_started.emit(act.action_name)
+		return
+	action_finished .emit(act.action_name)
 #endregion
 
 
@@ -96,6 +109,16 @@ func get_value(value_name : StringName) -> Variant:
 	if idx == -1:
 		return null
 	return _values[idx]
+
+func force_action_signal(action_name : StringName) -> void:
+	var idx := _get_action_index(action_name)
+	if idx == -1:
+		return
+	
+	_force_action_signal(_actions[idx])
+func force_all_action_signals() -> void:
+	for act : Action in _actions:
+		_force_action_signal(act)
 #endregion
 
 

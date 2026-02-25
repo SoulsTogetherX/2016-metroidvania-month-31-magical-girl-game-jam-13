@@ -18,7 +18,9 @@ signal _force_change(state : StateNode)
 
 #region Private Variables
 var _running : bool
+
 var _modules : Array[StateModule]
+var _conditionals : Array[StateConditional]
 #endregion
 
 
@@ -27,7 +29,7 @@ var _modules : Array[StateModule]
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
-			_register_modules()
+			_register_subnodes()
 #endregion
 
 
@@ -41,21 +43,38 @@ func process_input(_input: InputEvent) -> StateNode:
 #endregion
 
 
-#region Private Methods
+#region Private Methods (Helper)
 func _enter_state() -> void:
 	for module : StateModule in _modules:
-		module.enter_state()
+		if module.auto_call:
+			module.enter_state()
 	enter_state()
 func _exit_state() -> void:
 	exit_state()
 	for module : StateModule in _modules:
-		module.exit_state()
+		if module.auto_call:
+			module.exit_state()
+func _state_passthrough() -> StateNode:
+	var state : StateNode
+	for con : StateConditional in _conditionals:
+		if con.auto_call:
+			state = con.conditional_check()
+			if state != null:
+				return state
+	
+	return state_passthrough()
+func _disable_state(toggle : bool) -> void:
+	_running = toggle
+	disable_state(toggle)
 
-func _register_modules() -> void:
+func _register_subnodes() -> void:
 	_modules.clear()
+	_conditionals.clear()
 	for child : Node in get_children():
 		if child is StateModule:
 			_modules.push_back(child)
+		elif child is StateConditional:
+			_conditionals.push_back(child)
 #endregion
 
 
@@ -65,6 +84,9 @@ func state_passthrough() -> StateNode:
 func enter_state() -> void:
 	pass
 func exit_state() -> void:
+	pass
+
+func disable_state(_toggle : bool) -> void:
 	pass
 #endregion
 
@@ -78,6 +100,27 @@ func force_change(state : StateNode) -> void:
 #region Public Methods (Accesser)
 func is_running() -> bool:
 	return _running
+
 func get_all_modules() -> Array[StateModule]:
 	return _modules
+func enter_manual_modules() -> void:
+	for module : StateModule in _modules:
+		if !module.auto_call:
+			module.enter_state()
+func exit_manual_modules() -> void:
+	for module : StateModule in _modules:
+		if !module.auto_call:
+			module.exit_state()
+
+func get_all_conditionals() -> Array[StateConditional]:
+	return _conditionals
+func check_manual_conditionals() -> StateNode:
+	var state : StateNode
+	for con : StateConditional in _conditionals:
+		if !con.auto_call:
+			state = con.conditional_check()
+			if state != null:
+				return state
+	
+	return null
 #endregion
