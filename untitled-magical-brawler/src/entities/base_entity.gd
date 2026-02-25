@@ -9,9 +9,6 @@ var SNAP_RAYCAST_LENGTH := 500
 
 
 #region Export Variables
-@export_group("Settings")
-@export var faction : Constants.FACTION = Constants.FACTION.NEUTRAL
-
 @export_group("Debug")
 @export_tool_button("Snap To Ground") var snap_func = _snap_to_ground 
 
@@ -139,8 +136,9 @@ func _draw_trajectory() -> void:
 
 #region Private Methods (Helper)
 func _snap_to_ground() -> void:
-	var result := EditorUtilities.raycast_ground(
-		self, SNAP_RAYCAST_LENGTH
+	var result := Utilities.raycast_manual(
+		self, SNAP_RAYCAST_LENGTH,
+		Constants.COLLISION.GROUND
 	)
 	
 	_draw_snap_line = result.get(&"collider", null) == null

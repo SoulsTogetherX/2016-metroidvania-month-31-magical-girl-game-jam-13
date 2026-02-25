@@ -59,8 +59,9 @@ func _notification(what: int) -> void:
 
 #region Private Methods
 func _snap_to_ground() -> void:
-	var result := EditorUtilities.raycast_ground(
-		self, SNAP_RAYCAST_LENGTH
+	var result := Utilities.raycast_manual(
+		self, SNAP_RAYCAST_LENGTH,
+		Constants.COLLISION.GROUND
 	)
 	
 	if result.get(&"collider", null) != null:

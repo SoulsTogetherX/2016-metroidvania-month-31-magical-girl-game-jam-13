@@ -3,7 +3,7 @@ extends Node
 
 #region Public Variables
 var game_controller : GameController
-var player : BaseEntity
+var player : Player
 var camera : GlobalCamera
 #endregion
 

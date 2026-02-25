@@ -1,4 +1,4 @@
-extends StateActionNode
+extends StateNode
 
 
 #region Enums
@@ -11,8 +11,9 @@ const ABILITY_TYPE := AbilityData.ABILITY_TYPE
 @export var ability_cache : AbilityCacheModule
 
 @export_group("States")
-@export var dig_ability_state : StateNode
 @export var normal_state : StateNode
+@export_subgroup("Abilities")
+@export var dig_ability_state : StateNode
 #endregion
 
 
@@ -22,9 +23,7 @@ func state_passthrough() -> StateNode:
 	var ability := ability_cache.get_current_ability()
 	match ability.get_ability_type():
 		ABILITY_TYPE.DIG:
-			if ability.can_start({ "on_ground": !action_cache.is_action(&"in_air") }):
-				return dig_ability_state
+			return dig_ability_state
 	
-	force_change.call_deferred(normal_state)
-	return null
+	return normal_state
 #endregion

@@ -1,9 +1,18 @@
 class_name AbilityCacheModule extends Node
 
 
-#region Public Variables
-@export var abilties : Array[AbilityData]:
+#region Enums
+const ABILITY_TYPE := AbilityData.ABILITY_TYPE
+#endregion
+
+
+#region Private Variables
+var abilties : Array[AbilityData]:
 	set = set_abilities
+#endregion
+
+
+#region Public Variables
 var abilty_idx : int:
 	set = set_abilty_idx,
 	get = get_abilty_idx
@@ -17,8 +26,12 @@ var _abilty_idx : int
 
 
 #region Public Methods
+func register_ability(data : AbilityData) -> void:
+	if data == null:
+		return
+	abilties.append(data)
 func set_abilities(val : Array[AbilityData]) -> void:
-	abilties = val
+	abilties = val.filter(func(data): return data != null)
 	if abilties.is_empty():
 		_abilty_idx = -1
 		return
@@ -52,8 +65,16 @@ func get_current_ability() -> AbilityData:
 	if is_empty():
 		return null
 	return abilties[_abilty_idx]
+func size() -> int:
+	return abilties.size()
 func is_empty() -> bool:
 	return abilties.is_empty()
+
+func has_ability_data(data : AbilityData) -> bool:
+	for ability : AbilityData in abilties:
+		if data.get_ability_type() == ability.get_ability_type():
+			return true
+	return false
 
 func prev() -> void:
 	set_abilty_idx(_abilty_idx - 1) 

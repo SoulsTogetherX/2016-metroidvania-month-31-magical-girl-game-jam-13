@@ -21,4 +21,3 @@ func exit_state() -> void:
 	if end.is_empty():
 		return
 	animation_player.play(end)
-#endregion

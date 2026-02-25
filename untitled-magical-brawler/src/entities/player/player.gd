@@ -1,5 +1,5 @@
 @tool
-extends BaseEntity
+class_name Player extends BaseEntity
 
 
 #region OnReady Variables
@@ -10,6 +10,9 @@ extends BaseEntity
 @onready var _gravity_task: TaskNode = %GravityTask
 @onready var _velocity_apply_task: TaskNode = %VelocityApplyTask
 @onready var _update_cache_task: TaskNode = %UpdateCacheTask
+
+# Caches
+@onready var _ability_cache: AbilityCacheModule = %AbilityCacheModule
 #endregion
 
 
@@ -35,6 +38,16 @@ func toggle_brain(toggle : bool = true) -> void:
 		)
 		return
 	_task_manager.task_end(_update_cache_task)
+#endregion
+
+
+#region Public Methods
+func has_ability(ability : AbilityData) -> bool:
+	return _ability_cache.has_ability_data(ability)
+func register_ability(ability : AbilityData) -> void:
+	if has_ability(ability):
+		return
+	_ability_cache.register_ability(ability)
 #endregion
 
 

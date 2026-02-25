@@ -10,7 +10,7 @@ class_name FlatHealthEffect extends AttackEffect
 
 #region Public Virtual Methods
 func implement_attack(collide_info : CollisionInfoResource) -> void:
-	var health_module := collide_info.get_health_module()
+	var health_module := collide_info.health_module
 	if health_module:
 		health_module.damage(damage)
 #endregion

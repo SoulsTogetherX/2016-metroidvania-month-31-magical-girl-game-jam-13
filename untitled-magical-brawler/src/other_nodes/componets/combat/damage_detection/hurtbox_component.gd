@@ -13,7 +13,10 @@ const DEBUG_COLOR := Color(0, 1, 0, 0.3)
 
 
 #region External Variables
-@export_group("Modules")
+@export_group("Collison Info")
+@export var entity : BaseEntity
+
+@export_subgroup("Modules")
 @export var knockback_module : KnockbackComponent
 @export var health_module : HealthComponent
 @export var invincibility_module : InvincibilityComponent
@@ -40,19 +43,8 @@ func _validate_property(property: Dictionary) -> void:
 
 #region Custom Virtual Methods
 func _refresh_faction() -> void:
+	collision_mask = faction
 	collision_layer = 0
-	
-	match faction:
-		Constants.FACTION.NONE:
-			collision_mask = 0
-		Constants.FACTION.PLAYER:
-			collision_mask = Constants.COLLISION.ENEMY
-		Constants.FACTION.ENEMY:
-			collision_mask = Constants.COLLISION.PLAYER
-		Constants.FACTION.NEUTRAL:
-			collision_mask = Constants.COLLISION.PLAYER | Constants.COLLISION.ENEMY
-		_:
-			collision_mask = 0
 
 func _refresh_collider() -> void:
 	super()
@@ -70,7 +62,8 @@ func _on_area_enter(collision : HitboxComponent) -> void:
 	
 	collision.enact_collision(CollisionInfoResource.new(
 		self.global_position - collision.global_position,
-		health_module, knockback_module, invincibility_module
+		entity, health_module, knockback_module,
+		invincibility_module
 	))
 	on_hit.emit(collision)
 #endregion

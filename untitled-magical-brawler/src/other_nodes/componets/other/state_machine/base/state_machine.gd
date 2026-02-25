@@ -63,9 +63,21 @@ func _change_state(new_state: StateNode, passthrough : bool = true) -> void:
 	if _current_state == new_state:
 		return
 	
+	# If current state exists, start exit process
+	if _current_state != null:
+		_current_state._exit_state()
+		_disable_processes()
+		_current_state._force_change.disconnect(_change_state)
+		_current_state._running = false
+	
+	# If changing to null, clear it
+	if new_state == null:
+		clear_state()
+		return
+	
+	# Goes through passthrough
 	var check_state : StateNode = new_state
 	if passthrough:
-		# Goes through passthrough
 		if new_state:
 			while new_state:
 				check_state = new_state
@@ -77,22 +89,16 @@ func _change_state(new_state: StateNode, passthrough : bool = true) -> void:
 					push_error("Possible Infinite State Loop Found")
 					return
 	
-	if _current_state:
-		_current_state._exit_state()
-		_current_state._force_change.disconnect(_change_state)
-		_current_state._running = false
-	
-	if !check_state:
-		changed_state.emit()
-		clear_state()
-		return
 	_current_state = check_state
 	
-	if !disabled:
-		_sync_processing_to_state(_current_state)
+	# If current state exists, start enter process
 	_current_state._force_change.connect(_change_state, CONNECT_DEFERRED)
 	_current_state._running = true
 	_current_state._enter_state()
+	
+	# Begins processes if not disabled
+	if !disabled:
+		_sync_processing_to_state(_current_state)
 	
 	changed_state.emit()
 func _sync_processing_to_state(state: StateNode) -> void:

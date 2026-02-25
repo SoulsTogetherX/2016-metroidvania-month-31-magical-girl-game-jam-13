@@ -37,18 +37,3 @@ static func confirmed_child(
 	if !property_name.is_empty():
 		parent.set(property_name, child)
 #endregion
-
-
-#region Ground
-static func raycast_ground(from : Node2D, length : float) -> Dictionary:
-	var space_state := from.get_world_2d().direct_space_state
-	var origin := from.global_position
-	var end := from.global_position + Vector2(0, length)
-	
-	var query := PhysicsRayQueryParameters2D.create(origin, end)
-	query.collision_mask = Constants.COLLISION.GROUND
-	query.hit_from_inside = true
-	var result := space_state.intersect_ray(query)
-	
-	return result
-#endregion

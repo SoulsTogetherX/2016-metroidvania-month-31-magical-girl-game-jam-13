@@ -12,13 +12,6 @@ class_name FactionAreaComponent extends Area2D
 		shape = val
 		
 		_refresh_collider()
-@export var faction : Constants.FACTION = Constants.FACTION.NEUTRAL:
-	set(val):
-		if val == faction:
-			return
-		faction = val
-		
-		_refresh_faction()
 @export var disabled : bool:
 	set(val):
 		if val == disabled:
@@ -27,6 +20,15 @@ class_name FactionAreaComponent extends Area2D
 		
 		if is_node_ready():
 			_collider.disabled = val
+
+@export_group("Faction")
+@export_flags_2d_physics var faction: int = Constants.COLLISION.PLAYER:
+	set(val):
+		if val == faction:
+			return
+		faction = val
+		
+		_refresh_faction()
 
 @export_group("Destroy")
 @export_range(0, 10, 0.01, "or_greater") var duration : float = 0.0
@@ -59,7 +61,8 @@ func _validate_property(property: Dictionary) -> void:
 
 #region Custom Virtual Methods
 func _refresh_faction() -> void:
-	pass
+	collision_mask = faction
+	collision_layer = faction
 #endregion
 
 

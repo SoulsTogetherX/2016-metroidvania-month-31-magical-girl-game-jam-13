@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://coaco4ykmwesx" path="res://src/rooms/room_base.gd" id="1_3ri7j"]
 [ext_resource type="TileSet" uid="uid://6nv32bdevd7d" path="res://assets/tilesets/test_tileset/test_tileset_2.tres" id="1_qh8os"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_8p8dm"]
-[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/other_ref_counted/combat/effects/base_effect.gd" id="6_3ri7j"]
-[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/other_ref_counted/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="7_3fxrl"]
-[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/other_ref_counted/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="8_uwh81"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="6_3ri7j"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="7_3fxrl"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="8_uwh81"]
 [ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="9_hx47o"]
 [ext_resource type="Script" uid="uid://bgh34blcwhwjf" path="res://src/other_nodes/room_editor_tools/debug/fps_display.gd" id="10_frlpf"]
 [ext_resource type="Script" uid="uid://cx8vpb8103j00" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="11_21nwj"]
@@ -59,7 +59,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 57.0"
+text = "FPS: 73.0"
 horizontal_alignment = 1
 script = ExtResource("10_frlpf")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -87,14 +87,12 @@ script = ExtResource("14_3ri7j")
 
 [node name="DamageTester" type="Area2D" parent="." unique_id=49765339]
 position = Vector2(427.80002, -219.00002)
-collision_layer = 8
+collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("5_8p8dm")
 effects = Array[ExtResource("6_3ri7j")]([SubResource("Resource_3ri7j"), SubResource("Resource_3fxrl")])
 shape = SubResource("RectangleShape2D_61abt")
-faction = 2
-metadata/_custom_type_script = "uid://cxla1cqkag8lu"
 
 [node name="Icon" type="Sprite2D" parent="DamageTester" unique_id=1769853222]
 modulate = Color(1, 0, 0, 1)

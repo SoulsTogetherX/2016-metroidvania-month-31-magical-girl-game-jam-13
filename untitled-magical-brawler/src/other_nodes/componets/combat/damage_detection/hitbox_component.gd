@@ -18,7 +18,7 @@ const DEBUG_COLOR := Color(1, 0, 0, 0.3)
 @export_range(0, 1, 1, "or_greater") var max_collisions : int = 0
 
 @export_group("Effect")
-@export_tool_button("Load Effect Preset") var load_effects_preset = _load_effects_preset
+@export_tool_button("Load Attack Preset") var load_attack_preset = _load_attack_preset
 @export var effects : Array[BaseEffect]:
 	set(val):
 		for i : int in range(val.size()):
@@ -52,18 +52,7 @@ func _validate_property(property: Dictionary) -> void:
 #region Custom Virtual Methods
 func _refresh_faction() -> void:
 	collision_mask = 0
-	
-	match faction:
-		Constants.FACTION.NONE:
-			collision_layer = 0
-		Constants.FACTION.PLAYER:
-			collision_layer = Constants.COLLISION.PLAYER
-		Constants.FACTION.ENEMY:
-			collision_layer = Constants.COLLISION.ENEMY
-		Constants.FACTION.NEUTRAL:
-			collision_layer = Constants.COLLISION.PLAYER | Constants.COLLISION.ENEMY
-		_:
-			collision_layer = 0
+	collision_layer = faction
 
 func _refresh_collider() -> void:
 	super()
@@ -73,7 +62,7 @@ func _refresh_collider() -> void:
 
 
 #region Private Methods (Helper)
-func _load_effects_preset() -> void:
+func _load_attack_preset() -> void:
 	effects = [
 		FlatHealthEffect.new(),
 		KnockbackEffect.new()

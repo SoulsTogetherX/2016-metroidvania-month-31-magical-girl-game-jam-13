@@ -10,7 +10,7 @@ class_name AttackEffect extends BaseEffect
 
 #region Public Virtual Methods
 func implement_effect(collide_info : CollisionInfoResource) -> void:
-	var inv := collide_info.get_invincibility_module()
+	var inv := collide_info.invincibility_module
 	if inv && !ignore_invincibility && inv.is_invincible():
 		return
 	

@@ -118,7 +118,6 @@ func force_action_signal(action_name : StringName) -> void:
 	_force_action_signal(_actions[idx])
 func force_all_action_signals() -> void:
 	for act : Action in _actions:
-		prints(act.action_name, act.toggle)
 		_force_action_signal(act)
 #endregion
 

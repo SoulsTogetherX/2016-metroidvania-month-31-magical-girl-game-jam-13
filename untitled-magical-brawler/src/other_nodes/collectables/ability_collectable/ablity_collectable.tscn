@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://brtg8xudu24iv"]
+
+[ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="1_2mb31"]
+[ext_resource type="Script" uid="uid://jsanxybvkimk" path="res://src/other_nodes/collectables/ability_collectable/ablity_collectable.gd" id="1_bfv2b"]
+[ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="1_xmjyj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yn6ok"]
+radius = 70.0
+
+[node name="AblityCollectable" type="Node2D" unique_id=370613763]
+script = ExtResource("1_bfv2b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1155619885]
+texture = ExtResource("1_2mb31")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1349477786]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_xmjyj")
+shape = SubResource("CircleShape2D_yn6ok")
+faction = 16
+metadata/_custom_type_script = "uid://cxla1cqkag8lu"

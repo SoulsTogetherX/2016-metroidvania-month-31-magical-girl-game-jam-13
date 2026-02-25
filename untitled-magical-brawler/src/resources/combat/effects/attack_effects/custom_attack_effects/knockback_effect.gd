@@ -37,11 +37,11 @@ enum AXIS {
 #region Public Virtual Methods
 func implement_attack(collide_info : CollisionInfoResource) -> void:
 	if !enact_on_dead:
-		var health := collide_info.get_health_module()
+		var health := collide_info.health_module
 		if health && health.is_dead():
 			return
 	
-	var knockback := collide_info.get_knockback_module()
+	var knockback := collide_info.knockback_module
 	if !knockback:
 		return
 	
@@ -49,7 +49,7 @@ func implement_attack(collide_info : CollisionInfoResource) -> void:
 	var angle : float = angle_offset
 	
 	if dynamic_direction:
-		var offset := collide_info.get_hit_offset()
+		var offset := collide_info.hit_offset
 		angle += atan2(offset.y, offset.x)
 	
 	if (axis_ignore & AXIS.X) == 0:

@@ -24,13 +24,12 @@ func conditional_check() -> StateNode:
 
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> StateNode:
-	if ability_cache.is_empty():
-		return
-	
 	match action_name:
 		select_action:
-			return select_state
+			if ability_cache.size() > 1:
+				return select_state
 		ability_action:
-			return ability_state
+			if !ability_cache.is_empty():
+				return ability_state
 	return null
 #endregion

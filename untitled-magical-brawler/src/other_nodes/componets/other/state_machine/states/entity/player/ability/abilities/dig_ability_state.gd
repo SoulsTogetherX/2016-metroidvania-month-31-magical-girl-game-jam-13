@@ -18,27 +18,48 @@ extends StateActionNode
 
 
 
+#region Private Methods
+func _force_exit_state(_animation : StringName) -> void:
+	force_change(normal_state)
+#endregion
+
+
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> void:
 	match action_name:
 		&"ability_use":
 			if animation_player.is_playing():
 				return
-			if !ability_cache.can_end({&"collide": ground_collide}):
+			if !ability_cache.can_end(
+				{&"collide": ground_collide}
+			):
 				return
 			
-			settup_exit_state()
+			ground_ray_cast.enabled = false
+			exit_manual_modules()
+			animation_player.animation_finished.connect(
+				_force_exit_state
+			)
 #endregion
 
 
 #region Public Methods (State Change)
+func state_passthrough() -> StateNode:
+	var ability := ability_cache.get_current_ability()
+	if !ability || !ability.can_start(
+		{
+			&"collide": ground_collide,
+			&"on_ground": !action_cache.is_action(&"in_air")
+		}
+	):
+		return normal_state
+	
+	return null
 func enter_state() -> void:
 	ground_ray_cast.enabled = true
 	enter_manual_modules()
-func settup_exit_state() -> void:
-	ground_ray_cast.enabled = false
-	exit_manual_modules()
-	
-	await animation_player.animation_finished
-	force_change(normal_state)
+func exit_state() -> void:
+	animation_player.animation_finished.disconnect(
+		_force_exit_state
+	)
 #endregion
