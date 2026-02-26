@@ -50,16 +50,11 @@ func _load_game_objects() -> void:
 	Global.camera = load(CAMERA_PACKED).instantiate()
 	
 	game.change_2d_scene_to_node(
-		Global.player, Constants.PLAYER_ID
+		Global.player, GlobalLabels.objects.PLAYER_ID
 	)
 	
-	# Stress-Testing performance
-	#for i : int in range(100):
-	#	game.change_2d_scene_to_node(
-	#		load(PLAYER_PACKED).instantiate(), Constants.PLAYER_ID + str(i)
-	#	)
 	game.change_2d_scene_to_node(
-		Global.camera, Constants.CAMERA_ID
+		Global.camera, GlobalLabels.objects.CAMERA_ID
 	)
 
 func _load_game_ui() -> void:
@@ -67,7 +62,7 @@ func _load_game_ui() -> void:
 	
 	game.change_ui_scene_to_node(
 		FadeCoverNode.new(),
-		Constants.TRANSTION_ID
+		GlobalLabels.objects.TRANSTION_ID
 	)
 
 func _load_game_room(room_path : String) -> void:
@@ -75,6 +70,6 @@ func _load_game_room(room_path : String) -> void:
 	
 	game.change_2d_scene_to_node(
 		(load(room_path) as PackedScene).instantiate(),
-		Constants.ROOM_ID
+		GlobalLabels.objects.ROOM_ID
 	)
 #endregion

@@ -1,5 +1,5 @@
 @tool
-class_name EditorUtilities
+class_name EditorUtilities extends Object
 
 
 #region Confirm Child

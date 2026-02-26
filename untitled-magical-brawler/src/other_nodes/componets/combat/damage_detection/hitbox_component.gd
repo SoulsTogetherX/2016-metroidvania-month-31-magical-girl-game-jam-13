@@ -14,6 +14,9 @@ const DEBUG_COLOR := Color(1, 0, 0, 0.3)
 
 
 #region External Variables
+@export_group("Collison Info")
+@export var entity : BaseEntity
+
 @export_group("Destroy")
 @export_range(0, 1, 1, "or_greater") var max_collisions : int = 0
 

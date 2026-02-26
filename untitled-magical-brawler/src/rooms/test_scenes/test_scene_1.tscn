@@ -91,7 +91,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 106.0"
+text = "FPS: 123.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -137,7 +137,6 @@ collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("12_vil43")
-i_frames = null
 shape = SubResource("RectangleShape2D_lxi1k")
 faction = 8
 

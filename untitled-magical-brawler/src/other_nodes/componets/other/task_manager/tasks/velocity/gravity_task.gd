@@ -55,4 +55,6 @@ func task_passthrough() -> bool:
 		return false
 	
 	return true
+func task_begin() -> void:
+	set_disabled(false)
 #endregion

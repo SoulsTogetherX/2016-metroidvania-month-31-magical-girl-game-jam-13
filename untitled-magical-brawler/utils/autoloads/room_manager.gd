@@ -62,12 +62,12 @@ func _pre_room_switch() -> void:
 	)
 	
 	await Global.game_controller.get_ui_from_id(
-		Constants.TRANSTION_ID
+		GlobalLabels.objects.TRANSTION_ID
 	).toggle_fade(true)
 func _room_switch(room : Node2D) -> void:
 	CameraZoneManager.request_snap()
 	Global.game_controller.change_2d_scene_to_node(
-		room, Constants.ROOM_ID,
+		room, GlobalLabels.objects.ROOM_ID,
 		GameController.UNMOUNT_TYPE.DELETE
 	)
 func _post_room_switch(entrance : GatewayInfo) -> void:
@@ -76,6 +76,6 @@ func _post_room_switch(entrance : GatewayInfo) -> void:
 	Global.player.global_position = exit.exit_pos
 	Global.player.process_mode = Node.PROCESS_MODE_INHERIT
 	await Global.game_controller.get_ui_from_id(
-		Constants.TRANSTION_ID
+		GlobalLabels.objects.TRANSTION_ID
 	).toggle_fade(false)
 #endregion

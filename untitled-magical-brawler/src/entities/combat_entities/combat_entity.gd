@@ -88,12 +88,8 @@ func get_max_health() -> int:
 		return 0
 	return _health_module.get_max_health()
 
-func inflict_damage(delta : int) -> void:
+func is_dead() -> bool:
 	if !_health_module:
-		return
-	_health_module.damage(delta)
-func heal_damage(delta : int) -> void:
-	if !_health_module:
-		return
-	_health_module.heal(delta)
+		return false
+	return _health_module.is_dead()
 #endregion

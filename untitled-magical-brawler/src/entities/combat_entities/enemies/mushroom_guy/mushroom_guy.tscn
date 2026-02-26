@@ -3,36 +3,33 @@
 [ext_resource type="Script" uid="uid://dfrerw612ix6r" path="res://src/entities/combat_entities/enemies/enemy_entity.gd" id="1_gcj1i"]
 [ext_resource type="SpriteFrames" uid="uid://cu3wk7btyh6r5" path="res://assets/entities/enemies/mushroom_guy/mushroom_guy_spriteframes.tres" id="2_6t03g"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_g3lxf"]
-
-[sub_resource type="Animation" id="Animation_opvji"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_mme5p"]
+[ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/damage_reaction/health_component.gd" id="5_g3ivy"]
+[ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="6_wmsra"]
+[ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="9_sigsm"]
+[ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="10_4wjxv"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="11_chpug"]
+[ext_resource type="Script" uid="uid://dme5f24l0edsf" path="res://addons/beehave/blackboard.gd" id="11_u7tq1"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_5utyv"]
+[ext_resource type="Script" uid="uid://wlv8mevyp2xg" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_is_health_below.gd" id="13_gbnxp"]
+[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="13_u7tq1"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="14_3xgua"]
+[ext_resource type="Script" uid="uid://dpptc6vadvc0s" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_animation_leaf.gd" id="14_t51hq"]
+[ext_resource type="Script" uid="uid://dgur31eip2ba7" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_await_animation.gd" id="15_bi35q"]
+[ext_resource type="Script" uid="uid://dnxhbudup2no5" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_is_stunned.gd" id="15_t51hq"]
+[ext_resource type="Script" uid="uid://t1vdkkqw3328" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/misc/bh_remove_self.gd" id="16_bi35q"]
+[ext_resource type="Script" uid="uid://c60eik3a4v666" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/velocity/bh_set_horizontal_velocity.gd" id="19_4kywf"]
+[ext_resource type="Script" uid="uid://ddcs3mkffsnhy" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_horizontal_velocity_limit.gd" id="19_5utyv"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="19_axkgu"]
+[ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="19_bi35q"]
+[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="19_u7tq1"]
+[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="20_gbnxp"]
+[ext_resource type="Script" uid="uid://dicyqrsa1akwv" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/task/bh_task_runner.gd" id="21_axkgu"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="21_t51hq"]
+[ext_resource type="Script" uid="uid://bbx22fu4rlkev" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/move_to_point_task.gd" id="26_4kywf"]
 
 [sub_resource type="Animation" id="Animation_6t03g"]
-resource_name = "dead"
+resource_name = "DEAD"
 length = 0.5
 step = 0.1
 tracks/0/type = "value"
@@ -61,7 +58,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ned1c"]
-resource_name = "idle"
+resource_name = "IDLE"
 length = 0.4
 loop_mode = 1
 step = 0.1
@@ -91,7 +88,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_g3lxf"]
-resource_name = "running"
+resource_name = "MOVE"
 length = 0.6
 loop_mode = 1
 step = 0.1
@@ -120,12 +117,39 @@ tracks/1/keys = {
 "values": [&"running"]
 }
 
+[sub_resource type="Animation" id="Animation_opvji"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_opvji"]
 _data = {
-&"RESET": SubResource("Animation_opvji"),
-&"dead": SubResource("Animation_6t03g"),
-&"idle": SubResource("Animation_ned1c"),
-&"running": SubResource("Animation_g3lxf")
+&"DEAD": SubResource("Animation_6t03g"),
+&"IDLE": SubResource("Animation_ned1c"),
+&"MOVE": SubResource("Animation_g3lxf"),
+&"RESET": SubResource("Animation_opvji")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ned1c"]
@@ -134,10 +158,13 @@ size = Vector2(180, 225)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t03g"]
 size = Vector2(140, 225)
 
-[node name="MushroomGuy" type="CharacterBody2D" unique_id=2105658879]
+[node name="MushroomGuy" type="CharacterBody2D" unique_id=2105658879 node_paths=PackedStringArray("_health_module", "_visual_pivot", "_velocity_module")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_gcj1i")
+_health_module = NodePath("CombatComponents/HealthComponent")
+_visual_pivot = NodePath("VisualPivot")
+_velocity_module = NodePath("VelocityComponent")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=764783160]
 
@@ -145,16 +172,22 @@ script = ExtResource("1_gcj1i")
 sprite_frames = ExtResource("2_6t03g")
 animation = &"idle"
 offset = Vector2(-20, -130)
+flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=1355228639]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_opvji")
 
-[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=914141939]
+[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=914141939 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
 position = Vector2(0, -113)
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("3_g3lxf")
+entity = NodePath("../..")
+knockback_module = NodePath("../../CombatComponents/KnockbackComponent")
+health_module = NodePath("../../CombatComponents/HealthComponent")
+status_effect_module = NodePath("../../CombatComponents/StatusEffectReceiver")
 shape = SubResource("RectangleShape2D_ned1c")
 faction = 8
 
@@ -167,3 +200,130 @@ collision_mask = 2
 [node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=1598916610]
 position = Vector2(0, -112.5)
 shape = SubResource("RectangleShape2D_6t03g")
+
+[node name="CombatComponents" type="Node" parent="." unique_id=1295537730]
+
+[node name="KnockbackComponent" type="Node" parent="CombatComponents" unique_id=924171595 node_paths=PackedStringArray("velocity_module")]
+script = ExtResource("4_mme5p")
+velocity_module = NodePath("../../VelocityComponent")
+metadata/_custom_type_script = "uid://bhe0ii8bxo24u"
+
+[node name="HealthComponent" type="Node" parent="CombatComponents" unique_id=1256400487]
+unique_name_in_owner = true
+script = ExtResource("5_g3ivy")
+max_health = 1000
+metadata/_custom_type_script = "uid://lqunqvr5fs"
+
+[node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=50855024]
+unique_name_in_owner = true
+script = ExtResource("6_wmsra")
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=311409027]
+script = ExtResource("9_sigsm")
+metadata/_custom_type_script = "uid://ui8sa21uexr7"
+
+[node name="GravityComponent" type="Node" parent="." unique_id=852066168]
+script = ExtResource("10_4wjxv")
+metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
+
+[node name="Blackboard" type="Node" parent="." unique_id=459988030]
+unique_name_in_owner = true
+script = ExtResource("11_u7tq1")
+metadata/_custom_type_script = "uid://dme5f24l0edsf"
+
+[node name="StandardEnemyAI" type="Node" parent="." unique_id=358563597 node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("13_5utyv")
+actor_node_path = NodePath("..")
+blackboard = NodePath("../Blackboard")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="HurtDeadAlive" type="Node" parent="StandardEnemyAI" unique_id=1990652795]
+script = ExtResource("11_chpug")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="Dead" type="Node" parent="StandardEnemyAI/HurtDeadAlive" unique_id=742223312]
+script = ExtResource("14_3xgua")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="IsDead" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Dead" unique_id=932978862]
+script = ExtResource("13_gbnxp")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SetHVelocityToZero" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Dead" unique_id=285818161]
+script = ExtResource("19_4kywf")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="DeadAnimation" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Dead" unique_id=2062603417]
+script = ExtResource("14_t51hq")
+animation = 3
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="AwaitAnimation" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Dead" unique_id=1540056246]
+script = ExtResource("15_bi35q")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="RemoveSelf" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Dead" unique_id=2016146029]
+script = ExtResource("16_bi35q")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="IsStunned" type="Node" parent="StandardEnemyAI/HurtDeadAlive" unique_id=1109659133]
+script = ExtResource("15_t51hq")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="Idle" type="Node" parent="StandardEnemyAI/HurtDeadAlive" unique_id=660470452]
+script = ExtResource("14_3xgua")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="IdleAnimation" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Idle" unique_id=1170722204]
+script = ExtResource("14_t51hq")
+animation = 1
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SlowdownCheck" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Idle" unique_id=1878274843]
+script = ExtResource("19_axkgu")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="InverterDecorator" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Idle/SlowdownCheck" unique_id=1896323416]
+script = ExtResource("19_bi35q")
+metadata/_custom_type_script = "uid://crkjak4kyv56m"
+
+[node name="HasNoHVelocity" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Idle/SlowdownCheck/InverterDecorator" unique_id=1257740968]
+script = ExtResource("19_5utyv")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SlowdownTask" type="Node" parent="StandardEnemyAI/HurtDeadAlive/Idle/SlowdownCheck" unique_id=1447037629 node_paths=PackedStringArray("task")]
+script = ExtResource("21_axkgu")
+task = NodePath("../../../../../TaskManager/SlowdownTask")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="TaskManager" type="Node" parent="." unique_id=894518937 node_paths=PackedStringArray("velocity_module")]
+unique_name_in_owner = true
+script = ExtResource("13_u7tq1")
+velocity_module = NodePath("../VelocityComponent")
+metadata/_custom_type_script = "uid://clhcvayfse4aa"
+
+[node name="GravityTask" type="Node" parent="TaskManager" unique_id=615510896 node_paths=PackedStringArray("gravity_module")]
+script = ExtResource("20_gbnxp")
+gravity_module = NodePath("../../GravityComponent")
+auto_start = true
+need_physics = true
+
+[node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=1157575312]
+script = ExtResource("19_u7tq1")
+reset_on_end = true
+need_physics = true
+
+[node name="MoveToPoint" type="Node" parent="TaskManager" unique_id=1720177087 node_paths=PackedStringArray("entity")]
+script = ExtResource("26_4kywf")
+slowdown_weight = 5.0
+hard_stop = true
+entity = NodePath("../..")
+auto_start = true
+need_physics = true
+
+[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=1834553648 node_paths=PackedStringArray("actor")]
+script = ExtResource("21_t51hq")
+actor = NodePath("../..")
+auto_start = true
+need_physics = true

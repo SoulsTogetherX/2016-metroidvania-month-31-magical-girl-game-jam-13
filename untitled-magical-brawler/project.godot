@@ -29,16 +29,18 @@ CameraZoneManager="*uid://bp2yrrt1gfn65"
 RoomManager="*uid://bv166q8suutld"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 SaveManager="*uid://bxajorf1s246a"
+BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
+BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/FreeControl/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 
