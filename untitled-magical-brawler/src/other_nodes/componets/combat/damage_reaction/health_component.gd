@@ -17,14 +17,14 @@ signal revived
 
 
 #region External Variables
-@export_range(1, 1, 1, "or_greater") var max_health : int:
+@export_range(1, 1, 1, "or_greater") var max_health : int = 5:
 	get = get_max_health,
 	set = set_max_health
 #endregion
 
 
 #region Private Variables
-var _max_health : int = 10
+var _max_health : int = 5
 var _health : int
 #endregion
 

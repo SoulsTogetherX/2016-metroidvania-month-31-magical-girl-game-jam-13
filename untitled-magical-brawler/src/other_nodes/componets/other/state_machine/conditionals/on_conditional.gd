@@ -9,7 +9,9 @@ extends StateActionConditional
 @export var action : StringName
 
 @export_group("Other")
-@export var on_direct_check : bool = true
+@export var on_direct_check : bool = false
+@export var on_start_check : bool = false
+@export var on_finished_check : bool = false
 #endregion
 
 
@@ -24,7 +26,11 @@ func conditional_check() -> StateNode:
 
 #region Public Virtual Methods
 func action_start(action_name : StringName) -> StateNode:
-	if action_name == action:
+	if on_start_check && action_name == action:
+		return state
+	return null
+func action_finished(action_name : StringName) -> StateNode:
+	if on_finished_check && action_name == action:
 		return state
 	return null
 #endregion

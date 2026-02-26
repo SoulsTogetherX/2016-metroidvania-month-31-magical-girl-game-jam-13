@@ -14,6 +14,9 @@ const CAMERA_ID := &"__camera__"
 
 #region Constants
 const DEBUG_FONT_WIDTH := 120
+
+const DEFAULT_STUN := 0.4
+const DEFAULT_INVINCIBILITY := 0.5
 #endregion
 
 

@@ -15,6 +15,7 @@ const VELOCITY_NAME := &"__velocity_component__"
 
 #region Ready Methods
 func _ready() -> void:
+	super()
 	if !velocity_module:
 		push_error("No 'VelocityComponent' found")
 #endregion

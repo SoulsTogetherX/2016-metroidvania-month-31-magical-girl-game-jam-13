@@ -1,4 +1,4 @@
-class_name KnockbackEffect extends AttackEffect
+class_name KnockbackEffect extends CombatEffect
 
 
 #region Enum

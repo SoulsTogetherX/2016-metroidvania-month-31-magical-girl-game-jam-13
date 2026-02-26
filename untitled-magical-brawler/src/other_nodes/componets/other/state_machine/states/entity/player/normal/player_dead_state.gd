@@ -5,6 +5,9 @@ extends StateActionNode
 @export_group("Modules")
 @export var animation_player : AnimationPlayer
 @export var velocity_module : VelocityComponent
+
+@export_group("States")
+@export var stop_state : StateNode
 #endregion
 
 
@@ -30,6 +33,8 @@ func action_finished(action_name : StringName) -> void:
 	match action_name:
 		&"in_air":
 			_on_dead_end()
+		&"dead":
+			force_change(stop_state)
 #endregion
 
 

@@ -22,6 +22,11 @@ var _input_cache : Array[TaskNode]
 
 
 #region Virtual Methods
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	_auto_start_all()
+
 func _process(delta: float) -> void:
 	for task : TaskNode in _process_cache:
 		task.task_process(delta)
@@ -101,6 +106,11 @@ func _toggle_process_update(node : TaskNode, toggle : bool) -> void:
 
 
 #region Private Methods (Helper)
+func _auto_start_all() -> void:
+	for child : Node in get_children():
+		if child is TaskNode && child.auto_start:
+			task_begin(child)
+
 func _update_proces_mode() -> void:
 	set_process(!disabled && !_process_cache.is_empty())
 	set_physics_process(!disabled && !_physics_cache.is_empty())

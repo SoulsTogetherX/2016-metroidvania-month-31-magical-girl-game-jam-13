@@ -63,9 +63,26 @@ func _refresh_collider() -> void:
 
 #region Private Methods (Helper)
 func _load_attack_preset() -> void:
+	var stun_effect := StatusEffect.new()
+	stun_effect.type = StatusEffect.STATUS_TYPE.STUN
+	stun_effect.duration = Constants.DEFAULT_STUN
+	
+	var apply_stun_effect := ApplyStatusEffect.new()
+	apply_stun_effect.status = stun_effect
+	
+	var inv_effect := StatusEffect.new()
+	inv_effect.type = StatusEffect.STATUS_TYPE.INVINCIBILITY
+	inv_effect.duration = Constants.DEFAULT_INVINCIBILITY
+	
+	var apply_inv_effect := ApplyStatusEffect.new()
+	apply_inv_effect.status = inv_effect
+	
+	
 	effects = [
 		FlatHealthEffect.new(),
-		KnockbackEffect.new()
+		KnockbackEffect.new(),
+		apply_stun_effect,
+		apply_inv_effect
 	]
 
 func _countdown_collisions() -> void:
@@ -77,7 +94,9 @@ func _countdown_collisions() -> void:
 
 
 #region Public Methods
-func enact_collision(collide_info : CollisionInfoResource) -> void:
+func enact_collision(
+	collide_info : CollisionInfoResource
+) -> void:
 	if !collide_info:
 		return
 	

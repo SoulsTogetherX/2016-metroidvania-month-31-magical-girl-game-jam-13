@@ -20,23 +20,6 @@ var SNAP_RAYCAST_LENGTH := 500
 		display_velocity = val
 		
 		_refresh_velocity_display()
-
-@export_subgroup("Health")
-@export var display_health : bool = false:
-	set(val):
-		if val == display_health:
-			return
-		display_health = val
-		
-		_refresh_health_display()
-@export var display_health_offset : Vector2:
-	set(val):
-		if val == display_health_offset:
-			return
-		display_health_offset = val
-		
-		if is_node_ready() && _health_display:
-			_health_display.follow_offset = display_health_offset
 #endregion
 
 
@@ -44,12 +27,10 @@ var SNAP_RAYCAST_LENGTH := 500
 @export_group("Hidden Exports")
 @export var _visual_pivot: Node2D
 @export var _velocity_module: VelocityComponent
-@export var _health_module: HealthComponent
 #endregion
 
 
 #region Private Variables
-var _health_display : DebugHealthDisplayLabel
 var _draw_snap_line : bool
 #endregion
 
@@ -64,7 +45,7 @@ func _notification(what: int) -> void:
 			_on_draw_notification()
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in [&"_visual_pivot", &"_velocity_module", &"_health_module"]:
+	if property.name in [&"_visual_pivot", &"_velocity_module"]:
 		if owner != null:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 #endregion
@@ -88,7 +69,6 @@ func _on_draw_notification() -> void:
 #region Private Methods (Toggle)
 func _refresh_debugs() -> void:
 	_refresh_velocity_display()
-	_refresh_health_display()
 func _refresh_velocity_display() -> void:
 	if !is_node_ready() || !_velocity_module:
 		return
@@ -104,23 +84,6 @@ func _refresh_velocity_display() -> void:
 		draw.disconnect(_draw_trajectory)
 	if _velocity_module.velocity_changed.is_connected(queue_redraw):
 		_velocity_module.velocity_changed.disconnect(queue_redraw)
-func _refresh_health_display() -> void:
-	if !is_node_ready():
-		return
-	
-	if display_health:
-		if !_health_display:
-			_health_display = DebugHealthDisplayLabel.new()
-			add_child(_health_display)
-		
-		_health_display.health_module = _health_module
-		_health_display.follow = self
-		_health_display.follow_offset = display_health_offset
-		return
-	
-	if _health_display:
-		_health_display.queue_free()
-		_health_display = null
 #endregion
 
 
@@ -157,17 +120,12 @@ func change_direction(h_flip : bool, v_flip : bool) -> void:
 		-1.0 if h_flip else 1.0,
 		-1.0 if v_flip else 1.0
 	)
-
-@abstract
-func toggle_brain(toggle : bool) -> void
 #endregion
 
 
 #region Public Methods (Checks)
 func has_velocity() -> bool:
 	return _velocity_module != null
-func has_health() -> bool:
-	return _health_module != null
 #endregion
 
 
@@ -185,19 +143,4 @@ func predict_next_position(delta : float = 1.0) -> Vector2:
 		return Vector2.ZERO
 	
 	return global_position + _velocity_module.get_velocity() * delta
-#endregion
-
-
-#region Public Methods (Health)
-func get_health_component() -> HealthComponent:
-	return _health_module
-
-func get_health() -> int:
-	if !_health_module:
-		return 0
-	return _health_module.get_health()
-func get_max_health() -> int:
-	if !_health_module:
-		return 0
-	return _health_module.get_max_health()
 #endregion

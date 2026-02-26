@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://ggu8kemt8cb3"]
+
+[ext_resource type="Script" uid="uid://dfrerw612ix6r" path="res://src/entities/combat_entities/enemies/enemy_entity.gd" id="1_gcj1i"]
+[ext_resource type="SpriteFrames" uid="uid://cu3wk7btyh6r5" path="res://assets/entities/enemies/mushroom_guy/mushroom_guy_spriteframes.tres" id="2_6t03g"]
+[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_g3lxf"]
+
+[sub_resource type="Animation" id="Animation_opvji"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6t03g"]
+resource_name = "dead"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+
+[sub_resource type="Animation" id="Animation_ned1c"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_g3lxf"]
+resource_name = "running"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"running"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_opvji"]
+_data = {
+&"RESET": SubResource("Animation_opvji"),
+&"dead": SubResource("Animation_6t03g"),
+&"idle": SubResource("Animation_ned1c"),
+&"running": SubResource("Animation_g3lxf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ned1c"]
+size = Vector2(180, 225)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t03g"]
+size = Vector2(140, 225)
+
+[node name="MushroomGuy" type="CharacterBody2D" unique_id=2105658879]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_gcj1i")
+
+[node name="VisualPivot" type="Node2D" parent="." unique_id=764783160]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=1107063774]
+sprite_frames = ExtResource("2_6t03g")
+animation = &"idle"
+offset = Vector2(-20, -130)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=1355228639]
+libraries/ = SubResource("AnimationLibrary_opvji")
+
+[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=914141939]
+position = Vector2(0, -113)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("3_g3lxf")
+shape = SubResource("RectangleShape2D_ned1c")
+faction = 8
+
+[node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=590573902]
+position = Vector2(111, 0)
+enabled = false
+target_position = Vector2(0, 10)
+collision_mask = 2
+
+[node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=1598916610]
+position = Vector2(0, -112.5)
+shape = SubResource("RectangleShape2D_6t03g")

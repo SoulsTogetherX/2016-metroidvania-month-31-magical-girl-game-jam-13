@@ -19,9 +19,11 @@ const DEBUG_COLOR := Color(0, 1, 0, 0.3)
 @export_subgroup("Modules")
 @export var knockback_module : KnockbackComponent
 @export var health_module : HealthComponent
-@export var invincibility_module : InvincibilityComponent
+@export var status_effect_module : StatusEffectReceiver
+@export var death_handler_module : DeathHandlerBaseComponent
 
 @export_group("Settings")
+@export var i_frames : float = 0.0
 @export var collide_when_dead : bool = false
 @export_range(0, 1, 1, "or_greater") var destroy_on_collision_count : int = 0
 #endregion
@@ -63,7 +65,9 @@ func _on_area_enter(collision : HitboxComponent) -> void:
 	collision.enact_collision(CollisionInfoResource.new(
 		self.global_position - collision.global_position,
 		entity, health_module, knockback_module,
-		invincibility_module
+		status_effect_module, death_handler_module
 	))
+	
 	on_hit.emit(collision)
+	death_handler_module._attempt_death(health_module)
 #endregion

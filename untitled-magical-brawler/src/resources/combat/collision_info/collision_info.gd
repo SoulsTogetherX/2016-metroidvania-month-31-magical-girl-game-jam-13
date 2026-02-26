@@ -3,10 +3,12 @@ class_name CollisionInfoResource extends Resource
 
 #region Private Variables
 var hit_offset : Vector2
+
 var entity : BaseEntity
 var health_module : HealthComponent
 var knockback_module : KnockbackComponent
-var invincibility_module : InvincibilityComponent
+var status_effect_module : StatusEffectReceiver
+var death_handler_module : DeathHandlerComponent
 #endregion
 
 
@@ -17,11 +19,14 @@ func _init(
 	base_entity : BaseEntity,
 	health : HealthComponent,
 	knockback : KnockbackComponent,
-	invincibility : InvincibilityComponent
+	status_effect : StatusEffectReceiver,
+	death_handler : DeathHandlerComponent
 ) -> void:
 	hit_offset = offset
+	
 	entity = base_entity
 	health_module = health
 	knockback_module = knockback
-	invincibility_module = invincibility
+	status_effect_module = status_effect
+	death_handler_module = death_handler
 #endregion

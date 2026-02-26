@@ -1,4 +1,4 @@
-class_name FlatHealthEffect extends AttackEffect
+class_name FlatHealthEffect extends CombatEffect
 
 
 #region External Variables

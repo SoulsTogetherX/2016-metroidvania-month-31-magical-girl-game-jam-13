@@ -2,7 +2,7 @@ extends Node
 
 
 #region Constants
-const PLAYER_PACKED := "res://src/entities/player/player.tscn"
+const PLAYER_PACKED := "res://src/entities/combat_entities/player/player.tscn"
 const CAMERA_PACKED := "res://src/other_nodes/camera/global_camera.tscn"
 #endregion
 

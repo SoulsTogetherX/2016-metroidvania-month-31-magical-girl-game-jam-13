@@ -20,10 +20,6 @@ extends Node2D
 
 #region Virtual Methods
 func _ready() -> void:
-	prints(
-		ability,
-		Global.player.has_ability(ability)
-	)
 	if ability == null || Global.player.has_ability(ability):
 		queue_free()
 		return

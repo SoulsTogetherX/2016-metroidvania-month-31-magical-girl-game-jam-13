@@ -4,12 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="1_iclql"]
 [ext_resource type="Script" uid="uid://coaco4ykmwesx" path="res://src/rooms/room_base.gd" id="1_jjl5p"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="5_3ttad"]
-[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="6_nmdk6"]
-[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/attack_effects/custom_attack_effects/flat_health_effect.gd" id="7_wx32i"]
-[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/attack_effects/custom_attack_effects/knockback_effect.gd" id="8_uv8eo"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="8_o3rvy"]
 [ext_resource type="Script" uid="uid://bgh34blcwhwjf" path="res://src/other_nodes/room_editor_tools/debug/fps_display.gd" id="8_wx32i"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="9_u88s5"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="10_6313p"]
 [ext_resource type="Script" uid="uid://cx8vpb8103j00" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="11_7yuiy"]
+[ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="11_y2erj"]
 [ext_resource type="Script" uid="uid://bwbbfuu5x3o8i" path="res://src/other_nodes/room_editor_tools/gateway/resources/gateway_info.gd" id="12_5f1c8"]
+[ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="12_extif"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="12_vil43"]
 [ext_resource type="Script" uid="uid://c1ojn44nvgt21" path="res://src/other_nodes/room_editor_tools/gateway/helper/gateway_exit_marker.gd" id="13_5f1c8"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_jjl5p"]
@@ -19,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cobb1ipksi4ot" path="res://src/other_nodes/componets/other/assign_player.gd" id="15_jjl5p"]
 [ext_resource type="PackedScene" uid="uid://brtg8xudu24iv" path="res://src/other_nodes/collectables/ability_collectable/ablity_collectable.tscn" id="18_r5234"]
 [ext_resource type="Script" uid="uid://mujaf6yh5n1f" path="res://src/resources/ability/abilties_custom/dig_ability.gd" id="19_qrox3"]
+[ext_resource type="PackedScene" uid="uid://ggu8kemt8cb3" path="res://src/entities/combat_entities/enemies/mushroom_guy/mushroom_guy.tscn" id="20_s8506"]
 
 [sub_resource type="Resource" id="Resource_jjl5p"]
 script = ExtResource("12_5f1c8")
@@ -30,11 +33,28 @@ facing_left = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f1c8"]
 size = Vector2(256, 1238)
 
-[sub_resource type="Resource" id="Resource_qrox3"]
-script = ExtResource("7_wx32i")
+[sub_resource type="Resource" id="Resource_o3rvy"]
+script = ExtResource("9_u88s5")
 
-[sub_resource type="Resource" id="Resource_s8506"]
-script = ExtResource("8_uv8eo")
+[sub_resource type="Resource" id="Resource_u88s5"]
+script = ExtResource("10_6313p")
+
+[sub_resource type="Resource" id="Resource_6313p"]
+script = ExtResource("12_extif")
+type = 1
+duration = 0.4
+
+[sub_resource type="Resource" id="Resource_y2erj"]
+script = ExtResource("11_y2erj")
+status = SubResource("Resource_6313p")
+
+[sub_resource type="Resource" id="Resource_extif"]
+script = ExtResource("12_extif")
+duration = 10.0
+
+[sub_resource type="Resource" id="Resource_w1ybs"]
+script = ExtResource("11_y2erj")
+status = SubResource("Resource_extif")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ttad"]
 size = Vector2(128, 128)
@@ -71,7 +91,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 107.0"
+text = "FPS: 106.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -104,7 +124,7 @@ collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("5_3ttad")
-effects = Array[ExtResource("6_nmdk6")]([SubResource("Resource_qrox3"), SubResource("Resource_s8506")])
+effects = Array[ExtResource("8_o3rvy")]([SubResource("Resource_o3rvy"), SubResource("Resource_u88s5"), SubResource("Resource_y2erj"), SubResource("Resource_w1ybs")])
 shape = SubResource("RectangleShape2D_3ttad")
 
 [node name="Icon" type="Sprite2D" parent="DamageTester" unique_id=1672272971]
@@ -117,6 +137,7 @@ collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("12_vil43")
+i_frames = null
 shape = SubResource("RectangleShape2D_lxi1k")
 faction = 8
 
@@ -219,6 +240,9 @@ theme_override_font_sizes/font_size = 100
 text = "N/A"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MushroomGuy" parent="." unique_id=2105658879 instance=ExtResource("20_s8506")]
+position = Vector2(1448, 0)
 
 [connection signal="direction_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_direction_changed"]
 [connection signal="position_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_positon_changed"]
