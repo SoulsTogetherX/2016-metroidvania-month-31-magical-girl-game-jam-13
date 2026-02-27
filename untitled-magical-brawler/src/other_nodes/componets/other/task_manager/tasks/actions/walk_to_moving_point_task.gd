@@ -16,7 +16,6 @@ extends VelocityTaskNode
 
 @export_group("Settings")
 @export var auto_change_dir : bool = true
-@export var hard_stop : bool = false
 
 @export_group("Other")
 @export var entity : BaseEntity
@@ -37,7 +36,6 @@ var _weight : float
 var _slowdown_weight : float
 
 var _auto_change_dir : bool
-var _hard_stop : bool
 #endregion
 
 
@@ -52,9 +50,6 @@ func _ready() -> void:
 func task_physics(delta : float) -> void:
 	var target_point : Vector2 = _get_target_point.call()
 	var move_dir : float = signf(target_point.x - _entity.global_position.x)
-	
-	if auto_change_dir && _entity && !is_zero_approx(move_dir):
-		_entity.change_direction(move_dir < 0, false)
 	
 	if _stop_raycast && !_stop_raycast.is_colliding():
 		velocity_module.velocity.x = 0.0
@@ -71,11 +66,8 @@ func task_physics(delta : float) -> void:
 		move_dir * _max_speed, _weight, delta
 	)
 	
-	if _hard_stop:
-		if move_dir > 0:
-			velocity_module.max_hor_velocity(0.0)
-		else:
-			velocity_module.min_hor_velocity(0.0)
+	if auto_change_dir && _entity && !is_zero_approx(move_dir):
+		_entity.change_direction(move_dir < 0, false)
 #endregion
 	
 
@@ -91,12 +83,10 @@ func task_passthrough() -> bool:
 	_acceleration = args.get(&"acceleration", acceleration)
 	_max_speed = args.get(&"max_speed", max_speed)
 	_weight = args.get(&"weight", weight)
-
+	
 	_slowdown_weight = args.get(&"slowdown_weight", slowdown_weight)
 	
 	_auto_change_dir = args.get(&"auto_change_dir", auto_change_dir)
-	_hard_stop = args.get(&"hard_stop", hard_stop)
-	
 	return true
 
 func task_begin() -> void:

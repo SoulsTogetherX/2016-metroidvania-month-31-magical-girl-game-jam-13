@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ch6c673k0md8j"]
+
+[ext_resource type="Script" uid="uid://crovfuriy4k2i" path="res://src/other_nodes/componets/other/behavior_tree/modules/go_to/module_script.gd" id="1_3xd6u"]
+[ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="4_ng8gy"]
+[ext_resource type="Script" uid="uid://ywn7hpmxvinc" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/navigation/bh_is_at_interest_point.gd" id="5_bm30w"]
+[ext_resource type="Script" uid="uid://bre7v1ob2gwkc" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/task/bh_move_to_point_task_runner.gd" id="6_bc8bc"]
+
+[node name="GoToInterestPoint" type="Node" unique_id=75870779]
+script = ExtResource("1_3xd6u")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="NotAtInterestPoint" type="Node" parent="." unique_id=2040062465]
+script = ExtResource("4_ng8gy")
+metadata/_custom_type_script = "uid://crkjak4kyv56m"
+
+[node name="AtInterestPoint" type="Node" parent="NotAtInterestPoint" unique_id=397121229]
+unique_name_in_owner = true
+script = ExtResource("5_bm30w")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="WalkToMovingPointTask" type="Node" parent="." unique_id=1377852003]
+unique_name_in_owner = true
+script = ExtResource("6_bc8bc")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"

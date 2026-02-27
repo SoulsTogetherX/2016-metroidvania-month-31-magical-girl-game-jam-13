@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bkxwp5lgaoou4"]
+
+[ext_resource type="Script" uid="uid://b1q7v4w3xo6no" path="res://src/other_nodes/componets/other/behavior_tree/modules/idle/module_script.gd" id="1_65wka"]
+[ext_resource type="Script" uid="uid://dpptc6vadvc0s" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_animation_leaf.gd" id="2_7jumc"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="3_jajf7"]
+[ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="4_duc7w"]
+[ext_resource type="Script" uid="uid://ddcs3mkffsnhy" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/velocity/bh_horizontal_velocity_limit.gd" id="5_gsmpu"]
+[ext_resource type="Script" uid="uid://dicyqrsa1akwv" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/task/bh_task_runner.gd" id="6_onuq5"]
+
+[node name="IdleSlowdownSequence" type="Node" unique_id=1242129750]
+script = ExtResource("1_65wka")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="IdleAnimation" type="Node" parent="." unique_id=445134883]
+script = ExtResource("2_7jumc")
+animation = 1
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SlowdownSequence" type="Node" parent="." unique_id=882899377]
+script = ExtResource("3_jajf7")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="InverterDecorator" type="Node" parent="SlowdownSequence" unique_id=32083500]
+script = ExtResource("4_duc7w")
+metadata/_custom_type_script = "uid://crkjak4kyv56m"
+
+[node name="HasNoHVelocity" type="Node" parent="SlowdownSequence/InverterDecorator" unique_id=1591068067]
+script = ExtResource("5_gsmpu")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SlowdownTask" type="Node" parent="SlowdownSequence" unique_id=1111495047]
+unique_name_in_owner = true
+script = ExtResource("6_onuq5")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"

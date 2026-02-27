@@ -10,7 +10,7 @@ extends ActionLeaf
 
 #region Virtual Methods
 func tick(actor: Node, _blackboard: Blackboard) -> int:
-	var act : Enemy = actor
+	var act : BaseEntity = actor
 	act.get_velocity_component().velocity.x = speed
 	
 	return SUCCESS

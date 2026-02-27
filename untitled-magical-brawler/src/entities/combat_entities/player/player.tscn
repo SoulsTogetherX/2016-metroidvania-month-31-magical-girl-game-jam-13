@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://4tex7mgshe66" path="res://src/other_nodes/componets/other/state_machine/states/entity/base/entity_idle_state.gd" id="10_3c4mh"]
 [ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="10_nshoc"]
 [ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="10_ogtao"]
-[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/move_task.gd" id="11_a31ob"]
+[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/walk_task.gd" id="11_a31ob"]
 [ext_resource type="Script" uid="uid://dtgljqvaxqo4g" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_handler/state_status_effect_handler.gd" id="11_iamtb"]
 [ext_resource type="Script" uid="uid://co2ga7r6maxo7" path="res://src/other_nodes/componets/other/state_machine/states/entity/base/entity_move_state.gd" id="11_p2qdy"]
 [ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/normal/player_jump_state.gd" id="12_lqdhu"]
@@ -1050,7 +1050,6 @@ need_physics = true
 
 [node name="AirMoveTask" type="Node" parent="TaskManager" unique_id=116377760 node_paths=PackedStringArray("entity")]
 script = ExtResource("11_a31ob")
-weight = 0.7
 entity = NodePath("../..")
 need_physics = true
 
@@ -1064,9 +1063,8 @@ entity = NodePath("../..")
 stop_raycast = NodePath("../../VisualPivot/GroundRayCast")
 need_physics = true
 
-[node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("action_cache", "gravity_module")]
+[node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("gravity_module")]
 script = ExtResource("9_ogtao")
-action_cache = NodePath("../../ActionCacheModule")
 gravity_module = NodePath("../../GravityComponent")
 auto_start = true
 need_physics = true

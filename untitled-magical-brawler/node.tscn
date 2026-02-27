@@ -2,280 +2,127 @@
 
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="1_bss38"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_tda05"]
-[ext_resource type="Script" uid="uid://cbnbvj8prv63i" path="res://addons/beehave/nodes/leaves/condition.gd" id="3_qn3nj"]
-[ext_resource type="Script" uid="uid://cv74jjdrwevpr" path="res://addons/beehave/nodes/leaves/action.gd" id="4_l6pdb"]
-[ext_resource type="Script" uid="uid://we22430vcb44" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="5_r657h"]
 [ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="6_bnlop"]
-[ext_resource type="Script" uid="uid://wlv8mevyp2xg" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_is_health_below.gd" id="7_oaeeq"]
+[ext_resource type="Script" uid="uid://wlv8mevyp2xg" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/health/bh_is_health_below.gd" id="7_oaeeq"]
 [ext_resource type="Script" uid="uid://c60eik3a4v666" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/velocity/bh_set_horizontal_velocity.gd" id="8_ey15c"]
 [ext_resource type="Script" uid="uid://dpptc6vadvc0s" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_animation_leaf.gd" id="9_p1837"]
 [ext_resource type="Script" uid="uid://dgur31eip2ba7" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_await_animation.gd" id="10_qv2vy"]
 [ext_resource type="Script" uid="uid://t1vdkkqw3328" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/misc/bh_remove_self.gd" id="11_8jewq"]
 [ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="12_3xwg0"]
-[ext_resource type="Script" uid="uid://dnxhbudup2no5" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_is_stunned.gd" id="13_85l3h"]
-[ext_resource type="Script" uid="uid://dwa2gh3bvi5uo" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/misc/bh_forever_leaf.gd" id="14_j31fo"]
+[ext_resource type="Script" uid="uid://dnxhbudup2no5" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/misc/bh_is_stunned.gd" id="13_85l3h"]
 [ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="15_o6fs4"]
-[ext_resource type="Script" uid="uid://ywn7hpmxvinc" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_is_at_interest_point.gd" id="16_twhnx"]
+[ext_resource type="Script" uid="uid://ywn7hpmxvinc" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/navigation/bh_is_at_interest_point.gd" id="16_twhnx"]
 [ext_resource type="Script" uid="uid://bre7v1ob2gwkc" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/task/bh_move_to_point_task_runner.gd" id="17_1am0g"]
-[ext_resource type="Script" uid="uid://ddcs3mkffsnhy" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_horizontal_velocity_limit.gd" id="18_2wy2p"]
+[ext_resource type="Script" uid="uid://ddcs3mkffsnhy" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/velocity/bh_horizontal_velocity_limit.gd" id="18_2wy2p"]
 [ext_resource type="Script" uid="uid://dicyqrsa1akwv" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/task/bh_task_runner.gd" id="19_w6pri"]
 
 [node name="Node" type="Node" unique_id=735237862]
 
-[node name="HurtDeadAlive" type="Node" parent="." unique_id=571981163]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="Dead" type="Node" parent="HurtDeadAlive" unique_id=518703547]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="IsDead" type="Node" parent="HurtDeadAlive/Dead" unique_id=577106477]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="Dead" type="Node" parent="HurtDeadAlive/Dead" unique_id=692956354]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="Hurt" type="Node" parent="HurtDeadAlive" unique_id=245578002]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="IsHurt" type="Node" parent="HurtDeadAlive/Hurt" unique_id=608951460]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="StunTimer" type="Node" parent="HurtDeadAlive/Hurt" unique_id=2116186945]
-script = ExtResource("5_r657h")
-metadata/_custom_type_script = "uid://we22430vcb44"
-
-[node name="Stunned" type="Node" parent="HurtDeadAlive/Hurt/StunTimer" unique_id=1338317640]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="WanderOrPursue" type="Node" parent="HurtDeadAlive" unique_id=2095036905]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="Pursuing" type="Node" parent="HurtDeadAlive/WanderOrPursue" unique_id=142199834]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="InAtkRange" type="Node" parent="HurtDeadAlive/WanderOrPursue/Pursuing" unique_id=563070041]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="IsInRange" type="Node" parent="HurtDeadAlive/WanderOrPursue/Pursuing/InAtkRange" unique_id=1797213925]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="Atk" type="Node" parent="HurtDeadAlive/WanderOrPursue/Pursuing/InAtkRange" unique_id=1903468010]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="PursuePlayer" type="Node" parent="HurtDeadAlive/WanderOrPursue/Pursuing" unique_id=101653959]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="Wandering" type="Node" parent="HurtDeadAlive/WanderOrPursue" unique_id=184668958]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="IsWandering" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering" unique_id=1980357987]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="WanderCheck" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering" unique_id=85899735]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="WanderType" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering" unique_id=620822957]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="FollowsPath" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType" unique_id=81473233]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="FollowsPath" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath" unique_id=1024930975]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="FollowPath" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath" unique_id=256703003]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="GetNearstPathPoint" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath/FollowPath" unique_id=266113001]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="SelectorComposite" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath/FollowPath" unique_id=1389865493]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="MoveToPoint" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath/FollowPath/SelectorComposite" unique_id=1967558136]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="ChangeToWander" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath/FollowPath/SelectorComposite" unique_id=2035938017]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="PathIdleWait" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath/FollowPath" unique_id=903047763]
-script = ExtResource("5_r657h")
-metadata/_custom_type_script = "uid://we22430vcb44"
-
-[node name="Idle" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/FollowsPath/FollowPath/PathIdleWait" unique_id=2044302603]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="RandomWander" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType" unique_id=506456205]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="PickRandomPoint" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/RandomWander" unique_id=931288913]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="MoveToPoint" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/RandomWander" unique_id=2135533938]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="WanderIdleWait" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/RandomWander" unique_id=646025166]
-script = ExtResource("5_r657h")
-metadata/_custom_type_script = "uid://we22430vcb44"
-
-[node name="Idle" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/IsWandering/WanderType/RandomWander/WanderIdleWait" unique_id=1427891365]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="Idle" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering" unique_id=1783620224]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="ReturnToIdlePosition" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle" unique_id=1467823266]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="IsNotAtIdle" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition" unique_id=1374029816]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="DoesReturn" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition" unique_id=1726796462]
-script = ExtResource("3_qn3nj")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="SelectorComposite" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition" unique_id=23943281]
-script = ExtResource("1_bss38")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="SequenceComposite" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition/SelectorComposite" unique_id=1584519434]
-script = ExtResource("2_tda05")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="SetPointToIdlePoint" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition/SelectorComposite/SequenceComposite" unique_id=1346366421]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="MoveToPoint" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition/SelectorComposite/SequenceComposite" unique_id=425803332]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="ChangeToWander" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle/ReturnToIdlePosition/SelectorComposite" unique_id=98879532]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="Idle" type="Node" parent="HurtDeadAlive/WanderOrPursue/Wandering/Idle" unique_id=1859183578]
-script = ExtResource("4_l6pdb")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="HurtDeadAlive2" type="Node" parent="." unique_id=850560135]
+[node name="HurtDeadAlive" type="Node" parent="." unique_id=566060246]
 script = ExtResource("6_bnlop")
 metadata/_custom_type_script = "uid://cw22yurt5l74k"
 
-[node name="Dead" type="Node" parent="HurtDeadAlive2" unique_id=506309588]
+[node name="Dead" type="Node" parent="HurtDeadAlive" unique_id=923181622]
 script = ExtResource("2_tda05")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="IsDead" type="Node" parent="HurtDeadAlive2/Dead" unique_id=825838344]
+[node name="IsDead" type="Node" parent="HurtDeadAlive/Dead" unique_id=2127363729]
 script = ExtResource("7_oaeeq")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="SetHVelocityToZero" type="Node" parent="HurtDeadAlive2/Dead" unique_id=1724225999]
+[node name="SetHVelocityToZero" type="Node" parent="HurtDeadAlive/Dead" unique_id=1502883038]
 script = ExtResource("8_ey15c")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="DeadAnimation" type="Node" parent="HurtDeadAlive2/Dead" unique_id=14113097]
+[node name="DeadAnimation" type="Node" parent="HurtDeadAlive/Dead" unique_id=177711669]
 script = ExtResource("9_p1837")
 animation = 3
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="AwaitAnimation" type="Node" parent="HurtDeadAlive2/Dead" unique_id=649893407]
+[node name="AwaitAnimation" type="Node" parent="HurtDeadAlive/Dead" unique_id=1310384392]
 script = ExtResource("10_qv2vy")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="RemoveSelf" type="Node" parent="HurtDeadAlive2/Dead" unique_id=2041629697]
+[node name="RemoveSelf" type="Node" parent="HurtDeadAlive/Dead" unique_id=1784823581]
 script = ExtResource("11_8jewq")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="Stun" type="Node" parent="HurtDeadAlive2" unique_id=441117259]
-script = ExtResource("12_3xwg0")
-metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
-
-[node name="IsStunned" type="Node" parent="HurtDeadAlive2/Stun" unique_id=56150596]
+[node name="IsStunned" type="Node" parent="HurtDeadAlive" unique_id=263481600]
 script = ExtResource("13_85l3h")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="ForeverWait" type="Node" parent="HurtDeadAlive2/Stun" unique_id=1782769532]
-script = ExtResource("14_j31fo")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+[node name="Move" type="Node" parent="HurtDeadAlive" unique_id=878846670]
+script = ExtResource("2_tda05")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="MoveToInterestPoint" type="Node" parent="HurtDeadAlive2" unique_id=1086219238]
+[node name="PurseOrPatrol" type="Node" parent="HurtDeadAlive/Move" unique_id=45986235]
+script = ExtResource("6_bnlop")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="Player" type="Node" parent="HurtDeadAlive/Move/PurseOrPatrol" unique_id=1475940286]
 script = ExtResource("12_3xwg0")
 metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
 
-[node name="NotAtInterestPoint" type="Node" parent="HurtDeadAlive2/MoveToInterestPoint" unique_id=303284840]
+[node name="PatrolMethod" type="Node" parent="HurtDeadAlive/Move/PurseOrPatrol" unique_id=886816774]
+script = ExtResource("1_bss38")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="Path" type="Node" parent="HurtDeadAlive/Move/PurseOrPatrol/PatrolMethod" unique_id=1674345216]
+script = ExtResource("2_tda05")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="Wander" type="Node" parent="HurtDeadAlive/Move/PurseOrPatrol/PatrolMethod" unique_id=1040749027]
+script = ExtResource("2_tda05")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="Stationery" type="Node" parent="HurtDeadAlive/Move/PurseOrPatrol/PatrolMethod" unique_id=604117550]
+script = ExtResource("2_tda05")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="MoveToInterestPoint" type="Node" parent="HurtDeadAlive/Move" unique_id=451504485]
+script = ExtResource("12_3xwg0")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="NotAtInterestPoint" type="Node" parent="HurtDeadAlive/Move/MoveToInterestPoint" unique_id=770173581]
 script = ExtResource("15_o6fs4")
 metadata/_custom_type_script = "uid://crkjak4kyv56m"
 
-[node name="AtInterestPoint" type="Node" parent="HurtDeadAlive2/MoveToInterestPoint/NotAtInterestPoint" unique_id=1662245634]
+[node name="AtInterestPoint" type="Node" parent="HurtDeadAlive/Move/MoveToInterestPoint/NotAtInterestPoint" unique_id=1967678821]
 script = ExtResource("16_twhnx")
 forgiveness = 100.0
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="WalkAnimation" type="Node" parent="HurtDeadAlive2/MoveToInterestPoint" unique_id=1154181686]
+[node name="WalkAnimation" type="Node" parent="HurtDeadAlive/Move/MoveToInterestPoint" unique_id=409046738]
 script = ExtResource("9_p1837")
 animation = 2
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="MoveToPointTask" type="Node" parent="HurtDeadAlive2/MoveToInterestPoint" unique_id=829310569 node_paths=PackedStringArray("task")]
+[node name="MoveToPointTask" type="Node" parent="HurtDeadAlive/Move/MoveToInterestPoint" unique_id=589101658]
 script = ExtResource("17_1am0g")
-task = NodePath("")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="Idle" type="Node" parent="HurtDeadAlive2" unique_id=1929970974]
+[node name="Idle" type="Node" parent="HurtDeadAlive" unique_id=1664275716]
 script = ExtResource("2_tda05")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="IdleAnimation" type="Node" parent="HurtDeadAlive2/Idle" unique_id=490134998]
+[node name="IdleAnimation" type="Node" parent="HurtDeadAlive/Idle" unique_id=55249231]
 script = ExtResource("9_p1837")
 animation = 1
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="SlowdownCheck" type="Node" parent="HurtDeadAlive2/Idle" unique_id=1948803725]
+[node name="SlowdownCheck" type="Node" parent="HurtDeadAlive/Idle" unique_id=1142031084]
 script = ExtResource("12_3xwg0")
 metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
 
-[node name="HasHVelocity" type="Node" parent="HurtDeadAlive2/Idle/SlowdownCheck" unique_id=1151172822]
+[node name="InverterDecorator" type="Node" parent="HurtDeadAlive/Idle/SlowdownCheck" unique_id=961242039]
 script = ExtResource("15_o6fs4")
 metadata/_custom_type_script = "uid://crkjak4kyv56m"
 
-[node name="HasNoHVelocity" type="Node" parent="HurtDeadAlive2/Idle/SlowdownCheck/HasHVelocity" unique_id=997380650]
+[node name="HasNoHVelocity" type="Node" parent="HurtDeadAlive/Idle/SlowdownCheck/InverterDecorator" unique_id=1938762954]
 script = ExtResource("18_2wy2p")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="SlowdownTask" type="Node" parent="HurtDeadAlive2/Idle/SlowdownCheck" unique_id=1676857730 node_paths=PackedStringArray("task")]
+[node name="SlowdownTask" type="Node" parent="HurtDeadAlive/Idle/SlowdownCheck" unique_id=656731780 node_paths=PackedStringArray("task")]
 script = ExtResource("19_w6pri")
 task = NodePath("")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"

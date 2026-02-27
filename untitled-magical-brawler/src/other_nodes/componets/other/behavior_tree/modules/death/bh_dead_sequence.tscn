@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://0gf4d4ablrmm"]
+
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="1_gs4ve"]
+[ext_resource type="Script" uid="uid://wlv8mevyp2xg" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/health/bh_is_health_below.gd" id="2_b6rcq"]
+[ext_resource type="Script" uid="uid://c60eik3a4v666" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/velocity/bh_set_horizontal_velocity.gd" id="3_eq75b"]
+[ext_resource type="Script" uid="uid://dpptc6vadvc0s" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_animation_leaf.gd" id="4_oq7dw"]
+[ext_resource type="Script" uid="uid://dgur31eip2ba7" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/animation/bh_await_animation.gd" id="5_qwu2q"]
+[ext_resource type="Script" uid="uid://t1vdkkqw3328" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/misc/bh_remove_self.gd" id="6_sfree"]
+
+[node name="DeadSequence" type="Node" unique_id=1983090562]
+script = ExtResource("1_gs4ve")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="IsDead" type="Node" parent="." unique_id=1610156585]
+script = ExtResource("2_b6rcq")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SetHVelocityToZero" type="Node" parent="." unique_id=1720155479]
+script = ExtResource("3_eq75b")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="DeadAnimation" type="Node" parent="." unique_id=1735228479]
+script = ExtResource("4_oq7dw")
+animation = 3
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="AwaitAnimation" type="Node" parent="." unique_id=284197431]
+script = ExtResource("5_qwu2q")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="RemoveSelf" type="Node" parent="." unique_id=1728316774]
+script = ExtResource("6_sfree")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"

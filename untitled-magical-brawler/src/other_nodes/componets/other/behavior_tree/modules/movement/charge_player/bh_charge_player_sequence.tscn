@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://wewdvxttrvlp"]
+
+[ext_resource type="Script" uid="uid://cce7kabs02et5" path="res://src/other_nodes/componets/other/behavior_tree/modules/movement/charge_player/module_script.gd" id="1_kwj2k"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="4_tk8q3"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_3jqs8"]
+[ext_resource type="Script" uid="uid://v6rm3wx6tyqq" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/misc/bh_player_in_detection.gd" id="5_30jrk"]
+[ext_resource type="PackedScene" uid="uid://coxws8h4eomqo" path="res://src/other_nodes/componets/other/behavior_tree/modules/go_to/bh_go_to_player.tscn" id="6_acy3a"]
+[ext_resource type="Script" uid="uid://bqgjmbd01e1xg" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/misc/bh_remembers_player.gd" id="7_a50xg"]
+[ext_resource type="Script" uid="uid://bkr7qj44253ue" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="8_t8bib"]
+[ext_resource type="Script" uid="uid://dorri1tul8gfx" path="res://addons/beehave/nodes/decorators/delayer.gd" id="9_wn1lx"]
+[ext_resource type="Script" uid="uid://b1rsp7g7pkcux" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/misc/bh_forget_player.gd" id="10_nwtjk"]
+
+[node name="ChargePlayerSequence" type="Node" unique_id=284113125]
+script = ExtResource("1_kwj2k")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="PursueSequence" type="Node" parent="." unique_id=119716230]
+script = ExtResource("4_tk8q3")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="DetectsPlayer" type="Node" parent="PursueSequence" unique_id=2095195553]
+script = ExtResource("5_30jrk")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="GoToPlayerPursue" parent="PursueSequence" unique_id=75870779 instance=ExtResource("6_acy3a")]
+unique_name_in_owner = true
+
+[node name="PursueLingerSequence" type="Node" parent="." unique_id=1930248544]
+script = ExtResource("5_3jqs8")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="RememebersPlayer" type="Node" parent="PursueLingerSequence" unique_id=988587145]
+script = ExtResource("7_a50xg")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SimpleParallelComposite" type="Node" parent="PursueLingerSequence" unique_id=1920144070]
+script = ExtResource("8_t8bib")
+metadata/_custom_type_script = "uid://bkr7qj44253ue"
+
+[node name="GoToPlayerLinger" parent="PursueLingerSequence/SimpleParallelComposite" unique_id=112785069 instance=ExtResource("6_acy3a")]
+unique_name_in_owner = true
+
+[node name="DelayDecorator" type="Node" parent="PursueLingerSequence/SimpleParallelComposite" unique_id=1094216169]
+unique_name_in_owner = true
+script = ExtResource("9_wn1lx")
+wait_time = 2.0
+metadata/_custom_type_script = "uid://dorri1tul8gfx"
+
+[node name="ForgetPlayer" type="Node" parent="PursueLingerSequence/SimpleParallelComposite/DelayDecorator" unique_id=1719920089]
+script = ExtResource("10_nwtjk")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
