@@ -27,6 +27,8 @@ var SNAP_RAYCAST_LENGTH := 500
 @export_group("Hidden Exports")
 @export var _visual_pivot: Node2D
 @export var _velocity_module: VelocityComponent
+@export var _task_manager: TaskManager
+@export var _animation_player: AnimationPlayer
 #endregion
 
 
@@ -45,7 +47,7 @@ func _notification(what: int) -> void:
 			_on_draw_notification()
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in [&"_visual_pivot", &"_velocity_module"]:
+	if property.name in [&"_visual_pivot", &"_velocity_module", &"_task_manager", &"_animation_player"]:
 		if owner != null:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 #endregion
@@ -143,4 +145,22 @@ func predict_next_position(delta : float = 1.0) -> Vector2:
 		return Vector2.ZERO
 	
 	return global_position + _velocity_module.get_velocity() * delta
+#endregion
+
+
+#region Public Methods
+func play_animation(animation_name : StringName) -> void:
+	_animation_player.play(animation_name)
+func is_animation_playing() -> bool:
+	return _animation_player.is_playing()
+func get_animation_player() -> AnimationPlayer:
+	return _animation_player
+
+func start_task(
+	node : TaskNode, args : Dictionary = {},
+	overwrite : bool = true
+) -> void:
+	_task_manager.task_begin(node, args, overwrite)
+func end_task(node : TaskNode) -> void:
+	_task_manager.task_end(node)
 #endregion

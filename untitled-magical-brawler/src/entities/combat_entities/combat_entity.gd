@@ -27,6 +27,7 @@ class_name CombatEntity extends BaseEntity
 #region Private Export Variables
 @export_group("Hidden Exports")
 @export var _health_module: HealthComponent
+@export var _status_effect_receiver : StatusEffectReceiverBase
 #endregion
 
 
@@ -39,7 +40,7 @@ var _health_display : DebugHealthDisplayLabel
 #region Virtual Methods
 func _validate_property(property: Dictionary) -> void:
 	super(property)
-	if property.name in [&"_health_module"]:
+	if property.name in [&"_health_module", &"_status_effect_receiver"]:
 		if owner != null:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 #endregion
@@ -92,4 +93,10 @@ func is_dead() -> bool:
 	if !_health_module:
 		return false
 	return _health_module.is_dead()
+#endregion
+
+
+#region Public Methods (Status Effects)
+func has_status_effect(type : StatusEffect.STATUS_TYPE) -> bool:
+	return _status_effect_receiver.has_effect_type(type)
 #endregion

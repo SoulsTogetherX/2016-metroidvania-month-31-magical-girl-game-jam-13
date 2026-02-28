@@ -11,36 +11,398 @@
 [ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_ed3ja"]
 [ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_0r3kn"]
-[ext_resource type="Script" uid="uid://e6u6g1v5xrc0" path="res://src/other_nodes/componets/control/action_cache_component.gd" id="7_p2qdy"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="8_5qgjf"]
 [ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_ljr7w"]
 [ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/jump_task.gd" id="9_0tyfe"]
 [ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="9_ogtao"]
 [ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="9_rvvip"]
-[ext_resource type="Script" uid="uid://4tex7mgshe66" path="res://src/other_nodes/componets/other/state_machine/states/entity/base/entity_idle_state.gd" id="10_3c4mh"]
 [ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="10_nshoc"]
 [ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="10_ogtao"]
 [ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/walk_task.gd" id="11_a31ob"]
 [ext_resource type="Script" uid="uid://dtgljqvaxqo4g" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_handler/state_status_effect_handler.gd" id="11_iamtb"]
-[ext_resource type="Script" uid="uid://co2ga7r6maxo7" path="res://src/other_nodes/componets/other/state_machine/states/entity/base/entity_move_state.gd" id="11_p2qdy"]
-[ext_resource type="Script" uid="uid://d0ibkovbhlejv" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/normal/player_jump_state.gd" id="12_lqdhu"]
-[ext_resource type="Script" uid="uid://bg0x5p60udvex" path="res://src/other_nodes/componets/other/state_machine/states/entity/base/entity_slowdown_state.gd" id="12_t8d2k"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="13_a31ob"]
-[ext_resource type="Script" uid="uid://bcqjmffcvd5p1" path="res://src/other_nodes/componets/other/ability_manager/ability_cache_module.gd" id="13_xm7nl"]
-[ext_resource type="Script" uid="uid://cbsbtae5bl2nj" path="res://src/other_nodes/componets/other/state_machine/base/state_machine.gd" id="15_2cmg6"]
-[ext_resource type="Script" uid="uid://vqmn4degnkv1" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/normal/player_fall_state.gd" id="15_3d0mj"]
-[ext_resource type="Script" uid="uid://7oli4bfl8pen" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/ability/select_state.gd" id="15_f610a"]
-[ext_resource type="Script" uid="uid://cfpbs2b0cw273" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/ability/ability_passthrough_state.gd" id="16_lacky"]
-[ext_resource type="Script" uid="uid://ddjhdefxicgos" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/normal/player_hurt_state.gd" id="17_fjj3i"]
-[ext_resource type="Script" uid="uid://dk2uca55dbflh" path="res://src/other_nodes/componets/other/state_machine/modules/animation_state_module.gd" id="17_snams"]
-[ext_resource type="Script" uid="uid://d26id7i6xpc3r" path="res://src/other_nodes/componets/other/state_machine/states/entity/base/entity_dead_state.gd" id="18_ngh1c"]
-[ext_resource type="Script" uid="uid://bu2ma7h63v04n" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/ability/abilities/dig_ability_state.gd" id="19_f610a"]
-[ext_resource type="Script" uid="uid://sf14nbivbae6" path="res://src/other_nodes/componets/other/state_machine/modules/task_state_module.gd" id="19_snams"]
-[ext_resource type="Script" uid="uid://b8hm5bjcv2jk4" path="res://src/other_nodes/componets/other/state_machine/modules/player_walk_task_state_module.gd" id="21_45rvh"]
-[ext_resource type="Script" uid="uid://b1e2iqp2tkllh" path="res://src/other_nodes/componets/other/state_machine/conditionals/ability_change_conditional.gd" id="25_fbnv4"]
-[ext_resource type="Script" uid="uid://bf1xbadqscuer" path="res://src/other_nodes/componets/other/state_machine/conditionals/on_conditional.gd" id="25_i78gy"]
-[ext_resource type="Script" uid="uid://dikdupoei8wb1" path="res://src/other_nodes/componets/other/state_machine/states/entity/player/normal/player_grounded_attack_state.gd" id="25_lacky"]
-[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_cache_on_actor.gd" id="33_45rvh"]
+[ext_resource type="Script" uid="uid://bcqjmffcvd5p1" path="res://src/other_nodes/componets/other/ability_manager/ability_cache_module.gd" id="14_kgtwq"]
+[ext_resource type="Script" uid="uid://6hg6o4escfno" path="res://src/other_nodes/componets/other/hsm/base/HSMContext.gd" id="16_1fgyy"]
+[ext_resource type="Script" uid="uid://crubykxav651n" path="res://src/other_nodes/componets/other/hsm/modules/move_task_module.gd" id="28_txpw3"]
+[ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="29_iamtb"]
+[ext_resource type="Script" uid="uid://f52ik2jq0j3c" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/hsm_stationary_branch.gd" id="29_wjrm0"]
+[ext_resource type="Script" uid="uid://xv610pu3m66j" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/hsm_normal_branch.gd" id="31_nshoc"]
+[ext_resource type="Script" uid="uid://c13ducndpw58n" path="res://src/other_nodes/componets/other/hsm/modules/task_module.gd" id="32_3xcyv"]
+[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_hsm_context.gd" id="33_45rvh"]
+[ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="41_iamtb"]
+[ext_resource type="Script" uid="uid://0cpy1h8nxy0k" path="res://src/other_nodes/componets/other/hsm/player/injured/hsm_injured_branch.gd" id="42_8h0p6"]
+[ext_resource type="Script" uid="uid://cu77b7j2pivmq" path="res://src/other_nodes/componets/other/hsm/player/injured/leafs/hsm_dead.gd" id="43_d0oxh"]
+[ext_resource type="Script" uid="uid://bqwidr1pm2ims" path="res://src/other_nodes/componets/other/hsm/player/injured/leafs/hsm_hurt.gd" id="44_7yy2l"]
+[ext_resource type="Script" uid="uid://b3qq0uta0dnch" path="res://src/other_nodes/componets/other/hsm/player/normal/hsm_normal_branch.gd" id="45_ja238"]
+[ext_resource type="Script" uid="uid://d3lbx6x36g5lm" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/hsm_airborn_branch_.gd" id="46_wixch"]
+[ext_resource type="Script" uid="uid://y4ui85ghvo47" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/leafs/hsm_fall.gd" id="47_llr1v"]
+[ext_resource type="Script" uid="uid://ouvwrmrbv6uv" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/leafs/hsm_jump.gd" id="48_gaiw7"]
+[ext_resource type="Script" uid="uid://bfywxkk80bnwv" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/hsm_grounded_branch.gd" id="49_hp8j0"]
+[ext_resource type="Script" uid="uid://dfhtf8imgj2cg" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/leafs/hsm_dig.gd" id="50_5ewf5"]
+[ext_resource type="Script" uid="uid://c0elefshkywa1" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/leafs/hsm_idle.gd" id="51_3gyts"]
+[ext_resource type="Script" uid="uid://d10dlcdx7wqf6" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/leafs/hsm_grounded_attack.gd" id="52_d0oxh"]
+[ext_resource type="Script" uid="uid://nn7kpdksgcc7" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/leafs/hsm_running.gd" id="52_kctto"]
+[ext_resource type="Script" uid="uid://doh1sw7gy812l" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/leafs/hsm_slowdown.gd" id="53_fjhij"]
+
+[sub_resource type="Animation" id="Animation_45rvh"]
+resource_name = "ATTACK"
+length = 0.275
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"punch"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PunchHitboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.275),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_snams"]
+resource_name = "DEAD"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dead"]
+}
+
+[sub_resource type="Animation" id="Animation_akx0o"]
+resource_name = "DIG_END"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Particles/DigParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GroundCollide:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../DigGroundCollide:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HurtboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.39999998, 0.5, 0.55, 0.75, 0.8, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dig_end"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:offset:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fbnv4"]
+resource_name = "DIG_START"
+length = 1.225
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Particles/DigParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GroundCollide:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../DigGroundCollide:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HurtboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.275, 0.375, 0.45, 0.55, 0.725, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dig_start"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:offset:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.05, 1.2, 1.225),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [0.0, -190.0, -190.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2cmg6"]
+resource_name = "FALL"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+
+[sub_resource type="Animation" id="Animation_iamtb"]
+resource_name = "IDLE"
+length = 0.5714286
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857146),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_4tw7w"]
+resource_name = "JUMP"
+length = 0.71428573
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
 
 [sub_resource type="Animation" id="Animation_amj0e"]
 resource_name = "RESET"
@@ -121,347 +483,42 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".:visible")
+tracks/6/path = NodePath("../HurtboxComponent:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../HurtboxComponent:disabled")
+tracks/7/path = NodePath(".:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_snams"]
-resource_name = "dead"
-length = 0.7
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"dead"]
-}
-
-[sub_resource type="Animation" id="Animation_akx0o"]
-resource_name = "dig_end"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Particles/DigParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../GroundCollide:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../DigGroundCollide:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
 "values": [true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../HurtboxComponent:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:offset:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_fbnv4"]
-resource_name = "dig_start"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Particles/DigParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../GroundCollide:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../DigGroundCollide:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../HurtboxComponent:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_2cmg6"]
-resource_name = "fall"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"jump"]
-}
-
-[sub_resource type="Animation" id="Animation_33dyk"]
-resource_name = "hurt"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"hurt"]
-}
-
-[sub_resource type="Animation" id="Animation_t4js2"]
-resource_name = "idle"
-length = 0.5714286
-loop_mode = 1
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857146),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
-}
-
-[sub_resource type="Animation" id="Animation_4tw7w"]
-resource_name = "jump"
-length = 0.71428573
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [2, 3, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"jump"]
-}
-
-[sub_resource type="Animation" id="Animation_45rvh"]
-resource_name = "punch"
-length = 0.275
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 0, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"punch"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../PunchHitboxComponent:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.275),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_tvulh"]
-resource_name = "running"
+resource_name = "RUNNING"
 length = 0.71428573
 loop_mode = 1
 step = 0.15
@@ -490,18 +547,47 @@ tracks/1/keys = {
 "values": [&"running"]
 }
 
+[sub_resource type="Animation" id="Animation_33dyk"]
+resource_name = "STUN"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cmg6"]
 _data = {
+&"ATTACK": SubResource("Animation_45rvh"),
+&"DEAD": SubResource("Animation_snams"),
+&"DIG_END": SubResource("Animation_akx0o"),
+&"DIG_START": SubResource("Animation_fbnv4"),
+&"FALL": SubResource("Animation_2cmg6"),
+&"IDLE": SubResource("Animation_iamtb"),
+&"JUMP": SubResource("Animation_4tw7w"),
 &"RESET": SubResource("Animation_amj0e"),
-&"dead": SubResource("Animation_snams"),
-&"dig_end": SubResource("Animation_akx0o"),
-&"dig_start": SubResource("Animation_fbnv4"),
-&"fall": SubResource("Animation_2cmg6"),
-&"hurt": SubResource("Animation_33dyk"),
-&"idle": SubResource("Animation_t4js2"),
-&"jump": SubResource("Animation_4tw7w"),
-&"punch": SubResource("Animation_45rvh"),
-&"running": SubResource("Animation_tvulh")
+&"RUNNING": SubResource("Animation_tvulh"),
+&"STUN": SubResource("Animation_33dyk")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
@@ -536,14 +622,17 @@ height = 401.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akx0o"]
 size = Vector2(220, 6)
 
-[node name="Player" type="CharacterBody2D" unique_id=539542931 node_paths=PackedStringArray("_health_module", "_visual_pivot", "_velocity_module")]
+[node name="Player" type="CharacterBody2D" unique_id=539542931 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
 z_index = 1
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_33dyk")
 _health_module = NodePath("CombatComponents/HealthComponent")
+_status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
 _visual_pivot = NodePath("VisualPivot")
 _velocity_module = NodePath("VelocityComponent")
+_task_manager = NodePath("TaskManager")
+_animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=1229646187]
 
@@ -553,6 +642,7 @@ animation = &"idle"
 offset = Vector2(0, -224)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=71332508]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_2cmg6")
 
 [node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=1143519473 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
@@ -631,15 +721,14 @@ metadata/_custom_type_script = "uid://lqunqvr5fs"
 [node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=605702931]
 script = ExtResource("10_nshoc")
 
-[node name="StatusEffectHandler" type="Node" parent="CombatComponents/StatusEffectReceiver" unique_id=470331412 node_paths=PackedStringArray("action_cache", "recevier")]
+[node name="StatusEffectHandler" type="Node" parent="CombatComponents/StatusEffectReceiver" unique_id=470331412 node_paths=PackedStringArray("recevier")]
 script = ExtResource("11_iamtb")
-action_cache = NodePath("../../../ActionCacheModule")
 action_stun = &"hit_stun"
 recevier = NodePath("..")
 
-[node name="AbilityCacheModule" type="Node" parent="." unique_id=1952546448]
+[node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
 unique_name_in_owner = true
-script = ExtResource("13_xm7nl")
+script = ExtResource("14_kgtwq")
 metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
@@ -650,386 +739,148 @@ metadata/_custom_type_script = "uid://ui8sa21uexr7"
 script = ExtResource("6_iw6ud")
 metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
 
-[node name="ActionCacheModule" type="Node" parent="." unique_id=1515441628]
-script = ExtResource("7_p2qdy")
-metadata/_custom_type_script = "uid://e6u6g1v5xrc0"
+[node name="HSMContext" type="Node" parent="." unique_id=69866376]
+script = ExtResource("16_1fgyy")
+metadata/_custom_type_script = "uid://6hg6o4escfno"
 
-[node name="StateMachine" type="Node" parent="." unique_id=479517536 node_paths=PackedStringArray("starting_state")]
-script = ExtResource("15_2cmg6")
-starting_state = NodePath("Idle")
-metadata/_custom_type_script = "uid://cbsbtae5bl2nj"
+[node name="HSMMaster" type="Node" parent="." unique_id=1860324189 node_paths=PackedStringArray("starting_state", "context", "actor")]
+script = ExtResource("41_iamtb")
+starting_state = NodePath("Normal/Grounded/Normal/Stationary/Idle")
+context = NodePath("../HSMContext")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://cn1lche2a867t"
 
-[node name="AbilityGroup" type="Node" parent="StateMachine" unique_id=1822918190 node_paths=PackedStringArray("ability_cache", "normal_state", "dig_ability_state")]
-script = ExtResource("16_lacky")
-ability_cache = NodePath("../../AbilityCacheModule")
-normal_state = NodePath("../Idle")
-dig_ability_state = NodePath("DigAbility")
+[node name="Injured" type="Node" parent="HSMMaster" unique_id=1176988154]
+script = ExtResource("42_8h0p6")
 
-[node name="DigAbility" type="Node" parent="StateMachine/AbilityGroup" unique_id=1600582476 node_paths=PackedStringArray("ability_cache", "normal_state", "ground_ray_cast", "ground_collide", "animation_player", "action_cache")]
-script = ExtResource("19_f610a")
-ability_cache = NodePath("../../../AbilityCacheModule")
-normal_state = NodePath("../../Idle")
-ground_ray_cast = NodePath("../../../VisualPivot/GroundRayCast")
-ground_collide = NodePath("../../../GroundCollide")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-action_cache = NodePath("../../../ActionCacheModule")
+[node name="Dead" type="Node" parent="HSMMaster/Injured" unique_id=1808724823]
+script = ExtResource("43_d0oxh")
 
-[node name="DigMoveTask" type="Node" parent="StateMachine/AbilityGroup/DigAbility" unique_id=555452927 node_paths=PackedStringArray("action_cache_module", "task_manager", "task")]
-script = ExtResource("21_45rvh")
-action_cache_module = NodePath("../../../../ActionCacheModule")
-task_manager = NodePath("../../../../TaskManager")
-task = NodePath("../../../../TaskManager/DigMoveTask")
-auto_call = false
+[node name="Hurt" type="Node" parent="HSMMaster/Injured" unique_id=884992292]
+script = ExtResource("44_7yy2l")
 
-[node name="Animation" type="Node" parent="StateMachine/AbilityGroup/DigAbility" unique_id=2113292941 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"dig_start"
-end = &"dig_end"
-auto_call = false
+[node name="Normal" type="Node" parent="HSMMaster" unique_id=1842780270]
+script = ExtResource("45_ja238")
 
-[node name="AbilitySelect" type="Node" parent="StateMachine" unique_id=423674994 node_paths=PackedStringArray("ability_cache", "normal_state", "action_cache")]
-script = ExtResource("15_f610a")
-ability_cache = NodePath("../../AbilityCacheModule")
-normal_state = NodePath("../Idle")
-action_cache = NodePath("../../ActionCacheModule")
+[node name="Airborn" type="Node" parent="HSMMaster/Normal" unique_id=1982618466]
+script = ExtResource("46_wixch")
 
-[node name="IdleAnimation" type="Node" parent="StateMachine/AbilitySelect" unique_id=1881726539 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"idle"
+[node name="GravityTaskModule" type="Node" parent="HSMMaster/Normal/Airborn" unique_id=388417439 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../TaskManager/GravityTask")
 
-[node name="StartTask" type="Node" parent="StateMachine/AbilitySelect" unique_id=2078428892 node_paths=PackedStringArray("task_manager", "tasks")]
-script = ExtResource("19_snams")
-task_manager = NodePath("../../../TaskManager")
-tasks = [NodePath("../../../TaskManager/SlowdownTask")]
+[node name="AirMoveTaskModule" type="Node" parent="HSMMaster/Normal/Airborn" unique_id=441882860 node_paths=PackedStringArray("task")]
+script = ExtResource("28_txpw3")
+task = NodePath("../../../../TaskManager/AirMoveTask")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=74776973 node_paths=PackedStringArray("velocity_module", "move_state", "slowdown_state", "action_cache")]
-script = ExtResource("10_3c4mh")
-velocity_module = NodePath("../../VelocityComponent")
-move_state = NodePath("../Running")
-slowdown_state = NodePath("../Slowdown")
-action_cache = NodePath("../../ActionCacheModule")
-
-[node name="IdleAnimation" type="Node" parent="StateMachine/Idle" unique_id=769521148 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"idle"
-
-[node name="AbilityConditional" type="Node" parent="StateMachine/Idle" unique_id=1389468701 node_paths=PackedStringArray("ability_cache", "select_state", "ability_state", "action_cache")]
-script = ExtResource("25_fbnv4")
-ability_cache = NodePath("../../../AbilityCacheModule")
-select_state = NodePath("../../AbilitySelect")
-ability_state = NodePath("../../AbilityGroup")
-action_cache = NodePath("../../../ActionCacheModule")
-auto_call = null
-
-[node name="FallConditional" type="Node" parent="StateMachine/Idle" unique_id=393455261 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../PlayerFall")
-action = &"in_air"
-on_direct_check = true
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="JumpConditional" type="Node" parent="StateMachine/Idle" unique_id=575336785 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Jump")
-action = &"player_jump"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="GroundedAttackConditional" type="Node" parent="StateMachine/Idle" unique_id=78279028 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../GroundedAttack")
-action = &"player_attack"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="DeathConditional" type="Node" parent="StateMachine/Idle" unique_id=1570692843 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="HitStunConditional" type="Node" parent="StateMachine/Idle" unique_id=2141592399 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Hurt")
-action = &"hit_stun"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="Slowdown" type="Node" parent="StateMachine" unique_id=1861832200 node_paths=PackedStringArray("velocity_module", "move_state", "stop_state", "action_cache")]
-script = ExtResource("12_t8d2k")
-velocity_module = NodePath("../../VelocityComponent")
-move_state = NodePath("../Running")
-stop_state = NodePath("../Idle")
-action_cache = NodePath("../../ActionCacheModule")
-
-[node name="IdleAnimation" type="Node" parent="StateMachine/Slowdown" unique_id=67502184 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"idle"
-
-[node name="SlowdownTask" type="Node" parent="StateMachine/Slowdown" unique_id=1118527549 node_paths=PackedStringArray("task_manager", "tasks")]
-script = ExtResource("19_snams")
-task_manager = NodePath("../../../TaskManager")
-tasks = [NodePath("../../../TaskManager/SlowdownTask")]
-
-[node name="AbilityConditional" type="Node" parent="StateMachine/Slowdown" unique_id=747167608 node_paths=PackedStringArray("ability_cache", "select_state", "ability_state", "action_cache")]
-script = ExtResource("25_fbnv4")
-ability_cache = NodePath("../../../AbilityCacheModule")
-select_state = NodePath("../../AbilitySelect")
-ability_state = NodePath("../../AbilityGroup")
-action_cache = NodePath("../../../ActionCacheModule")
-auto_call = null
-
-[node name="FallConditional" type="Node" parent="StateMachine/Slowdown" unique_id=2117298485 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../PlayerFall")
-action = &"in_air"
-on_direct_check = true
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="JumpConditional" type="Node" parent="StateMachine/Slowdown" unique_id=473745463 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Jump")
-action = &"player_jump"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="GroundedAttackConditional" type="Node" parent="StateMachine/Slowdown" unique_id=510777368 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../GroundedAttack")
-action = &"player_attack"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="DeathConditional" type="Node" parent="StateMachine/Slowdown" unique_id=1329093318 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"player_death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="HitStunConditional" type="Node" parent="StateMachine/Slowdown" unique_id=968429949 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Hurt")
-action = &"hit_stun"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="Running" type="Node" parent="StateMachine" unique_id=1053190898 node_paths=PackedStringArray("stop_state", "action_cache")]
-script = ExtResource("11_p2qdy")
-stop_state = NodePath("../Slowdown")
-action_cache = NodePath("../../ActionCacheModule")
-
-[node name="RunAnimation" type="Node" parent="StateMachine/Running" unique_id=1789065644 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"running"
-
-[node name="GroundedMoveTask" type="Node" parent="StateMachine/Running" unique_id=112420077 node_paths=PackedStringArray("action_cache_module", "task_manager", "task")]
-script = ExtResource("21_45rvh")
-action_cache_module = NodePath("../../../ActionCacheModule")
-task_manager = NodePath("../../../TaskManager")
-task = NodePath("../../../TaskManager/GroundMoveTask")
-
-[node name="AbilityConditional" type="Node" parent="StateMachine/Running" unique_id=2059724773 node_paths=PackedStringArray("ability_cache", "select_state", "ability_state", "action_cache")]
-script = ExtResource("25_fbnv4")
-ability_cache = NodePath("../../../AbilityCacheModule")
-select_state = NodePath("../../AbilitySelect")
-ability_state = NodePath("../../AbilityGroup")
-action_cache = NodePath("../../../ActionCacheModule")
-auto_call = null
-
-[node name="FallConditional" type="Node" parent="StateMachine/Running" unique_id=599458372 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../PlayerFall")
-action = &"in_air"
-on_direct_check = true
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="JumpConditional" type="Node" parent="StateMachine/Running" unique_id=1266056460 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Jump")
-action = &"player_jump"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="GroundedAttackConditional" type="Node" parent="StateMachine/Running" unique_id=371501697 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../GroundedAttack")
-action = &"player_attack"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="DeathConditional" type="Node" parent="StateMachine/Running" unique_id=669776716 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"player_death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="HitStunConditional" type="Node" parent="StateMachine/Running" unique_id=1495044733 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Hurt")
-action = &"hit_stun"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="Jump" type="Node" parent="StateMachine" unique_id=365668129 node_paths=PackedStringArray("stop_state", "action_cache")]
-script = ExtResource("12_lqdhu")
-stop_state = NodePath("../PlayerFall")
-action_cache = NodePath("../../ActionCacheModule")
-
-[node name="JumpAnimation" type="Node" parent="StateMachine/Jump" unique_id=445466903 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"jump"
-
-[node name="JumpTask" type="Node" parent="StateMachine/Jump" unique_id=979424954 node_paths=PackedStringArray("task_manager", "tasks")]
-script = ExtResource("19_snams")
-task_manager = NodePath("../../../TaskManager")
-tasks = [NodePath("../../../TaskManager/JumpTask")]
-
-[node name="AirMoveTask" type="Node" parent="StateMachine/Jump" unique_id=226066150 node_paths=PackedStringArray("action_cache_module", "task_manager", "task")]
-script = ExtResource("21_45rvh")
-action_cache_module = NodePath("../../../ActionCacheModule")
-task_manager = NodePath("../../../TaskManager")
-task = NodePath("../../../TaskManager/AirMoveTask")
-
-[node name="AbilityConditional" type="Node" parent="StateMachine/Jump" unique_id=1595629203 node_paths=PackedStringArray("ability_cache", "select_state", "ability_state", "action_cache")]
-script = ExtResource("25_fbnv4")
-ability_cache = NodePath("../../../AbilityCacheModule")
-select_state = NodePath("../../AbilitySelect")
-ability_state = NodePath("../../AbilityGroup")
-action_cache = NodePath("../../../ActionCacheModule")
-auto_call = null
-
-[node name="DeathConditional" type="Node" parent="StateMachine/Jump" unique_id=792195479 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"player_death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="HitStunConditional" type="Node" parent="StateMachine/Jump" unique_id=1912756638 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Hurt")
-action = &"hit_stun"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="PlayerFall" type="Node" parent="StateMachine" unique_id=254368669 node_paths=PackedStringArray("jump_state", "land_state", "coyote_timer", "jump_buffer", "action_cache")]
-script = ExtResource("15_3d0mj")
+[node name="Fall" type="Node" parent="HSMMaster/Normal/Airborn" unique_id=1970180688 node_paths=PackedStringArray("jump_state", "ground_state", "coyote_timer", "jump_buffer")]
+script = ExtResource("47_llr1v")
 jump_state = NodePath("../Jump")
-land_state = NodePath("../Slowdown")
+ground_state = NodePath("../../Grounded/Normal")
 coyote_timer = NodePath("CoyoteTimer")
 jump_buffer = NodePath("JumpBuffer")
-action_cache = NodePath("../../ActionCacheModule")
+need_action_start = true
+need_action_finished = true
 
-[node name="AirMoveTask" type="Node" parent="StateMachine/PlayerFall" unique_id=66088107 node_paths=PackedStringArray("action_cache_module", "task_manager", "task")]
-script = ExtResource("21_45rvh")
-action_cache_module = NodePath("../../../ActionCacheModule")
-task_manager = NodePath("../../../TaskManager")
-task = NodePath("../../../TaskManager/AirMoveTask")
+[node name="FallAnimationModule" type="Node" parent="HSMMaster/Normal/Airborn/Fall" unique_id=473475995]
+script = ExtResource("29_iamtb")
+animation = 1
 
-[node name="AbilityConditional" type="Node" parent="StateMachine/PlayerFall" unique_id=1311599830 node_paths=PackedStringArray("ability_cache", "select_state", "ability_state", "action_cache")]
-script = ExtResource("25_fbnv4")
-ability_cache = NodePath("../../../AbilityCacheModule")
-select_state = NodePath("../../AbilitySelect")
-ability_state = NodePath("../../AbilityGroup")
-action_cache = NodePath("../../../ActionCacheModule")
-auto_call = null
-
-[node name="DeathConditional" type="Node" parent="StateMachine/PlayerFall" unique_id=1658282423 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"player_death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="HitStunConditional" type="Node" parent="StateMachine/PlayerFall" unique_id=711179777 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Hurt")
-action = &"hit_stun"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="JumpBuffer" type="Timer" parent="StateMachine/PlayerFall" unique_id=1569241911]
+[node name="JumpBuffer" type="Timer" parent="HSMMaster/Normal/Airborn/Fall" unique_id=546628607]
 wait_time = 0.2
 one_shot = true
 
-[node name="CoyoteTimer" type="Timer" parent="StateMachine/PlayerFall" unique_id=1270542648]
+[node name="CoyoteTimer" type="Timer" parent="HSMMaster/Normal/Airborn/Fall" unique_id=1373262917]
 wait_time = 0.15
 one_shot = true
 
-[node name="GroundedAttack" type="Node" parent="StateMachine" unique_id=253184800 node_paths=PackedStringArray("stop_state", "punch_delay", "action_cache")]
-script = ExtResource("25_lacky")
-stop_state = NodePath("../Idle")
+[node name="Jump" type="Node" parent="HSMMaster/Normal/Airborn" unique_id=602866142 node_paths=PackedStringArray("fall_state", "ground_state")]
+script = ExtResource("48_gaiw7")
+fall_state = NodePath("../Fall")
+ground_state = NodePath("../../Grounded/Normal")
+need_action_finished = true
+
+[node name="JumpAnimationModule" type="Node" parent="HSMMaster/Normal/Airborn/Jump" unique_id=569971262]
+script = ExtResource("29_iamtb")
+animation = 4
+
+[node name="JumpTaskModule" type="Node" parent="HSMMaster/Normal/Airborn/Jump" unique_id=1836199224 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../../TaskManager/JumpTask")
+
+[node name="Grounded" type="Node" parent="HSMMaster/Normal" unique_id=1567838968 node_paths=PackedStringArray("fall_state", "attack_state", "dig_state", "ground_collider", "ability_cache")]
+script = ExtResource("49_hp8j0")
+fall_state = NodePath("../Airborn/Fall")
+attack_state = NodePath("GroundedAttack")
+dig_state = NodePath("Dig")
+ground_collider = NodePath("../../../GroundCollide")
+ability_cache = NodePath("../../../AbilityCacheModule")
+need_action_start = true
+
+[node name="Normal" type="Node" parent="HSMMaster/Normal/Grounded" unique_id=630790927 node_paths=PackedStringArray("jump_state", "moving_state", "stationary_state")]
+script = ExtResource("31_nshoc")
+jump_state = NodePath("../../Airborn/Jump")
+moving_state = NodePath("Running")
+stationary_state = NodePath("Stationary")
+need_action_start = true
+need_action_finished = true
+
+[node name="Running" type="Node" parent="HSMMaster/Normal/Grounded/Normal" unique_id=1812129145 node_paths=PackedStringArray("stop_state")]
+script = ExtResource("52_kctto")
+stop_state = NodePath("../Stationary/Slowdown")
+need_action_finished = true
+
+[node name="MovingAnimationModule" type="Node" parent="HSMMaster/Normal/Grounded/Normal/Running" unique_id=69468196]
+script = ExtResource("29_iamtb")
+animation = 3
+
+[node name="GroundMoveTaskModule" type="Node" parent="HSMMaster/Normal/Grounded/Normal/Running" unique_id=1309939993 node_paths=PackedStringArray("task")]
+script = ExtResource("28_txpw3")
+task = NodePath("../../../../../../TaskManager/GroundMoveTask")
+
+[node name="Stationary" type="Node" parent="HSMMaster/Normal/Grounded/Normal" unique_id=1215355353 node_paths=PackedStringArray("idle", "slowdown")]
+script = ExtResource("29_wjrm0")
+idle = NodePath("Idle")
+slowdown = NodePath("Slowdown")
+need_action_start = true
+
+[node name="StationaryAnimationModule" type="Node" parent="HSMMaster/Normal/Grounded/Normal/Stationary" unique_id=247710662]
+script = ExtResource("29_iamtb")
+
+[node name="Idle" type="Node" parent="HSMMaster/Normal/Grounded/Normal/Stationary" unique_id=1968702926]
+script = ExtResource("51_3gyts")
+
+[node name="Slowdown" type="Node" parent="HSMMaster/Normal/Grounded/Normal/Stationary" unique_id=986139104]
+script = ExtResource("53_fjhij")
+
+[node name="SlowdownTaskModule" type="Node" parent="HSMMaster/Normal/Grounded/Normal/Stationary/Slowdown" unique_id=1367713461 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../../../../TaskManager/SlowdownTask")
+
+[node name="GroundedAttack" type="Node" parent="HSMMaster/Normal/Grounded" unique_id=943700735 node_paths=PackedStringArray("stop_state", "punch_delay")]
+script = ExtResource("52_d0oxh")
+stop_state = NodePath("../Normal")
 punch_delay = NodePath("PunchDelay")
-action_cache = NodePath("../../ActionCacheModule")
+need_action_start = true
 
-[node name="PunchAnimation" type="Node" parent="StateMachine/GroundedAttack" unique_id=697478310 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"punch"
+[node name="AttackAnimationModule" type="Node" parent="HSMMaster/Normal/Grounded/GroundedAttack" unique_id=451916555]
+script = ExtResource("29_iamtb")
+animation = 3
 
-[node name="SlowdownTask" type="Node" parent="StateMachine/GroundedAttack" unique_id=1924683943 node_paths=PackedStringArray("task_manager", "tasks")]
-script = ExtResource("19_snams")
-task_manager = NodePath("../../../TaskManager")
-tasks = [NodePath("../../../TaskManager/SlowdownTask")]
-
-[node name="DeathConditional" type="Node" parent="StateMachine/GroundedAttack" unique_id=1282961636 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="HitStunConditional" type="Node" parent="StateMachine/GroundedAttack" unique_id=1454711862 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Hurt")
-action = &"hit_stun"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="PunchDelay" type="Timer" parent="StateMachine/GroundedAttack" unique_id=1053735251]
+[node name="PunchDelay" type="Timer" parent="HSMMaster/Normal/Grounded/GroundedAttack" unique_id=1780023592]
 wait_time = 0.3
 
-[node name="Hurt" type="Node" parent="StateMachine" unique_id=1462840384 node_paths=PackedStringArray("stop_state", "action_cache")]
-script = ExtResource("17_fjj3i")
-stop_state = NodePath("../PlayerFall")
-action_cache = NodePath("../../ActionCacheModule")
-
-[node name="HurtAnimation" type="Node" parent="StateMachine/Hurt" unique_id=1510715168 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"hurt"
-
-[node name="DeathConditional" type="Node" parent="StateMachine/Hurt" unique_id=1083324371 node_paths=PackedStringArray("state", "action_cache")]
-script = ExtResource("25_i78gy")
-state = NodePath("../../Dead")
-action = &"player_death"
-on_start_check = true
-action_cache = NodePath("../../../ActionCacheModule")
-
-[node name="Dead" type="Node" parent="StateMachine" unique_id=771187690 node_paths=PackedStringArray("animation_player", "velocity_module", "action_cache")]
-script = ExtResource("18_ngh1c")
-animation_player = NodePath("../../VisualPivot/Sprite/AnimationPlayer")
-velocity_module = NodePath("../../VelocityComponent")
-action_cache = NodePath("../../ActionCacheModule")
-
-[node name="DeadAnimation" type="Node" parent="StateMachine/Dead" unique_id=551834951 node_paths=PackedStringArray("animation_player")]
-script = ExtResource("17_snams")
-animation_player = NodePath("../../../VisualPivot/Sprite/AnimationPlayer")
-begin = &"hurt"
+[node name="Dig" type="Node" parent="HSMMaster/Normal/Grounded" unique_id=1164074805 node_paths=PackedStringArray("ability_cache", "normal_state", "dig_move_task", "ground_collider", "ground_ray_cast")]
+script = ExtResource("50_5ewf5")
+ability_cache = NodePath("../../../../AbilityCacheModule")
+normal_state = NodePath("../Normal")
+dig_move_task = NodePath("../../../../TaskManager/DigMoveTask")
+ground_collider = NodePath("../../../../GroundCollide")
+ground_ray_cast = NodePath("../../../../VisualPivot/GroundRayCast")
+need_action_start = true
 
 [node name="TaskManager" type="Node" parent="." unique_id=615361991 node_paths=PackedStringArray("velocity_module")]
+unique_name_in_owner = true
 script = ExtResource("8_5qgjf")
 velocity_module = NodePath("../VelocityComponent")
 metadata/_custom_type_script = "uid://clhcvayfse4aa"
@@ -1040,7 +891,7 @@ gravity_module = NodePath("../../GravityComponent")
 
 [node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=1703085196]
 script = ExtResource("10_ogtao")
-reset_on_end = true
+hard_stop = false
 need_physics = true
 
 [node name="GroundMoveTask" type="Node" parent="TaskManager" unique_id=200243738 node_paths=PackedStringArray("entity")]
@@ -1053,20 +904,18 @@ script = ExtResource("11_a31ob")
 entity = NodePath("../..")
 need_physics = true
 
-[node name="DigMoveTask" type="Node" parent="TaskManager" unique_id=192365737 node_paths=PackedStringArray("entity", "stop_raycast")]
+[node name="DigMoveTask" type="Node" parent="TaskManager" unique_id=192365737 node_paths=PackedStringArray("entity")]
 script = ExtResource("11_a31ob")
 acceleration = 3000.0
 max_speed = 1500.0
 reset_on_begin = true
 reset_on_end = true
 entity = NodePath("../..")
-stop_raycast = NodePath("../../VisualPivot/GroundRayCast")
 need_physics = true
 
 [node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("gravity_module")]
 script = ExtResource("9_ogtao")
 gravity_module = NodePath("../../GravityComponent")
-auto_start = true
 need_physics = true
 
 [node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=473670275 node_paths=PackedStringArray("actor")]
@@ -1075,9 +924,9 @@ actor = NodePath("../..")
 auto_start = true
 need_physics = true
 
-[node name="UpdateCacheTask" type="Node" parent="TaskManager" unique_id=1339140841 node_paths=PackedStringArray("action_cache", "actor")]
+[node name="UpdateContextTask" type="Node" parent="TaskManager" unique_id=1339140841 node_paths=PackedStringArray("context", "actor")]
 script = ExtResource("33_45rvh")
-action_cache = NodePath("../../ActionCacheModule")
+context = NodePath("../../HSMContext")
 actor = NodePath("../..")
 auto_start = true
 need_physics = true

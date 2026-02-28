@@ -27,13 +27,6 @@ enum PATROL_TYPE {
 #endregion
 
 
-#region OnReady Variables
-@onready var _animation_player: AnimationPlayer = %AnimationPlayer
-@onready var _status_effect_receiver: StatusEffectReceiver = %StatusEffectReceiver
-@onready var _task_manager: VelocityTaskManager = %TaskManager
-#endregion
-
-
 
 #region Virtual Methods
 func _get_property_list() -> Array[Dictionary]:
@@ -80,23 +73,6 @@ func _get(property: StringName) -> Variant:
 
 
 #region Public Methods
-func play_animation(animation_name : StringName) -> void:
-	_animation_player.play(animation_name)
-func is_animation_playing() -> bool:
-	return _animation_player.is_playing()
-
-func has_status_effect(type : StatusEffect.STATUS_TYPE) -> bool:
-	return _status_effect_receiver.has_effect_type(type)
-
-func start_task(
-	node : TaskNode, args : Dictionary = {},
-	overwrite : bool = true
-) -> void:
-	_task_manager.task_begin(node, args, overwrite)
-func end_task(node : TaskNode) -> void:
-	_task_manager.task_end(node)
-
-
 func get_patrol_obj() -> Object:
 	return _patrol_object
 #endregion

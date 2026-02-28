@@ -16,6 +16,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		GlobalLabels.bh_blackboard.INTEREST_POINT,
 		act.global_position
 	)
+	
 	if absf(act.global_position.x - point.x) <= forgiveness:
 		return SUCCESS
 	return FAILURE

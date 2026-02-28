@@ -2,17 +2,19 @@
 class_name Player extends CombatEntity
 
 
-#region OnReady Variables
-# Caches
-@onready var _ability_cache: AbilityCacheModule = %AbilityCacheModule
+#region Onready Variables
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var task_manager: VelocityTaskManager = %TaskManager
+@onready var ability_cache: AbilityCacheModule = %AbilityCacheModule
 #endregion
 
 
-#region Public Methods
+
+#region Ability Methods
 func has_ability(ability : AbilityData) -> bool:
-	return _ability_cache.has_ability_data(ability)
+	if ability == null:
+		return false
+	return ability_cache.has_ability(ability.get_ability_type())
 func register_ability(ability : AbilityData) -> void:
-	if has_ability(ability):
-		return
-	_ability_cache.register_ability(ability)
+	ability_cache.register_ability(ability)
 #endregion

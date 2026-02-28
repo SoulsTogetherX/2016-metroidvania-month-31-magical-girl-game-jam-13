@@ -7,20 +7,9 @@ const ABILITY_TYPE := AbilityData.ABILITY_TYPE
 
 
 #region Private Variables
-var abilties : Array[AbilityData]:
-	set = set_abilities
-#endregion
-
-
-#region Public Variables
-var abilty_idx : int:
-	set = set_abilty_idx,
-	get = get_abilty_idx
-#endregion
-
-
-#region Private Variables
-var _abilty_idx : int
+var _abilties : Dictionary[ABILITY_TYPE, AbilityData] = {
+	ABILITY_TYPE.DIG: DigAbility.new()
+}
 #endregion
 
 
@@ -29,55 +18,30 @@ var _abilty_idx : int
 func register_ability(data : AbilityData) -> void:
 	if data == null:
 		return
-	abilties.append(data)
-func set_abilities(val : Array[AbilityData]) -> void:
-	abilties = val.filter(func(data): return data != null)
-	if abilties.is_empty():
-		_abilty_idx = -1
-		return
-	
-	_abilty_idx = posmod(abilty_idx, abilties.size())
-
-func set_abilty_idx(val : int) -> void:
-	if abilties.is_empty():
-		_abilty_idx = -1
-		return
-	_abilty_idx = posmod(val, abilties.size())
-func get_abilty_idx() -> int:
-	return _abilty_idx
+	_abilties.set(data.get_ability_type(), data)
 #endregion
 
 
 #region Public Methods (Can Checks)
-func can_start(args : Dictionary = {}) -> bool:
-	if is_empty():
+func can_start(type : ABILITY_TYPE, args : Dictionary = {}) -> bool:
+	var ability : AbilityData = _abilties.get(type, null)
+	if ability == null:
 		return false
-	return get_current_ability().can_start(args)
-func can_end(args : Dictionary = {}) -> bool:
-	if is_empty():
+	return ability.can_start(args)
+func can_end(type : ABILITY_TYPE, args : Dictionary = {}) -> bool:
+	var ability : AbilityData = _abilties.get(type, null)
+	if ability == null:
 		return false
-	return get_current_ability().can_end(args)
+	return ability.can_end(args)
 #endregion
 
 
 #region Public Methods (Helper)
-func get_current_ability() -> AbilityData:
-	if is_empty():
-		return null
-	return abilties[_abilty_idx]
 func size() -> int:
-	return abilties.size()
+	return _abilties.size()
 func is_empty() -> bool:
-	return abilties.is_empty()
+	return _abilties.is_empty()
 
-func has_ability_data(data : AbilityData) -> bool:
-	for ability : AbilityData in abilties:
-		if data.get_ability_type() == ability.get_ability_type():
-			return true
-	return false
-
-func prev() -> void:
-	set_abilty_idx(_abilty_idx - 1) 
-func next() -> void:
-	set_abilty_idx(_abilty_idx + 1) 
+func has_ability(type : ABILITY_TYPE) -> bool:
+	return _abilties.has(type)
 #endregion

@@ -15,13 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://0gf4d4ablrmm" path="res://src/other_nodes/componets/other/behavior_tree/modules/death/bh_dead_sequence.tscn" id="13_lu1um"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="13_u7tq1"]
 [ext_resource type="Script" uid="uid://dnxhbudup2no5" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/misc/bh_is_stunned.gd" id="15_t51hq"]
-[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="16_5utyv"]
-[ext_resource type="Script" uid="uid://dx4g7hk3qjjfu" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/navigation/patrol/bh_is_patrol_type.gd" id="17_bi35q"]
-[ext_resource type="Script" uid="uid://d05r1nhsx0p7t" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/navigation/patrol/bh_set_patrol_interest.gd" id="18_axkgu"]
-[ext_resource type="PackedScene" uid="uid://ch6c673k0md8j" path="res://src/other_nodes/componets/other/behavior_tree/modules/go_to/bh_go_to_interest_point.tscn" id="19_4kywf"]
 [ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="19_u7tq1"]
 [ext_resource type="PackedScene" uid="uid://wewdvxttrvlp" path="res://src/other_nodes/componets/other/behavior_tree/modules/movement/charge_player/bh_charge_player_sequence.tscn" id="20_3xgua"]
-[ext_resource type="Script" uid="uid://dsf3a8vlolhx8" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="20_bi35q"]
 [ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="20_gbnxp"]
 [ext_resource type="PackedScene" uid="uid://bkxwp5lgaoou4" path="res://src/other_nodes/componets/other/behavior_tree/modules/idle/bh_idle_sequence.tscn" id="21_bi35q"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="21_t51hq"]
@@ -158,16 +153,19 @@ size = Vector2(180, 225)
 size = Vector2(140, 225)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xgua"]
-radius = 2889.0
+radius = 483.6179
 
-[node name="MushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_visual_pivot", "_velocity_module")]
+[node name="MushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_axkgu")
 patrol_type = 1
 _health_module = NodePath("CombatComponents/HealthComponent")
+_status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
 _visual_pivot = NodePath("VisualPivot")
 _velocity_module = NodePath("VelocityComponent")
+_task_manager = NodePath("TaskManager")
+_animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=764783160]
 
@@ -181,13 +179,12 @@ flip_h = true
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_opvji")
 
-[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=914141939 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
+[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=914141939 node_paths=PackedStringArray("knockback_module", "health_module", "status_effect_module")]
 position = Vector2(0, -113)
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 script = ExtResource("3_g3lxf")
-entity = NodePath("../..")
 knockback_module = NodePath("../../CombatComponents/KnockbackComponent")
 health_module = NodePath("../../CombatComponents/HealthComponent")
 status_effect_module = NodePath("../../CombatComponents/StatusEffectReceiver")
@@ -204,7 +201,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="PlayerCollide" type="CollisionShape2D" parent="DetectPlayer" unique_id=545579223]
-position = Vector2(0, -112.5)
+position = Vector2(1, -112.5)
 shape = SubResource("CircleShape2D_3xgua")
 
 [node name="CombatComponents" type="Node" parent="." unique_id=1295537730]
@@ -262,27 +259,8 @@ metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 task = NodePath("../../../TaskManager/WalkToMovingPoint")
 linger_duration = 0.2
 
-[node name="SequenceComposite" type="Node" parent="StandardEnemyAI/MainSelector" unique_id=2002611938]
-script = ExtResource("16_5utyv")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="IsStationary" type="Node" parent="StandardEnemyAI/MainSelector/SequenceComposite" unique_id=2147283620]
-script = ExtResource("17_bi35q")
-patrol_type = 1
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
-
-[node name="SetPatrolIntreast" type="Node" parent="StandardEnemyAI/MainSelector/SequenceComposite" unique_id=362071570]
-script = ExtResource("18_axkgu")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="GoToInterestPoint" parent="StandardEnemyAI/MainSelector/SequenceComposite" unique_id=75870779 instance=ExtResource("19_4kywf")]
-
-[node name="AlwaysSucceedDecorator" type="Node" parent="StandardEnemyAI/MainSelector" unique_id=570737236]
-script = ExtResource("20_bi35q")
-metadata/_custom_type_script = "uid://dsf3a8vlolhx8"
-
-[node name="IdleSequence" parent="StandardEnemyAI/MainSelector/AlwaysSucceedDecorator" unique_id=1242129750 node_paths=PackedStringArray("task") instance=ExtResource("21_bi35q")]
-task = NodePath("../../../../TaskManager/SlowdownTask")
+[node name="IdleSequence" parent="StandardEnemyAI/MainSelector" unique_id=1242129750 node_paths=PackedStringArray("task") instance=ExtResource("21_bi35q")]
+task = NodePath("../../../TaskManager/SlowdownTask")
 
 [node name="TaskManager" type="Node" parent="." unique_id=894518937 node_paths=PackedStringArray("velocity_module")]
 unique_name_in_owner = true
