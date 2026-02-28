@@ -3,6 +3,7 @@ extends HSMBranch
 
 #region External Variables
 @export_group("States")
+@export var normal_state : HSMBranch
 @export var fall_state : HSMBranch
 @export var attack_state : HSMBranch
 @export var dig_state : HSMBranch
@@ -37,5 +38,5 @@ func action_started(action_name : StringName) -> void:
 
 #region Public State Change Methods
 func passthrough_state(_act : Node, _ctx : HSMContext) -> HSMBranch:
-	return null
+	return normal_state
 #endregion

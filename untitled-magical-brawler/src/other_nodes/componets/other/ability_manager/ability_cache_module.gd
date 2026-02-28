@@ -7,9 +7,7 @@ const ABILITY_TYPE := AbilityData.ABILITY_TYPE
 
 
 #region Private Variables
-var _abilties : Dictionary[ABILITY_TYPE, AbilityData] = {
-	ABILITY_TYPE.DIG: DigAbility.new()
-}
+var _abilties : Dictionary[ABILITY_TYPE, AbilityData] = {}
 #endregion
 
 

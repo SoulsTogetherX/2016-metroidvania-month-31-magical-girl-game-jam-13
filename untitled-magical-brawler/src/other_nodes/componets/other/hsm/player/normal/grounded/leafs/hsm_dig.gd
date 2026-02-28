@@ -73,7 +73,7 @@ func enter_state(act : Node, _ctx : HSMContext) -> void:
 	entity.get_animation_player().animation_finished.connect(
 		_dig_start.unbind(1)
 	)
-func exit_state(act : Node, ctx : HSMContext) -> void:
+func exit_state(act : Node, _ctx : HSMContext) -> void:
 	var entity : BaseEntity = act
 	var player := entity.get_animation_player()
 	

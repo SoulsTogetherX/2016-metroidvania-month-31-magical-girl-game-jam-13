@@ -1,3 +1,4 @@
+@tool
 class_name DigAbility extends AbilityData
 
 
@@ -46,12 +47,12 @@ func can_end(arg : Dictionary = {}) -> bool:
 
 #region Public Methods (Access)
 func get_ability_name() -> StringName:
-	return &""
+	return &"Dig Ability"
 func get_description() -> StringName:
-	return &""
+	return &"Press S to burrow under your troubles."
 
 func get_icon() -> Texture2D:
-	return null
+	return preload("uid://chwljnx2nsoh5")
 
 func get_ability_type() -> ABILITY_TYPE:
 	return ABILITY_TYPE.DIG

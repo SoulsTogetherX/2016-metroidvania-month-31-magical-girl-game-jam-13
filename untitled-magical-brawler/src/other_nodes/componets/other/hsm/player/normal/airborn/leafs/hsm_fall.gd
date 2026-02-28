@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 #region Public Virtual Methods
-func action_start(action_name : StringName) -> void:
+func action_started(action_name : StringName) -> void:
 	var ctx := get_context()
 	
 	match action_name:

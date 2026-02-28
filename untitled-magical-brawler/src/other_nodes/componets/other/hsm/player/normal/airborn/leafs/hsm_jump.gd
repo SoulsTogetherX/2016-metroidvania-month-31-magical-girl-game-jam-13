@@ -20,6 +20,10 @@ func action_finished(action_name : StringName) -> void:
 
 
 #region Public Methods (State Change)
+func passthrough_state(_act : Node, ctx : HSMContext) -> HSMBranch:
+	if !ctx.is_action(GlobalLabels.hsm_context.ACT_JUMPING):
+		return ground_state
+	return null
 func enter_state(_act : Node, ctx : HSMContext) -> void:
 	ctx.set_value(&"has_jumped", true)
 	ctx.force_action_signal(&"player_jump")

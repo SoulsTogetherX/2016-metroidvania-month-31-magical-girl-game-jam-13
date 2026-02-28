@@ -2,7 +2,7 @@ extends HSMModule
 
 
 #region External Variables
-@export_group("Settings")
+@export_group("Modules")
 @export var task : TaskNode
 #endregion
 

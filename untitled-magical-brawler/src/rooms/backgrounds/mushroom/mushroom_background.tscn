@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dv85in5mroe81"]
+
+[ext_resource type="Texture2D" uid="uid://d1cjhsr0vt5g0" path="res://assets/background/mushroom_area/Background Image.png" id="1_scrw1"]
+[ext_resource type="Texture2D" uid="uid://bqpdg8ciksj4v" path="res://assets/background/mushroom_area/Foreground Elements.png" id="2_vcfe0"]
+[ext_resource type="Texture2D" uid="uid://bat1vhidwirkw" path="res://assets/background/mushroom_area/Midground Elements.png" id="3_2dkk0"]
+
+[node name="MushroomBG" type="Node2D" unique_id=2012265308]
+z_index = -1
+
+[node name="Background" type="Parallax2D" parent="." unique_id=1985971173]
+unique_name_in_owner = true
+scroll_scale = Vector2(0, 0)
+scroll_offset = Vector2(0, 500)
+repeat_size = Vector2(1920, 0)
+repeat_times = 4
+
+[node name="BackgroundImage" type="Sprite2D" parent="Background" unique_id=1822128209]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("1_scrw1")
+
+[node name="Midground" type="Parallax2D" parent="." unique_id=119002296]
+unique_name_in_owner = true
+scroll_scale = Vector2(0.025, 0)
+repeat_size = Vector2(1920, 0)
+repeat_times = 4
+follow_viewport = false
+
+[node name="MidgroundElements" type="Sprite2D" parent="Midground" unique_id=1110038562]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("3_2dkk0")
+
+[node name="Foreground" type="Parallax2D" parent="." unique_id=1493895682]
+unique_name_in_owner = true
+scroll_scale = Vector2(0.05, 0)
+repeat_size = Vector2(1920, 0)
+repeat_times = 4
+follow_viewport = false
+
+[node name="ForegroundElements" type="Sprite2D" parent="Foreground" unique_id=1021581107]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("2_vcfe0")

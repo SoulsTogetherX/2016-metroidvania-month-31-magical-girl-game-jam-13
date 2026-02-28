@@ -8,10 +8,7 @@ const STATUS_TYPE := StatusEffect.STATUS_TYPE
 
 #region External Variables
 @export_group("Modules")
-@export var action_cache : ActionCacheComponent
-
-@export_group("Actions")
-@export var action_stun : StringName
+@export var context : HSMContext
 #endregion
 
 
@@ -20,9 +17,15 @@ const STATUS_TYPE := StatusEffect.STATUS_TYPE
 func _on_effect_started(status : StatusEffect) -> void:
 	match status.type:
 		STATUS_TYPE.STUN:
-			action_cache.set_action(action_stun, true)
+			context.set_action(
+				GlobalLabels.hsm_context.ACT_STUN,
+				true
+			)
 func _on_effect_finished(status : StatusEffect) -> void:
 	match status.type:
 		STATUS_TYPE.STUN:
-			action_cache.set_action(action_stun, false)
+			context.set_action(
+				GlobalLabels.hsm_context.ACT_STUN,
+				false
+			)
 #endregion

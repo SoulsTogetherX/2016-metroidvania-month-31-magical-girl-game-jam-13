@@ -19,5 +19,7 @@ const ACT_MOVING := &"__moving__"
 const ACT_JUMPING := &"__jumping__"
 const ACT_ATTACKING := &"__attacking__"
 
+const ACT_STUN := &"__stun__"
+
 const VAL_H_DIR := &"__h_direction__"
 #endregion

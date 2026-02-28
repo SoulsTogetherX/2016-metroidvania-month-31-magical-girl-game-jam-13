@@ -155,23 +155,28 @@ func _propagate_parent(bottom : HSMBase) -> void:
 		if node is HSMBase:
 			node._parent = bottom
 			_propagate_parent(node)
-func _propagate_child() -> void:
-	var bottom : HSMBase = _bottom
-	var parent := bottom._parent
+func _propagate_child(new_state : HSMBase) -> void:
+	var parent := new_state._parent
 	while parent:
-		parent._child = bottom
-		bottom = parent
-		parent = bottom._parent
+		if parent._child != new_state:
+			_top = new_state._parent
 		
-		if bottom == _top:
-			return
+		parent._child = new_state
+		new_state = parent
+		parent = new_state._parent
 
 
 func _propagate_enter_state() -> void:
 	if _top == null:
 		return
+		
+	var top : HSMBranch = self._child
+	# Adds needed to queue again
+	while top && top != _top._child:
+		_add_to_queue(top)
+		top = top._child
 	
-	var top : HSMBranch = _top._child
+	# Only acts on the changed states
 	while top:
 		top._running = true
 		top._context = context
@@ -182,6 +187,7 @@ func _propagate_enter_state() -> void:
 		top.enter_state(actor, context)
 		top._start_modules()
 		top = top._child
+	
 func _propagate_exit_state() -> void:
 	var bottom : HSMBase = _bottom
 	while bottom:
@@ -200,11 +206,6 @@ func _propagate_exit_state() -> void:
 func change_state(new_state : HSMBranch) -> void:
 	if disabled:
 		return
-	if _bottom == new_state:
-		return
-	
-	_propagate_exit_state()
-	_clear_queues()
 	
 	# Goes through passthrough
 	var check_state : HSMBranch = new_state
@@ -217,11 +218,15 @@ func change_state(new_state : HSMBranch) -> void:
 		if _bottom == new_state && check_state != null:
 			push_error("Possible Infinite State Loop Found")
 			return
+	if _bottom == new_state:
+		return
+	_propagate_child(new_state)
+	
+	_propagate_exit_state()
+	_clear_queues()
 	
 	_bottom = new_state
-	if _bottom:
-		_propagate_child()
-		_propagate_enter_state()
+	_propagate_enter_state()
 	_action_finished_queue.reverse()
 	
 	_update_processing()
