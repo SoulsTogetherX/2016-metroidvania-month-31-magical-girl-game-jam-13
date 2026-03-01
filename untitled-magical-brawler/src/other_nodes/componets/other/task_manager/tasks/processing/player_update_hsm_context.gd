@@ -63,12 +63,6 @@ func task_physics(_delta : float) -> void:
 	_context.set_action(
 		labels.ACT_IN_AIR, !_actor.is_on_floor()
 	)
-	_context.set_action(
-		labels.ACT_ON_CEIlING, _actor.is_on_ceiling()
-	)
-	_context.set_action(
-		labels.ACT_ON_WALL, _actor.is_on_wall()
-	)
 	
 	# Helper States
 	_context.set_value(

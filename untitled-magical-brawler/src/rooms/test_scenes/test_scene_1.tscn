@@ -94,7 +94,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 54.0"
+text = "FPS: 38.0"
 horizontal_alignment = 1
 script = ExtResource("8_wx32i")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -102,19 +102,13 @@ metadata/_custom_type_script = "uid://bgh34blcwhwjf"
 [node name="MushroomBG" parent="." unique_id=2012265308 instance=ExtResource("3_o3rvy")]
 position = Vector2(-819, -1446)
 
-[node name="Background" parent="MushroomBG" index="0" unique_id=1985971173]
-repeat_times = 1
-
-[node name="BackgroundImage" parent="MushroomBG/Background" index="0" unique_id=1822128209]
-scale = Vector2(5, 5)
-
-[node name="Midground" parent="MushroomBG" index="1" unique_id=119002296]
+[node name="Midground" parent="MushroomBG" index="0" unique_id=119002296]
 repeat_size = Vector2(5376, 0)
 
 [node name="MidgroundElements" parent="MushroomBG/Midground" index="0" unique_id=1110038562]
 scale = Vector2(2.8, 2.8)
 
-[node name="Foreground" parent="MushroomBG" index="2" unique_id=1493895682]
+[node name="Foreground" parent="MushroomBG" index="1" unique_id=1493895682]
 repeat_size = Vector2(5376, 0)
 
 [node name="ForegroundElements" parent="MushroomBG/Foreground" index="0" unique_id=1021581107]
@@ -192,7 +186,7 @@ zoom = Vector2(0.3, 0.3)
 tween_resource = SubResource("Resource_lxi1k")
 tween_on_load = false
 inactive_update_mode = 1
-limit_target = NodePath("../../TileMapLayer")
+noise_emitter_layer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zone1" unique_id=661924388]
 position = Vector2(137, 944.5)
@@ -217,6 +211,7 @@ tween_resource = SubResource("Resource_r5234")
 tween_on_load = false
 inactive_update_mode = 1
 limit_target = NodePath("../../TileMapLayer")
+noise_emitter_layer = 1
 
 [node name="AssignPlayer" type="Node" parent="Zone2/PhantomCamera2D" unique_id=1566406837]
 script = ExtResource("15_jjl5p")

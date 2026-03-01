@@ -5,6 +5,7 @@ class_name HSMContext extends Node
 signal action_started(action_name : StringName)
 signal action_finished(action_name : StringName)
 
+signal action_changed(action_name : StringName)
 signal value_changed(value_name : StringName)
 #endregion
 
@@ -57,7 +58,7 @@ func _force_action_signal(act : Action) -> void:
 	if act.toggle:
 		action_started.emit(act.action_name)
 		return
-	action_finished .emit(act.action_name)
+	action_finished.emit(act.action_name)
 #endregion
 
 
@@ -68,6 +69,7 @@ func set_action(action_name : StringName, toggle : bool) -> void:
 		var act := Action.new(
 			action_started,
 			action_finished,
+			action_changed,
 			action_name,
 			toggle
 		)
@@ -149,17 +151,19 @@ func force_all_action_signals() -> void:
 class Action:
 	var action_started : Signal
 	var action_finished : Signal
+	var action_changed : Signal
 	
 	var action_name : StringName
 	var toggle : bool:
 		set = set_toggle
 	
 	func _init(
-		act_s : Signal, fin_s : Signal,
+		act_s : Signal, fin_s : Signal, chan_s : Signal,
 		act_name : StringName, tog : bool
 	) -> void:
 		action_started = act_s
 		action_finished = fin_s
+		action_changed = chan_s
 		action_name = act_name
 		toggle = tog
 	
@@ -170,8 +174,9 @@ class Action:
 		
 		if toggle:
 			action_started.emit(action_name)
-			return
-		action_finished.emit(action_name)
+		else:
+			action_finished.emit(action_name)
+		action_changed.emit(action_name)
 
 class Value:
 	var value_name : StringName

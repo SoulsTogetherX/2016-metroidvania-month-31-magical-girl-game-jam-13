@@ -39,4 +39,7 @@ func action_started(action_name : StringName) -> void:
 #region Public State Change Methods
 func passthrough_state(_act : Node, _ctx : HSMContext) -> HSMBranch:
 	return normal_state
+func enter_state(act : Node, ctx : HSMContext) -> void:
+	var player : Player = act
+	player.update_camera_lead_y()
 #endregion

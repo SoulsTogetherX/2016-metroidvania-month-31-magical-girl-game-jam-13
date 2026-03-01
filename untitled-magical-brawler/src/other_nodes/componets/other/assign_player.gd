@@ -9,5 +9,7 @@ class_name AssignPlayer extends Node
 
 #region Virtual Methods
 func _ready() -> void:
-	get_parent().set(property_name, Global.player)
+	var phantom : PhantomCamera2D = get_parent()
+	phantom.follow_mode = PhantomCamera2D.FollowMode.GLUED
+	phantom.follow_target = Global.player.get_camera_lead()
 #endregion

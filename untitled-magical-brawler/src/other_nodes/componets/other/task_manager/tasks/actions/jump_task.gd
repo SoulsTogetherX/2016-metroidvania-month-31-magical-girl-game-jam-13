@@ -3,7 +3,7 @@ extends VelocityTaskNode
 
 #region External Variables
 @export_group("Settings")
-@export var jump_offset := Vector2(0.0, 600.0)
+@export var jump_offset := Vector2(0.0, -600.0)
 @export var jump_stopper_weight : float = 0.9
 @export_flags("Replace y:1", "Replace x:2") var replace_mask : int = 1
 

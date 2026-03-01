@@ -17,3 +17,15 @@ func passthrough_state(act : Node, _ctx : HSMContext) -> HSMBranch:
 		return dead_state
 	return hurt_state
 #endregion
+
+
+#region Public Methods (State Change)
+func enter_state(_act : Node, _ctx : HSMContext) -> void:
+	Global.camera.freeze_frame(0.0, 0.1)
+	Global.camera.screen_shake(
+		GlobalCamera.create_noise(
+			250, 500.0
+		),
+		0.1, 0.0, 0.0
+	)
+#endregion

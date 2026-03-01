@@ -16,6 +16,7 @@ signal _request_change(state : HSMBranch)
 @export_group("Context")
 @export var need_action_start : bool
 @export var need_action_finished : bool
+@export var need_action_changed : bool
 @export var need_value_changed : bool
 #endregion
 
@@ -69,6 +70,9 @@ func process_input(_event: InputEvent) -> void:
 func action_started(_action_name : StringName) -> void:
 	pass
 func action_finished(_action_name : StringName) -> void:
+	pass
+
+func action_changed(_action_name : StringName) -> void:
 	pass
 func value_changed(_value_name : StringName) -> void:
 	pass

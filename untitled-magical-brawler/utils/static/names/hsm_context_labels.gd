@@ -10,6 +10,9 @@ const ACT_PLAYER_DOWN := &"__player_down__"
 
 const ACT_PLAYER_DIG := &"__player_dig__"
 
+const VAL_JUMP_COUNT := &"__jump_count__"
+const VAL_WALL_JUMP_COUNT := &"__jump_count__"
+
 # General
 const ACT_IN_AIR := &"__in_air__"
 const ACT_ON_CEIlING := &"__on_ceiling__"

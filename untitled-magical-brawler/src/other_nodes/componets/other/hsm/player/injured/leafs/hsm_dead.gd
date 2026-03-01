@@ -1,6 +1,11 @@
 extends HSMBranch
 
 
+#region Exteral Variables
+@export var root : HSMMaster
+#endregion
+
+
 #region Private Variables
 var _dead_mutex : bool
 #endregion
@@ -9,11 +14,9 @@ var _dead_mutex : bool
 
 #region Private Methods
 func _on_dead_end() -> void:
-	print(1)
 	if _dead_mutex:
 		return
 	_dead_mutex = true
-	print(2)
 	
 	var entity : BaseEntity = get_actor()
 	entity.get_velocity_component().velocity = Vector2.ZERO

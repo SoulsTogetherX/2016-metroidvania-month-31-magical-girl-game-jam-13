@@ -2,10 +2,14 @@ class_name HSMMaster extends HSMBase
 
 
 #region External Variables
+@export_group("Nodes")
 @export var starting_state : HSMBranch
 @export var context : HSMContext:
 	set = _set_context
 @export var actor : Node
+
+@export_group("Settings")
+@export var allow_swap_cancel : bool = false
 @export var disabled : bool:
 	set(val):
 		if val == disabled:
@@ -28,7 +32,11 @@ var _input_queue : Array[HSMBranch]
 
 var _action_started_queue : Array[HSMBranch]
 var _action_finished_queue : Array[HSMBranch]
+
+var _action_changed_queue : Array[HSMBranch]
 var _value_changed_queue : Array[HSMBranch]
+
+var _swapped_hault : bool = false
 #endregion
 
 
@@ -60,7 +68,10 @@ func _action_started(action_name : StringName) -> void:
 func _action_finished(action_name : StringName) -> void:
 	for state : HSMBranch in _action_finished_queue:
 		state.action_finished(action_name)
-	
+
+func _action_changed(action_name : StringName) -> void:
+	for state : HSMBranch in _action_finished_queue:
+		state.action_changed(action_name)
 func _value_changed(value_name : StringName) -> void:
 	for state : HSMBranch in _value_changed_queue:
 		state.value_changed(value_name)
@@ -96,6 +107,14 @@ func _set_action_finished(toggle : bool) -> void:
 		return
 	if context.action_finished.is_connected(_action_finished):
 		context.action_finished.disconnect(_action_finished)
+
+func _set_action_changed(toggle : bool) -> void:
+	if toggle:
+		if !context.action_changed.is_connected(_action_changed):
+			context.action_changed.connect(_action_changed)
+		return
+	if context.action_changed.is_connected(_action_changed):
+		context.action_changed.disconnect(_action_changed)
 func _set_value_changed(toggle : bool) -> void:
 	if toggle:
 		if !context.value_changed.is_connected(_value_changed):
@@ -103,6 +122,7 @@ func _set_value_changed(toggle : bool) -> void:
 		return
 	if context.value_changed.is_connected(_value_changed):
 		context.value_changed.disconnect(_value_changed)
+
 func _set_request_change(state : HSMBranch, toggle : bool) -> void:
 	if toggle:
 		if !state._request_change.is_connected(change_state):
@@ -119,6 +139,8 @@ func _update_processing() -> void:
 func _update_contexting() -> void:
 	_set_action_started(!disabled && !_action_started_queue.is_empty())
 	_set_action_finished(!disabled && !_action_finished_queue.is_empty())
+	
+	_set_action_changed(!disabled && !_action_changed_queue.is_empty())
 	_set_value_changed(!disabled && !_value_changed_queue.is_empty())
 #endregion
 
@@ -131,6 +153,8 @@ func _clear_queues() -> void:
 	
 	_action_started_queue.clear()
 	_action_finished_queue.clear()
+	
+	_action_changed_queue.clear()
 	_value_changed_queue.clear()
 func _add_to_queue(state : HSMBranch) -> void:
 	if state.need_process:
@@ -144,6 +168,9 @@ func _add_to_queue(state : HSMBranch) -> void:
 		_action_started_queue.append(state)
 	if state.need_action_finished:
 		_action_finished_queue.append(state)
+	
+	if state.need_action_changed:
+		_action_changed_queue.append(state)
 	if state.need_value_changed:
 		_value_changed_queue.append(state)
 #endregion
@@ -206,6 +233,11 @@ func _propagate_exit_state() -> void:
 func change_state(new_state : HSMBranch) -> void:
 	if disabled:
 		return
+	if _swapped_hault:
+		return
+	if !allow_swap_cancel:
+		_swapped_hault = true
+		set_deferred("_swapped_hault", false)
 	
 	# Goes through passthrough
 	var check_state : HSMBranch = new_state

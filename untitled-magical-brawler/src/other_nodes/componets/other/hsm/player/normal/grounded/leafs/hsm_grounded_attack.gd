@@ -18,11 +18,7 @@ func _end_punch() -> void:
 
 
 #region Public Methods (State Change)
-func enter_state(act : Node, _ctx : HSMContext) -> void:
-	var entity : BaseEntity = act
-	var vel := entity.get_velocity_component()
-	vel.velocity.x = 0.0
-	
+func enter_state(_act : Node, _ctx : HSMContext) -> void:
 	punch_delay.timeout.connect(_end_punch)
 	punch_delay.start()
 func exit_state(_act : Node, ctx : HSMContext) -> void:
