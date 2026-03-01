@@ -2,9 +2,13 @@ extends VelocityTaskNode
 
 
 #region External Variables
-@export_subgroup("Slowdown")
+@export_group("Slowdown")
 @export var slowdown_flat : float = 100.0
 @export var slowdown_weight : float = 20.0
+
+@export_group("Settings")
+@export var hard_stop : bool = true
+@export var reset_on_end : bool = false
 #endregion
 
 
@@ -23,22 +27,24 @@ func _ready() -> void:
 
 #region Public Virtual Methods
 func task_physics(delta : float) -> void:
-	var dir : float = velocity_module.get_hor_direction()
+	var flat := _slowdown_flat * delta
+	if hard_stop:
+		if absf(velocity_module.velocity.x) <= flat:
+			velocity_module.velocity.x = 0.0
+			return
 	
+	var dir : float = signf(velocity_module.velocity.x)
 	velocity_module.velocity.x = Utilities.dampf(
 		velocity_module.get_velocity().x - (
-			_slowdown_flat * dir * delta
+			flat * dir
 		),
 		0.0, _slowdown_weight, delta
 	)
 	
-	if dir > 0:
-		velocity_module.max_hor_velocity(0.0)
-	else:
-		velocity_module.min_hor_velocity(0.0)
-	
-	if is_zero_approx(velocity_module.velocity.x):
-		force_end()
+	if hard_stop:
+		if is_zero_approx(velocity_module.velocity.x):
+			velocity_module.velocity.x = 0.0
+			return
 #endregion
 
 
@@ -47,6 +53,9 @@ func task_passthrough() -> bool:
 	_slowdown_flat = args.get(&"slowdown_flat", slowdown_flat)
 	_slowdown_weight = args.get(&"slowdown_weight", slowdown_weight)
 	return true
+
 func task_end() -> void:
+	if !reset_on_end:
+		return
 	velocity_module.velocity.x = 0.0
 #endregion

@@ -19,7 +19,7 @@ const DEBUG_COLOR := Color(0, 1, 0, 0.3)
 @export_subgroup("Modules")
 @export var knockback_module : KnockbackComponent
 @export var health_module : HealthComponent
-@export var invincibility_module : InvincibilityComponent
+@export var status_effect_module : StatusEffectReceiver
 
 @export_group("Settings")
 @export var collide_when_dead : bool = false
@@ -60,10 +60,13 @@ func _on_area_enter(collision : HitboxComponent) -> void:
 	if !collide_when_dead && health_module && health_module.is_dead():
 		return
 	
+	var offset : Vector2 = entity.global_position if entity else global_position
+	offset -= collision.entity.global_position if collision.entity else collision.global_position
+	
 	collision.enact_collision(CollisionInfoResource.new(
-		self.global_position - collision.global_position,
-		entity, health_module, knockback_module,
-		invincibility_module
+		offset, entity, health_module,
+		knockback_module, status_effect_module
 	))
+	
 	on_hit.emit(collision)
 #endregion

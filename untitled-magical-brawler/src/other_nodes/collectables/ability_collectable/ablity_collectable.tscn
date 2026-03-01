@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="1_xmjyj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yn6ok"]
-radius = 70.0
+radius = 85.52
 
 [node name="AblityCollectable" type="Node2D" unique_id=370613763]
 script = ExtResource("1_bfv2b")

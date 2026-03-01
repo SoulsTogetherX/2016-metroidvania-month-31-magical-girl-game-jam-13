@@ -1,4 +1,4 @@
-class_name Utilities
+class_name Utilities extends Object
 
 
 #region Dampening

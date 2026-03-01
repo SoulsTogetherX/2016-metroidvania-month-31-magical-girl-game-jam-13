@@ -10,5 +10,7 @@ var camera : GlobalCamera
 
 #region Public Methods (Helper)
 func get_current_room() -> Node2D:
-	return game_controller.get_node_2d_from_id(Constants.ROOM_ID)
+	return game_controller.get_node_2d_from_id(
+		GlobalLabels.objects.ROOM_ID
+	)
 #endregion

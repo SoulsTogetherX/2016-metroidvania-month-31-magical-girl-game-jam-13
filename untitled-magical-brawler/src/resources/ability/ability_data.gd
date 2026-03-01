@@ -1,5 +1,6 @@
 @abstract
-class_name AbilityData extends Resource #RefCounted
+@tool
+class_name AbilityData extends Resource
 
 
 #region Private Signals
@@ -11,10 +12,10 @@ enum ABILITY_TYPE {
 
 
 #region Public Methods (Can Checks)
-func can_start(_arg : Dictionary = {}) -> bool:
-	return true
-func can_end(_arg : Dictionary = {}) -> bool:
-	return true
+@abstract
+func can_start(_arg : Dictionary = {}) -> bool
+@abstract
+func can_end(_arg : Dictionary = {}) -> bool
 #endregion
 
 

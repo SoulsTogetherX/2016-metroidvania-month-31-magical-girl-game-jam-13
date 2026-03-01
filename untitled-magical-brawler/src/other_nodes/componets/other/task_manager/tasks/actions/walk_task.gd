@@ -24,6 +24,7 @@ extends VelocityTaskNode
 var _move_dir : Callable
 
 var _entity : BaseEntity
+var _stop_raycast : RayCast2D
 
 var _acceleration : float
 var _max_speed : float
@@ -43,10 +44,11 @@ func _ready() -> void:
 #region Public Virtual Methods
 func task_physics(delta : float) -> void:
 	var move_dir : float = _move_dir.call()
-	if entity && !is_zero_approx(move_dir):
-		entity.change_direction(move_dir < 0, false)
 	
-	if stop_raycast && !stop_raycast.is_colliding():
+	if _entity && !is_zero_approx(move_dir):
+		_entity.change_direction(move_dir < 0, false)
+	
+	if _stop_raycast && !_stop_raycast.is_colliding():
 		velocity_module.velocity.x = 0.0
 		return
 	elif signf(move_dir) != signf(velocity_module.get_velocity().x):
@@ -65,17 +67,19 @@ func task_physics(delta : float) -> void:
 
 #region Public Methods (Action States)
 func task_passthrough() -> bool:
-	_move_dir = args.get("move_dir", Callable())
-	if !_move_dir.is_valid() || !(_move_dir.call() is int):
+	_move_dir = args.get(&"move_dir", Callable())
+	if !_move_dir.is_valid() || !(_move_dir.call() is float):
 		return false
 	
-	_entity = args.get("entity", null)
+	_entity = args.get(&"entity", entity)
+	_stop_raycast = args.get(&"stop_raycast", stop_raycast)
 	
-	_acceleration = args.get("acceleration", acceleration)
-	_max_speed = args.get("max_speed", max_speed)
-	_weight = args.get("weight", weight)
+	_acceleration = args.get(&"acceleration", acceleration)
+	_max_speed = args.get(&"max_speed", max_speed)
+	_weight = args.get(&"weight", weight)
 
-	_slowdown_weight = args.get("slowdown_weight", slowdown_weight)
+	_slowdown_weight = args.get(&"slowdown_weight", slowdown_weight)
+	
 	return true
 
 func task_begin() -> void:
@@ -85,5 +89,5 @@ func task_begin() -> void:
 func task_end() -> void:
 	if !reset_on_end:
 		return
-	velocity_module.velocity.x = 0
+	velocity_module.velocity.x = 0.0
 #endregion

@@ -1,3 +1,4 @@
+@tool
 class_name DigAbility extends AbilityData
 
 
@@ -9,6 +10,9 @@ const EDGE_FORGIVENESS := 60
 
 #region Public Methods (State Change)
 func can_start(arg : Dictionary = {}) -> bool:
+	if !arg.get(&"on_ground", false):
+		return false
+	
 	var collide : CollisionShape2D = arg.get(&"collide", null)
 	var size := collide.shape.get_rect().size
 	var space := collide.get_world_2d().direct_space_state
@@ -28,14 +32,12 @@ func can_start(arg : Dictionary = {}) -> bool:
 		Constants.COLLISION.GROUND
 	).is_empty():
 		return false
-	
-	# Confirms player is on the ground
-	return arg.get(&"on_ground", false)
+	return true
 func can_end(arg : Dictionary = {}) -> bool:
 	var collide : CollisionShape2D = arg.get(&"collide", null)
 	if !collide:
 		return false
-		
+	
 	return Utilities.manual_collide_check(
 		collide, true, false,
 		Constants.COLLISION.GROUND
@@ -45,12 +47,12 @@ func can_end(arg : Dictionary = {}) -> bool:
 
 #region Public Methods (Access)
 func get_ability_name() -> StringName:
-	return &""
+	return &"Dig Ability"
 func get_description() -> StringName:
-	return &""
+	return &"Press S to burrow under your troubles."
 
 func get_icon() -> Texture2D:
-	return null
+	return preload("uid://chwljnx2nsoh5")
 
 func get_ability_type() -> ABILITY_TYPE:
 	return ABILITY_TYPE.DIG

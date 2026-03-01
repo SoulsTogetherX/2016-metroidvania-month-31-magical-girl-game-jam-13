@@ -32,7 +32,9 @@ func _ready() -> void:
 		func(_node): pass,
 		0
 	)
-	_phantom_camera.add_to_group(Constants.CAMERA_ZONE_GROUP_NAME)
+	_phantom_camera.add_to_group(
+		GlobalLabels.objects.CAMERA_ZONE_GROUP_NAME
+	)
 #endregion
 
 
@@ -43,6 +45,7 @@ func _create_phantom_camera() -> PhantomCamera2D:
 	node.zoom = Vector2(0.3, 0.3)
 	node.tween_on_load = false
 	node.inactive_update_mode = PhantomCamera2D.InactiveUpdateMode.NEVER
+	node.noise_emitter_layer = 1
 	
 	return node
 #endregion

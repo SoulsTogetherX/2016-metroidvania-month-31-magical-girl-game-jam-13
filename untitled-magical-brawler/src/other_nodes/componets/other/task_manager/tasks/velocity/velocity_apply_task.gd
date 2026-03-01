@@ -19,20 +19,31 @@ func _ready() -> void:
 #endregion
 
 
+#region Private Methods
+func _connect_velocity_check() -> void:
+	set_disabled(true)
+	if !velocity_module.velocity_changed.is_connected(_velocity_changes):
+		velocity_module.velocity_changed.connect(_velocity_changes)
+func _disconnect_velocity_check() -> void:
+	set_disabled(false)
+	if velocity_module.velocity_changed.is_connected(_velocity_changes):
+		velocity_module.velocity_changed.disconnect(_velocity_changes)
+#endregion
+
+
 #region Private Methods (Velocity Check)
 func _velocity_changes() -> void:
 	if velocity_module.velocity.is_zero_approx():
-		set_disabled(true)
-		velocity_module.velocity_changed.connect(
-			set_disabled.bind(false),
-			CONNECT_ONE_SHOT
-		)
 		return
+	_disconnect_velocity_check()
 #endregion
 
 
 #region Public Virtual Methods
 func task_physics(_delta : float) -> void:
+	if velocity_module.velocity.is_zero_approx():
+		_connect_velocity_check()
+		return
 	velocity_module.apply_velocity(_actor)
 #endregion
 	
@@ -45,7 +56,7 @@ func task_passthrough() -> bool:
 	return true
 
 func task_begin() -> void:
-	velocity_module.velocity_changed.connect(_velocity_changes)
+	_velocity_changes()
 func task_end() -> void:
-	velocity_module.velocity_changed.disconnect(_velocity_changes)
+	_disconnect_velocity_check()
 #endregion

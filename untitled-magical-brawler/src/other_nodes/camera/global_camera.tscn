@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://bu76r6gwkw61j"]
 
 [ext_resource type="Script" uid="uid://cx6ju7g612bk7" path="res://src/other_nodes/camera/global_camera.gd" id="1_bgehv"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/panel/updater/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_y2co5"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_y2co5"]
+[ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="3_oc081"]
 
 [node name="GlobalCamera" type="Camera2D" unique_id=1580514438]
 top_level = true
 process_callback = 0
-limit_left = -7680
-limit_top = -5376
-limit_right = 8192
-limit_bottom = 512
+limit_left = -6272
+limit_top = -3200
+limit_right = 10112
+limit_bottom = 640
+editor_draw_limits = true
 script = ExtResource("1_bgehv")
 
 [node name="PhantomCameraHost" type="Node" parent="." unique_id=733490608]
@@ -19,3 +21,8 @@ process_physics_priority = 300
 script = ExtResource("1_y2co5")
 interpolation_mode = 2
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="NoiseEmitter2D" type="Node2D" parent="." unique_id=238130607]
+unique_name_in_owner = true
+script = ExtResource("3_oc081")
+metadata/_custom_type_script = "uid://bhd4nuiu23e7l"

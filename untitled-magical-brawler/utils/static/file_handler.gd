@@ -1,4 +1,4 @@
-class_name FileHandler
+class_name FileHandler extends Object
 
 
 #region Static Methods (Manage Binary)

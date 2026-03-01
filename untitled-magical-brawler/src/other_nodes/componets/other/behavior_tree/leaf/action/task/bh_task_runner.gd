@@ -1,0 +1,23 @@
+@tool
+extends ActionLeaf
+
+
+#region External Variables
+@export var task : TaskNode
+#endregion
+
+
+
+#region Virtual Methods
+func tick(_actor: Node, _blackboard: Blackboard) -> int:
+	return RUNNING
+
+func before_run(actor: Node, _blackboard: Blackboard) -> void:
+	if !task.is_running():
+		var act : Enemy = actor
+		act.start_task(task)
+func interrupt(actor: Node, _blackboard: Blackboard) -> void:
+	if task.is_running():
+		var act : Enemy = actor
+		act.end_task(task)
+#endregion

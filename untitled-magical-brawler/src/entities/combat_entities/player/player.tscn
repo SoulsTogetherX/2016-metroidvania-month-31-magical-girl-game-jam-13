@@ -1,0 +1,1521 @@
+[gd_scene format=3 uid="uid://co68h8eknlwnj"]
+
+[ext_resource type="Script" uid="uid://dwb3lsjj6k3ao" path="res://src/entities/combat_entities/player/player.gd" id="1_33dyk"]
+[ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/damage_reaction/health_component.gd" id="1_peafg"]
+[ext_resource type="SpriteFrames" uid="uid://b3bftuwc7kx51" path="res://assets/entities/player/resources/player_sprite_frames.tres" id="2_3xcyv"]
+[ext_resource type="Script" uid="uid://cy7yl1sef0v05" path="res://src/other_nodes/camera/camera_lead.gd" id="2_rvvip"]
+[ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="3_33dyk"]
+[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
+[ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="5_kgtwq"]
+[ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="5_uym1e"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_ed3ja"]
+[ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_0r3kn"]
+[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="8_5qgjf"]
+[ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_ljr7w"]
+[ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/jump_task.gd" id="9_0tyfe"]
+[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="9_ogtao"]
+[ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="9_rvvip"]
+[ext_resource type="Texture2D" uid="uid://cmrbwr8pkunel" path="res://assets/particles/transform_particles.png" id="10_0r3kn"]
+[ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="10_nshoc"]
+[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="10_ogtao"]
+[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/walk_task.gd" id="11_a31ob"]
+[ext_resource type="Script" uid="uid://dtgljqvaxqo4g" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_handler/state_status_effect_handler.gd" id="11_iamtb"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="13_a31ob"]
+[ext_resource type="Script" uid="uid://bcqjmffcvd5p1" path="res://src/other_nodes/componets/other/ability_manager/ability_cache_module.gd" id="14_kgtwq"]
+[ext_resource type="Script" uid="uid://6hg6o4escfno" path="res://src/other_nodes/componets/other/hsm/base/HSMContext.gd" id="16_1fgyy"]
+[ext_resource type="Script" uid="uid://buvd8v2xnqdma" path="res://src/other_nodes/componets/other/hsm/player/hsm_master_branch.gd" id="19_ed3ja"]
+[ext_resource type="Script" uid="uid://crubykxav651n" path="res://src/other_nodes/componets/other/hsm/modules/move_task_module.gd" id="28_txpw3"]
+[ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="29_iamtb"]
+[ext_resource type="Script" uid="uid://f52ik2jq0j3c" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/hsm_stationary_branch.gd" id="29_wjrm0"]
+[ext_resource type="Script" uid="uid://bbxh0naimvb8e" path="res://src/other_nodes/componets/other/hsm/modules/particle_module.gd" id="30_ljr7w"]
+[ext_resource type="Script" uid="uid://cka3v8ea47wvs" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/jumping/hsm_jumping_branch.gd" id="31_8acae"]
+[ext_resource type="Script" uid="uid://xv610pu3m66j" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/hsm_normal_branch.gd" id="31_nshoc"]
+[ext_resource type="Script" uid="uid://c13ducndpw58n" path="res://src/other_nodes/componets/other/hsm/modules/task_module.gd" id="32_3xcyv"]
+[ext_resource type="Script" uid="uid://clkmvbmnonx58" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/jumping/leafs/hsm_wall_jump.gd" id="32_8acae"]
+[ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_hsm_context.gd" id="33_45rvh"]
+[ext_resource type="Script" uid="uid://8eitfm2qkex7" path="res://src/other_nodes/componets/other/hsm/modules/wall_jump_task_module.gd" id="34_0xmtw"]
+[ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="41_iamtb"]
+[ext_resource type="Script" uid="uid://0cpy1h8nxy0k" path="res://src/other_nodes/componets/other/hsm/player/injured/hsm_injured_branch.gd" id="42_8h0p6"]
+[ext_resource type="Script" uid="uid://cu77b7j2pivmq" path="res://src/other_nodes/componets/other/hsm/player/injured/leafs/hsm_dead.gd" id="43_d0oxh"]
+[ext_resource type="Script" uid="uid://bqwidr1pm2ims" path="res://src/other_nodes/componets/other/hsm/player/injured/leafs/hsm_hurt.gd" id="44_7yy2l"]
+[ext_resource type="Script" uid="uid://b3qq0uta0dnch" path="res://src/other_nodes/componets/other/hsm/player/normal/hsm_healthy_branch.gd" id="45_ja238"]
+[ext_resource type="Script" uid="uid://d3lbx6x36g5lm" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/hsm_airborn_branch.gd" id="46_wixch"]
+[ext_resource type="Script" uid="uid://y4ui85ghvo47" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/leafs/hsm_fall.gd" id="47_llr1v"]
+[ext_resource type="Script" uid="uid://8refxrhjc54v" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_camera_lead.gd" id="48_evk2k"]
+[ext_resource type="Script" uid="uid://ouvwrmrbv6uv" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/jumping/leafs/hsm_jump.gd" id="48_gaiw7"]
+[ext_resource type="Script" uid="uid://bfywxkk80bnwv" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/hsm_grounded_branch.gd" id="49_hp8j0"]
+[ext_resource type="Script" uid="uid://dfhtf8imgj2cg" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/leafs/hsm_dig.gd" id="50_5ewf5"]
+[ext_resource type="Script" uid="uid://c0elefshkywa1" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/leafs/hsm_idle.gd" id="51_3gyts"]
+[ext_resource type="Script" uid="uid://d10dlcdx7wqf6" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/leafs/hsm_grounded_attack.gd" id="52_d0oxh"]
+[ext_resource type="Script" uid="uid://nn7kpdksgcc7" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/leafs/hsm_running.gd" id="52_kctto"]
+[ext_resource type="Script" uid="uid://doh1sw7gy812l" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/leafs/hsm_slowdown.gd" id="53_fjhij"]
+
+[sub_resource type="Animation" id="Animation_45rvh"]
+resource_name = "ATTACK"
+length = 0.275
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"punch"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PunchHitboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.275),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16041677, 0.275),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.95), Vector2(1.1, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_snams"]
+resource_name = "DEAD"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.35, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 6, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dead"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -220), Vector2(0, -220), Vector2(0, -210)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Particles/DeathParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.35, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.1, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_akx0o"]
+resource_name = "DIG_END"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Particles/DigParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GroundCollide:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../DigGroundCollide:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HurtboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.39999998, 0.5, 0.55, 0.75, 0.8, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dig_end"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:offset:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:offset:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [-169.0, -220.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Particles/TransformPaticles:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Particles/DigStartEndParticles:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../WallDetect:monitoring")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fbnv4"]
+resource_name = "DIG_START"
+length = 1.1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Particles/DigParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.725, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GroundCollide:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../DigGroundCollide:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HurtboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.275, 0.375, 0.45, 0.55, 0.775, 0.875, 0.975),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 7, 8, 9, 10]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dig_start"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:offset:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.575, 0.875, 1.075, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1e-05, 1, 1),
+"update": 1,
+"values": [0.0, -125.4115, -190.0, -190.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:offset:y")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.375, 0.725, 0.87638783),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-220.0, -220.0, -260.0, -185.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Particles/TransformPaticles:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Particles/DigStartEndParticles:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../WallDetect:monitoring")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2cmg6"]
+resource_name = "FALL"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iamtb"]
+resource_name = "IDLE"
+length = 0.5714286
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857146),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2857143, 0.5714286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 0.98), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4tw7w"]
+resource_name = "JUMP"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.85, 1.15), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_amj0e"]
+resource_name = "RESET"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PunchHitboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../GroundCollide:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../DigGroundCollide:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Particles/DigParticles:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../HurtboxComponent:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Particles/TransformPaticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Particles/DigStartEndParticles:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Particles/WalkParticles:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath(".:offset")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -220)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../Particles/DeathParticles:emitting")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath(".:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../WallDetect:monitoring")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tvulh"]
+resource_name = "RUNNING"
+length = 0.85714287
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857143, 0.5714286, 0.71428573),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"running"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Particles/WalkParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.42857143),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Particles/WalkParticles:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.42857143),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(97, -1), Vector2(-63, -2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2857143, 0.42857143, 0.71428573, 0.85714287),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.05, 0.95), Vector2(1, 1), Vector2(1.05, 0.95), Vector2(1, 1), Vector2(1.05, 0.95)]
+}
+
+[sub_resource type="Animation" id="Animation_33dyk"]
+resource_name = "STUN"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20935692, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(1.05, 0.95), Vector2(1.2, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cmg6"]
+_data = {
+&"ATTACK": SubResource("Animation_45rvh"),
+&"DEAD": SubResource("Animation_snams"),
+&"DIG_END": SubResource("Animation_akx0o"),
+&"DIG_START": SubResource("Animation_fbnv4"),
+&"FALL": SubResource("Animation_2cmg6"),
+&"IDLE": SubResource("Animation_iamtb"),
+&"JUMP": SubResource("Animation_4tw7w"),
+&"RESET": SubResource("Animation_amj0e"),
+&"RUNNING": SubResource("Animation_tvulh"),
+&"STUN": SubResource("Animation_33dyk")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
+size = Vector2(120, 350)
+
+[sub_resource type="Resource" id="Resource_ed3ja"]
+script = ExtResource("6_ed3ja")
+
+[sub_resource type="Resource" id="Resource_0r3kn"]
+script = ExtResource("7_0r3kn")
+
+[sub_resource type="Resource" id="Resource_ljr7w"]
+script = ExtResource("9_rvvip")
+type = 1
+duration = 0.4
+
+[sub_resource type="Resource" id="Resource_rvvip"]
+script = ExtResource("8_ljr7w")
+status = SubResource("Resource_ljr7w")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tw7w"]
+size = Vector2(250, 100)
+
+[sub_resource type="Curve" id="Curve_0r3kn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.7126436, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_i78gy"]
+offsets = PackedFloat32Array(0.09394904, 0.30732483, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62038666, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ljr7w"]
+_data = [Vector2(0, 0.22193098), 0.0, 0.0, 0, 0, Vector2(0.14121038, 1), 0.0, 0.0, 0, 0, Vector2(0.24207492, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ljr7w"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_evk2k"]
+offsets = PackedFloat32Array(0, 0.6206349, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_0r3kn"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.48095238, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xmtw"]
+size = Vector2(26, 204)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvvip"]
+size = Vector2(105, 365)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akx0o"]
+size = Vector2(120, 5)
+
+[node name="Player" type="CharacterBody2D" unique_id=539542931 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
+z_index = 1
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_33dyk")
+_health_module = NodePath("CombatComponents/HealthComponent")
+_status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
+_visual_pivot = NodePath("VisualPivot")
+_velocity_module = NodePath("VelocityComponent")
+_task_manager = NodePath("TaskManager")
+_animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
+
+[node name="CameraLead" type="Marker2D" parent="." unique_id=2009942089 node_paths=PackedStringArray("follow")]
+top_level = true
+position = Vector2(0, -160.5)
+script = ExtResource("2_rvvip")
+follow = NodePath("..")
+
+[node name="VisualPivot" type="Node2D" parent="." unique_id=1229646187]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=1133366217]
+sprite_frames = ExtResource("2_3xcyv")
+animation = &"idle"
+offset = Vector2(0, -220)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=71332508]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_2cmg6")
+
+[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=1143519473 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
+position = Vector2(0, -173)
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+script = ExtResource("3_mjwoq")
+entity = NodePath("../..")
+knockback_module = NodePath("../../CombatComponents/KnockbackComponent")
+health_module = NodePath("../../CombatComponents/HealthComponent")
+status_effect_module = NodePath("../../CombatComponents/StatusEffectReceiver")
+shape = SubResource("RectangleShape2D_33dyk")
+faction = 20
+
+[node name="PunchHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=2087121274 node_paths=PackedStringArray("entity")]
+position = Vector2(163, -138)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_33dyk")
+entity = NodePath("../..")
+effects = Array[ExtResource("5_kgtwq")]([SubResource("Resource_ed3ja"), SubResource("Resource_0r3kn"), SubResource("Resource_rvvip")])
+shape = SubResource("RectangleShape2D_4tw7w")
+disabled = true
+faction = 8
+
+[node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=1157038368]
+position = Vector2(60, 0)
+enabled = false
+target_position = Vector2(0, 10)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="Particles" type="Node2D" parent="VisualPivot" unique_id=800089669]
+
+[node name="DigStartEndParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=679902570]
+modulate = Color(0.5019608, 0.3529412, 0, 1)
+z_index = -1
+position = Vector2(0, -1)
+emitting = false
+amount = 40
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+direction = Vector2(0, -1)
+initial_velocity_min = 800.0
+initial_velocity_max = 1400.0
+damping_min = 1000.0
+damping_max = 1000.0
+damping_curve = SubResource("Curve_0r3kn")
+angle_min = -25.0
+angle_max = 25.0
+scale_amount_min = 15.0
+scale_amount_max = 35.0
+color_ramp = SubResource("Gradient_i78gy")
+
+[node name="DigParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=926756774]
+modulate = Color(0.5019608, 0.3529412, 0, 1)
+z_index = -1
+position = Vector2(0, -1)
+emitting = false
+amount = 100
+lifetime = 0.7
+draw_order = 1
+direction = Vector2(0, -1)
+spread = 50.0
+initial_velocity_min = 250.0
+initial_velocity_max = 450.0
+angle_min = -25.0
+angle_max = 25.0
+scale_amount_min = 15.0
+scale_amount_max = 35.0
+color_ramp = SubResource("Gradient_i78gy")
+
+[node name="DeathParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=573906165]
+z_index = 1
+position = Vector2(0, -132)
+emitting = false
+amount = 50
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.1
+draw_order = 1
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 3000.0
+radial_accel_min = -300.0
+radial_accel_max = 500.0
+tangential_accel_min = -300.0
+tangential_accel_max = 300.0
+damping_min = 1500.0
+damping_max = 2000.0
+angle_min = -25.0
+angle_max = 25.0
+scale_amount_min = 30.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_ljr7w")
+color = Color(0.41960785, 0.7372549, 0.7764706, 1)
+color_ramp = SubResource("Gradient_i78gy")
+
+[node name="TransformPaticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=227839210]
+material = SubResource("CanvasItemMaterial_ljr7w")
+position = Vector2(0, -242)
+emitting = false
+amount = 30
+texture = ExtResource("10_0r3kn")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.2
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 700.0
+initial_velocity_max = 1500.0
+angular_velocity_max = 100000.0
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+linear_accel_min = -500.0
+linear_accel_max = -200.0
+radial_accel_max = 100.0
+tangential_accel_max = 100.0
+angle_max = 360.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_evk2k")
+anim_offset_max = 1.0
+
+[node name="WalkParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=981171770]
+z_index = -1
+position = Vector2(97, -1)
+emitting = false
+amount = 30
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(-1, -1)
+spread = 80.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+damping_min = 2000.0
+damping_max = 2000.0
+scale_amount_min = 8.0
+scale_amount_max = 16.0
+color_ramp = SubResource("Gradient_0r3kn")
+
+[node name="LandParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=1427025870]
+position = Vector2(28, 4)
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.6
+emission_shape = 5
+emission_points = PackedVector2Array(0, 0, 0, 0)
+emission_normals = PackedVector2Array(-1, 0, 1, 0)
+emission_colors = PackedColorArray()
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 800.0
+initial_velocity_max = 1300.0
+damping_min = 2000.0
+damping_max = 2000.0
+scale_amount_min = 15.0
+scale_amount_max = 20.0
+color_ramp = SubResource("Gradient_0r3kn")
+
+[node name="JumpParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=1519825588]
+position = Vector2(0, -1)
+emitting = false
+amount = 30
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+emission_shape = 5
+emission_points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+emission_normals = PackedVector2Array(-1, -0.5, 1, -0.5, 0, -0.5)
+emission_colors = PackedColorArray()
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+linear_accel_min = -500.0
+linear_accel_max = -100.0
+damping_min = 100.0
+damping_max = 100.0
+angle_min = -25.0
+angle_max = 25.0
+scale_amount_min = 15.0
+scale_amount_max = 35.0
+color_ramp = SubResource("Gradient_i78gy")
+
+[node name="DoubleJumpParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=1998468788]
+position = Vector2(0, -1)
+emitting = false
+amount = 30
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+emission_shape = 5
+emission_points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+emission_normals = PackedVector2Array(-1, -0.5, 1, -0.5, 0, -0.5)
+emission_colors = PackedColorArray()
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+linear_accel_min = -500.0
+linear_accel_max = -100.0
+damping_min = 100.0
+damping_max = 100.0
+angle_min = -25.0
+angle_max = 25.0
+scale_amount_min = 15.0
+scale_amount_max = 35.0
+color_ramp = SubResource("Gradient_i78gy")
+
+[node name="WallDetect" type="Area2D" parent="VisualPivot" unique_id=2107200642]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisualPivot/WallDetect" unique_id=1471209075]
+position = Vector2(66, -160)
+shape = SubResource("RectangleShape2D_0xmtw")
+
+[node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=1568380323]
+position = Vector2(-0.5, -180.5)
+shape = SubResource("RectangleShape2D_rvvip")
+
+[node name="DigGroundCollide" type="CollisionShape2D" parent="." unique_id=1114400878]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_akx0o")
+disabled = true
+
+[node name="CombatComponents" type="Node" parent="." unique_id=1672935310]
+
+[node name="KnockbackComponent" type="Node" parent="CombatComponents" unique_id=1548867984 node_paths=PackedStringArray("velocity_module")]
+script = ExtResource("4_dao75")
+velocity_module = NodePath("../../VelocityComponent")
+metadata/_custom_type_script = "uid://bhe0ii8bxo24u"
+
+[node name="HealthComponent" type="Node" parent="CombatComponents" unique_id=1826590427]
+script = ExtResource("1_peafg")
+metadata/_custom_type_script = "uid://lqunqvr5fs"
+
+[node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=605702931]
+script = ExtResource("10_nshoc")
+
+[node name="StatusEffectHandler" type="Node" parent="CombatComponents/StatusEffectReceiver" unique_id=470331412 node_paths=PackedStringArray("context", "recevier")]
+script = ExtResource("11_iamtb")
+context = NodePath("../../../HSMContext")
+recevier = NodePath("..")
+
+[node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
+unique_name_in_owner = true
+script = ExtResource("14_kgtwq")
+metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
+script = ExtResource("5_uym1e")
+metadata/_custom_type_script = "uid://ui8sa21uexr7"
+
+[node name="GravityComponent" type="Node" parent="." unique_id=1508736019]
+script = ExtResource("6_iw6ud")
+metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
+
+[node name="HSMContext" type="Node" parent="." unique_id=69866376]
+script = ExtResource("16_1fgyy")
+metadata/_custom_type_script = "uid://6hg6o4escfno"
+
+[node name="HSMMaster" type="Node" parent="." unique_id=1860324189 node_paths=PackedStringArray("starting_state", "context", "actor")]
+script = ExtResource("41_iamtb")
+starting_state = NodePath("Master/Healthy/Grounded/Normal/Stationary/Idle")
+context = NodePath("../HSMContext")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://cn1lche2a867t"
+
+[node name="Master" type="Node" parent="HSMMaster" unique_id=426437201 node_paths=PackedStringArray("injured_state", "normal_state")]
+script = ExtResource("19_ed3ja")
+injured_state = NodePath("Injured")
+normal_state = NodePath("Healthy")
+need_action_start = true
+
+[node name="Injured" type="Node" parent="HSMMaster/Master" unique_id=1176988154 node_paths=PackedStringArray("dead_state", "hurt_state")]
+script = ExtResource("42_8h0p6")
+dead_state = NodePath("Dead")
+hurt_state = NodePath("Hurt")
+
+[node name="StunAnimationModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=662488774]
+script = ExtResource("29_iamtb")
+animation = 7
+
+[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=2103056586 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../TaskManager/GravityTask")
+
+[node name="Dead" type="Node" parent="HSMMaster/Master/Injured" unique_id=1808724823 node_paths=PackedStringArray("root")]
+script = ExtResource("43_d0oxh")
+root = NodePath("../../..")
+need_action_finished = true
+
+[node name="Hurt" type="Node" parent="HSMMaster/Master/Injured" unique_id=884992292 node_paths=PackedStringArray("normal_state")]
+script = ExtResource("44_7yy2l")
+normal_state = NodePath("../../Healthy")
+need_action_finished = true
+
+[node name="Healthy" type="Node" parent="HSMMaster/Master" unique_id=1842780270 node_paths=PackedStringArray("airborn_state", "grounded_state")]
+script = ExtResource("45_ja238")
+airborn_state = NodePath("Airborn")
+grounded_state = NodePath("Grounded")
+
+[node name="Airborn" type="Node" parent="HSMMaster/Master/Healthy" unique_id=1982618466 node_paths=PackedStringArray("fall_state")]
+script = ExtResource("46_wixch")
+fall_state = NodePath("Fall")
+need_action_changed = true
+
+[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=388417439 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../../TaskManager/GravityTask")
+
+[node name="AirMoveTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=441882860 node_paths=PackedStringArray("task")]
+script = ExtResource("28_txpw3")
+task = NodePath("../../../../../TaskManager/AirMoveTask")
+
+[node name="Fall" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=1970180688 node_paths=PackedStringArray("jump_state", "wall_jump_state", "ground_state", "wall_detect", "coyote_timer", "jump_buffer")]
+script = ExtResource("47_llr1v")
+jump_state = NodePath("../Jumping/Jump")
+wall_jump_state = NodePath("../Jumping/WallJump")
+ground_state = NodePath("../../Grounded/Normal")
+wall_detect = NodePath("../../../../../VisualPivot/WallDetect")
+coyote_timer = NodePath("CoyoteTimer")
+jump_buffer = NodePath("JumpBuffer")
+need_action_start = true
+need_action_finished = true
+
+[node name="FallAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=473475995]
+script = ExtResource("29_iamtb")
+animation = 1
+
+[node name="JumpBuffer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=546628607]
+wait_time = 0.2
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=1373262917]
+wait_time = 0.15
+one_shot = true
+
+[node name="Jumping" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=624786871 node_paths=PackedStringArray("fall_state", "ground_state", "jump_state")]
+script = ExtResource("31_8acae")
+fall_state = NodePath("../Fall")
+ground_state = NodePath("../../Grounded")
+jump_state = NodePath("Jump")
+need_action_finished = true
+
+[node name="JumpAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn/Jumping" unique_id=569971262]
+script = ExtResource("29_iamtb")
+animation = 4
+
+[node name="Jump" type="Node" parent="HSMMaster/Master/Healthy/Airborn/Jumping" unique_id=602866142 node_paths=PackedStringArray("jump_particles", "double_jump_particles")]
+script = ExtResource("48_gaiw7")
+jump_particles = NodePath("../../../../../../VisualPivot/Particles/JumpParticles")
+double_jump_particles = NodePath("../../../../../../VisualPivot/Particles/DoubleJumpParticles")
+
+[node name="JumpTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn/Jumping/Jump" unique_id=1836199224 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../../../../TaskManager/JumpTask")
+
+[node name="WallJump" type="Node" parent="HSMMaster/Master/Healthy/Airborn/Jumping" unique_id=103908486]
+script = ExtResource("32_8acae")
+
+[node name="WallJumpTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn/Jumping/WallJump" unique_id=1702800354 node_paths=PackedStringArray("task")]
+script = ExtResource("34_0xmtw")
+task = NodePath("../../../../../../../TaskManager/JumpTask")
+
+[node name="Grounded" type="Node" parent="HSMMaster/Master/Healthy" unique_id=1567838968 node_paths=PackedStringArray("normal_state", "fall_state", "attack_state", "dig_state", "ground_collider", "ability_cache")]
+script = ExtResource("49_hp8j0")
+normal_state = NodePath("Normal")
+fall_state = NodePath("../Airborn/Fall")
+attack_state = NodePath("GroundedAttack")
+dig_state = NodePath("Dig")
+ground_collider = NodePath("../../../../GroundCollide")
+ability_cache = NodePath("../../../../AbilityCacheModule")
+need_action_start = true
+
+[node name="LandParticleModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded" unique_id=240620676 node_paths=PackedStringArray("particle")]
+script = ExtResource("30_ljr7w")
+particle = NodePath("../../../../../VisualPivot/Particles/LandParticles")
+
+[node name="Normal" type="Node" parent="HSMMaster/Master/Healthy/Grounded" unique_id=630790927 node_paths=PackedStringArray("jump_state", "moving_state", "stationary_state")]
+script = ExtResource("31_nshoc")
+jump_state = NodePath("../../Airborn/Jumping/Jump")
+moving_state = NodePath("Running")
+stationary_state = NodePath("Stationary")
+need_action_start = true
+need_action_finished = true
+
+[node name="Running" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal" unique_id=1812129145 node_paths=PackedStringArray("stop_state")]
+script = ExtResource("52_kctto")
+stop_state = NodePath("../Stationary/Slowdown")
+need_action_finished = true
+
+[node name="MovingAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Running" unique_id=69468196]
+script = ExtResource("29_iamtb")
+animation = 3
+
+[node name="LandParticleModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Running" unique_id=671071003 node_paths=PackedStringArray("particle")]
+script = ExtResource("30_ljr7w")
+particle = NodePath("../../../../../../../VisualPivot/Particles/LandParticles")
+
+[node name="GroundMoveTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Running" unique_id=1309939993 node_paths=PackedStringArray("task")]
+script = ExtResource("28_txpw3")
+task = NodePath("../../../../../../../TaskManager/GroundMoveTask")
+
+[node name="Stationary" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal" unique_id=1215355353 node_paths=PackedStringArray("idle", "slowdown")]
+script = ExtResource("29_wjrm0")
+idle = NodePath("Idle")
+slowdown = NodePath("Slowdown")
+need_action_start = true
+
+[node name="StationaryAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Stationary" unique_id=247710662]
+script = ExtResource("29_iamtb")
+
+[node name="Idle" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Stationary" unique_id=1968702926]
+script = ExtResource("51_3gyts")
+
+[node name="Slowdown" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Stationary" unique_id=986139104]
+script = ExtResource("53_fjhij")
+
+[node name="SlowdownTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Stationary/Slowdown" unique_id=1367713461 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../../../../../TaskManager/SlowdownTask")
+
+[node name="GroundedAttack" type="Node" parent="HSMMaster/Master/Healthy/Grounded" unique_id=943700735 node_paths=PackedStringArray("stop_state", "punch_delay")]
+script = ExtResource("52_d0oxh")
+stop_state = NodePath("../Normal")
+punch_delay = NodePath("PunchDelay")
+need_action_start = true
+
+[node name="AttackAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/GroundedAttack" unique_id=451916555]
+script = ExtResource("29_iamtb")
+animation = 5
+
+[node name="SlowdownTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/GroundedAttack" unique_id=1352665731 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../../../../TaskManager/SlowdownTask")
+
+[node name="PunchDelay" type="Timer" parent="HSMMaster/Master/Healthy/Grounded/GroundedAttack" unique_id=1780023592]
+wait_time = 0.3
+
+[node name="Dig" type="Node" parent="HSMMaster/Master/Healthy/Grounded" unique_id=1164074805 node_paths=PackedStringArray("ability_cache", "normal_state", "dig_move_task", "ground_collider", "ground_ray_cast")]
+script = ExtResource("50_5ewf5")
+ability_cache = NodePath("../../../../../AbilityCacheModule")
+normal_state = NodePath("../Normal")
+dig_move_task = NodePath("../../../../../TaskManager/DigMoveTask")
+ground_collider = NodePath("../../../../../GroundCollide")
+ground_ray_cast = NodePath("../../../../../VisualPivot/GroundRayCast")
+need_action_start = true
+
+[node name="TaskManager" type="Node" parent="." unique_id=615361991 node_paths=PackedStringArray("velocity_module")]
+unique_name_in_owner = true
+script = ExtResource("8_5qgjf")
+velocity_module = NodePath("../VelocityComponent")
+metadata/_custom_type_script = "uid://clhcvayfse4aa"
+
+[node name="JumpTask" type="Node" parent="TaskManager" unique_id=112608991 node_paths=PackedStringArray("gravity_module")]
+script = ExtResource("9_0tyfe")
+gravity_module = NodePath("../../GravityComponent")
+
+[node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=1703085196]
+script = ExtResource("10_ogtao")
+hard_stop = false
+need_physics = true
+
+[node name="GroundMoveTask" type="Node" parent="TaskManager" unique_id=200243738 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_a31ob")
+entity = NodePath("../..")
+need_physics = true
+
+[node name="AirMoveTask" type="Node" parent="TaskManager" unique_id=116377760 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_a31ob")
+entity = NodePath("../..")
+need_physics = true
+
+[node name="DigMoveTask" type="Node" parent="TaskManager" unique_id=192365737 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_a31ob")
+acceleration = 3000.0
+max_speed = 1500.0
+reset_on_begin = true
+reset_on_end = true
+entity = NodePath("../..")
+need_physics = true
+
+[node name="GravityTask" type="Node" parent="TaskManager" unique_id=1953513191 node_paths=PackedStringArray("gravity_module")]
+script = ExtResource("9_ogtao")
+gravity_module = NodePath("../../GravityComponent")
+need_physics = true
+
+[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=473670275 node_paths=PackedStringArray("actor")]
+script = ExtResource("13_a31ob")
+actor = NodePath("../..")
+auto_start = true
+need_physics = true
+
+[node name="UpdateCameraLeadTask" type="Node" parent="TaskManager" unique_id=1235855302 node_paths=PackedStringArray("context", "actor")]
+script = ExtResource("48_evk2k")
+context = NodePath("../../HSMContext")
+actor = NodePath("../../CameraLead")
+auto_start = true
+need_physics = true
+
+[node name="UpdateContextTask" type="Node" parent="TaskManager" unique_id=1339140841 node_paths=PackedStringArray("context", "actor")]
+script = ExtResource("33_45rvh")
+context = NodePath("../../HSMContext")
+actor = NodePath("../..")
+auto_start = true
+need_physics = true

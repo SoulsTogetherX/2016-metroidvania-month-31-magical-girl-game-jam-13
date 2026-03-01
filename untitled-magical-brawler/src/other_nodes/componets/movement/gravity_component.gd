@@ -19,18 +19,21 @@ static func get_trajectory_impulse(
 ## Untested
 static func get_required_trajectory_impulse(
 	gravity_val : float,
-	positon : Vector2
+	positon : Vector2,
+	time : float = 0.2
 ) -> Vector2:
 	if positon.x == 0.0:
 		return Vector2(
 			0,
-			get_trajectory_impulse(gravity_val, positon.y)
+			get_trajectory_impulse(gravity_val, -positon.y)
 		)
 	
-	var temp := positon.y + positon.length()
-	return Vector2.ONE.rotated(
-		atan(temp / positon.x)
-	) * sqrt(gravity_val * temp)
+	return (positon / time) + Vector2(0, 0.5 * gravity_val * time)
+	
+	#var temp := positon.y + positon.length()
+	#return -Vector2.ONE.rotated(
+	#	atan(temp / positon.x)
+	#) * sqrt(gravity_val * temp)
 ## Untested
 static func get_required_trajectory_impulse_for_angle(
 	gravity_val : float,

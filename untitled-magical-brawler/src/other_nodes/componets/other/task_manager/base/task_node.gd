@@ -25,6 +25,7 @@ signal _update_process(node : TaskNode)
 @export var disabled : bool:
 	set = set_disabled,
 	get = get_disabled
+@export var auto_start : bool
 
 @export_group("Proccessing")
 @export var need_process : bool = false:
