@@ -1,28 +1,42 @@
 [gd_scene format=3 uid="uid://ggu8kemt8cb3"]
 
 [ext_resource type="Script" uid="uid://dfrerw612ix6r" path="res://src/entities/combat_entities/enemies/enemy_entity.gd" id="1_axkgu"]
-[ext_resource type="SpriteFrames" uid="uid://cu3wk7btyh6r5" path="res://assets/entities/enemies/mushroom_guy/mushroom_guy_spriteframes.tres" id="2_6t03g"]
-[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_g3lxf"]
-[ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_mme5p"]
-[ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/damage_reaction/health_component.gd" id="5_g3ivy"]
-[ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="6_wmsra"]
-[ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="9_sigsm"]
-[ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="10_4wjxv"]
-[ext_resource type="Script" uid="uid://fdecunaq77js" path="res://src/other_nodes/componets/control/bh_blackboard_setter.gd" id="10_r68xm"]
-[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="11_chpug"]
-[ext_resource type="Script" uid="uid://dme5f24l0edsf" path="res://addons/beehave/blackboard.gd" id="11_u7tq1"]
-[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_5utyv"]
-[ext_resource type="PackedScene" uid="uid://0gf4d4ablrmm" path="res://src/other_nodes/componets/other/behavior_tree/modules/death/bh_dead_sequence.tscn" id="13_lu1um"]
-[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="13_u7tq1"]
-[ext_resource type="Script" uid="uid://dnxhbudup2no5" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/misc/bh_is_stunned.gd" id="15_t51hq"]
-[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="19_u7tq1"]
-[ext_resource type="PackedScene" uid="uid://wewdvxttrvlp" path="res://src/other_nodes/componets/other/behavior_tree/modules/movement/charge_player/bh_charge_player_sequence.tscn" id="20_3xgua"]
-[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="20_gbnxp"]
-[ext_resource type="PackedScene" uid="uid://bkxwp5lgaoou4" path="res://src/other_nodes/componets/other/behavior_tree/modules/idle/bh_idle_sequence.tscn" id="21_bi35q"]
-[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="21_t51hq"]
-[ext_resource type="Script" uid="uid://bbx22fu4rlkev" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/walk_to_moving_point_task.gd" id="26_4kywf"]
+[ext_resource type="SpriteFrames" uid="uid://cu3wk7btyh6r5" path="res://assets/entities/enemies/mushroom_guy/mushroom_guy_spriteframes.tres" id="2_4wjxv"]
+[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_4wjxv"]
+[ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="4_3pfdt"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="5_lu1um"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_u7tq1"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_gbnxp"]
+[ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_t51hq"]
+[ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="9_5utyv"]
+[ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="10_bi35q"]
+[ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/damage_reaction/health_component.gd" id="11_axkgu"]
+[ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="12_4kywf"]
+[ext_resource type="Script" uid="uid://dtgljqvaxqo4g" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_handler/state_status_effect_handler.gd" id="13_4wjxv"]
+[ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="14_chpug"]
+[ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="15_r68xm"]
+[ext_resource type="Script" uid="uid://6hg6o4escfno" path="res://src/other_nodes/componets/other/hsm/base/HSMContext.gd" id="16_vakfp"]
+[ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="17_lud7w"]
+[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="18_la5ec"]
+[ext_resource type="Script" uid="uid://crl4egd5t8kl" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/hsm_master_branch.gd" id="19_3xebj"]
+[ext_resource type="Script" uid="uid://bbvkeqvv7h1cx" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/injured/hsm_injured_branch.gd" id="19_5utyv"]
+[ext_resource type="Script" uid="uid://bekwjwj7ad6l0" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/injured/leafs/hsm_dead.gd" id="20_bi35q"]
+[ext_resource type="Script" uid="uid://cyo26jnbx0o6x" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/injured/leafs/hsm_stunned.gd" id="21_axkgu"]
+[ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="23_t51hq"]
+[ext_resource type="Script" uid="uid://bgmb7wq6q1gcq" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/healthy/hsm_healthy_branch.gd" id="24_pb48o"]
+[ext_resource type="Script" uid="uid://c710e15pvnu3w" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/healthy/leafs/hsm_pursue_player.gd" id="25_r68xm"]
+[ext_resource type="Script" uid="uid://dw6kd00a15esl" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/healthy/leafs/hsm_wander.gd" id="26_vakfp"]
+[ext_resource type="Script" uid="uid://cv32i7ohr3tga" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/healthy/stationary/hsm_stationary_branch.gd" id="27_lud7w"]
+[ext_resource type="Script" uid="uid://btusietain12j" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/healthy/stationary/leafs/hsm_idle.gd" id="28_la5ec"]
+[ext_resource type="Script" uid="uid://qtxpbyo3lh6e" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/healthy/stationary/leafs/hsm_slowdown.gd" id="29_14xs3"]
+[ext_resource type="Script" uid="uid://c13ducndpw58n" path="res://src/other_nodes/componets/other/hsm/modules/task_module.gd" id="30_14xs3"]
+[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="31_la5ec"]
+[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="33_6o8bd"]
+[ext_resource type="Script" uid="uid://bbx22fu4rlkev" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/move_to_moving_point_task.gd" id="33_14xs3"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="34_3xebj"]
+[ext_resource type="Script" uid="uid://cdguo5ic5hyvo" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_distance.gd" id="36_6o8bd"]
 
-[sub_resource type="Animation" id="Animation_6t03g"]
+[sub_resource type="Animation" id="Animation_sigsm"]
 resource_name = "DEAD"
 length = 0.5
 step = 0.1
@@ -33,7 +47,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
@@ -50,8 +64,32 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"death"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HurtboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="Animation" id="Animation_ned1c"]
+[sub_resource type="Animation" id="Animation_lu1um"]
 resource_name = "IDLE"
 length = 0.4
 loop_mode = 1
@@ -81,8 +119,59 @@ tracks/1/keys = {
 "values": [&"idle"]
 }
 
-[sub_resource type="Animation" id="Animation_g3lxf"]
-resource_name = "MOVE"
+[sub_resource type="Animation" id="Animation_u7tq1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HurtboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4wjxv"]
+resource_name = "RUNNING"
 length = 0.6
 loop_mode = 1
 step = 0.1
@@ -93,7 +182,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
@@ -111,55 +200,79 @@ tracks/1/keys = {
 "values": [&"running"]
 }
 
-[sub_resource type="Animation" id="Animation_opvji"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_3pfdt"]
+resource_name = "STUN"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"idle"]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
+tracks/1/path = NodePath(".:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [&"death"]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_opvji"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lu1um"]
 _data = {
-&"DEAD": SubResource("Animation_6t03g"),
-&"IDLE": SubResource("Animation_ned1c"),
-&"MOVE": SubResource("Animation_g3lxf"),
-&"RESET": SubResource("Animation_opvji")
+&"DEAD": SubResource("Animation_sigsm"),
+&"IDLE": SubResource("Animation_lu1um"),
+&"RESET": SubResource("Animation_u7tq1"),
+&"RUNNING": SubResource("Animation_4wjxv"),
+&"STUN": SubResource("Animation_3pfdt")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ned1c"]
-size = Vector2(180, 225)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o8bd"]
+size = Vector2(200, 250)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t03g"]
-size = Vector2(140, 225)
+[sub_resource type="Resource" id="Resource_pb48o"]
+script = ExtResource("6_u7tq1")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3xgua"]
-radius = 483.6179
+[sub_resource type="Resource" id="Resource_crrt2"]
+script = ExtResource("7_gbnxp")
+
+[sub_resource type="Resource" id="Resource_1l634"]
+script = ExtResource("9_5utyv")
+type = 1
+duration = 0.4
+
+[sub_resource type="Resource" id="Resource_elvao"]
+script = ExtResource("8_t51hq")
+status = SubResource("Resource_1l634")
+
+[sub_resource type="Resource" id="Resource_7f4rg"]
+script = ExtResource("9_5utyv")
+duration = 0.5
+
+[sub_resource type="Resource" id="Resource_igp0m"]
+script = ExtResource("8_t51hq")
+status = SubResource("Resource_7f4rg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xebj"]
+size = Vector2(180, 250)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pb48o"]
+size = Vector2(146.5, 234)
 
 [node name="MushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_axkgu")
-patrol_type = 1
 _health_module = NodePath("CombatComponents/HealthComponent")
 _status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
 _visual_pivot = NodePath("VisualPivot")
@@ -167,131 +280,216 @@ _velocity_module = NodePath("VelocityComponent")
 _task_manager = NodePath("TaskManager")
 _animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
 
-[node name="VisualPivot" type="Node2D" parent="." unique_id=764783160]
+[node name="VisualPivot" type="Node2D" parent="." unique_id=604135442]
 
-[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=1107063774]
-sprite_frames = ExtResource("2_6t03g")
-animation = &"idle"
-offset = Vector2(-20, -130)
+[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=65209676]
+position = Vector2(0, 69)
+sprite_frames = ExtResource("2_4wjxv")
+animation = &"death"
+offset = Vector2(0, -200)
 flip_h = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=1355228639]
-unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_opvji")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=1997354259]
+libraries/ = SubResource("AnimationLibrary_lu1um")
 
-[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=914141939 node_paths=PackedStringArray("knockback_module", "health_module", "status_effect_module")]
-position = Vector2(0, -113)
+[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=688587415 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
+position = Vector2(0, -125)
 collision_layer = 0
 collision_mask = 8
 monitorable = false
-script = ExtResource("3_g3lxf")
+script = ExtResource("3_4wjxv")
+entity = NodePath("../..")
 knockback_module = NodePath("../../CombatComponents/KnockbackComponent")
 health_module = NodePath("../../CombatComponents/HealthComponent")
 status_effect_module = NodePath("../../CombatComponents/StatusEffectReceiver")
-shape = SubResource("RectangleShape2D_ned1c")
+shape = SubResource("RectangleShape2D_6o8bd")
 faction = 8
 
-[node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=1598916610]
-position = Vector2(0, -112.5)
-shape = SubResource("RectangleShape2D_6t03g")
+[node name="HitboxComponent" type="Area2D" parent="VisualPivot" unique_id=1649434660 node_paths=PackedStringArray("entity")]
+position = Vector2(3, -119)
+collision_layer = 12
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_3pfdt")
+entity = NodePath("../..")
+effects = Array[ExtResource("5_lu1um")]([SubResource("Resource_pb48o"), SubResource("Resource_crrt2"), SubResource("Resource_elvao"), SubResource("Resource_igp0m")])
+shape = SubResource("RectangleShape2D_3xebj")
+faction = 12
 
-[node name="DetectPlayer" type="Area2D" parent="." unique_id=248372083]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
+[node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=772671663]
+position = Vector2(60, 0)
+enabled = false
+target_position = Vector2(0, 10)
+collision_mask = 2
+hit_from_inside = true
 
-[node name="PlayerCollide" type="CollisionShape2D" parent="DetectPlayer" unique_id=545579223]
-position = Vector2(1, -112.5)
-shape = SubResource("CircleShape2D_3xgua")
+[node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=871175542]
+position = Vector2(0, -117)
+shape = SubResource("RectangleShape2D_pb48o")
 
-[node name="CombatComponents" type="Node" parent="." unique_id=1295537730]
+[node name="CombatComponents" type="Node" parent="." unique_id=94140589]
 
-[node name="KnockbackComponent" type="Node" parent="CombatComponents" unique_id=924171595 node_paths=PackedStringArray("velocity_module")]
-script = ExtResource("4_mme5p")
+[node name="KnockbackComponent" type="Node" parent="CombatComponents" unique_id=883221410 node_paths=PackedStringArray("velocity_module")]
+script = ExtResource("10_bi35q")
 velocity_module = NodePath("../../VelocityComponent")
 metadata/_custom_type_script = "uid://bhe0ii8bxo24u"
 
-[node name="HealthComponent" type="Node" parent="CombatComponents" unique_id=1256400487]
-unique_name_in_owner = true
-script = ExtResource("5_g3ivy")
-max_health = 1000
+[node name="HealthComponent" type="Node" parent="CombatComponents" unique_id=1304487477]
+script = ExtResource("11_axkgu")
 metadata/_custom_type_script = "uid://lqunqvr5fs"
 
-[node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=50855024]
-unique_name_in_owner = true
-script = ExtResource("6_wmsra")
+[node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=884753076]
+script = ExtResource("12_4kywf")
 
-[node name="VelocityComponent" type="Node" parent="." unique_id=311409027]
-script = ExtResource("9_sigsm")
+[node name="StatusEffectHandler" type="Node" parent="CombatComponents/StatusEffectReceiver" unique_id=1863936555 node_paths=PackedStringArray("context", "recevier")]
+script = ExtResource("13_4wjxv")
+context = NodePath("../../../HSMContext")
+recevier = NodePath("..")
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=467419818]
+script = ExtResource("14_chpug")
 metadata/_custom_type_script = "uid://ui8sa21uexr7"
 
-[node name="GravityComponent" type="Node" parent="." unique_id=852066168]
-script = ExtResource("10_4wjxv")
+[node name="GravityComponent" type="Node" parent="." unique_id=257284224]
+script = ExtResource("15_r68xm")
 metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
 
-[node name="Blackboard" type="Node" parent="." unique_id=459988030]
+[node name="HSMContext" type="Node" parent="." unique_id=259512921]
 unique_name_in_owner = true
-script = ExtResource("11_u7tq1")
-metadata/_custom_type_script = "uid://dme5f24l0edsf"
+script = ExtResource("16_vakfp")
+metadata/_custom_type_script = "uid://6hg6o4escfno"
 
-[node name="BlackboardSetter" type="Node" parent="Blackboard" unique_id=1649961789 node_paths=PackedStringArray("blackboard")]
-script = ExtResource("10_r68xm")
-blackboard = NodePath("..")
-
-[node name="StandardEnemyAI" type="Node" parent="." unique_id=358563597 node_paths=PackedStringArray("blackboard", "actor")]
-script = ExtResource("13_5utyv")
-actor_node_path = NodePath("..")
-blackboard = NodePath("../Blackboard")
+[node name="HSMMaster" type="Node" parent="." unique_id=153630655 node_paths=PackedStringArray("starting_state", "context", "actor")]
+script = ExtResource("17_lud7w")
+starting_state = NodePath("Master")
+context = NodePath("../HSMContext")
 actor = NodePath("..")
-metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+metadata/_custom_type_script = "uid://cn1lche2a867t"
 
-[node name="MainSelector" type="Node" parent="StandardEnemyAI" unique_id=1990652795]
-script = ExtResource("11_chpug")
-metadata/_custom_type_script = "uid://cw22yurt5l74k"
+[node name="Master" type="Node" parent="HSMMaster" unique_id=291971418 node_paths=PackedStringArray("injured_state", "healthy_state", "gravity_task")]
+script = ExtResource("19_3xebj")
+injured_state = NodePath("Injured")
+healthy_state = NodePath("Healthy")
+gravity_task = NodePath("../../TaskManager/GravityTask")
+need_action_start = true
+need_action_finished = true
 
-[node name="DeadSequence" parent="StandardEnemyAI/MainSelector" unique_id=1983090562 instance=ExtResource("13_lu1um")]
+[node name="Injured" type="Node" parent="HSMMaster/Master" unique_id=406197344 node_paths=PackedStringArray("dead_state", "hurt_state")]
+script = ExtResource("19_5utyv")
+dead_state = NodePath("Dead")
+hurt_state = NodePath("Stunned")
 
-[node name="IsStunned" type="Node" parent="StandardEnemyAI/MainSelector" unique_id=1109659133]
-script = ExtResource("15_t51hq")
-metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+[node name="StunnedAnimationModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=1739727245]
+script = ExtResource("23_t51hq")
+animation = 7
 
-[node name="ChargePlayerSequence" parent="StandardEnemyAI/MainSelector" unique_id=2023452835 node_paths=PackedStringArray("task") instance=ExtResource("20_3xgua")]
-task = NodePath("../../../TaskManager/WalkToMovingPoint")
-linger_duration = 0.2
+[node name="Dead" type="Node" parent="HSMMaster/Master/Injured" unique_id=1319855817]
+script = ExtResource("20_bi35q")
 
-[node name="IdleSequence" parent="StandardEnemyAI/MainSelector" unique_id=1242129750 node_paths=PackedStringArray("task") instance=ExtResource("21_bi35q")]
-task = NodePath("../../../TaskManager/SlowdownTask")
+[node name="Stunned" type="Node" parent="HSMMaster/Master/Injured" unique_id=890512609 node_paths=PackedStringArray("normal_state")]
+script = ExtResource("21_axkgu")
+normal_state = NodePath("../../Healthy/Stationary")
+need_action_finished = true
 
-[node name="TaskManager" type="Node" parent="." unique_id=894518937 node_paths=PackedStringArray("velocity_module")]
+[node name="Healthy" type="Node" parent="HSMMaster/Master" unique_id=1447335723 node_paths=PackedStringArray("pursue_state", "wander_state", "stationary_state")]
+script = ExtResource("24_pb48o")
+pursue_state = NodePath("PursuePlayer")
+wander_state = NodePath("Wander")
+stationary_state = NodePath("Stationary")
+need_action_start = true
+need_action_finished = true
+
+[node name="PursuePlayer" type="Node" parent="HSMMaster/Master/Healthy" unique_id=1633090942 node_paths=PackedStringArray("moving_point_task", "purse_lingur")]
+script = ExtResource("25_r68xm")
+moving_point_task = NodePath("../../../../TaskManager/MoveToMovingPointTask")
+purse_lingur = NodePath("PurseLinger")
+need_action_start = true
+need_action_finished = true
+
+[node name="PurseLinger" type="Timer" parent="HSMMaster/Master/Healthy/PursuePlayer" unique_id=1854477058]
 unique_name_in_owner = true
-script = ExtResource("13_u7tq1")
+wait_time = 0.1
+one_shot = true
+
+[node name="MovingAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/PursuePlayer" unique_id=1849939857]
+script = ExtResource("23_t51hq")
+animation = 3
+
+[node name="Wander" type="Node" parent="HSMMaster/Master/Healthy" unique_id=917288862 node_paths=PackedStringArray("stationary_state", "moving_point_task")]
+script = ExtResource("26_vakfp")
+stationary_state = NodePath("../Stationary")
+moving_point_task = NodePath("../../../../TaskManager/WanderToMovingPointTaskx")
+
+[node name="MovingAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Wander" unique_id=1771879560]
+script = ExtResource("23_t51hq")
+animation = 3
+
+[node name="Stationary" type="Node" parent="HSMMaster/Master/Healthy" unique_id=586334544 node_paths=PackedStringArray("idle_state", "slowdown_state", "idle_timer")]
+script = ExtResource("27_lud7w")
+idle_state = NodePath("Idle")
+slowdown_state = NodePath("Slowdown")
+idle_timer = NodePath("IdleDelay")
+need_action_start = true
+
+[node name="IdleDelay" type="Timer" parent="HSMMaster/Master/Healthy/Stationary" unique_id=2103600363]
+
+[node name="StationaryAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Stationary" unique_id=155248369]
+script = ExtResource("23_t51hq")
+animation = 2
+
+[node name="Idle" type="Node" parent="HSMMaster/Master/Healthy/Stationary" unique_id=1215060724]
+script = ExtResource("28_la5ec")
+
+[node name="Slowdown" type="Node" parent="HSMMaster/Master/Healthy/Stationary" unique_id=49028306]
+script = ExtResource("29_14xs3")
+
+[node name="SlowdownTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Stationary/Slowdown" unique_id=2045552129 node_paths=PackedStringArray("task")]
+script = ExtResource("30_14xs3")
+task = NodePath("../../../../../../TaskManager/SlowdownTask")
+
+[node name="TaskManager" type="Node" parent="." unique_id=1797110563 node_paths=PackedStringArray("velocity_module")]
+unique_name_in_owner = true
+script = ExtResource("18_la5ec")
 velocity_module = NodePath("../VelocityComponent")
 metadata/_custom_type_script = "uid://clhcvayfse4aa"
 
-[node name="GravityTask" type="Node" parent="TaskManager" unique_id=615510896 node_paths=PackedStringArray("gravity_module")]
-script = ExtResource("20_gbnxp")
-gravity_module = NodePath("../../GravityComponent")
-auto_start = true
+[node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=490139005]
+script = ExtResource("31_la5ec")
+hard_stop = false
 need_physics = true
 
-[node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=1157575312]
-script = ExtResource("19_u7tq1")
-need_physics = true
-
-[node name="WalkToMovingPoint" type="Node" parent="TaskManager" unique_id=1720177087 node_paths=PackedStringArray("entity")]
-script = ExtResource("26_4kywf")
-acceleration = 1500.0
-max_speed = 2000.0
-weight = 0.8
-slowdown_weight = 0.0
+[node name="MoveToMovingPointTask" type="Node" parent="TaskManager" unique_id=1363629959 node_paths=PackedStringArray("entity")]
+script = ExtResource("33_14xs3")
+acceleration = 1000.0
+max_speed = 2500.0
+weight = 0.9
+slowdown_weight = 1.0
 entity = NodePath("../..")
 need_physics = true
 
-[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=1834553648 node_paths=PackedStringArray("actor")]
-script = ExtResource("21_t51hq")
+[node name="WanderToMovingPointTaskx" type="Node" parent="TaskManager" unique_id=427537348 node_paths=PackedStringArray("entity")]
+script = ExtResource("33_14xs3")
+acceleration = 500.0
+max_speed = 1250.0
+weight = 0.9
+slowdown_weight = 1.0
+entity = NodePath("../..")
+need_physics = true
+
+[node name="GravityTask" type="Node" parent="TaskManager" unique_id=269036756 node_paths=PackedStringArray("gravity_module")]
+script = ExtResource("33_6o8bd")
+gravity_module = NodePath("../../GravityComponent")
+need_physics = true
+
+[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=32928031 node_paths=PackedStringArray("actor")]
+script = ExtResource("34_3xebj")
 actor = NodePath("../..")
 auto_start = true
 need_physics = true
 
-[connection signal="body_entered" from="DetectPlayer" to="Blackboard/BlackboardSetter" method="_detected_player_enter"]
-[connection signal="body_exited" from="DetectPlayer" to="Blackboard/BlackboardSetter" method="_detected_player_exit"]
+[node name="UpdatePointDistanceTask" type="Node" parent="TaskManager" unique_id=1389509404 node_paths=PackedStringArray("context", "actor")]
+script = ExtResource("36_6o8bd")
+context = NodePath("../../HSMContext")
+actor = NodePath("../..")
+auto_start = true
+need_physics = true

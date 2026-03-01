@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://okn43w5swjl2"]
+
+[ext_resource type="Script" uid="uid://dfrerw612ix6r" path="res://src/entities/combat_entities/enemies/enemy_entity.gd" id="1_epmla"]
+
+[node name="MushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_epmla")
+patrol_type = 1
+_health_module = NodePath("")
+_status_effect_receiver = NodePath("")
+_visual_pivot = NodePath("")
+_velocity_module = NodePath("")
+_task_manager = NodePath("")
+_animation_player = NodePath("")

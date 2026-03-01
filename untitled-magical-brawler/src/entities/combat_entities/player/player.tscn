@@ -20,37 +20,39 @@
 [ext_resource type="Texture2D" uid="uid://cmrbwr8pkunel" path="res://assets/particles/transform_particles.png" id="10_0r3kn"]
 [ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="10_nshoc"]
 [ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="10_ogtao"]
-[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/walk_task.gd" id="11_a31ob"]
+[ext_resource type="Script" uid="uid://p68k1ml1noab" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/move_task.gd" id="11_a31ob"]
 [ext_resource type="Script" uid="uid://dtgljqvaxqo4g" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_handler/state_status_effect_handler.gd" id="11_iamtb"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="13_a31ob"]
 [ext_resource type="Script" uid="uid://bcqjmffcvd5p1" path="res://src/other_nodes/componets/other/ability_manager/ability_cache_module.gd" id="14_kgtwq"]
 [ext_resource type="Script" uid="uid://6hg6o4escfno" path="res://src/other_nodes/componets/other/hsm/base/HSMContext.gd" id="16_1fgyy"]
-[ext_resource type="Script" uid="uid://buvd8v2xnqdma" path="res://src/other_nodes/componets/other/hsm/player/hsm_master_branch.gd" id="19_ed3ja"]
+[ext_resource type="Script" uid="uid://buvd8v2xnqdma" path="res://src/other_nodes/componets/other/hsm/custom/player/hsm_master_branch.gd" id="19_ed3ja"]
+[ext_resource type="Script" uid="uid://cjsfs1tu44rru" path="res://src/other_nodes/componets/other/hsm/modules/camera_impact_module.gd" id="25_axxsh"]
+[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="26_8h0p6"]
 [ext_resource type="Script" uid="uid://crubykxav651n" path="res://src/other_nodes/componets/other/hsm/modules/move_task_module.gd" id="28_txpw3"]
 [ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="29_iamtb"]
-[ext_resource type="Script" uid="uid://f52ik2jq0j3c" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/hsm_stationary_branch.gd" id="29_wjrm0"]
+[ext_resource type="Script" uid="uid://f52ik2jq0j3c" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/normal/stationary/hsm_stationary_branch.gd" id="29_wjrm0"]
 [ext_resource type="Script" uid="uid://bbxh0naimvb8e" path="res://src/other_nodes/componets/other/hsm/modules/particle_module.gd" id="30_ljr7w"]
-[ext_resource type="Script" uid="uid://cka3v8ea47wvs" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/jumping/hsm_jumping_branch.gd" id="31_8acae"]
-[ext_resource type="Script" uid="uid://xv610pu3m66j" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/hsm_normal_branch.gd" id="31_nshoc"]
+[ext_resource type="Script" uid="uid://cka3v8ea47wvs" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/airborn/jumping/hsm_jumping_branch.gd" id="31_8acae"]
+[ext_resource type="Script" uid="uid://xv610pu3m66j" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/normal/hsm_normal_branch.gd" id="31_nshoc"]
 [ext_resource type="Script" uid="uid://c13ducndpw58n" path="res://src/other_nodes/componets/other/hsm/modules/task_module.gd" id="32_3xcyv"]
-[ext_resource type="Script" uid="uid://clkmvbmnonx58" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/jumping/leafs/hsm_wall_jump.gd" id="32_8acae"]
+[ext_resource type="Script" uid="uid://clkmvbmnonx58" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/airborn/jumping/leafs/hsm_wall_jump.gd" id="32_8acae"]
 [ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_hsm_context.gd" id="33_45rvh"]
 [ext_resource type="Script" uid="uid://8eitfm2qkex7" path="res://src/other_nodes/componets/other/hsm/modules/wall_jump_task_module.gd" id="34_0xmtw"]
 [ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="41_iamtb"]
-[ext_resource type="Script" uid="uid://0cpy1h8nxy0k" path="res://src/other_nodes/componets/other/hsm/player/injured/hsm_injured_branch.gd" id="42_8h0p6"]
-[ext_resource type="Script" uid="uid://cu77b7j2pivmq" path="res://src/other_nodes/componets/other/hsm/player/injured/leafs/hsm_dead.gd" id="43_d0oxh"]
-[ext_resource type="Script" uid="uid://bqwidr1pm2ims" path="res://src/other_nodes/componets/other/hsm/player/injured/leafs/hsm_hurt.gd" id="44_7yy2l"]
-[ext_resource type="Script" uid="uid://b3qq0uta0dnch" path="res://src/other_nodes/componets/other/hsm/player/normal/hsm_healthy_branch.gd" id="45_ja238"]
-[ext_resource type="Script" uid="uid://d3lbx6x36g5lm" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/hsm_airborn_branch.gd" id="46_wixch"]
-[ext_resource type="Script" uid="uid://y4ui85ghvo47" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/leafs/hsm_fall.gd" id="47_llr1v"]
+[ext_resource type="Script" uid="uid://0cpy1h8nxy0k" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/hsm_injured_branch.gd" id="42_8h0p6"]
+[ext_resource type="Script" uid="uid://cu77b7j2pivmq" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/leafs/hsm_dead.gd" id="43_d0oxh"]
+[ext_resource type="Script" uid="uid://bqwidr1pm2ims" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/leafs/hsm_stunned.gd" id="44_7yy2l"]
+[ext_resource type="Script" uid="uid://b3qq0uta0dnch" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/hsm_healthy_branch.gd" id="45_ja238"]
+[ext_resource type="Script" uid="uid://d3lbx6x36g5lm" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/airborn/hsm_airborn_branch.gd" id="46_wixch"]
+[ext_resource type="Script" uid="uid://y4ui85ghvo47" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/airborn/leafs/hsm_fall.gd" id="47_llr1v"]
 [ext_resource type="Script" uid="uid://8refxrhjc54v" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_camera_lead.gd" id="48_evk2k"]
-[ext_resource type="Script" uid="uid://ouvwrmrbv6uv" path="res://src/other_nodes/componets/other/hsm/player/normal/airborn/jumping/leafs/hsm_jump.gd" id="48_gaiw7"]
-[ext_resource type="Script" uid="uid://bfywxkk80bnwv" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/hsm_grounded_branch.gd" id="49_hp8j0"]
-[ext_resource type="Script" uid="uid://dfhtf8imgj2cg" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/leafs/hsm_dig.gd" id="50_5ewf5"]
-[ext_resource type="Script" uid="uid://c0elefshkywa1" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/leafs/hsm_idle.gd" id="51_3gyts"]
-[ext_resource type="Script" uid="uid://d10dlcdx7wqf6" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/leafs/hsm_grounded_attack.gd" id="52_d0oxh"]
-[ext_resource type="Script" uid="uid://nn7kpdksgcc7" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/leafs/hsm_running.gd" id="52_kctto"]
-[ext_resource type="Script" uid="uid://doh1sw7gy812l" path="res://src/other_nodes/componets/other/hsm/player/normal/grounded/normal/stationary/leafs/hsm_slowdown.gd" id="53_fjhij"]
+[ext_resource type="Script" uid="uid://ouvwrmrbv6uv" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/airborn/jumping/leafs/hsm_jump.gd" id="48_gaiw7"]
+[ext_resource type="Script" uid="uid://bfywxkk80bnwv" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/hsm_grounded_branch.gd" id="49_hp8j0"]
+[ext_resource type="Script" uid="uid://dfhtf8imgj2cg" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/leafs/hsm_dig.gd" id="50_5ewf5"]
+[ext_resource type="Script" uid="uid://c0elefshkywa1" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/normal/stationary/leafs/hsm_idle.gd" id="51_3gyts"]
+[ext_resource type="Script" uid="uid://d10dlcdx7wqf6" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/leafs/hsm_grounded_attack.gd" id="52_d0oxh"]
+[ext_resource type="Script" uid="uid://nn7kpdksgcc7" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/normal/leafs/hsm_running.gd" id="52_kctto"]
+[ext_resource type="Script" uid="uid://doh1sw7gy812l" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/normal/stationary/leafs/hsm_slowdown.gd" id="53_fjhij"]
 
 [sub_resource type="Animation" id="Animation_45rvh"]
 resource_name = "ATTACK"
@@ -168,6 +170,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.1, 1.2), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../..:collision_layer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_akx0o"]
@@ -318,6 +332,18 @@ tracks/11/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../..:collision_layer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="Animation" id="Animation_fbnv4"]
 resource_name = "DIG_START"
@@ -466,6 +492,18 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../..:collision_layer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_2cmg6"]
@@ -788,6 +826,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../..:collision_layer")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="Animation" id="Animation_tvulh"]
 resource_name = "RUNNING"
@@ -913,20 +963,20 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
 size = Vector2(120, 350)
 
-[sub_resource type="Resource" id="Resource_ed3ja"]
+[sub_resource type="Resource" id="Resource_8h0p6"]
 script = ExtResource("6_ed3ja")
 
-[sub_resource type="Resource" id="Resource_0r3kn"]
+[sub_resource type="Resource" id="Resource_7yy2l"]
 script = ExtResource("7_0r3kn")
 
-[sub_resource type="Resource" id="Resource_ljr7w"]
+[sub_resource type="Resource" id="Resource_ja238"]
 script = ExtResource("9_rvvip")
 type = 1
 duration = 0.4
 
-[sub_resource type="Resource" id="Resource_rvvip"]
+[sub_resource type="Resource" id="Resource_wixch"]
 script = ExtResource("8_ljr7w")
-status = SubResource("Resource_ljr7w")
+status = SubResource("Resource_ja238")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tw7w"]
 size = Vector2(250, 100)
@@ -967,6 +1017,12 @@ size = Vector2(105, 365)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akx0o"]
 size = Vector2(120, 5)
 
+[sub_resource type="Resource" id="Resource_d0oxh"]
+script = ExtResource("26_8h0p6")
+amplitude = 250.0
+frequency = 500.0
+metadata/_custom_type_script = "uid://dimvdouy8g0sv"
+
 [node name="Player" type="CharacterBody2D" unique_id=539542931 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
 z_index = 1
 collision_layer = 4
@@ -997,7 +1053,7 @@ unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_2cmg6")
 
 [node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=1143519473 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
-position = Vector2(0, -173)
+position = Vector2(0, -175)
 collision_layer = 0
 collision_mask = 20
 monitorable = false
@@ -1016,7 +1072,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("3_33dyk")
 entity = NodePath("../..")
-effects = Array[ExtResource("5_kgtwq")]([SubResource("Resource_ed3ja"), SubResource("Resource_0r3kn"), SubResource("Resource_rvvip")])
+effects = Array[ExtResource("5_kgtwq")]([SubResource("Resource_8h0p6"), SubResource("Resource_7yy2l"), SubResource("Resource_wixch")])
 shape = SubResource("RectangleShape2D_4tw7w")
 disabled = true
 faction = 8
@@ -1229,11 +1285,11 @@ position = Vector2(66, -160)
 shape = SubResource("RectangleShape2D_0xmtw")
 
 [node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=1568380323]
-position = Vector2(-0.5, -180.5)
+position = Vector2(-0.5, -182.5)
 shape = SubResource("RectangleShape2D_rvvip")
 
 [node name="DigGroundCollide" type="CollisionShape2D" parent="." unique_id=1114400878]
-position = Vector2(0, -0.5)
+position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_akx0o")
 disabled = true
 
@@ -1289,7 +1345,7 @@ need_action_start = true
 [node name="Injured" type="Node" parent="HSMMaster/Master" unique_id=1176988154 node_paths=PackedStringArray("dead_state", "hurt_state")]
 script = ExtResource("42_8h0p6")
 dead_state = NodePath("Dead")
-hurt_state = NodePath("Hurt")
+hurt_state = NodePath("Stunned")
 
 [node name="StunAnimationModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=662488774]
 script = ExtResource("29_iamtb")
@@ -1299,12 +1355,16 @@ animation = 7
 script = ExtResource("32_3xcyv")
 task = NodePath("../../../../TaskManager/GravityTask")
 
+[node name="CameraImpactModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=772768823]
+script = ExtResource("25_axxsh")
+noise = SubResource("Resource_d0oxh")
+
 [node name="Dead" type="Node" parent="HSMMaster/Master/Injured" unique_id=1808724823 node_paths=PackedStringArray("root")]
 script = ExtResource("43_d0oxh")
 root = NodePath("../../..")
 need_action_finished = true
 
-[node name="Hurt" type="Node" parent="HSMMaster/Master/Injured" unique_id=884992292 node_paths=PackedStringArray("normal_state")]
+[node name="Stunned" type="Node" parent="HSMMaster/Master/Injured" unique_id=884992292 node_paths=PackedStringArray("normal_state")]
 script = ExtResource("44_7yy2l")
 normal_state = NodePath("../../Healthy")
 need_action_finished = true
@@ -1314,10 +1374,15 @@ script = ExtResource("45_ja238")
 airborn_state = NodePath("Airborn")
 grounded_state = NodePath("Grounded")
 
-[node name="Airborn" type="Node" parent="HSMMaster/Master/Healthy" unique_id=1982618466 node_paths=PackedStringArray("fall_state")]
+[node name="Airborn" type="Node" parent="HSMMaster/Master/Healthy" unique_id=1982618466 node_paths=PackedStringArray("fall_state", "coyote_timer")]
 script = ExtResource("46_wixch")
 fall_state = NodePath("Fall")
+coyote_timer = NodePath("CoyoteTimer")
 need_action_changed = true
+
+[node name="CoyoteTimer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn" unique_id=1373262917]
+wait_time = 0.15
+one_shot = true
 
 [node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=388417439 node_paths=PackedStringArray("task")]
 script = ExtResource("32_3xcyv")
@@ -1333,7 +1398,7 @@ jump_state = NodePath("../Jumping/Jump")
 wall_jump_state = NodePath("../Jumping/WallJump")
 ground_state = NodePath("../../Grounded/Normal")
 wall_detect = NodePath("../../../../../VisualPivot/WallDetect")
-coyote_timer = NodePath("CoyoteTimer")
+coyote_timer = NodePath("../CoyoteTimer")
 jump_buffer = NodePath("JumpBuffer")
 need_action_start = true
 need_action_finished = true
@@ -1344,10 +1409,6 @@ animation = 1
 
 [node name="JumpBuffer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=546628607]
 wait_time = 0.2
-one_shot = true
-
-[node name="CoyoteTimer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=1373262917]
-wait_time = 0.15
 one_shot = true
 
 [node name="Jumping" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=624786871 node_paths=PackedStringArray("fall_state", "ground_state", "jump_state")]
@@ -1424,6 +1485,7 @@ need_action_start = true
 
 [node name="StationaryAnimationModule" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Stationary" unique_id=247710662]
 script = ExtResource("29_iamtb")
+animation = 2
 
 [node name="Idle" type="Node" parent="HSMMaster/Master/Healthy/Grounded/Normal/Stationary" unique_id=1968702926]
 script = ExtResource("51_3gyts")

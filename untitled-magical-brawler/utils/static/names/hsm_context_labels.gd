@@ -11,7 +11,11 @@ const ACT_PLAYER_DOWN := &"__player_down__"
 const ACT_PLAYER_DIG := &"__player_dig__"
 
 const VAL_JUMP_COUNT := &"__jump_count__"
-const VAL_WALL_JUMP_COUNT := &"__jump_count__"
+const VAL_WALL_JUMP_COUNT := &"__wall_jump_count__"
+
+# Enemy
+const ACT_SPOTTED_PLAYER := &"__spotted_player__"
+const ACT_PURSUING_PLAYER := &"__pursuing_player__"
 
 # General
 const ACT_IN_AIR := &"__in_air__"
