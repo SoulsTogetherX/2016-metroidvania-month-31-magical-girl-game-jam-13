@@ -51,10 +51,15 @@ func task_physics(delta : float) -> void:
 	var target_point : Vector2 = _get_target_point.call()
 	var move_dir : float = signf(target_point.x - _entity.global_position.x)
 	
-	if _stop_raycast && !_stop_raycast.is_colliding():
-		velocity_module.velocity.x = 0.0
-		return
-	elif signf(move_dir) != signf(velocity_module.get_velocity().x):
+	if auto_change_dir && _entity && !is_zero_approx(move_dir):
+		_entity.change_direction(move_dir < 0, false)
+	if _stop_raycast:
+		_stop_raycast.force_raycast_update()
+		if !_stop_raycast.is_colliding():
+			velocity_module.velocity.x = 0.0
+			return
+	
+	if signf(move_dir) != signf(velocity_module.get_velocity().x):
 		velocity_module.lerp_hor_change(
 			0.0, _slowdown_weight, delta
 		)
@@ -65,9 +70,6 @@ func task_physics(delta : float) -> void:
 	velocity_module.lerp_hor_change(
 		move_dir * _max_speed, _weight, delta
 	)
-	
-	if auto_change_dir && _entity && !is_zero_approx(move_dir):
-		_entity.change_direction(move_dir < 0, false)
 #endregion
 	
 

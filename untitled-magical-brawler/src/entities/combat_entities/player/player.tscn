@@ -39,7 +39,6 @@
 [ext_resource type="Script" uid="uid://dqxbobealchy8" path="res://src/other_nodes/componets/other/task_manager/tasks/processing/player_update_hsm_context.gd" id="33_45rvh"]
 [ext_resource type="Script" uid="uid://8eitfm2qkex7" path="res://src/other_nodes/componets/other/hsm/modules/wall_jump_task_module.gd" id="34_0xmtw"]
 [ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="41_iamtb"]
-[ext_resource type="Script" uid="uid://0cpy1h8nxy0k" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/hsm_injured_branch.gd" id="42_8h0p6"]
 [ext_resource type="Script" uid="uid://cu77b7j2pivmq" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/leafs/hsm_dead.gd" id="43_d0oxh"]
 [ext_resource type="Script" uid="uid://bqwidr1pm2ims" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/leafs/hsm_stunned.gd" id="44_7yy2l"]
 [ext_resource type="Script" uid="uid://b3qq0uta0dnch" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/hsm_healthy_branch.gd" id="45_ja238"]
@@ -56,7 +55,7 @@
 
 [sub_resource type="Animation" id="Animation_45rvh"]
 resource_name = "ATTACK"
-length = 0.275
+length = 0.3
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -181,7 +180,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_akx0o"]
@@ -960,8 +959,8 @@ _data = {
 &"STUN": SubResource("Animation_33dyk")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dyk"]
-size = Vector2(120, 350)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0oxh"]
+size = Vector2(133, 323)
 
 [sub_resource type="Resource" id="Resource_8h0p6"]
 script = ExtResource("6_ed3ja")
@@ -978,8 +977,8 @@ duration = 0.4
 script = ExtResource("8_ljr7w")
 status = SubResource("Resource_ja238")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tw7w"]
-size = Vector2(250, 100)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h0p6"]
+size = Vector2(305, 101)
 
 [sub_resource type="Curve" id="Curve_0r3kn"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.7126436, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -1062,8 +1061,12 @@ entity = NodePath("../..")
 knockback_module = NodePath("../../CombatComponents/KnockbackComponent")
 health_module = NodePath("../../CombatComponents/HealthComponent")
 status_effect_module = NodePath("../../CombatComponents/StatusEffectReceiver")
-shape = SubResource("RectangleShape2D_33dyk")
 faction = 20
+
+[node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/HurtboxComponent" unique_id=684644458]
+position = Vector2(1.5, 12.5)
+shape = SubResource("RectangleShape2D_d0oxh")
+debug_color = Color(0, 1, 0, 0.3)
 
 [node name="PunchHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=2087121274 node_paths=PackedStringArray("entity")]
 position = Vector2(163, -138)
@@ -1073,9 +1076,14 @@ monitoring = false
 script = ExtResource("3_33dyk")
 entity = NodePath("../..")
 effects = Array[ExtResource("5_kgtwq")]([SubResource("Resource_8h0p6"), SubResource("Resource_7yy2l"), SubResource("Resource_wixch")])
-shape = SubResource("RectangleShape2D_4tw7w")
 disabled = true
 faction = 8
+
+[node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/PunchHitboxComponent" unique_id=1317105260]
+position = Vector2(-20.5, 6.5)
+shape = SubResource("RectangleShape2D_8h0p6")
+disabled = true
+debug_color = Color(1, 0, 0, 0.3)
 
 [node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=1157038368]
 position = Vector2(60, 0)
@@ -1338,36 +1346,35 @@ metadata/_custom_type_script = "uid://cn1lche2a867t"
 
 [node name="Master" type="Node" parent="HSMMaster" unique_id=426437201 node_paths=PackedStringArray("injured_state", "normal_state")]
 script = ExtResource("19_ed3ja")
-injured_state = NodePath("Injured")
+injured_state = NodePath("Stunned")
 normal_state = NodePath("Healthy")
 need_action_start = true
 
-[node name="Injured" type="Node" parent="HSMMaster/Master" unique_id=1176988154 node_paths=PackedStringArray("dead_state", "hurt_state")]
-script = ExtResource("42_8h0p6")
+[node name="Stunned" type="Node" parent="HSMMaster/Master" unique_id=884992292 node_paths=PackedStringArray("dead_state", "normal_state")]
+script = ExtResource("44_7yy2l")
 dead_state = NodePath("Dead")
-hurt_state = NodePath("Stunned")
+normal_state = NodePath("../Healthy")
+need_action_finished = true
 
-[node name="StunAnimationModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=662488774]
+[node name="StunAnimationModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=662488774]
 script = ExtResource("29_iamtb")
 animation = 7
 
-[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=2103056586 node_paths=PackedStringArray("task")]
+[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=2103056586 node_paths=PackedStringArray("task")]
 script = ExtResource("32_3xcyv")
 task = NodePath("../../../../TaskManager/GravityTask")
 
-[node name="CameraImpactModule" type="Node" parent="HSMMaster/Master/Injured" unique_id=772768823]
+[node name="CameraImpactModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=772768823]
 script = ExtResource("25_axxsh")
 noise = SubResource("Resource_d0oxh")
 
-[node name="Dead" type="Node" parent="HSMMaster/Master/Injured" unique_id=1808724823 node_paths=PackedStringArray("root")]
+[node name="Dead" type="Node" parent="HSMMaster/Master/Stunned" unique_id=1808724823]
 script = ExtResource("43_d0oxh")
-root = NodePath("../../..")
 need_action_finished = true
 
-[node name="Stunned" type="Node" parent="HSMMaster/Master/Injured" unique_id=884992292 node_paths=PackedStringArray("normal_state")]
-script = ExtResource("44_7yy2l")
-normal_state = NodePath("../../Healthy")
-need_action_finished = true
+[node name="DeadAnimationModule" type="Node" parent="HSMMaster/Master/Stunned/Dead" unique_id=890806761]
+script = ExtResource("29_iamtb")
+animation = 6
 
 [node name="Healthy" type="Node" parent="HSMMaster/Master" unique_id=1842780270 node_paths=PackedStringArray("airborn_state", "grounded_state")]
 script = ExtResource("45_ja238")

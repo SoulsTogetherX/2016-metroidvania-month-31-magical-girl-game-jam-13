@@ -11,15 +11,6 @@ extends Node2D
 		
 		_update_hitbox_effect()
 		_load_texture()
-@export var shape : Shape2D:
-	set(val):
-		if val == shape:
-			return
-		if val == null:
-			val = CircleShape2D.new()
-		shape = val
-		
-		_update_hitbox_shape()
 #endregion
 
 
@@ -40,7 +31,6 @@ func _ready() -> void:
 	
 	_update_hitbox_effect()
 	_load_texture()
-	_update_hitbox_shape()
 	_hitbox.collision_found.connect(_on_collect)
 #endregion
 
@@ -53,10 +43,6 @@ func _update_hitbox_effect() -> void:
 	var upgrade := UpgradeCollectableEffect.new()
 	upgrade.ability = ability
 	_hitbox.effects = [upgrade]
-func _update_hitbox_shape() -> void:
-	if !is_node_ready():
-		return
-	_hitbox.shape = shape
 
 func _load_texture() -> void:
 	if ability == null:

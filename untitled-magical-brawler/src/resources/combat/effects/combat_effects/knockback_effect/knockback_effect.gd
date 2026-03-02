@@ -21,6 +21,9 @@ enum AXIS {
 @export_range(
 	0, 10000, 0.001, "or_greater"
 ) var knockback_power : float = 2000
+@export_range(
+	0, 10000, 0.001, "or_greater"
+) var upwards_push : float = 100
 
 @export_group("Axis")
 @export_flags(
@@ -52,10 +55,8 @@ func implement_attack(collide_info : CollisionInfoResource) -> void:
 		var offset := collide_info.hit_offset
 		angle += atan2(offset.y, offset.x)
 	
-	if (axis_ignore & AXIS.X) == 0:
-		dir.x = cos(angle) * knockback_power
-	if (axis_ignore & AXIS.Y) == 0:
-		dir.y = sin(angle) * knockback_power
+	dir = Vector2.RIGHT.rotated(angle) * knockback_power
+	dir.y -= upwards_push
 	
 	knockback.enact_knockback(
 		dir,

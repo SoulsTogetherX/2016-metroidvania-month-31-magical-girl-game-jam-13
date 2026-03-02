@@ -3,22 +3,20 @@
 class_name FactionAreaComponent extends Area2D
 
 
+#region Constants
+const COLLIDER_NAME := "FactionDetectionArea"
+#endregion
+
+
 #region External Variables
 @export_group("Settings")
-@export var shape : Shape2D:
-	set(val):
-		if val == shape:
-			return
-		shape = val
-		
-		_refresh_collider()
 @export var disabled : bool:
 	set(val):
 		if val == disabled:
 			return
 		disabled = val
 		
-		if is_node_ready():
+		if _collider:
 			_collider.disabled = val
 
 @export_group("Faction")
@@ -46,10 +44,13 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_READY:
 			_refresh_faction()
-			_refresh_collider()
 			
-			if Engine.is_editor_hint():
-				return
+			EditorUtilities.confirmed_child.call_deferred(
+				self, &"_collider",
+				COLLIDER_NAME, _create_collider,
+				func(_node): pass, 0
+			)
+			
 			if duration > 0:
 				destroy_box(duration)
 
@@ -66,17 +67,11 @@ func _refresh_faction() -> void:
 #endregion
 
 
-#region Private Methods
-func _refresh_collider() -> void:
-	if _collider:
-		_collider.queue_free()
-		_collider = null
-	
-	if shape:
-		_collider = CollisionShape2D.new()
-		_collider.shape = shape
-		_collider.disabled = disabled
-		add_child(_collider)
+#region Private Methods (Confirmed Children)
+func _create_collider() -> CollisionShape2D:
+	return CollisionShape2D.new()
+func _settup_collider(collide : CollisionShape2D) -> void:
+	collide.disabled = disabled
 #endregion
 
 

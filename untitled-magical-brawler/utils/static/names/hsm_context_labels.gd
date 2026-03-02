@@ -15,7 +15,7 @@ const VAL_WALL_JUMP_COUNT := &"__wall_jump_count__"
 
 # Enemy
 const ACT_SPOTTED_PLAYER := &"__spotted_player__"
-const ACT_PURSUING_PLAYER := &"__pursuing_player__"
+const ACT_OUT_OF_RANGE := &"__out_of_range__"
 
 # General
 const ACT_IN_AIR := &"__in_air__"

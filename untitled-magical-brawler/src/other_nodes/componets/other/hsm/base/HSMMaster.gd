@@ -71,12 +71,12 @@ func _action_finished(action_name : StringName) -> void:
 	for state : HSMBranch in _action_finished_queue:
 		state.action_finished(action_name)
 
-func _action_changed(action_name : StringName) -> void:
+func _action_changed(action_name : StringName, val : bool) -> void:
 	for state : HSMBranch in _action_finished_queue:
-		state.action_changed(action_name)
-func _value_changed(value_name : StringName) -> void:
+		state.action_changed(action_name, val)
+func _value_changed(value_name : StringName, val : Variant) -> void:
 	for state : HSMBranch in _value_changed_queue:
-		state.value_changed(value_name)
+		state.value_changed(value_name, val)
 #endregion
 
 

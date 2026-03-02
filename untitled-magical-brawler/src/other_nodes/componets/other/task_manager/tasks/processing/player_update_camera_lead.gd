@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 #region Public Action Methods
-func action_changed(action_name : String) -> void:
+func action_changed(action_name : String, _val : bool) -> void:
 	var labels := GlobalLabels.hsm_context
 	
 	match action_name:

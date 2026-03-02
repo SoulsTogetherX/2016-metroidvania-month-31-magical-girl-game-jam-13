@@ -17,7 +17,7 @@ func _ready() -> void:
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
 	
-	EditorUtilities.confirmed_child(
+	EditorUtilities.confirmed_child.call_deferred(
 		self,
 		&"",
 		COLLIDER_NAME,

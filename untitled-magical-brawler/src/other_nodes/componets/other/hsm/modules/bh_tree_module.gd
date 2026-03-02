@@ -2,7 +2,7 @@ extends HSMModule
 
 
 #region External Variables
-@export_group("Animations")
+@export_group("Tree")
 @export var behavioral_tree : BeehaveTree
 
 @export_group("Settings")

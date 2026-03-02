@@ -20,12 +20,8 @@ func action_started(action_name : StringName) -> void:
 	match action_name:
 		GlobalLabels.hsm_context.ACT_STUN:
 			change_state(injured_state)
-		GlobalLabels.hsm_context.ACT_IN_AIR:
-			gravity_task.disabled = false
 func action_finished(action_name : StringName) -> void:
 	match action_name:
 		GlobalLabels.hsm_context.ACT_STUN:
 			change_state(healthy_state)
-		GlobalLabels.hsm_context.ACT_IN_AIR:
-			gravity_task.disabled = true
 #endregion

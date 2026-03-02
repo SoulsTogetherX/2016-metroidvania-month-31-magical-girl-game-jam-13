@@ -12,7 +12,6 @@ extends HSMBranch
 #region Public State Change Methods
 func passthrough_state(act : Node, _ctx : HSMContext) -> HSMBranch:
 	var entity : CombatEntity = act
-	
 	if entity.get_health_component().is_dead():
 		return dead_state
 	return hurt_state

@@ -37,4 +37,6 @@ func enter_state(_act : Node, ctx : HSMContext) -> void:
 	
 	if !ctx.is_action(GlobalLabels.hsm_context.ACT_IN_AIR):
 		_on_dead_end()
+func exit_state(act : Node, _ctx : HSMContext) -> void:
+	act.queue_free()
 #endregion
