@@ -34,11 +34,14 @@
 [ext_resource type="Script" uid="uid://bg443kmtvkij4" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/hb_is_at_intreast.gd" id="31_1l634"]
 [ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="31_la5ec"]
 [ext_resource type="Script" uid="uid://b15bievrlmqxj" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/pursue_wander/branches/hsm_wander_branch.gd" id="31_pb48o"]
+[ext_resource type="Script" uid="uid://pm4vrnm63gc6" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_face_interest.gd" id="32_q18rv"]
+[ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="33_0thg1"]
 [ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="33_6o8bd"]
 [ext_resource type="Script" uid="uid://bbx22fu4rlkev" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/move_to_moving_point_task.gd" id="33_14xs3"]
 [ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="33_elvao"]
 [ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="34_3xebj"]
 [ext_resource type="Script" uid="uid://ituubmwq4mqp" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_has_h_speed.gd" id="34_7f4rg"]
+[ext_resource type="Script" uid="uid://dsta3mdddecro" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_cannot_move_forward.gd" id="34_uw72r"]
 [ext_resource type="Script" uid="uid://dsf3a8vlolhx8" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="34_xl3hi"]
 [ext_resource type="Script" uid="uid://d1bgpcpv1g18a" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_play_animation.gd" id="35_elvao"]
 [ext_resource type="Script" uid="uid://wmlgde2i3qps" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_play_task.gd" id="35_igp0m"]
@@ -300,6 +303,9 @@ size = Vector2(129, 227)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xebj"]
 size = Vector2(169, 234)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rql5l"]
+size = Vector2(5, 233)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pb48o"]
 size = Vector2(146.5, 234)
 
@@ -360,6 +366,11 @@ metadata/_custom_type_script = "uid://d4frh4mqr77xo"
 position = Vector2(0, -116)
 shape = SubResource("RectangleShape2D_3xebj")
 debug_color = Color(0, 1, 0, 0.3)
+
+[node name="WallCheck" type="CollisionShape2D" parent="VisualPivot" unique_id=1578837107]
+position = Vector2(76.5, -116.5)
+shape = SubResource("RectangleShape2D_rql5l")
+debug_color = Color(0.80883354, 3.1766297e-06, 0.49389768, 0.3019608)
 
 [node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=871175542]
 position = Vector2(0, -117)
@@ -472,6 +483,28 @@ metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 [node name="FollowIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence" unique_id=1350486538]
 script = ExtResource("30_pb48o")
 metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="CanMoveSequence" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast" unique_id=2141630648]
+script = ExtResource("33_elvao")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="FaceIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=208055095]
+script = ExtResource("32_q18rv")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="InverterDecorator" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=156216725]
+script = ExtResource("33_0thg1")
+metadata/_custom_type_script = "uid://crkjak4kyv56m"
+
+[node name="CannotMoveForward" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence/InverterDecorator" unique_id=360427589 node_paths=PackedStringArray("wall_check")]
+script = ExtResource("34_uw72r")
+wall_check = NodePath("../../../../../../../../../../../VisualPivot/WallCheck")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="StationaryAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=355175635]
+script = ExtResource("35_elvao")
+animation = 2
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
 [node name="StationaryCheck" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast" unique_id=232374210]
 script = ExtResource("33_elvao")

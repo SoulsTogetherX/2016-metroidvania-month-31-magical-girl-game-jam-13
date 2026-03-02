@@ -483,6 +483,9 @@ size = Vector2(214, 198)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvyoa"]
 size = Vector2(191, 293)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iih32"]
+size = Vector2(11, 293)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pb48o"]
 size = Vector2(93.5, 328)
 
@@ -557,6 +560,11 @@ metadata/_custom_type_script = "uid://d4frh4mqr77xo"
 position = Vector2(18.5, -146.5)
 shape = SubResource("RectangleShape2D_kvyoa")
 debug_color = Color(0, 1, 0, 0.3)
+
+[node name="WallCheck" type="CollisionShape2D" parent="VisualPivot" unique_id=664090325]
+position = Vector2(53.5, -146.5)
+shape = SubResource("RectangleShape2D_iih32")
+debug_color = Color(0.80883354, 3.1766297e-06, 0.49389768, 0.3019608)
 
 [node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=772671663]
 position = Vector2(47, -3)
@@ -689,9 +697,10 @@ metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 script = ExtResource("35_ftbgm")
 metadata/_custom_type_script = "uid://crkjak4kyv56m"
 
-[node name="CannotMoveForward" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence/InverterDecorator" unique_id=1368978929 node_paths=PackedStringArray("raycast")]
+[node name="CannotMoveForward" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence/InverterDecorator" unique_id=1368978929 node_paths=PackedStringArray("raycast", "wall_check")]
 script = ExtResource("36_iih32")
 raycast = NodePath("../../../../../../../../../../../VisualPivot/GroundRayCast")
+wall_check = NodePath("../../../../../../../../../../../VisualPivot/WallCheck")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
 [node name="StationaryAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=1576595078]
