@@ -1,0 +1,919 @@
+[gd_scene format=3 uid="uid://u5w1c10cgqcj"]
+
+[ext_resource type="Shader" uid="uid://c4pwni02nxw7f" path="res://assets/shaders/hit_flash_shader.gdshader" id="1_iih32"]
+[ext_resource type="Script" uid="uid://dfrerw612ix6r" path="res://src/entities/combat_entities/enemies/enemy_entity.gd" id="1_sobtd"]
+[ext_resource type="SpriteFrames" uid="uid://citi8s6h8yjlf" path="res://assets/entities/enemies/sword_mush_guy/sword_mushroom_guy_spritesheet.tres" id="2_kvyoa"]
+[ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_u3vkn"]
+[ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="4_aosrb"]
+[ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="5_8fh7g"]
+[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_besge"]
+[ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_j4u2l"]
+[ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_krdy4"]
+[ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="9_msv2j"]
+[ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="10_mtpr2"]
+[ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/damage_reaction/health_component.gd" id="11_512lf"]
+[ext_resource type="Script" uid="uid://t6fmk6m3s8bn" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_reciever/status_effect_receiver.gd" id="12_b6ysp"]
+[ext_resource type="Script" uid="uid://dtgljqvaxqo4g" path="res://src/other_nodes/componets/combat/damage_reaction/status_effect_handler/state_status_effect_handler.gd" id="13_6qwfq"]
+[ext_resource type="Script" uid="uid://ui8sa21uexr7" path="res://src/other_nodes/componets/movement/velocity_component.gd" id="14_v7kbu"]
+[ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="15_3cq8e"]
+[ext_resource type="Script" uid="uid://6hg6o4escfno" path="res://src/other_nodes/componets/other/hsm/base/HSMContext.gd" id="16_h8mo8"]
+[ext_resource type="Script" uid="uid://dme5f24l0edsf" path="res://addons/beehave/blackboard.gd" id="17_e2ens"]
+[ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="17_x0xm6"]
+[ext_resource type="Script" uid="uid://crl4egd5t8kl" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/hsm_master_branch.gd" id="18_vt0rf"]
+[ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="20_urunc"]
+[ext_resource type="Script" uid="uid://bekwjwj7ad6l0" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/injured/leafs/hsm_dead.gd" id="21_yr0y5"]
+[ext_resource type="Script" uid="uid://cyo26jnbx0o6x" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/injured/leafs/hsm_stunned.gd" id="22_dxw8u"]
+[ext_resource type="Script" uid="uid://djnujq0jylt8y" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/pursue_wander/hsm_pursue_wander_branch.gd" id="23_vnr28"]
+[ext_resource type="Script" uid="uid://ddu63qiu6am6v" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/pursue_wander/branches/hsm_pursue_branch.gd" id="24_iyuj2"]
+[ext_resource type="Script" uid="uid://dqefj4hpuyk1n" path="res://src/other_nodes/componets/other/hsm/modules/bh_tree_module.gd" id="25_5gpq8"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="26_e2ens"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="27_m83q3"]
+[ext_resource type="Script" uid="uid://bxkic4apcromp" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_set_interest_to_player.gd" id="28_e7xy8"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="29_ftbgm"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="30_iih32"]
+[ext_resource type="Script" uid="uid://bg443kmtvkij4" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/hb_is_at_intreast.gd" id="31_1mio5"]
+[ext_resource type="Script" uid="uid://b15bievrlmqxj" path="res://src/other_nodes/componets/other/hsm/custom/enemy/master/pursue_wander/branches/hsm_wander_branch.gd" id="31_h4jvc"]
+[ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="32_2f2i6"]
+[ext_resource type="Script" uid="uid://d1bgpcpv1g18a" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_play_animation.gd" id="32_vrvvp"]
+[ext_resource type="Script" uid="uid://f34l31lgpbgo" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/slowdown_task.gd" id="33_emwwr"]
+[ext_resource type="Script" uid="uid://dsf3a8vlolhx8" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="33_uo6fu"]
+[ext_resource type="Script" uid="uid://bbx22fu4rlkev" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/move_to_moving_point_task.gd" id="34_8veo0"]
+[ext_resource type="Script" uid="uid://ituubmwq4mqp" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_has_h_speed.gd" id="34_as5v6"]
+[ext_resource type="Script" uid="uid://pm4vrnm63gc6" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_face_interest.gd" id="34_e7xy8"]
+[ext_resource type="Script" uid="uid://c60nfbpk24ypa" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/gravity_task.gd" id="35_82gr5"]
+[ext_resource type="Script" uid="uid://wmlgde2i3qps" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_play_task.gd" id="35_f2ipb"]
+[ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="35_ftbgm"]
+[ext_resource type="Script" uid="uid://dsta3mdddecro" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_cannot_move_forward.gd" id="36_iih32"]
+[ext_resource type="Script" uid="uid://60mrhnrlij2v" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_set_h_speed.gd" id="36_qsfyd"]
+[ext_resource type="Script" uid="uid://d8caihrl226f" path="res://src/other_nodes/componets/other/task_manager/tasks/velocity/velocity_apply_task.gd" id="36_vywn3"]
+[ext_resource type="Script" uid="uid://cxhqu37u0seko" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_await_forever.gd" id="37_guhdl"]
+[ext_resource type="Script" uid="uid://ch4grvnq8sxrj" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_move_to_task.gd" id="38_u5kti"]
+[ext_resource type="Script" uid="uid://jsfvlol4v1hf" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_await_animation.gd" id="39_5gpq8"]
+[ext_resource type="Script" uid="uid://c7f2ckdd3t4au" path="res://src/other_nodes/componets/other/behavior_tree/leaf/action/bh_update_interest.gd" id="40_tcwpo"]
+[ext_resource type="Script" uid="uid://dorri1tul8gfx" path="res://addons/beehave/nodes/decorators/delayer.gd" id="41_0akrd"]
+[ext_resource type="Script" uid="uid://c217liatwe683" path="res://src/other_nodes/componets/other/behavior_tree/leaf/conditional/bh_area_detected.gd" id="41_1mio5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iih32"]
+shader = ExtResource("1_iih32")
+shader_parameter/white_out = false
+
+[sub_resource type="Animation" id="Animation_5gpq8"]
+resource_name = "ATTACK"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../SwordHitboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [56.5]
+}
+
+[sub_resource type="Animation" id="Animation_sigsm"]
+resource_name = "DEAD"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HurtboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../BodyHitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:offset:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../SwordHitboxComponent:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../..")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_lu1um"]
+resource_name = "IDLE"
+length = 1.4
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SwordHitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_u7tq1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HurtboxComponent:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../BodyHitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SwordHitboxComponent:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4wjxv"]
+resource_name = "RUNNING"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"running"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SwordHitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3pfdt"]
+resource_name = "STUN"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SwordHitboxComponent:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lu1um"]
+_data = {
+&"ATTACK": SubResource("Animation_5gpq8"),
+&"DEAD": SubResource("Animation_sigsm"),
+&"IDLE": SubResource("Animation_lu1um"),
+&"RESET": SubResource("Animation_u7tq1"),
+&"RUNNING": SubResource("Animation_4wjxv"),
+&"STUN": SubResource("Animation_3pfdt")
+}
+
+[sub_resource type="Resource" id="Resource_pb48o"]
+script = ExtResource("6_besge")
+
+[sub_resource type="Resource" id="Resource_crrt2"]
+script = ExtResource("7_j4u2l")
+
+[sub_resource type="Resource" id="Resource_1l634"]
+script = ExtResource("9_msv2j")
+type = 1
+duration = 0.4
+
+[sub_resource type="Resource" id="Resource_elvao"]
+script = ExtResource("8_krdy4")
+status = SubResource("Resource_1l634")
+
+[sub_resource type="Resource" id="Resource_7f4rg"]
+script = ExtResource("9_msv2j")
+duration = 0.5
+
+[sub_resource type="Resource" id="Resource_igp0m"]
+script = ExtResource("8_krdy4")
+status = SubResource("Resource_7f4rg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hps4"]
+size = Vector2(135, 292)
+
+[sub_resource type="Resource" id="Resource_5gpq8"]
+script = ExtResource("7_j4u2l")
+knockback_power = 4000.0
+upwards_push = 2000.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2ens"]
+size = Vector2(214, 198)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvyoa"]
+size = Vector2(191, 293)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pb48o"]
+size = Vector2(93.5, 328)
+
+[node name="SwordMushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_sobtd")
+_health_module = NodePath("CombatComponents/HealthComponent")
+_status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
+_visual_pivot = NodePath("VisualPivot")
+_velocity_module = NodePath("VelocityComponent")
+_task_manager = NodePath("TaskManager")
+_animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
+
+[node name="VisualPivot" type="Node2D" parent="." unique_id=604135442]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=65209676]
+material = SubResource("ShaderMaterial_iih32")
+position = Vector2(0, 69)
+sprite_frames = ExtResource("2_kvyoa")
+animation = &"idle"
+offset = Vector2(0, -258)
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=1997354259]
+libraries/ = SubResource("AnimationLibrary_lu1um")
+autoplay = &"RESET"
+
+[node name="BodyHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=1649434660 node_paths=PackedStringArray("entity")]
+position = Vector2(3, -124)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_aosrb")
+entity = NodePath("../..")
+effects = Array[ExtResource("5_8fh7g")]([SubResource("Resource_pb48o"), SubResource("Resource_crrt2"), SubResource("Resource_elvao"), SubResource("Resource_igp0m")])
+
+[node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/BodyHitboxComponent" unique_id=1102514135]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_6hps4")
+debug_color = Color(1, 0, 0, 0.3)
+
+[node name="SwordHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=721080124 node_paths=PackedStringArray("entity")]
+position = Vector2(3, -124)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_aosrb")
+entity = NodePath("../..")
+effects = Array[ExtResource("5_8fh7g")]([SubResource("Resource_pb48o"), SubResource("Resource_5gpq8"), SubResource("Resource_elvao"), SubResource("Resource_igp0m")])
+disabled = true
+
+[node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/SwordHitboxComponent" unique_id=2019717725]
+position = Vector2(177, 25)
+shape = SubResource("RectangleShape2D_e2ens")
+disabled = true
+debug_color = Color(1, 0, 0, 0.3)
+
+[node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=1950521950 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("3_u3vkn")
+entity = NodePath("../..")
+knockback_module = NodePath("../../CombatComponents/KnockbackComponent")
+health_module = NodePath("../../CombatComponents/HealthComponent")
+status_effect_module = NodePath("../../CombatComponents/StatusEffectReceiver")
+faction = 8
+metadata/_custom_type_script = "uid://d4frh4mqr77xo"
+
+[node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/HurtboxComponent" unique_id=1608240348]
+position = Vector2(18.5, -146.5)
+shape = SubResource("RectangleShape2D_kvyoa")
+debug_color = Color(0, 1, 0, 0.3)
+
+[node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=772671663]
+position = Vector2(47, -3)
+enabled = false
+target_position = Vector2(0, 10)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="GroundCollide" type="CollisionShape2D" parent="." unique_id=871175542]
+position = Vector2(0, -164)
+shape = SubResource("RectangleShape2D_pb48o")
+
+[node name="CombatComponents" type="Node" parent="." unique_id=94140589]
+
+[node name="KnockbackComponent" type="Node" parent="CombatComponents" unique_id=883221410 node_paths=PackedStringArray("velocity_module")]
+script = ExtResource("10_mtpr2")
+velocity_module = NodePath("../../VelocityComponent")
+metadata/_custom_type_script = "uid://bhe0ii8bxo24u"
+
+[node name="HealthComponent" type="Node" parent="CombatComponents" unique_id=1304487477]
+script = ExtResource("11_512lf")
+max_health = 3
+health = 3
+metadata/_custom_type_script = "uid://lqunqvr5fs"
+
+[node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=884753076]
+script = ExtResource("12_b6ysp")
+
+[node name="StatusEffectHandler" type="Node" parent="CombatComponents/StatusEffectReceiver" unique_id=1863936555 node_paths=PackedStringArray("context", "recevier")]
+script = ExtResource("13_6qwfq")
+context = NodePath("../../../HSMContext")
+recevier = NodePath("..")
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=467419818]
+script = ExtResource("14_v7kbu")
+metadata/_custom_type_script = "uid://ui8sa21uexr7"
+
+[node name="GravityComponent" type="Node" parent="." unique_id=257284224]
+script = ExtResource("15_3cq8e")
+metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
+
+[node name="HSMContext" type="Node" parent="." unique_id=259512921]
+unique_name_in_owner = true
+script = ExtResource("16_h8mo8")
+metadata/_custom_type_script = "uid://6hg6o4escfno"
+
+[node name="Blackboard" type="Node" parent="." unique_id=1932018329]
+script = ExtResource("17_e2ens")
+metadata/_custom_type_script = "uid://dme5f24l0edsf"
+
+[node name="HSMMaster" type="Node" parent="." unique_id=1690165178 node_paths=PackedStringArray("starting_state", "context", "actor")]
+script = ExtResource("17_x0xm6")
+starting_state = NodePath("Master")
+context = NodePath("../HSMContext")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://cn1lche2a867t"
+
+[node name="Master" type="Node" parent="HSMMaster" unique_id=1432786035 node_paths=PackedStringArray("injured_state", "healthy_state", "gravity_task")]
+script = ExtResource("18_vt0rf")
+injured_state = NodePath("Stunned")
+healthy_state = NodePath("PursueWander")
+gravity_task = NodePath("../../TaskManager/GravityTask")
+need_action_start = true
+need_action_finished = true
+
+[node name="Stunned" type="Node" parent="HSMMaster/Master" unique_id=1872049716 node_paths=PackedStringArray("dead_state", "normal_state")]
+script = ExtResource("22_dxw8u")
+dead_state = NodePath("Dead")
+normal_state = NodePath("../PursueWander")
+need_action_finished = true
+
+[node name="StunnedAnimationModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=721190091]
+script = ExtResource("20_urunc")
+animation = 7
+
+[node name="Dead" type="Node" parent="HSMMaster/Master/Stunned" unique_id=1515710431]
+script = ExtResource("21_yr0y5")
+
+[node name="DeadAnimationModule" type="Node" parent="HSMMaster/Master/Stunned/Dead" unique_id=1299964161]
+script = ExtResource("20_urunc")
+animation = 6
+
+[node name="PursueWander" type="Node" parent="HSMMaster/Master" unique_id=1604958078 node_paths=PackedStringArray("pursue_state", "wander_state", "pursue_linger")]
+script = ExtResource("23_vnr28")
+pursue_state = NodePath("Pursue")
+wander_state = NodePath("Wander")
+pursue_linger = NodePath("PursueLinger")
+need_action_start = true
+need_action_finished = true
+
+[node name="PursueLinger" type="Timer" parent="HSMMaster/Master/PursueWander" unique_id=406754774]
+wait_time = 2.0
+one_shot = true
+
+[node name="Pursue" type="Node" parent="HSMMaster/Master/PursueWander" unique_id=1987803888]
+script = ExtResource("24_iyuj2")
+
+[node name="BHTreeModule" type="Node" parent="HSMMaster/Master/PursueWander/Pursue" unique_id=987147599 node_paths=PackedStringArray("behavioral_tree")]
+script = ExtResource("25_5gpq8")
+behavioral_tree = NodePath("PursueTree")
+
+[node name="PursueTree" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule" unique_id=1872996484 node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("26_e2ens")
+actor_node_path = NodePath("../../../../../..")
+blackboard = NodePath("../../../../../../Blackboard")
+actor = NodePath("../../../../../..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="MainSequence" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree" unique_id=1804347830]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetInterestToPlayer" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence" unique_id=115433232]
+script = ExtResource("28_e7xy8")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="FollowIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence" unique_id=597551800]
+script = ExtResource("29_ftbgm")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="CanMoveSequence" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast" unique_id=1184113074]
+script = ExtResource("30_iih32")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="FaceIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=1662841200]
+script = ExtResource("34_e7xy8")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="InverterDecorator" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=162020550]
+script = ExtResource("35_ftbgm")
+metadata/_custom_type_script = "uid://crkjak4kyv56m"
+
+[node name="CannotMoveForward" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence/InverterDecorator" unique_id=1368978929 node_paths=PackedStringArray("raycast")]
+script = ExtResource("36_iih32")
+raycast = NodePath("../../../../../../../../../../../VisualPivot/GroundRayCast")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="StationaryAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/CanMoveSequence" unique_id=1576595078]
+script = ExtResource("32_vrvvp")
+animation = 2
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="StationaryCheck" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast" unique_id=720129454]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SequenceReactiveComposite" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck" unique_id=113401850]
+script = ExtResource("30_iih32")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="AtIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite" unique_id=1759052993]
+script = ExtResource("31_1mio5")
+forgiveness = 280.0
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="StationarySequence" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite" unique_id=1600944697]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="StationaryAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence" unique_id=1108641462]
+script = ExtResource("32_vrvvp")
+animation = 2
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SlowdownSucceed" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence" unique_id=577787743]
+script = ExtResource("33_uo6fu")
+metadata/_custom_type_script = "uid://dsf3a8vlolhx8"
+
+[node name="SlowdownSequence" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence/SlowdownSucceed" unique_id=256074560]
+script = ExtResource("30_iih32")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="HasHVelocity" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence/SlowdownSucceed/SlowdownSequence" unique_id=1153262058]
+script = ExtResource("34_as5v6")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SlowdownTask" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence/SlowdownSucceed/SlowdownSequence" unique_id=879942334 node_paths=PackedStringArray("task")]
+script = ExtResource("35_f2ipb")
+task = NodePath("../../../../../../../../../../../../../../TaskManager/SlowdownTask")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SpeedCutoff" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence" unique_id=2012229514]
+script = ExtResource("36_qsfyd")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SelectorReactiveComposite" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence" unique_id=1998840989]
+script = ExtResource("29_ftbgm")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="DetectedPlayerInArea" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence/SelectorReactiveComposite" unique_id=1213788632 node_paths=PackedStringArray("detector")]
+script = ExtResource("41_1mio5")
+detector = NodePath("../../../../../../../../../../../../../VisualPivot/SwordHitboxComponent/FactionDetectionArea")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="Idle" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/SequenceReactiveComposite/StationarySequence/SelectorReactiveComposite" unique_id=1811621331]
+script = ExtResource("37_guhdl")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="AttackSequence" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck" unique_id=987027863]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="AttackAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/AttackSequence" unique_id=317822167]
+script = ExtResource("32_vrvvp")
+animation = 5
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="AwaitAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/AttackSequence" unique_id=323787638]
+script = ExtResource("39_5gpq8")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="StationaryAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/StationaryCheck/AttackSequence" unique_id=304212079]
+script = ExtResource("32_vrvvp")
+animation = 2
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="Pursuing" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast" unique_id=2120691778]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="RunAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/Pursuing" unique_id=141587357]
+script = ExtResource("32_vrvvp")
+animation = 3
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="MoveToTask" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule/PursueTree/MainSequence/FollowIntreast/Pursuing" unique_id=1206983381 node_paths=PackedStringArray("task")]
+script = ExtResource("38_u5kti")
+task = NodePath("../../../../../../../../../../TaskManager/PursueToMovingPointTask")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="Wander" type="Node" parent="HSMMaster/Master/PursueWander" unique_id=210384060]
+script = ExtResource("31_h4jvc")
+need_action_start = true
+need_action_finished = true
+
+[node name="BHTreeModule" type="Node" parent="HSMMaster/Master/PursueWander/Wander" unique_id=2122886082 node_paths=PackedStringArray("behavioral_tree")]
+script = ExtResource("25_5gpq8")
+behavioral_tree = NodePath("WanderTree")
+
+[node name="WanderTree" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule" unique_id=1281596142 node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("26_e2ens")
+actor_node_path = NodePath("../../../../../..")
+blackboard = NodePath("../../../../../../Blackboard")
+actor = NodePath("../../../../../..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="MainSequence" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree" unique_id=1586751220]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="UpdateInterest" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence" unique_id=1196183497]
+script = ExtResource("40_tcwpo")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="FollowIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence" unique_id=1092537426]
+script = ExtResource("29_ftbgm")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="StationaryCheck" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast" unique_id=5626766]
+script = ExtResource("30_iih32")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="AtIntreast" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck" unique_id=869351330]
+script = ExtResource("31_1mio5")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="StationarySequence" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck" unique_id=662811448]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="StationaryAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence" unique_id=530376018]
+script = ExtResource("32_vrvvp")
+animation = 2
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="AlwaysSucceedDecorator" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence" unique_id=1722401212]
+script = ExtResource("33_uo6fu")
+metadata/_custom_type_script = "uid://dsf3a8vlolhx8"
+
+[node name="SlowdownSequence" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence/AlwaysSucceedDecorator" unique_id=73912609]
+script = ExtResource("30_iih32")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="HasHVelocity" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence/AlwaysSucceedDecorator/SlowdownSequence" unique_id=1978887736]
+script = ExtResource("34_as5v6")
+forgiveness = 10.0
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="SlowdownTask" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence/AlwaysSucceedDecorator/SlowdownSequence" unique_id=40707550 node_paths=PackedStringArray("task")]
+script = ExtResource("35_f2ipb")
+task = NodePath("../../../../../../../../../../../../../TaskManager/SlowdownTask")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SpeedCutoff" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence" unique_id=557045855]
+script = ExtResource("36_qsfyd")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="UpdateDelay" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence" unique_id=1172424716]
+script = ExtResource("41_0akrd")
+wait_time = 1.0
+metadata/_custom_type_script = "uid://dorri1tul8gfx"
+
+[node name="UpdateInterest" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/StationaryCheck/StationarySequence/UpdateDelay" unique_id=496086379]
+script = ExtResource("40_tcwpo")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="Wandering" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast" unique_id=1747282838]
+script = ExtResource("27_m83q3")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="RunAnimation" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/Wandering" unique_id=638580323]
+script = ExtResource("32_vrvvp")
+animation = 3
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="MoveToTask" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule/WanderTree/MainSequence/FollowIntreast/Wandering" unique_id=1782340665 node_paths=PackedStringArray("task")]
+script = ExtResource("38_u5kti")
+task = NodePath("../../../../../../../../../../TaskManager/WanderToMovingPointTaskx")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="TaskManager" type="Node" parent="." unique_id=1797110563 node_paths=PackedStringArray("velocity_module")]
+unique_name_in_owner = true
+script = ExtResource("32_2f2i6")
+velocity_module = NodePath("../VelocityComponent")
+metadata/_custom_type_script = "uid://clhcvayfse4aa"
+
+[node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=490139005]
+script = ExtResource("33_emwwr")
+hard_stop = false
+need_physics = true
+
+[node name="PursueToMovingPointTask" type="Node" parent="TaskManager" unique_id=1363629959 node_paths=PackedStringArray("entity", "stop_raycast")]
+script = ExtResource("34_8veo0")
+acceleration = 500.0
+max_speed = 1250.0
+entity = NodePath("../..")
+stop_raycast = NodePath("../../VisualPivot/GroundRayCast")
+need_physics = true
+
+[node name="WanderToMovingPointTaskx" type="Node" parent="TaskManager" unique_id=427537348 node_paths=PackedStringArray("entity", "stop_raycast")]
+script = ExtResource("34_8veo0")
+acceleration = 250.0
+max_speed = 625.0
+weight = 0.9
+slowdown_weight = 1.0
+entity = NodePath("../..")
+stop_raycast = NodePath("../../VisualPivot/GroundRayCast")
+need_physics = true
+
+[node name="GravityTask" type="Node" parent="TaskManager" unique_id=269036756 node_paths=PackedStringArray("gravity_module")]
+script = ExtResource("35_82gr5")
+gravity_module = NodePath("../../GravityComponent")
+auto_start = true
+need_physics = true
+
+[node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=32928031 node_paths=PackedStringArray("actor")]
+script = ExtResource("36_vywn3")
+actor = NodePath("../..")
+auto_start = true
+need_physics = true

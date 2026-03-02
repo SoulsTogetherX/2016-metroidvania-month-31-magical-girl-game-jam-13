@@ -11,6 +11,10 @@ var SNAP_RAYCAST_LENGTH := 500
 #region Export Variables
 @export_group("Debug")
 @export_tool_button("Snap To Ground") var snap_func = _snap_to_ground 
+@export var look_left : bool:
+	set(val):
+		look_left = val
+		change_direction(val, false)
 
 @export_subgroup("Velocity")
 @export var display_velocity : bool = false:
@@ -56,6 +60,7 @@ func _validate_property(property: Dictionary) -> void:
 #region Private Methods (Notifcation Helper)
 func _on_ready_notification() -> void:
 	_refresh_debugs()
+	change_direction(look_left, false)
 	if Engine.is_editor_hint():
 		return
 

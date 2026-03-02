@@ -56,11 +56,15 @@ func _validate_property(property: Dictionary) -> void:
 func _refresh_faction() -> void:
 	collision_mask = 0
 	collision_layer = faction
+#endregion
 
-func _refresh_collider() -> void:
-	super()
-	if _collider:
-		_collider.debug_color = DEBUG_COLOR
+
+#region Private Methods (Confirmed Children)
+func _create_collider() -> CollisionShape2D:
+	var ret := super()
+	if ret:
+		ret.debug_color = DEBUG_COLOR
+	return ret
 #endregion
 
 

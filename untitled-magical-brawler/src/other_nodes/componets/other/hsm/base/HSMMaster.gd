@@ -6,7 +6,8 @@ class_name HSMMaster extends HSMBase
 @export var starting_state : HSMBranch
 @export var context : HSMContext:
 	set = _set_context
-@export var actor : Node
+@export var actor : Node:
+	set = _set_actor
 
 @export_group("Settings")
 @export var allow_swap_cancel : bool = false
@@ -47,6 +48,7 @@ func _ready() -> void:
 	_bottom = self
 	
 	_propagate_parent(self)
+	_propagate_info(self)
 	change_state(starting_state)
 #endregion
 
@@ -69,12 +71,12 @@ func _action_finished(action_name : StringName) -> void:
 	for state : HSMBranch in _action_finished_queue:
 		state.action_finished(action_name)
 
-func _action_changed(action_name : StringName) -> void:
+func _action_changed(action_name : StringName, val : bool) -> void:
 	for state : HSMBranch in _action_finished_queue:
-		state.action_changed(action_name)
-func _value_changed(value_name : StringName) -> void:
+		state.action_changed(action_name, val)
+func _value_changed(value_name : StringName, val : Variant) -> void:
 	for state : HSMBranch in _value_changed_queue:
-		state.value_changed(value_name)
+		state.value_changed(value_name, val)
 #endregion
 
 
@@ -91,6 +93,14 @@ func _set_context(val : HSMContext) -> void:
 	
 	context = val
 	_update_contexting()
+	if is_node_ready():
+		_propagate_info(self)
+func _set_actor(val : Node) -> void:
+	if val == actor:
+		return
+	actor = val
+	if is_node_ready():
+		_propagate_info(self)
 
 
 func _set_action_started(toggle : bool) -> void:
@@ -177,10 +187,18 @@ func _add_to_queue(state : HSMBranch) -> void:
 
 
 #region Private Methods (Propagates)
+func _propagate_info(bottom : HSMBase) -> void:
+	for node : Node in bottom.get_children():
+		if node is HSMBranch:
+			node._context = context
+			node._actor = actor
+			_propagate_info(node)
 func _propagate_parent(bottom : HSMBase) -> void:
 	for node : Node in bottom.get_children():
-		if node is HSMBase:
+		if node is HSMBranch:
 			node._parent = bottom
+			node._context = context
+			node._actor = actor
 			_propagate_parent(node)
 func _propagate_child(new_state : HSMBase) -> void:
 	var parent := new_state._parent
@@ -206,8 +224,6 @@ func _propagate_enter_state() -> void:
 	# Only acts on the changed states
 	while top:
 		top._running = true
-		top._context = context
-		top._actor = actor
 		_add_to_queue(top)
 		
 		_set_request_change(top, true)

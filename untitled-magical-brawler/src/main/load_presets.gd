@@ -4,6 +4,7 @@ extends Node
 #region Constants
 const PLAYER_PACKED := "res://src/entities/combat_entities/player/player.tscn"
 const CAMERA_PACKED := "res://src/other_nodes/camera/global_camera.tscn"
+const HEALTH_DISPLAY_PACKED := "res://src/UI/health_display/health_display.tscn"
 #endregion
 
 
@@ -49,12 +50,18 @@ func _load_game_objects() -> void:
 	Global.player = load(PLAYER_PACKED).instantiate()
 	Global.camera = load(CAMERA_PACKED).instantiate()
 	
+	var health_display = load(HEALTH_DISPLAY_PACKED).instantiate()
+	health_display.health_compoent = Global.player.get_health_component()
+	
+	
 	game.change_2d_scene_to_node(
 		Global.player, GlobalLabels.objects.PLAYER_ID
 	)
-	
 	game.change_2d_scene_to_node(
 		Global.camera, GlobalLabels.objects.CAMERA_ID
+	)
+	game.change_ui_scene_to_node(
+		health_display, GlobalLabels.objects.HEALTH_DISPLAY
 	)
 
 func _load_game_ui() -> void:

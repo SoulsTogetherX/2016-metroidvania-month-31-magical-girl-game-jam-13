@@ -10,7 +10,11 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_3fxrl"]
 [ext_resource type="Script" uid="uid://c1ojn44nvgt21" path="res://src/other_nodes/room_editor_tools/gateway/helper/gateway_exit_marker.gd" id="14_3ri7j"]
 [ext_resource type="Script" uid="uid://dukqn0hyev23g" path="res://src/other_nodes/room_editor_tools/camera_zone/camera_zone.gd" id="14_8p8dm"]
+[ext_resource type="Script" uid="uid://dcpljg42srlbk" path="res://src/other_nodes/room_editor_tools/enemy_ai/player_detecter.gd" id="14_frlpf"]
+[ext_resource type="Script" uid="uid://bqd7gwpt24j66" path="res://src/other_nodes/room_editor_tools/enemy_ai/wander_area.gd" id="14_uwh81"]
+[ext_resource type="PackedScene" uid="uid://ggu8kemt8cb3" path="res://src/entities/combat_entities/enemies/mushroom_guy/mushroom_guy.tscn" id="15_3fxrl"]
 [ext_resource type="Script" uid="uid://cobb1ipksi4ot" path="res://src/other_nodes/componets/other/assign_player.gd" id="15_3ri7j"]
+[ext_resource type="PackedScene" uid="uid://u5w1c10cgqcj" path="res://src/entities/combat_entities/enemies/sword_mushroom_guy/sword_mushroom_guy.tscn" id="15_uwh81"]
 
 [sub_resource type="Resource" id="Resource_61abt"]
 script = ExtResource("12_o6pw8")
@@ -35,6 +39,12 @@ duration = 0.3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fxrl"]
 size = Vector2(8704, 2908)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwh81"]
+size = Vector2(2601, 176)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8p8dm"]
+radius = 1092.0774
+
 [node name="TestScene_2" type="Node2D" unique_id=471352108]
 script = ExtResource("1_3ri7j")
 metadata/_custom_type_script = "uid://coaco4ykmwesx"
@@ -46,7 +56,7 @@ offset_top = -669.0
 offset_right = -370.0
 offset_bottom = -504.0
 theme_override_font_sizes/font_size = 120
-text = "FPS: 65.0"
+text = "FPS: 34.0"
 horizontal_alignment = 1
 script = ExtResource("10_frlpf")
 metadata/_custom_type_script = "uid://bgh34blcwhwjf"
@@ -54,19 +64,13 @@ metadata/_custom_type_script = "uid://bgh34blcwhwjf"
 [node name="MushroomBG" parent="." unique_id=2012265308 instance=ExtResource("3_3fxrl")]
 position = Vector2(-819, -1446)
 
-[node name="Background" parent="MushroomBG" index="0" unique_id=1985971173]
-repeat_times = 1
-
-[node name="BackgroundImage" parent="MushroomBG/Background" index="0" unique_id=1822128209]
-scale = Vector2(5, 5)
-
-[node name="Midground" parent="MushroomBG" index="1" unique_id=119002296]
+[node name="Midground" parent="MushroomBG" index="0" unique_id=119002296]
 repeat_size = Vector2(5376, 0)
 
 [node name="MidgroundElements" parent="MushroomBG/Midground" index="0" unique_id=1110038562]
 scale = Vector2(2.8, 2.8)
 
-[node name="Foreground" parent="MushroomBG" index="2" unique_id=1493895682]
+[node name="Foreground" parent="MushroomBG" index="1" unique_id=1493895682]
 repeat_size = Vector2(8064, 0)
 
 [node name="ForegroundElements" parent="MushroomBG/Foreground" index="0" unique_id=1021581107]
@@ -151,7 +155,51 @@ position = Vector2(5103, 31)
 shape = SubResource("RectangleShape2D_3fxrl")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1204968779]
-position = Vector2(2000, 0)
+position = Vector2(-1, -513)
+
+[node name="WanderArea" type="CollisionShape2D" parent="." unique_id=33125374]
+position = Vector2(1794, -96)
+shape = SubResource("RectangleShape2D_uwh81")
+debug_color = Color(1, 1, 0, 0.2)
+script = ExtResource("14_uwh81")
+metadata/_custom_type_script = "uid://bqd7gwpt24j66"
+
+[node name="SwordMushroomGuy" parent="." unique_id=1083892786 node_paths=PackedStringArray("player_detect") instance=ExtResource("15_uwh81")]
+position = Vector2(35, -512)
+player_detect = NodePath("PlayerDetecter")
+look_left = true
+
+[node name="PlayerDetecter" type="Area2D" parent="SwordMushroomGuy" unique_id=660436252]
+position = Vector2(8, -111)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("14_frlpf")
+metadata/_custom_type_script = "uid://dcpljg42srlbk"
+
+[node name="PlayerDetectionArea" type="CollisionShape2D" parent="SwordMushroomGuy/PlayerDetecter" unique_id=1115613265]
+shape = SubResource("CircleShape2D_8p8dm")
+debug_color = Color(0.5411765, 0.16862746, 0.8862745, 0.2)
+
+[node name="MushroomGuy" parent="." unique_id=1524637940 node_paths=PackedStringArray("player_detect", "patrol_area") instance=ExtResource("15_3fxrl")]
+position = Vector2(1075, -1)
+player_detect = NodePath("PlayerDetecter")
+patrol_type = 2
+_patrol_object = Object(CollisionShape2D,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1794, -96),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"shape":SubResource("RectangleShape2D_uwh81"),"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"debug_color":Color(1, 1, 0, 0.2),"script":ExtResource("14_uwh81"),"metadata/_custom_type_script":"uid://bqd7gwpt24j66")
+
+patrol_area = NodePath("../WanderArea")
+
+[node name="PlayerDetecter" type="Area2D" parent="MushroomGuy" unique_id=1884742483]
+position = Vector2(8, -111)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("14_frlpf")
+metadata/_custom_type_script = "uid://dcpljg42srlbk"
+
+[node name="PlayerDetectionArea" type="CollisionShape2D" parent="MushroomGuy/PlayerDetecter" unique_id=441538412]
+shape = SubResource("CircleShape2D_8p8dm")
+debug_color = Color(0.5411765, 0.16862746, 0.8862745, 0.2)
 
 [connection signal="direction_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_direction_changed"]
 [connection signal="position_changed" from="Gateway/GatewayExit" to="Gateway" method="_on_marker_positon_changed"]

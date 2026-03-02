@@ -72,9 +72,9 @@ func action_started(_action_name : StringName) -> void:
 func action_finished(_action_name : StringName) -> void:
 	pass
 
-func action_changed(_action_name : StringName) -> void:
+func action_changed(_action_name : StringName, _val : bool) -> void:
 	pass
-func value_changed(_value_name : StringName) -> void:
+func value_changed(_value_name : StringName, _val : Variant) -> void:
 	pass
 #endregion
 

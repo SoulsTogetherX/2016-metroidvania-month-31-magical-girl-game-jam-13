@@ -5,8 +5,8 @@ class_name HSMContext extends Node
 signal action_started(action_name : StringName)
 signal action_finished(action_name : StringName)
 
-signal action_changed(action_name : StringName)
-signal value_changed(value_name : StringName)
+signal action_changed(action_name : StringName, val : bool)
+signal value_changed(value_name : StringName, val : Variant)
 #endregion
 
 
@@ -86,12 +86,12 @@ func set_value(value_name : StringName, val : Variant) -> void:
 		_values_cache[value_name] = _values.size()
 		_values.push_back(Value.new(value_name, val))
 		
-		value_changed.emit(value_name)
+		value_changed.emit(value_name, val)
 		return
 	
 	if _values[idx].value != val:
 		_values[idx].value = val
-		value_changed.emit(value_name)
+		value_changed.emit(value_name, val)
 #endregion
 
 
@@ -176,7 +176,7 @@ class Action:
 			action_started.emit(action_name)
 		else:
 			action_finished.emit(action_name)
-		action_changed.emit(action_name)
+		action_changed.emit(action_name, toggle)
 
 class Value:
 	var value_name : StringName

@@ -18,14 +18,12 @@ func _on_effect_started(status : StatusEffect) -> void:
 	match status.type:
 		STATUS_TYPE.STUN:
 			context.set_action(
-				GlobalLabels.hsm_context.ACT_STUN,
-				true
+				GlobalLabels.hsm_context.ACT_STUN, true
 			)
 func _on_effect_finished(status : StatusEffect) -> void:
 	match status.type:
 		STATUS_TYPE.STUN:
 			context.set_action(
-				GlobalLabels.hsm_context.ACT_STUN,
-				false
+				GlobalLabels.hsm_context.ACT_STUN, false
 			)
 #endregion

@@ -9,9 +9,9 @@ var _effect_cache : Dictionary[STATUS_TYPE, StatusEffect]
 
 #region Private Methods
 func _finish_manual_effect(status : StatusEffect) -> void:
-	effect_finished.emit(_effect_cache.get(status.type))
+	effect_finished.emit(status)
 func _finish_effect(status : StatusEffect) -> void:
-	effect_finished.emit(_effect_cache.get(status.type))
+	effect_finished.emit(status)
 	_effect_cache.erase(status.type)
 #endregion
 
