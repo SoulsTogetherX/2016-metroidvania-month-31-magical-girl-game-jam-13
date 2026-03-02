@@ -20,19 +20,15 @@ signal revived
 @export_range(1, 1, 1, "or_greater") var max_health : int = 5:
 	get = get_max_health,
 	set = set_max_health
+@export_range(0, 0, 1, "or_greater") var health : int:
+	get = get_health,
+	set = set_health
 #endregion
 
 
 #region Private Variables
 var _max_health : int = 5
 var _health : int
-#endregion
-
-
-#region Public Variables
-var current_health : int:
-	get = get_health,
-	set = set_health
 #endregion
 
 
@@ -97,9 +93,9 @@ func set_health(val : int) -> void:
 
 #region Delta Methods
 func damage(delta : int) -> void:
-	current_health = _health - delta
+	health = _health - delta
 func heal(delta : int) -> void:
-	current_health = _health + delta
+	health = _health + delta
 #endregion
 
 

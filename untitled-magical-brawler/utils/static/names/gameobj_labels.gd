@@ -8,4 +8,6 @@ const ROOM_ID := &"__room__"
 
 const PLAYER_ID := &"__player__"
 const CAMERA_ID := &"__camera__"
+
+const HEALTH_DISPLAY := &"__health_display__"
 #endregion

@@ -55,7 +55,7 @@ func task_physics(delta : float) -> void:
 		_entity.change_direction(move_dir < 0, false)
 	if _stop_raycast:
 		_stop_raycast.force_raycast_update()
-		if !_stop_raycast.is_colliding():
+		if !_stop_raycast.is_colliding() && _entity.is_on_floor():
 			velocity_module.velocity.x = 0.0
 			return
 	
