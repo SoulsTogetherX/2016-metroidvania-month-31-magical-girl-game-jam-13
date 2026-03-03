@@ -52,7 +52,7 @@ func task_physics(delta : float) -> void:
 	var move_dir : float = signf(target_point.x - _entity.global_position.x)
 	
 	if auto_change_dir && _entity && !is_zero_approx(move_dir):
-		_entity.change_direction(move_dir < 0, false)
+		_entity.change_direction(move_dir < 0)
 	if _stop_raycast:
 		_stop_raycast.force_raycast_update()
 		if !_stop_raycast.is_colliding() && _entity.is_on_floor():

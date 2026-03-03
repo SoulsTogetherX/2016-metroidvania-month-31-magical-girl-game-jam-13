@@ -46,7 +46,7 @@ func task_physics(delta : float) -> void:
 	var move_dir : float = _move_dir.call()
 	
 	if _entity && !is_zero_approx(move_dir):
-		_entity.change_direction(move_dir < 0, false)
+		_entity.change_direction(move_dir < 0)
 	
 	if _stop_raycast && !_stop_raycast.is_colliding():
 		velocity_module.velocity.x = 0.0

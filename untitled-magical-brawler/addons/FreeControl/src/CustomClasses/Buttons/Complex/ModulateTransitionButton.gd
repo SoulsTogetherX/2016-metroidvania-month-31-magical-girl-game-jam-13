@@ -139,8 +139,6 @@ func _handle_ready() -> void:
 	_button.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	
 	if !Engine.is_editor_hint():
-		child_order_changed.connect(_button.move_to_front, CONNECT_DEFERRED)
-		
 		_button.pressed_state.connect(_on_press_state)
 		_button.release_state.connect(_on_release_state)
 		

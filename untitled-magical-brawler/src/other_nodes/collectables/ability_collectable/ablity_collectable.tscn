@@ -3,9 +3,27 @@
 [ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="1_2mb31"]
 [ext_resource type="Script" uid="uid://jsanxybvkimk" path="res://src/other_nodes/collectables/ability_collectable/ablity_collectable.gd" id="1_bfv2b"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="1_xmjyj"]
+[ext_resource type="Texture2D" uid="uid://cmrbwr8pkunel" path="res://assets/particles/transform_particles.png" id="4_2mb31"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yn6ok"]
-radius = 85.52
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l63h"]
+radius = 84.0238
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfv2b"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_2mb31"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14327484, 1), 0.0, 0.0, 0, 0, Vector2(0.54970765, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.024206161), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_bfv2b"]
+offsets = PackedFloat32Array(0, 0.66504854, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_2mb31"]
+colors = PackedColorArray(1, 1, 1, 1, 0.9157694, 0.9157693, 0.9157694, 1)
 
 [node name="AblityCollectable" type="Node2D" unique_id=370613763]
 script = ExtResource("1_bfv2b")
@@ -19,6 +37,36 @@ collision_layer = 16
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_xmjyj")
-shape = SubResource("CircleShape2D_yn6ok")
 faction = 16
 metadata/_custom_type_script = "uid://cxla1cqkag8lu"
+
+[node name="FactionDetectionArea" type="CollisionShape2D" parent="Hitbox" unique_id=1376038527]
+shape = SubResource("CircleShape2D_8l63h")
+debug_color = Color(1, 0, 0, 0.3)
+
+[node name="CollectableParticles" type="CPUParticles2D" parent="." unique_id=1644651748]
+material = SubResource("CanvasItemMaterial_bfv2b")
+amount = 60
+texture = ExtResource("4_2mb31")
+lifetime = 5.0
+preprocess = 3.0
+emission_shape = 6
+emission_ring_inner_radius = 300.0
+emission_ring_radius = 300.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.2
+radial_accel_min = 20.0
+radial_accel_max = 40.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_2mb31")
+color_ramp = SubResource("Gradient_bfv2b")
+color_initial_ramp = SubResource("Gradient_2mb31")
+anim_offset_max = 1.0

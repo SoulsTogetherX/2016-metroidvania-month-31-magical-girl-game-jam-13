@@ -274,28 +274,28 @@ _data = {
 &"STUN": SubResource("Animation_1l634")
 }
 
-[sub_resource type="Resource" id="Resource_pb48o"]
+[sub_resource type="Resource" id="Resource_q18rv"]
 script = ExtResource("6_u7tq1")
 
-[sub_resource type="Resource" id="Resource_crrt2"]
+[sub_resource type="Resource" id="Resource_0thg1"]
 script = ExtResource("7_gbnxp")
 
-[sub_resource type="Resource" id="Resource_1l634"]
+[sub_resource type="Resource" id="Resource_uw72r"]
 script = ExtResource("9_5utyv")
 type = 1
 duration = 0.4
 
-[sub_resource type="Resource" id="Resource_elvao"]
+[sub_resource type="Resource" id="Resource_01ptr"]
 script = ExtResource("8_t51hq")
-status = SubResource("Resource_1l634")
+status = SubResource("Resource_uw72r")
 
-[sub_resource type="Resource" id="Resource_7f4rg"]
+[sub_resource type="Resource" id="Resource_tdjxu"]
 script = ExtResource("9_5utyv")
-duration = 0.5
+duration = 0.7
 
-[sub_resource type="Resource" id="Resource_igp0m"]
+[sub_resource type="Resource" id="Resource_3631v"]
 script = ExtResource("8_t51hq")
-status = SubResource("Resource_7f4rg")
+status = SubResource("Resource_tdjxu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crrt2"]
 size = Vector2(129, 227)
@@ -343,7 +343,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("4_3pfdt")
 entity = NodePath("../..")
-effects = Array[ExtResource("5_lu1um")]([SubResource("Resource_pb48o"), SubResource("Resource_crrt2"), SubResource("Resource_elvao"), SubResource("Resource_igp0m")])
+effects = Array[ExtResource("5_lu1um")]([SubResource("Resource_q18rv"), SubResource("Resource_0thg1"), SubResource("Resource_01ptr"), SubResource("Resource_3631v")])
 
 [node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/HitboxComponent" unique_id=1831438425]
 position = Vector2(0, 10.5)

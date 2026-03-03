@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bwehhp34n84jm"]
+
+[ext_resource type="Script" uid="uid://mvehdhcopksc" path="res://src/main/main_menu/main_menu.gd" id="1_cdd6f"]
+[ext_resource type="Script" uid="uid://yojr73op28yi" path="res://src/main/scene_controller/scene_controller.gd" id="1_ofhve"]
+
+[node name="MenuManager" type="Node" unique_id=2125531782 node_paths=PackedStringArray("scene_controller")]
+script = ExtResource("1_cdd6f")
+scene_controller = NodePath("SceneController")
+
+[node name="SceneController" type="Node" parent="." unique_id=397997370 node_paths=PackedStringArray("world_parent")]
+script = ExtResource("1_ofhve")
+world_parent = NodePath("../CanvasLayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2033539230]

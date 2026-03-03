@@ -1,5 +1,5 @@
 @tool
-extends Control
+extends PaddingContainer
 
 
 #region External Variables

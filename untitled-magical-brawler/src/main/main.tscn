@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cns7a2pmlsie7"]
+
+[ext_resource type="Script" uid="uid://fpfseuormqpv" path="res://src/main/main.gd" id="1_48ajw"]
+[ext_resource type="Script" uid="uid://yojr73op28yi" path="res://src/main/scene_controller/scene_controller.gd" id="2_48ajw"]
+[ext_resource type="Script" uid="uid://bsyocka24a4ll" path="res://src/main/transition_cover.gd" id="3_ab7mr"]
+
+[node name="Main" type="Node" unique_id=272580906 node_paths=PackedStringArray("transition_cover", "scene_controller")]
+script = ExtResource("1_48ajw")
+transition_cover = NodePath("TransitionCover")
+scene_controller = NodePath("SceneController")
+
+[node name="SceneController" type="Node" parent="." unique_id=1860830731]
+script = ExtResource("2_48ajw")
+
+[node name="TransitionCover" type="CanvasLayer" parent="." unique_id=801094692]
+layer = 10
+script = ExtResource("3_ab7mr")

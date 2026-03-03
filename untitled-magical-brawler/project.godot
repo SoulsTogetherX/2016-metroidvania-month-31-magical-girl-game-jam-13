@@ -30,7 +30,6 @@ Global="*uid://fesh04jietu1"
 BackgroundLoader="*uid://b2e0jkapc64dp"
 SoundManager="*uid://dsiqp2rs1fep5"
 CameraZoneManager="*uid://bp2yrrt1gfn65"
-RoomManager="*uid://bv166q8suutld"
 SaveManager="*uid://bxajorf1s246a"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
@@ -57,8 +56,10 @@ folder_colors={
 "res://src/UI/": "pink",
 "res://src/entities/": "green",
 "res://src/main/": "gray",
+"res://src/main/main_game/": "purple",
+"res://src/main/main_game/rooms/": "purple",
+"res://src/main/main_menu/": "red",
 "res://src/other_nodes/": "blue",
-"res://src/rooms/": "purple",
 "res://utils/": "yellow"
 }
 
@@ -118,4 +119,4 @@ common/physics_interpolation=true
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.9490196, 0.70980394, 0.6509804, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

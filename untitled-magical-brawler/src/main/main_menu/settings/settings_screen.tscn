@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dseep5auuyr1q"]
+
+[ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/main_menu_subscreen.gd" id="1_mhkue"]
+[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_etgi0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwrn3"]
+bg_color = Color(0.9154528, 0.45313865, 9.62615e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hc2wr"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="SettingsScreen" type="MarginContainer" unique_id=1056288311]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mhkue")
+
+[node name="Panel" type="Panel" parent="." unique_id=234451201]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gwrn3")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1298332145]
+layout_mode = 2
+
+[node name="BackBtn" type="Container" parent="CenterContainer" unique_id=1348106912]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("2_etgi0")
+background = SubResource("StyleBoxFlat_hc2wr")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/BackBtn" unique_id=2137609818]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CenterContainer/BackBtn/Margin" unique_id=449380952]
+layout_mode = 2
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="press_vaild" from="CenterContainer/BackBtn" to="." method="_on_back"]

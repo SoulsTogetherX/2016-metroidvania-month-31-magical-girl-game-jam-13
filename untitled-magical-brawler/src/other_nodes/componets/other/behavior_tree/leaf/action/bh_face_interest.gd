@@ -11,6 +11,6 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	var move_dir : float = signf(get_point.call().x - entity.global_position.x)
 	
 	if !is_zero_approx(move_dir):
-		entity.change_direction(move_dir < 0, false)
+		entity.change_direction(move_dir < 0)
 	return SUCCESS
 #endregion

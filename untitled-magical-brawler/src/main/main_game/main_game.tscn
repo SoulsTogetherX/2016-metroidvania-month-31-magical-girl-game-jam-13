@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dgxy520rv5x3a"]
+
+[ext_resource type="Script" uid="uid://ehcke2bf17i6" path="res://src/main/main_game/main_game.gd" id="1_7uoq4"]
+[ext_resource type="PackedScene" uid="uid://co68h8eknlwnj" path="res://src/entities/combat_entities/player/player.tscn" id="2_rw1eq"]
+[ext_resource type="Script" uid="uid://yojr73op28yi" path="res://src/main/scene_controller/scene_controller.gd" id="2_tthvn"]
+[ext_resource type="PackedScene" uid="uid://bu76r6gwkw61j" path="res://src/other_nodes/camera/global_camera.tscn" id="3_tthvn"]
+
+[node name="RoomManager" type="Node" unique_id=1024841699 node_paths=PackedStringArray("player", "camera", "scene_controller")]
+script = ExtResource("1_7uoq4")
+player = NodePath("Player")
+camera = NodePath("GlobalCamera")
+scene_controller = NodePath("SceneController")
+
+[node name="Player" parent="." unique_id=539542931 instance=ExtResource("2_rw1eq")]
+
+[node name="GlobalCamera" parent="." unique_id=1580514438 instance=ExtResource("3_tthvn")]
+
+[node name="SceneController" type="Node" parent="." unique_id=164924445]
+script = ExtResource("2_tthvn")

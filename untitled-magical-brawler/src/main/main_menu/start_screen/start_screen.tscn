@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://blqrc4cbv78eb"]
+
+[ext_resource type="Script" uid="uid://dnlec3owfo2sk" path="res://src/main/main_menu/start_screen/start_screen.gd" id="1_m6ypo"]
+[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_aqrop"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c72ae"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lwn7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="StartScreen" type="MarginContainer" unique_id=1783423359]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m6ypo")
+
+[node name="Panel" type="Panel" parent="." unique_id=1231907799]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c72ae")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=934232474]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=355598848]
+layout_mode = 2
+
+[node name="StartGameBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=1765517855]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("2_aqrop")
+background = SubResource("StyleBoxFlat_7lwn7")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/StartGameBtn" unique_id=1861832116]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/StartGameBtn/Margin" unique_id=260002022]
+layout_mode = 2
+text = "Start Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=1321540934]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("2_aqrop")
+background = SubResource("StyleBoxFlat_7lwn7")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/SettingsBtn" unique_id=112560732]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/SettingsBtn/Margin" unique_id=1925692438]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StoryBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=2111832948]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("2_aqrop")
+background = SubResource("StyleBoxFlat_7lwn7")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/StoryBtn" unique_id=671060643]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/StoryBtn/Margin" unique_id=57292576]
+layout_mode = 2
+text = "Story"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=641796875]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("2_aqrop")
+background = SubResource("StyleBoxFlat_7lwn7")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/CreditsBtn" unique_id=922376244]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CreditsBtn/Margin" unique_id=607365924]
+layout_mode = 2
+text = "Credit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Container" parent="CenterContainer/HBoxContainer" unique_id=1068917767]
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("2_aqrop")
+background = SubResource("StyleBoxFlat_7lwn7")
+colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
+metadata/_custom_type_script = "uid://8jyk6thl41yx"
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/Quit" unique_id=1310010320]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/Quit/Margin" unique_id=1478476113]
+layout_mode = 2
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="press_vaild" from="CenterContainer/HBoxContainer/StartGameBtn" to="." method="_start_game_pressed"]
+[connection signal="press_vaild" from="CenterContainer/HBoxContainer/SettingsBtn" to="." method="_settings_game_pressed"]
+[connection signal="press_vaild" from="CenterContainer/HBoxContainer/StoryBtn" to="." method="_story_game_pressed"]
+[connection signal="press_vaild" from="CenterContainer/HBoxContainer/CreditsBtn" to="." method="_credits_game_pressed"]
+[connection signal="press_vaild" from="CenterContainer/HBoxContainer/Quit" to="." method="_quit_game_pressed"]

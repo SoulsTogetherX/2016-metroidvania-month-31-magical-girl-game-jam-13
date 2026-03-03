@@ -14,7 +14,7 @@ var SNAP_RAYCAST_LENGTH := 500
 @export var look_left : bool:
 	set(val):
 		look_left = val
-		change_direction(val, false)
+		change_direction(val)
 
 @export_subgroup("Velocity")
 @export var display_velocity : bool = false:
@@ -60,7 +60,7 @@ func _validate_property(property: Dictionary) -> void:
 #region Private Methods (Notifcation Helper)
 func _on_ready_notification() -> void:
 	_refresh_debugs()
-	change_direction(look_left, false)
+	change_direction(look_left)
 	if Engine.is_editor_hint():
 		return
 
@@ -119,13 +119,13 @@ func _snap_to_ground() -> void:
 
 
 #region Public Methods (Helper)
-func change_direction(h_flip : bool, v_flip : bool) -> void:
+func change_direction(h_flip : bool) -> void:
 	if !_visual_pivot:
 		return
 	
 	_visual_pivot.scale = Vector2(
 		-1.0 if h_flip else 1.0,
-		-1.0 if v_flip else 1.0
+		1.0
 	)
 #endregion
 

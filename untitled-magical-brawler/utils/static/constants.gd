@@ -5,7 +5,7 @@ class_name Constants extends Object
 const DEBUG_FONT_WIDTH := 120
 
 const DEFAULT_STUN := 0.4
-const DEFAULT_INVINCIBILITY := 0.5
+const DEFAULT_INVINCIBILITY := 0.8
 #endregion
 
 

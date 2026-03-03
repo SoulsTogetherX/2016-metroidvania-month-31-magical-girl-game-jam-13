@@ -3,10 +3,8 @@
 [ext_resource type="Script" uid="uid://xgd0e6jf7kk7" path="res://src/UI/health_display/health_display.gd" id="1_cwq01"]
 [ext_resource type="Texture2D" uid="uid://dablor8ij1i1" path="res://assets/other/heart_sprite.png" id="2_3e2nu"]
 
-[node name="HealthDisplay" type="Control" unique_id=759410609]
-layout_mode = 3
-anchor_left = 0.025
-anchor_top = 0.025
+[node name="HealthDisplay" type="Container" unique_id=1917005]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -14,24 +12,33 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_cwq01")
 heart_scale = 0.5
+child_anchor_left = 0.03
+child_anchor_top = 0.04
+child_anchor_right = 1.0
+child_anchor_bottom = 1.0
+child_offset_left = 0
+child_offset_top = 0
+child_offset_right = 0
+child_offset_bottom = 0
+metadata/_custom_type_script = "uid://dube6kmp8e6dk"
 
-[node name="BackgroundHearts" type="TextureRect" parent="." unique_id=815209118]
+[node name="Control" type="Control" parent="." unique_id=1078490063]
+layout_mode = 2
+
+[node name="BackgroundHearts" type="TextureRect" parent="Control" unique_id=815209118]
 unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
 layout_mode = 1
-offset_right = 550.0
-offset_bottom = 106.0
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("2_3e2nu")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Hearts" type="TextureRect" parent="." unique_id=465121108]
+[node name="Hearts" type="TextureRect" parent="Control" unique_id=465121108]
 unique_name_in_owner = true
 layout_mode = 1
-offset_bottom = 106.0
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("2_3e2nu")
 expand_mode = 1
