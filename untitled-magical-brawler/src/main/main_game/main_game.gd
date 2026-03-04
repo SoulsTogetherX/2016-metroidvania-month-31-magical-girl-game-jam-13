@@ -14,6 +14,9 @@ const START_ROOM_PATH := "res://src/main/main_game/rooms/test_scenes/test_scene_
 
 
 #region Private Variables
+var _current_path : String
+
+var _last_player_point : PlayerPositionResource
 var _fail_back : PlayerPositionResource
 var _gateways : Array[Gateway]
 #endregion
@@ -54,6 +57,8 @@ func _set_player_position(player_pos : PlayerPositionResource) -> void:
 #region Public Methods
 func register_gateway(gateway : Gateway) -> void:
 	_gateways.append(gateway)
+func register_last_plater_pos(play_pos : PlayerPositionResource) -> void:
+	_last_player_point = play_pos
 func register_failback(play_pos : PlayerPositionResource) -> void:
 	_fail_back = play_pos
 
@@ -65,6 +70,7 @@ func change_room_to_path(
 	_fail_back = null
 	_gateways.clear()
 	
+	_current_path = path
 	await (await scene_controller.change_scene_to_path(
 		path, SceneController.UNMOUNT_TYPE.DELETE,
 		true
@@ -83,11 +89,18 @@ func change_room_to_path(
 		_set_player_position(_fail_back)
 	
 	await unfade_cover()
-	return
 
-
-func change_scene_to_failsafe(_path : String) -> void:
-	pass
-func reset_scene_to_failsafe() -> void:
-	pass
+func reset_to_last_play_pos() -> void:
+	await fade_cover()
+	_fail_back = null
+	_gateways.clear()
+	
+	await (await scene_controller.change_scene_to_path(
+		_current_path, SceneController.UNMOUNT_TYPE.DELETE,
+		true
+	)).ready
+	
+	CameraZoneManager.request_snap()
+	_set_player_position(_last_player_point)
+	await unfade_cover()
 #endregion
