@@ -2,11 +2,6 @@ extends TaskNode
 
 
 #region External Variables
-@export_group("Settings")
-@export var x_bias : float = 700
-@export var y_bias : float = 700
-
-
 @export_group("Modules")
 @export var context : HSMContext
 
@@ -35,17 +30,17 @@ func action_changed(action_name : String, _val : bool) -> void:
 	
 	match action_name:
 		labels.ACT_PLAYER_LEFT, labels.ACT_PLAYER_RIGHT:
-			_actor.offset.x = (int(
+			_actor.direction.x = (int(
 				_context.is_action(labels.ACT_PLAYER_RIGHT)
 			) - int(
 				_context.is_action(labels.ACT_PLAYER_LEFT)
-			)) * x_bias
+			))
 		labels.ACT_PLAYER_UP, labels.ACT_PLAYER_DOWN:
-			_actor.offset.y = (int(
+			_actor.direction.y = (int(
 				_context.is_action(labels.ACT_PLAYER_DOWN)
 			) - int(
 				_context.is_action(labels.ACT_PLAYER_UP)
-			)) * y_bias
+			))
 #endregion
 
 

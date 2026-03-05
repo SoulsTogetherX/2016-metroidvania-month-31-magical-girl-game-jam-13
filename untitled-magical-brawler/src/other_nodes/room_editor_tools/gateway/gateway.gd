@@ -23,18 +23,21 @@ const RAYCAST_MAX_LENGTH := 500
 
 #region Virtual Methods
 func _ready() -> void:
+	info.exit_pos = global_position
 	monitoring = true
 	monitorable = false
 	
 	collision_layer = 0
-	collision_mask = Constants.COLLISION.PLAYER
+	collision_mask = 0
+	#collision_mask = Constants.COLLISION.PLAYER
 	
 	if Engine.is_editor_hint():
 		return
 	
 	body_entered.connect(_on_player_enter)
-	info.exit_pos = global_position
 	_register_self()
+	
+	collision_mask = Constants.COLLISION.PLAYER
 #endregion
 
 

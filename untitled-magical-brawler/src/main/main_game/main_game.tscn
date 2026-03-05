@@ -11,9 +11,9 @@ player = NodePath("Player")
 camera = NodePath("GlobalCamera")
 scene_controller = NodePath("SceneController")
 
+[node name="SceneController" type="Node" parent="." unique_id=164924445]
+script = ExtResource("2_tthvn")
+
 [node name="Player" parent="." unique_id=539542931 instance=ExtResource("2_rw1eq")]
 
 [node name="GlobalCamera" parent="." unique_id=1580514438 instance=ExtResource("3_tthvn")]
-
-[node name="SceneController" type="Node" parent="." unique_id=164924445]
-script = ExtResource("2_tthvn")

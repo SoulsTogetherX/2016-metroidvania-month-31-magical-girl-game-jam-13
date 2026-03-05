@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://lqunqvr5fs" path="res://src/other_nodes/componets/combat/damage_reaction/health_component.gd" id="1_peafg"]
 [ext_resource type="SpriteFrames" uid="uid://b3bftuwc7kx51" path="res://assets/entities/player/resources/player_sprite_frames.tres" id="2_3xcyv"]
 [ext_resource type="Script" uid="uid://cy7yl1sef0v05" path="res://src/other_nodes/camera/camera_lead.gd" id="2_rvvip"]
+[ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="3_8h0p6"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="3_33dyk"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_mjwoq"]
 [ext_resource type="Script" uid="uid://bhe0ii8bxo24u" path="res://src/other_nodes/componets/combat/damage_reaction/knockback_component.gd" id="4_dao75"]
@@ -1027,6 +1028,8 @@ metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 z_index = 1
 collision_layer = 4
 collision_mask = 2
+floor_stop_on_slope = false
+floor_constant_speed = true
 script = ExtResource("1_33dyk")
 _health_module = NodePath("CombatComponents/HealthComponent")
 _status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
@@ -1040,6 +1043,9 @@ top_level = true
 position = Vector2(0, -160.5)
 script = ExtResource("2_rvvip")
 follow = NodePath("..")
+
+[node name="Icon" type="Sprite2D" parent="CameraLead" unique_id=1730697425]
+texture = ExtResource("3_8h0p6")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=1229646187]
 
@@ -1311,6 +1317,7 @@ metadata/_custom_type_script = "uid://bhe0ii8bxo24u"
 
 [node name="HealthComponent" type="Node" parent="CombatComponents" unique_id=1826590427]
 script = ExtResource("1_peafg")
+health = 5
 metadata/_custom_type_script = "uid://lqunqvr5fs"
 
 [node name="StatusEffectReceiver" type="Node" parent="CombatComponents" unique_id=605702931]
@@ -1351,6 +1358,10 @@ injured_state = NodePath("Stunned")
 normal_state = NodePath("Healthy")
 need_action_start = true
 
+[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master" unique_id=2103056586 node_paths=PackedStringArray("task")]
+script = ExtResource("32_3xcyv")
+task = NodePath("../../../TaskManager/GravityTask")
+
 [node name="Stunned" type="Node" parent="HSMMaster/Master" unique_id=884992292 node_paths=PackedStringArray("dead_state", "normal_state")]
 script = ExtResource("44_7yy2l")
 dead_state = NodePath("Dead")
@@ -1360,10 +1371,6 @@ need_action_finished = true
 [node name="StunAnimationModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=662488774]
 script = ExtResource("29_iamtb")
 animation = 7
-
-[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=2103056586 node_paths=PackedStringArray("task")]
-script = ExtResource("32_3xcyv")
-task = NodePath("../../../../TaskManager/GravityTask")
 
 [node name="CameraImpactModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=772768823]
 script = ExtResource("25_axxsh")
@@ -1391,10 +1398,6 @@ need_action_changed = true
 [node name="CoyoteTimer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn" unique_id=1373262917]
 wait_time = 0.15
 one_shot = true
-
-[node name="GravityTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=388417439 node_paths=PackedStringArray("task")]
-script = ExtResource("32_3xcyv")
-task = NodePath("../../../../../TaskManager/GravityTask")
 
 [node name="AirMoveTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=441882860 node_paths=PackedStringArray("task")]
 script = ExtResource("28_txpw3")

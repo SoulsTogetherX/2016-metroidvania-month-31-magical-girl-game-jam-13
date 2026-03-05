@@ -66,16 +66,9 @@ func _change_scene_to_node(
 	mount_type : UNMOUNT_TYPE = UNMOUNT_TYPE.DELETE,
 	wait : bool = true
 ) -> Node:
-	if wait:
-		if !scene.is_finished():
-			if _current_cache:
-				_current_cache.get_node().set_deferred(
-					"process_mode", Node.PROCESS_MODE_DISABLED
-				)
-			await scene.get_finished_signal()
+	if wait && !scene.is_finished():
+		await scene.get_finished_signal()
 	
-	if _current_cache:
-		_current_cache.get_node().process_mode = Node.PROCESS_MODE_INHERIT
 	_clear_current(_current_cache, mount_type)
 	
 	var new_node : Node = scene.get_node()

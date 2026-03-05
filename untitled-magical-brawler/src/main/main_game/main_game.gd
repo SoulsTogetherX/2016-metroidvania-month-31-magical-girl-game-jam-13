@@ -2,7 +2,7 @@ class_name RoomManager extends SceneControllerManager
 
 
 #region Constants
-const START_ROOM_PATH := "res://src/main/main_game/rooms/test_scenes/test_scene_1.tscn"
+const START_ROOM_PATH := "res://src/main/main_game/rooms/room_3/room.tscn"
 #endregion
 
 
@@ -71,13 +71,16 @@ func change_room_to_path(
 	_gateways.clear()
 	
 	_current_path = path
+	player.global_position = Vector2(99999999999, 99999999999)
+	CameraZoneManager.request_snap()
+	
 	await (await scene_controller.change_scene_to_path(
 		path, SceneController.UNMOUNT_TYPE.DELETE,
 		true
 	)).ready
-	
-	CameraZoneManager.request_snap()
 	_update_room_cache()
+	
+	player.global_position = Vector2(0, 0)
 	
 	var found_gateway : bool = false
 	for gateway : Gateway in _gateways:
@@ -102,5 +105,6 @@ func reset_to_last_play_pos() -> void:
 	
 	CameraZoneManager.request_snap()
 	_set_player_position(_last_player_point)
+	
 	await unfade_cover()
 #endregion

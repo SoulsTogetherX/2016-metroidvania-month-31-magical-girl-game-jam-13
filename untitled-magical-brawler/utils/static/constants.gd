@@ -1,9 +1,20 @@
 class_name Constants extends Object
 
 
-#region Constants
-const DEBUG_FONT_WIDTH := 120
+#region Constants (Camera)
+const DEFAULT_X_BAIS := 700.0
+const DEFAULT_Y_BAIS := 700.0
 
+const DEFAULT_FLAT_Y_OFFSET := -960.0
+#endregion
+
+
+#region Constants (Debug)
+const DEBUG_FONT_WIDTH := 120
+#endregion
+
+
+#region Constants (Other)
 const DEFAULT_STUN := 0.4
 const DEFAULT_INVINCIBILITY := 0.8
 #endregion

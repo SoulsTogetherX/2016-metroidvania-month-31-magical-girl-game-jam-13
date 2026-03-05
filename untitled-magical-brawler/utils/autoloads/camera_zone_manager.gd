@@ -3,7 +3,7 @@ extends Node
 
 
 #region Private Variables
-var _snap_requested : bool
+var snap_requested : bool
 #endregion
 
 
@@ -14,23 +14,26 @@ func unfocus_all() -> void:
 		GlobalLabels.objects.CAMERA_ZONE_GROUP_NAME
 	):
 		cam.priority = 0
-func focus_camera(cam : PhantomCamera2D, snap : bool = false) -> void:
+func focus_camera(cam : PhantomCamera2D) -> void:
 	unfocus_all()
 	if !cam:
 		return
-	if !snap && !_snap_requested:
+	if !snap_requested:
 		cam.priority = 1
 		return
-	_snap_requested = false
+	set_deferred("snap_requested", false)
+	
+	if is_zero_approx(cam.tween_duration):
+		return
 	
 	var duration := cam.tween_duration
 	cam.tween_duration = 0.0
 	cam.priority = 1
-	cam.tween_duration = duration
+	cam.set_deferred("tween_duration", duration)
 #endregion
 
 
 #region Public Methods (Helper)
 func request_snap() -> void:
-	_snap_requested = true
+	snap_requested = true
 #endregion
