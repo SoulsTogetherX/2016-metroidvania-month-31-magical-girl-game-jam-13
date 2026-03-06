@@ -11,10 +11,10 @@ class_name PlayerFallback extends Marker2D
 
 #region Virtual Methods
 func _ready() -> void:
+	info.exit_pos = global_position
 	if Engine.is_editor_hint():
 		return
 	
-	info.exit_pos = global_position
 	_register_self()
 #endregion
 

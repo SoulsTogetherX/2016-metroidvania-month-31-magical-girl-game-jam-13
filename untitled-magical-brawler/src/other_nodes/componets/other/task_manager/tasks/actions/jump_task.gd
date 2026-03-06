@@ -9,6 +9,7 @@ extends VelocityTaskNode
 
 @export_group("Modules")
 @export var gravity_module : GravityComponent
+@export var sfx : AudioStreamPlayer
 #endregion
 
 
@@ -35,6 +36,8 @@ func task_passthrough() -> bool:
 	return true
 
 func task_begin() -> void:
+	if sfx: sfx.play()
+	
 	var impluse := GravityComponent.get_required_trajectory_impulse(
 		_gravity_module.gravity, _jump_offset
 	)

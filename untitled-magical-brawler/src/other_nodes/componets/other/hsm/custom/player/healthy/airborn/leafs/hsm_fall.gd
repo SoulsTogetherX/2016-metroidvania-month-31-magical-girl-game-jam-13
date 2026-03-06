@@ -11,6 +11,7 @@ extends HSMBranch
 @export var wall_detect : Area2D
 @export var coyote_timer : Timer
 @export var jump_buffer : Timer
+@export var ability_cache : AbilityCacheModule
 #endregion
 
 
@@ -28,8 +29,8 @@ func action_started(action_name : StringName) -> void:
 	match action_name:
 		GlobalLabels.hsm_context.ACT_JUMPING:
 			var ctx := get_context()
-			var max_wall_jumps := 3
-			var max_jumps := 2
+			var max_wall_jumps := 3 if ability_cache.has_ability(AbilityData.ABILITY_TYPE.WALL_JUMP) else 0
+			var max_jumps := 2 if ability_cache.has_ability(AbilityData.ABILITY_TYPE.DOUBLE_JUMP) else 1
 			
 			var wall_jump_count : int = ctx.get_value(GlobalLabels.hsm_context.VAL_WALL_JUMP_COUNT)
 			if (!wall_detect.get_overlapping_bodies().is_empty() &&

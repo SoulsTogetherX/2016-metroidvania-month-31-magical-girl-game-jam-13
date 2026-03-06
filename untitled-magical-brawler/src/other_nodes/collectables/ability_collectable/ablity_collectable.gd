@@ -9,7 +9,6 @@ extends Node2D
 			return
 		ability = val
 		
-		_update_hitbox_effect()
 		_load_texture()
 #endregion
 
@@ -25,25 +24,16 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		_load_texture()
 		return
-	if ability == null || Global.player.has_ability(ability):
+	if ability == null || Global.player.has_ability(ability.type):
 		queue_free()
 		return
 	
-	_update_hitbox_effect()
 	_load_texture()
 	_hitbox.collision_found.connect(_on_collect)
 #endregion
 
 
 #region Private Methods
-func _update_hitbox_effect() -> void:
-	if !is_node_ready():
-		return
-	
-	var upgrade := UpgradeCollectableEffect.new()
-	upgrade.ability = ability
-	_hitbox.effects = [upgrade]
-
 func _load_texture() -> void:
 	if ability == null:
 		return
@@ -51,6 +41,6 @@ func _load_texture() -> void:
 
 func _on_collect() -> void:
 	if ability != null:
-		Global.player.register_ability(ability)
+		Global.player.register_ability(ability.type)
 	queue_free()
 #endregion

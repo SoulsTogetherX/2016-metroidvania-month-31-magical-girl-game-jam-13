@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://biipx5e3vdtcs"]
 
 [ext_resource type="Script" uid="uid://xgd0e6jf7kk7" path="res://src/UI/health_display/health_display.gd" id="1_cwq01"]
-[ext_resource type="Texture2D" uid="uid://dablor8ij1i1" path="res://assets/other/heart_sprite.png" id="2_3e2nu"]
+[ext_resource type="Texture2D" uid="uid://dablor8ij1i1" path="res://assets/sprites/other/heart_sprite.png" id="2_3e2nu"]
 
 [node name="HealthDisplay" type="Container" unique_id=1917005]
 anchors_preset = 15

@@ -24,20 +24,24 @@ const RAYCAST_MAX_LENGTH := 500
 #region Virtual Methods
 func _ready() -> void:
 	info.exit_pos = global_position
-	monitoring = true
+	monitoring = false
 	monitorable = false
 	
 	collision_layer = 0
-	collision_mask = 0
-	#collision_mask = Constants.COLLISION.PLAYER
+	collision_mask = Constants.COLLISION.PLAYER
 	
 	if Engine.is_editor_hint():
 		return
 	
 	body_entered.connect(_on_player_enter)
 	_register_self()
-	
-	collision_mask = Constants.COLLISION.PLAYER
+	_after_ready()
+
+func _after_ready() -> void:
+	monitoring = false
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	monitoring = true
 #endregion
 
 
@@ -53,6 +57,7 @@ func _register_self() -> void:
 func _on_player_enter(player : Node2D) -> void:
 	if !(player is Player):
 		return
+	prints(name, owner.name)
 	
 	var room_manager : RoomManager = (Global.local_controller as RoomManager)
 	if room_manager != null:

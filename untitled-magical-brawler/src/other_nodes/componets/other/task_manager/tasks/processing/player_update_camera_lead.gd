@@ -35,12 +35,14 @@ func action_changed(action_name : String, _val : bool) -> void:
 			) - int(
 				_context.is_action(labels.ACT_PLAYER_LEFT)
 			))
+			_actor.update_direction()
 		labels.ACT_PLAYER_UP, labels.ACT_PLAYER_DOWN:
 			_actor.direction.y = (int(
 				_context.is_action(labels.ACT_PLAYER_DOWN)
 			) - int(
 				_context.is_action(labels.ACT_PLAYER_UP)
 			))
+			_actor.update_direction()
 #endregion
 
 

@@ -18,7 +18,7 @@ var _phantom_camera : PhantomCamera2D
 
 #region Virtual Methods
 func _init() -> void:
-	monitoring = true
+	monitoring = false
 	monitorable = false
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
@@ -44,6 +44,13 @@ func _ready() -> void:
 		_settup_phantom_camera,
 		1
 	)
+	_after_ready()
+
+func _after_ready() -> void:
+	monitoring = false
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	monitoring = true
 #endregion
 
 

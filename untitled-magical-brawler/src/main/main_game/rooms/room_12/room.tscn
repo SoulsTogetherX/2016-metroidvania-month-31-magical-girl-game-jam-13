@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://db4iqe3hivl5s"]
 
-[ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/tilesets/earth_tileset/earth_tileset.tres" id="1_bnsgl"]
+[ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/sprites/tilesets/tilesets/light_tileset.tres" id="1_bnsgl"]
 
 [node name="Room" type="Node2D" unique_id=539753159]
 

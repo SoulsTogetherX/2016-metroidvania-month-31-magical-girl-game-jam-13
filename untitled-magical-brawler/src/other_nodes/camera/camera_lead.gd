@@ -6,18 +6,16 @@ class_name CameraLead extends Marker2D
 @export var follow : Node2D
 
 @export_group("Positioning")
-@export var y_pos : float:
-	set = set_y_pos
-@export var flat_y_offset : float = -960.0:
-	set = set_flat_y_offset
-@export var direction : Vector2:
-	set = set_direction
+@export_subgroup("Y Pos")
+@export var y_pos : float
+
+@export_subgroup("Direct")
+@export var flat_y_offset : float = Constants.DEFAULT_FLAT_Y_OFFSET
+@export var direction : Vector2
 
 @export_group("Settings")
-@export var x_bias : float = 700:
-	set = set_x_bias
-@export var y_bias : float = 700:
-	set = set_y_bias
+@export var x_bias : float = Constants.DEFAULT_X_BAIS
+@export var y_bias : float = Constants.DEFAULT_Y_BAIS
 #endregion
 
 
@@ -40,7 +38,7 @@ func _physics_process(_delta: float) -> void:
 
 
 #region Private Methods
-func _update_y_tween() -> void:
+func _update_y_tween(duration := 1.5) -> void:
 	if _y_tween:
 		_y_tween.kill()
 	
@@ -51,9 +49,9 @@ func _update_y_tween() -> void:
 		self,
 		"_current_offset:y",
 		y_pos + direction.y * y_bias,
-		1.5
+		duration
 	)
-func _update_x_tween() -> void:
+func _update_x_tween(duration := 2.0) -> void:
 	if is_zero_approx(direction.x):
 		return
 	if _x_tween:
@@ -66,7 +64,7 @@ func _update_x_tween() -> void:
 		self,
 		"_current_offset:x",
 		direction.x * x_bias,
-		2
+		duration
 	)
 #endregion
 
@@ -77,36 +75,30 @@ func force_current_offset() -> void:
 		_x_tween.kill()
 	if _y_tween:
 		_y_tween.kill()
-	_current_offset = direction * Vector2(
-		x_bias, y_bias
-	) + Vector2(0, y_pos)
+	
+	_current_offset.x = 0.0
+	_current_offset.y = (direction.y * y_bias) + y_pos
 
 func set_x_bias(val : float) -> void:
-	if val == x_bias:
-		return
 	x_bias = val
 	_update_x_tween()
 func set_y_bias(val : float) -> void:
-	if val == y_bias:
-		return
 	y_bias = val
 	_update_y_tween()
 func set_flat_y_offset(val : float) -> void:
-	if val == flat_y_offset:
-		return
 	flat_y_offset = val
 	_update_y_tween()
 
 
 func set_y_pos(val : float) -> void:
-	if val == y_pos:
-		return
 	y_pos = val
 	_update_y_tween()
+
 func set_direction(val : Vector2) -> void:
-	if val == direction:
-		return
 	direction = val
+	_update_y_tween()
+	_update_x_tween()
+func update_direction() -> void:
 	_update_y_tween()
 	_update_x_tween()
 #endregion

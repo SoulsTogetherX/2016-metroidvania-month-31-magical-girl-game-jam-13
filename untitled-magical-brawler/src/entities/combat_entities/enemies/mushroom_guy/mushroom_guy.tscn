@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfrerw612ix6r" path="res://src/entities/combat_entities/enemies/enemy_entity.gd" id="1_axkgu"]
 [ext_resource type="Shader" uid="uid://c4pwni02nxw7f" path="res://assets/shaders/hit_flash_shader.gdshader" id="1_rql5l"]
-[ext_resource type="SpriteFrames" uid="uid://cu3wk7btyh6r5" path="res://assets/entities/enemies/mushroom_guy/mushroom_guy_spriteframes.tres" id="2_4wjxv"]
+[ext_resource type="SpriteFrames" uid="uid://cu3wk7btyh6r5" path="res://assets/sprites/entities/enemies/mushroom_guy/mushroom_guy_spriteframes.tres" id="2_4wjxv"]
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_4wjxv"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="4_3pfdt"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="5_lu1um"]

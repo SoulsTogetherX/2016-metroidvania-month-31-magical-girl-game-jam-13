@@ -3,7 +3,8 @@ extends Node
 
 
 #region Private Variables
-var snap_requested : bool
+var active_cam : PhantomCamera2D
+var requested_snap : bool = false
 #endregion
 
 
@@ -18,22 +19,17 @@ func focus_camera(cam : PhantomCamera2D) -> void:
 	unfocus_all()
 	if !cam:
 		return
-	if !snap_requested:
+	
+	active_cam = cam
+	if !requested_snap:
 		cam.priority = 1
 		return
-	set_deferred("snap_requested", false)
-	
-	if is_zero_approx(cam.tween_duration):
-		return
+	requested_snap = false
 	
 	var duration := cam.tween_duration
 	cam.tween_duration = 0.0
 	cam.priority = 1
-	cam.set_deferred("tween_duration", duration)
-#endregion
-
-
-#region Public Methods (Helper)
-func request_snap() -> void:
-	snap_requested = true
+	
+	await cam.tween_completed
+	cam.tween_duration = duration
 #endregion

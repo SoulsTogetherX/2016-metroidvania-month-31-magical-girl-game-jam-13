@@ -38,9 +38,7 @@ static func manual_collide_check(
 	
 	return shape_collide_check(
 		collide.get_world_2d().direct_space_state,
-		collide.get_global_transform().translated_local(
-			Vector2(0, -shape.get_rect().size.y * 0.5)
-		),
+		collide.get_global_transform().translated_local(Vector2.ZERO),
 		shape, bodies, areas, mask
 	)
 static func shape_collide_check(

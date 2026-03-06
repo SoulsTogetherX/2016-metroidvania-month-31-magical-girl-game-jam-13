@@ -51,8 +51,7 @@ func action_started(action_name : StringName) -> void:
 		GlobalLabels.hsm_context.ACT_PLAYER_DIG:
 			if act.is_animation_playing():
 				return
-			if !ability_cache.can_end(
-				AbilityData.ABILITY_TYPE.DIG,
+			if !DigAbility.can_end(
 				{
 					&"collide" : ground_collider
 				}

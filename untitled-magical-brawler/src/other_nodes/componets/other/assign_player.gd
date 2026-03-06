@@ -4,7 +4,7 @@ class_name AssignPlayer extends Node
 
 #region External Variables
 @export var follow_offset : bool = true
-@export var limit : TileMapLayer
+@export var limit : Node2D
 #endregion
 
 

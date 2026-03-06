@@ -4,9 +4,15 @@ class_name AssignCameraLead extends Node
 
 #region External Variables
 @export_group("Settings")
+@export_subgroup("Bias")
 @export var x_bais : float = Constants.DEFAULT_X_BAIS
 @export var y_bias : float = Constants.DEFAULT_Y_BAIS
+
+@export_subgroup("Y Positioning")
 @export var flat_y_offset : float = Constants.DEFAULT_FLAT_Y_OFFSET
+
+@export_subgroup("Other")
+@export var force_offset : bool = false
 #endregion
 
 
@@ -26,8 +32,8 @@ func _on_active() -> void:
 	player.set_camera_lead_y_bias(y_bias)
 	player.set_camera_flat_y_offset(flat_y_offset)
 	
-	if CameraZoneManager.snap_requested:
-		player.force_current_offset()
+	if force_offset:
+		Global.player.force_current_offset()
 func _on_inactive() -> void:
 	var player := Global.player
 	player.set_camera_lead_x_bias(Constants.DEFAULT_X_BAIS)

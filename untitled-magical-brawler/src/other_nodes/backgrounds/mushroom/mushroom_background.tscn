@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dv85in5mroe81"]
 
-[ext_resource type="Texture2D" uid="uid://bqpdg8ciksj4v" path="res://assets/background/mushroom_area/Foreground Elements.png" id="2_vcfe0"]
-[ext_resource type="Texture2D" uid="uid://bat1vhidwirkw" path="res://assets/background/mushroom_area/Midground Elements.png" id="3_2dkk0"]
+[ext_resource type="Texture2D" uid="uid://bqpdg8ciksj4v" path="res://assets/sprites/background/mushroom_area/Foreground Elements.png" id="2_vcfe0"]
+[ext_resource type="Texture2D" uid="uid://bat1vhidwirkw" path="res://assets/sprites/background/mushroom_area/Midground Elements.png" id="3_2dkk0"]
 
 [node name="MushroomBG" type="Node2D" unique_id=2012265308]
 z_index = -1

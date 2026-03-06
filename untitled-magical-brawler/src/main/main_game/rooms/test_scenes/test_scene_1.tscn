@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cepi7l2yq7v70"]
 
 [ext_resource type="Script" uid="uid://coaco4ykmwesx" path="res://src/main/main_game/rooms/room_base.gd" id="1_jjl5p"]
-[ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/tilesets/earth_tileset/earth_tileset.tres" id="4_o3rvy"]
+[ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/sprites/tilesets/tilesets/light_tileset.tres" id="4_o3rvy"]
 [ext_resource type="Script" uid="uid://ugwgsarbcpxm" path="res://src/other_nodes/room_editor_tools/gateway/player_position_resource.gd" id="8_a6p6p"]
 [ext_resource type="Script" uid="uid://8wbxs64d5ccc" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="11_7yuiy"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_jjl5p"]
