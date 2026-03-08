@@ -2,9 +2,22 @@
 class_name Player extends CombatEntity
 
 
+#region External Variables
+@export_group("Effect")
+@export var effects : Array[BaseEffect]:
+	set(val):
+		for i : int in range(val.size()):
+			if !val[i]:
+				val[i] = FlatHealthEffect.new()
+		effects = val
+#endregion
+
+
 #region Onready Variables
 @onready var _ability_cache: AbilityCacheModule = %AbilityCacheModule
 @onready var _camera_lead: CameraLead = $CameraLead
+
+@onready var _context_task: Node = %UpdateContextTask
 #endregion
 
 
@@ -63,4 +76,15 @@ func force_current_offset() -> void:
 		return
 	_camera_lead.y_pos = global_position.y
 	_camera_lead.force_current_offset()
+
+func toggle_player(toggle : bool) -> void:
+	_context_task.accept_input = toggle
+
+func _on_spike_detect(
+	_body_rid: RID, _body: Node2D, _body_shape_index: int,
+	_local_shape_index: int
+) -> void:
+	var control := Global.local_controller
+	if control is RoomManager:
+		control.reset_to_checkpoint()
 #endregion

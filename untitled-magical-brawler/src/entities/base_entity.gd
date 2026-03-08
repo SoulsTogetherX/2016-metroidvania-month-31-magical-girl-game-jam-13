@@ -119,6 +119,8 @@ func _snap_to_ground() -> void:
 
 
 #region Public Methods (Helper)
+func is_facing_right() -> bool:
+	return _visual_pivot.scale.x == -1.0
 func change_direction(h_flip : bool) -> void:
 	if !_visual_pivot:
 		return

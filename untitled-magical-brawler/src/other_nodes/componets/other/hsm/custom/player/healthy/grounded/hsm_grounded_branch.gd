@@ -18,8 +18,6 @@ extends HSMBranch
 #region Public Virtual Methods
 func action_started(action_name : StringName) -> void:
 	match action_name:
-		GlobalLabels.hsm_context.ACT_IN_AIR:
-			change_state(fall_state)
 		GlobalLabels.hsm_context.ACT_ATTACKING:
 			change_state(attack_state)
 		GlobalLabels.hsm_context.ACT_PLAYER_DIG:

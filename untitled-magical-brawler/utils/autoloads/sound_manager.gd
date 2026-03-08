@@ -77,6 +77,7 @@ func create_sound_effect(
 	audio.finished.connect(_finish_audio.bind(idx))
 	_sound_effects[idx] = audio
 	
+	add_child(audio)
 	return idx
 func cancel_sound_effect(idx : int) -> void:
 	if !_sound_effects.has(idx):

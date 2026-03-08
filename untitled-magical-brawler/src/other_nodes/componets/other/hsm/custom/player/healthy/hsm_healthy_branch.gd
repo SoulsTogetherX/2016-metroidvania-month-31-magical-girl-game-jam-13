@@ -9,6 +9,26 @@ extends HSMBranch
 
 
 
+#region Public Virtual Methods
+func action_started(action_name : StringName) -> void:
+	match action_name:
+		GlobalLabels.hsm_context.ACT_IN_AIR:
+			var ctx := get_context()
+			
+			if !ctx.is_action(
+				GlobalLabels.hsm_context.ACT_JUMPING
+			):
+				change_state(airborn_state)
+func action_finished(action_name : StringName) -> void:
+	match action_name:
+		GlobalLabels.hsm_context.ACT_IN_AIR:
+			var ctx := get_context()
+			
+			ctx.set_value(GlobalLabels.hsm_context.VAL_JUMP_COUNT, 0)
+			change_state(grounded_state)
+#endregion
+
+
 #region Public State Change Methods
 func passthrough_state(_act : Node, ctx : HSMContext) -> HSMBranch:
 	if ctx.is_action(

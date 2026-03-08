@@ -21,8 +21,6 @@ func action_finished(action_name : StringName) -> void:
 
 
 #region Public Methods (State Change)
-func passthrough_state(_act : Node, ctx : HSMContext) -> HSMBranch:
-	if !ctx.is_action(GlobalLabels.hsm_context.ACT_JUMPING):
-		return ground_state
+func passthrough_state(_act : Node, _ctx : HSMContext) -> HSMBranch:
 	return jump_state
 #endregion

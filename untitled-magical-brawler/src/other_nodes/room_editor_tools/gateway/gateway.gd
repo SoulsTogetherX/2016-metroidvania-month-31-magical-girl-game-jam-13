@@ -2,11 +2,6 @@
 class_name Gateway extends Area2D
 
 
-#region Constants
-const RAYCAST_MAX_LENGTH := 500
-#endregion
-
-
 #region External Variables
 @export_group("Entering Player")
 @export var info : PlayerPositionResource
@@ -57,7 +52,6 @@ func _register_self() -> void:
 func _on_player_enter(player : Node2D) -> void:
 	if !(player is Player):
 		return
-	prints(name, owner.name)
 	
 	var room_manager : RoomManager = (Global.local_controller as RoomManager)
 	if room_manager != null:

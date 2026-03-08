@@ -1,3 +1,4 @@
+@tool
 class_name WallJumpAbility extends AbilityData
 
 
@@ -5,7 +6,6 @@ class_name WallJumpAbility extends AbilityData
 func _init() -> void:
 	type = ABILITY_TYPE.WALL_JUMP
 #endregion
-
 
 
 #region Public Methods (Access)

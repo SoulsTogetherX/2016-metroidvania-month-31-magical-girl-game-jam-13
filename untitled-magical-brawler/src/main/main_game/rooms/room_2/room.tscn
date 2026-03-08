@@ -50,7 +50,7 @@ size = Vector2(61, 731)
 [sub_resource type="Resource" id="Resource_38m1q"]
 script = ExtResource("3_pec84")
 exit_pos = Vector2(12714, 896)
-face_right = true
+face_left = true
 metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38m1q"]

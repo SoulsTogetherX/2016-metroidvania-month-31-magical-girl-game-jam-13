@@ -7,6 +7,7 @@ extends TaskNode
 
 @export_group("Other")
 @export var actor : CharacterBody2D
+@export var accept_input : bool = true
 #endregion
 
 
@@ -27,41 +28,74 @@ func _ready() -> void:
 #region Public Virtual Methods
 func task_physics(_delta : float) -> void:
 	var labels := GlobalLabels.hsm_context
-	var move_dir := Input.get_axis(
-		&"player_left", &"player_right"
-	)
+	var move_dir := 0.0
 	
-	# Base Controls
-	_context.set_action(
-		labels.ACT_PLAYER_LEFT, Input.is_action_pressed(&"player_left")
-	)
-	_context.set_action(
-		labels.ACT_PLAYER_RIGHT, Input.is_action_pressed(&"player_right")
-	)
-	_context.set_action(
-		labels.ACT_PLAYER_UP, Input.is_action_pressed(&"player_up")
-	)
-	_context.set_action(
-		labels.ACT_PLAYER_DOWN, Input.is_action_pressed(&"player_down")
-	)
-	
-	# Ability Controls
-	_context.set_action(
-		labels.ACT_PLAYER_DIG, Input.is_action_pressed(&"player_dig")
-	)
+	if accept_input:
+		move_dir = Input.get_axis(
+			&"player_left", &"player_right"
+		)
+		
+		# Base Controls
+		_context.set_action(
+			labels.ACT_PLAYER_LEFT, Input.is_action_pressed(&"player_left")
+		)
+		_context.set_action(
+			labels.ACT_PLAYER_RIGHT, Input.is_action_pressed(&"player_right")
+		)
+		_context.set_action(
+			labels.ACT_PLAYER_UP, Input.is_action_pressed(&"player_up")
+		)
+		_context.set_action(
+			labels.ACT_PLAYER_DOWN, Input.is_action_pressed(&"player_down")
+		)
+		
+		# Ability Controls
+		_context.set_action(
+			labels.ACT_PLAYER_DIG, Input.is_action_pressed(&"player_dig")
+		)
+	else:
+		# Base Controls
+		_context.set_action(
+			labels.ACT_PLAYER_LEFT, false
+		)
+		_context.set_action(
+			labels.ACT_PLAYER_RIGHT, false
+		)
+		_context.set_action(
+			labels.ACT_PLAYER_UP, false
+		)
+		_context.set_action(
+			labels.ACT_PLAYER_DOWN, false
+		)
+		
+		# Ability Controls
+		_context.set_action(
+			labels.ACT_PLAYER_DIG, false
+		)
 	
 	# Input Checks
 	_context.set_action(labels.ACT_MOVING, move_dir != 0)
-	_context.set_action(
-		labels.ACT_JUMPING, Input.is_action_pressed(&"player_jump")
-	)
-	_context.set_action(
-		labels.ACT_ATTACKING, Input.is_action_pressed(&"player_attack")
-	)
+	if accept_input:
+		_context.set_action(
+			labels.ACT_JUMPING, Input.is_action_pressed(&"player_jump")
+		)
+		_context.set_action(
+			labels.ACT_ATTACKING, Input.is_action_pressed(&"player_attack")
+		)
+	else:
+		_context.set_action(
+			labels.ACT_JUMPING, false
+		)
+		_context.set_action(
+			labels.ACT_ATTACKING, false
+		)
 	
 	# States Checks
 	_context.set_action(
 		labels.ACT_IN_AIR, !_actor.is_on_floor()
+	)
+	_context.set_action(
+		labels.ACT_ON_WALL, _actor.is_on_wall_only()
 	)
 	
 	# Helper States

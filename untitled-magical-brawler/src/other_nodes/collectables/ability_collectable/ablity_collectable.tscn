@@ -29,6 +29,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.9157694, 0.9157693, 0.9157694, 1)
 script = ExtResource("1_bfv2b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1155619885]
+unique_name_in_owner = true
 texture = ExtResource("1_2mb31")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1349477786]

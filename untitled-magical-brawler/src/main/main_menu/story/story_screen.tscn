@@ -1,26 +1,15 @@
 [gd_scene format=3 uid="uid://dlqd0kfevoa7n"]
 
 [ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/main_menu_subscreen.gd" id="1_g5twi"]
-[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_kxfo6"]
+[ext_resource type="Texture2D" uid="uid://cssrp3q0uw35g" path="res://assets/sprites/UI/BackButton.tres" id="2_vynai"]
+[ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="3_vckw6"]
+[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/PaddingContainer/PaddingContainer.gd" id="3_vynai"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vckw6"]
-bg_color = Color(0, 0.71243995, 0.44907278, 1)
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vynai"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_vckw6"]
+file = "res://assets/videos/game_lore.ogv"
 
 [node name="StoryScreen" type="MarginContainer" unique_id=680349561]
 anchors_preset = 15
@@ -30,33 +19,53 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g5twi")
 
+[node name="PlayDelay" type="Timer" parent="." unique_id=669534783]
+one_shot = true
+autostart = true
+
 [node name="Panel" type="Panel" parent="." unique_id=1759359793]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vckw6")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=737071070]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1154008328]
+layout_mode = 2
+ratio = 1.8
+stretch_mode = 0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="AspectRatioContainer" unique_id=1926940943]
+layout_mode = 2
+stream = SubResource("VideoStreamTheora_vckw6")
+expand = true
+
+[node name="BackMargin" type="Container" parent="." unique_id=202055015]
+layout_mode = 2
+script = ExtResource("3_vynai")
+child_anchor_left = 0.92
+child_anchor_top = 0.9
+child_anchor_right = 1.0
+child_anchor_bottom = 0.98
+child_offset_left = 0
+child_offset_top = 0
+child_offset_right = 0
+child_offset_bottom = 0
+metadata/_custom_type_script = "uid://dube6kmp8e6dk"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="BackMargin" unique_id=1208880569]
 layout_mode = 2
 
-[node name="BackBtn" type="Container" parent="CenterContainer" unique_id=511559954]
+[node name="ModulateTransitionButton" type="Container" parent="BackMargin/AspectRatioContainer" unique_id=1333809937]
 layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_kxfo6")
-background = SubResource("StyleBoxFlat_vynai")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_vckw6")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/BackBtn" unique_id=1460899858]
+[node name="TextureRect" type="TextureRect" parent="BackMargin/AspectRatioContainer/ModulateTransitionButton" unique_id=876307456]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+texture = ExtResource("2_vynai")
+expand_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/BackBtn/Margin" unique_id=615407493]
-layout_mode = 2
-text = "Back"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="press_vaild" from="CenterContainer/BackBtn" to="." method="_on_back"]
+[connection signal="timeout" from="PlayDelay" to="AspectRatioContainer/VideoStreamPlayer" method="play"]
+[connection signal="finished" from="AspectRatioContainer/VideoStreamPlayer" to="." method="_on_back"]
+[connection signal="press_vaild" from="BackMargin/AspectRatioContainer/ModulateTransitionButton" to="." method="_on_back"]

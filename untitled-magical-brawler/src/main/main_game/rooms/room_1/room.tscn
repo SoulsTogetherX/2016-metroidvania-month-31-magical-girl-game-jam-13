@@ -34,7 +34,6 @@ transition = 1
 [sub_resource type="Resource" id="Resource_nvvsa"]
 script = ExtResource("3_u0mmh")
 exit_pos = Vector2(16328, 11)
-face_right = true
 metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnjq8"]

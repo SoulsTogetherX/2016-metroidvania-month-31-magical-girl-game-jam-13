@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://blqrc4cbv78eb"]
 
 [ext_resource type="Script" uid="uid://dnlec3owfo2sk" path="res://src/main/main_menu/start_screen/start_screen.gd" id="1_m6ypo"]
+[ext_resource type="Texture2D" uid="uid://cee5s31nr7bcb" path="res://assets/sprites/UI/Title.tres" id="2_57gqb"]
 [ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_aqrop"]
+[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/PaddingContainer/PaddingContainer.gd" id="5_b6ri3"]
+[ext_resource type="Texture2D" uid="uid://ccf43ah076pwc" path="res://assets/sprites/UI/Credits.tres" id="6_7jtmt"]
+[ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="6_o161a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c72ae"]
 
@@ -33,13 +37,45 @@ script = ExtResource("1_m6ypo")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c72ae")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=934232474]
+[node name="PaddingContainer" type="Container" parent="." unique_id=979806770]
+layout_mode = 2
+script = ExtResource("5_b6ri3")
+child_anchor_left = 0.05
+child_anchor_top = 0.05
+child_anchor_right = 0.95
+child_anchor_bottom = 0.95
+child_offset_left = 0
+child_offset_top = 0
+child_offset_right = 0
+child_offset_bottom = 0
+metadata/_custom_type_script = "uid://dube6kmp8e6dk"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PaddingContainer" unique_id=1927694137]
 layout_mode = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=355598848]
+[node name="VBoxContainer" type="VBoxContainer" parent="PaddingContainer/HBoxContainer" unique_id=897893406]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 3.37
+theme_override_constants/separation = 50
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer" unique_id=1779479659]
 layout_mode = 2
 
-[node name="StartGameBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=1765517855]
+[node name="Title" type="TextureRect" parent="PaddingContainer/HBoxContainer/VBoxContainer/AspectRatioContainer" unique_id=811863898]
+layout_mode = 2
+texture = ExtResource("2_57gqb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer" unique_id=355598848]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 15
+
+[node name="StartMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=480748034]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="StartGameBtn" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin" unique_id=1765517855]
 layout_mode = 2
 mouse_filter = 0
 script = ExtResource("2_aqrop")
@@ -47,21 +83,25 @@ background = SubResource("StyleBoxFlat_7lwn7")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/StartGameBtn" unique_id=1861832116]
+[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin/StartGameBtn" unique_id=1861832116]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
+theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/StartGameBtn/Margin" unique_id=260002022]
+[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin/StartGameBtn/Margin" unique_id=260002022]
 layout_mode = 2
 text = "Start Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=1321540934]
+[node name="SettingsMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=1262241396]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="SettingsBtn" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin" unique_id=1321540934]
 layout_mode = 2
 mouse_filter = 0
 script = ExtResource("2_aqrop")
@@ -69,21 +109,29 @@ background = SubResource("StyleBoxFlat_7lwn7")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/SettingsBtn" unique_id=112560732]
+[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn" unique_id=112560732]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
+theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/SettingsBtn/Margin" unique_id=1925692438]
+[node name="HBoxContainer" type="HBoxContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn/Margin" unique_id=743383483]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn/Margin/HBoxContainer" unique_id=1925692438]
 layout_mode = 2
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StoryBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=2111832948]
+[node name="StoryMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=855580489]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="StoryBtn" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin" unique_id=2111832948]
 layout_mode = 2
 mouse_filter = 0
 script = ExtResource("2_aqrop")
@@ -91,21 +139,25 @@ background = SubResource("StyleBoxFlat_7lwn7")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/StoryBtn" unique_id=671060643]
+[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin/StoryBtn" unique_id=671060643]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
+theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/StoryBtn/Margin" unique_id=57292576]
+[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin/StoryBtn/Margin" unique_id=57292576]
 layout_mode = 2
 text = "Story"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreditsBtn" type="Container" parent="CenterContainer/HBoxContainer" unique_id=641796875]
+[node name="QuitMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=673314135]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Quit" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin" unique_id=1068917767]
 layout_mode = 2
 mouse_filter = 0
 script = ExtResource("2_aqrop")
@@ -113,44 +165,45 @@ background = SubResource("StyleBoxFlat_7lwn7")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/CreditsBtn" unique_id=922376244]
+[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin/Quit" unique_id=1310010320]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
+theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/CreditsBtn/Margin" unique_id=607365924]
-layout_mode = 2
-text = "Credit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Quit" type="Container" parent="CenterContainer/HBoxContainer" unique_id=1068917767]
-layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_aqrop")
-background = SubResource("StyleBoxFlat_7lwn7")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
-
-[node name="Margin" type="MarginContainer" parent="CenterContainer/HBoxContainer/Quit" unique_id=1310010320]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/Quit/Margin" unique_id=1478476113]
+[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin/Quit/Margin" unique_id=1478476113]
 layout_mode = 2
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="press_vaild" from="CenterContainer/HBoxContainer/StartGameBtn" to="." method="_start_game_pressed"]
-[connection signal="press_vaild" from="CenterContainer/HBoxContainer/SettingsBtn" to="." method="_settings_game_pressed"]
-[connection signal="press_vaild" from="CenterContainer/HBoxContainer/StoryBtn" to="." method="_story_game_pressed"]
-[connection signal="press_vaild" from="CenterContainer/HBoxContainer/CreditsBtn" to="." method="_credits_game_pressed"]
-[connection signal="press_vaild" from="CenterContainer/HBoxContainer/Quit" to="." method="_quit_game_pressed"]
+[node name="ModulateTransitionButton" type="Container" parent="PaddingContainer/HBoxContainer" unique_id=1602911835]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_o161a")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
+
+[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/ModulateTransitionButton" unique_id=1080776824]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PaddingContainer/HBoxContainer/ModulateTransitionButton/Margin" unique_id=692705870]
+layout_mode = 2
+ratio = 1.9231
+stretch_mode = 0
+alignment_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBoxContainer/ModulateTransitionButton/Margin/AspectRatioContainer" unique_id=2053072215]
+layout_mode = 2
+texture = ExtResource("6_7jtmt")
+expand_mode = 2
+stretch_mode = 4
+
+[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin/StartGameBtn" to="." method="_start_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn" to="." method="_settings_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin/StoryBtn" to="." method="_story_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin/Quit" to="." method="_quit_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/ModulateTransitionButton" to="." method="_credits_game_pressed"]

@@ -84,7 +84,6 @@ func _load_attack_preset() -> void:
 	var apply_inv_effect := ApplyStatusEffect.new()
 	apply_inv_effect.status = inv_effect
 	
-	
 	effects = [
 		FlatHealthEffect.new(),
 		KnockbackEffect.new(),

@@ -14,7 +14,8 @@ extends Node2D
 
 
 #region OnReady Variables
-@onready var _hitbox: HitboxComponent = $Hitbox
+@onready var _sprite: Sprite2D = %Sprite2D
+@onready var _hitbox: HitboxComponent = %Hitbox
 #endregion
 
 
@@ -35,9 +36,9 @@ func _ready() -> void:
 
 #region Private Methods
 func _load_texture() -> void:
-	if ability == null:
+	if ability == null || _sprite == null:
 		return
-	$Sprite2D.texture = ability.get_icon()
+	_sprite.texture = ability.get_icon()
 
 func _on_collect() -> void:
 	if ability != null:

@@ -14,7 +14,7 @@ ss2d/version="3.3.1"
 
 [application]
 
-config/name="Untitled Magical Brawler"
+config/name="Magical Snek"
 run/main_scene="uid://cns7a2pmlsie7"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=60

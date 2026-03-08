@@ -1,3 +1,4 @@
+@tool
 class_name DigAbility extends AbilityData
 
 
@@ -5,6 +6,7 @@ class_name DigAbility extends AbilityData
 const EDGE_FORGIVENESS := 60
 const DOWNWARDS_SEARCH := 5
 #endregion
+
 
 
 #region Virtual Methods

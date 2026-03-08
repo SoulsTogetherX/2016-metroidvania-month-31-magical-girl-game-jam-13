@@ -15,10 +15,10 @@ func _ready() -> void:
 
 
 #region Public Methods (Accessors)
-func fade_cover() -> void:
-	await Global.transition_cover.fade_cover(true, 0.2)
-func unfade_cover() -> void:
-	await Global.transition_cover.fade_cover(false, 0.2)
+func fade_cover(delay : float = 0.2) -> void:
+	await Global.transition_cover.fade_cover(true, delay)
+func unfade_cover(delay : float = 0.2) -> void:
+	await Global.transition_cover.fade_cover(false, delay)
 
 func get_current_cache() -> SceneController.CachedScene:
 	return scene_controller.get_current_cache()
