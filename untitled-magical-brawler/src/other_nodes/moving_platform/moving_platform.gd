@@ -3,6 +3,7 @@ extends PathFollow2D
 
 #region External Variables
 @export var auto_start : bool = true
+@export var one_shot : bool = false
 
 @export_group("Tween")
 @export var duration : float = 1.0
@@ -38,7 +39,8 @@ func _create_tween() -> void:
 	_path_tween.set_trans(trans_type)
 	_path_tween.set_ease(ease_type)
 	
-	_path_tween.set_loops(-1)
+	if !one_shot:
+		_path_tween.set_loops(-1)
 	_path_tween.tween_method(
 		_set_ratio, progress_ratio, progress_ratio + 1.0,
 		duration
@@ -50,7 +52,7 @@ func _create_tween() -> void:
 		)
 func _set_ratio(delta : float) -> void:
 	_body.global_position = global_position
-	progress_ratio = absf(1.0 - fmod(delta, 2.0))
+	progress_ratio = 1.0 - absf(1.0 - fmod(delta, 2.0))
 #endregion
 
 
@@ -60,6 +62,10 @@ func reset() -> void:
 	if !auto_start:
 		_path_tween.pause()
 
+func play() -> void:
+	toggle_tween(true)
+func pause() -> void:
+	toggle_tween(false)
 func toggle_tween(toggle : bool = false) -> void:
 	if !_path_tween:
 		return

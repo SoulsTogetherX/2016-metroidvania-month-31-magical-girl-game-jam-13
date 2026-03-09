@@ -9,20 +9,33 @@
 [ext_resource type="Script" uid="uid://cobb1ipksi4ot" path="res://src/other_nodes/componets/other/assign_player.gd" id="7_7qlgs"]
 [ext_resource type="Script" uid="uid://7qsfw4eqfblm" path="res://src/other_nodes/componets/other/assign_camera_lead.gd" id="8_c6b5m"]
 [ext_resource type="Script" uid="uid://8wbxs64d5ccc" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="9_ola3l"]
+[ext_resource type="Script" uid="uid://dwwm5nsjrqj7v" path="res://src/other_nodes/room_editor_tools/safe_area/checkpoint.gd" id="10_ksba5"]
 
 [sub_resource type="Resource" id="Resource_uifku"]
 script = ExtResource("3_ola3l")
 exit_pos = Vector2(288, 0)
 metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6b5m"]
+size = Vector2(6782, 16064)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gteab"]
-size = Vector2(1980, 2010)
+size = Vector2(1406, 2010)
 
 [sub_resource type="Resource" id="Resource_pddvf"]
 script = ExtResource("6_o28bs")
 duration = 0.6
 transition = 1
 ease = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ola3l"]
+size = Vector2(2656, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksba5"]
+size = Vector2(8880, 1376)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o28bs"]
+size = Vector2(1368, 912)
 
 [sub_resource type="Resource" id="Resource_ksba5"]
 script = ExtResource("3_ola3l")
@@ -39,6 +52,13 @@ metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qlgs"]
 size = Vector2(96, 1824)
+
+[sub_resource type="Resource" id="Resource_fhevc"]
+script = ExtResource("3_ola3l")
+exit_pos = Vector2(35072, 11392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uifku"]
+size = Vector2(2880, 352)
 
 [node name="Room" type="Node2D" unique_id=539753159]
 metadata/_edit_horizontal_guides_ = [-2592.0]
@@ -72,8 +92,12 @@ metadata/_custom_type_script = "uid://cpduwb8f22nmd"
 
 [node name="Zones" type="Node2D" parent="." unique_id=1785407417]
 
+[node name="CameraLimits" type="CollisionShape2D" parent="Zones" unique_id=1876965966]
+position = Vector2(3393, 5760)
+shape = SubResource("RectangleShape2D_c6b5m")
+disabled = true
+
 [node name="Zone_1" type="Area2D" parent="Zones" unique_id=1452464751]
-visible = false
 z_index = 1
 collision_layer = 0
 collision_mask = 4
@@ -82,13 +106,13 @@ script = ExtResource("4_ksba5")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
 
 [node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_1" unique_id=1615633961]
-position = Vector2(247, -384)
+position = Vector2(705, -768)
 shape = SubResource("RectangleShape2D_gteab")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_1" unique_id=194964107]
 position = Vector2(1006, -107)
 script = ExtResource("5_fhevc")
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.2, 0.2)
 tween_resource = SubResource("Resource_pddvf")
 tween_on_load = false
 inactive_update_mode = 1
@@ -96,14 +120,82 @@ draw_limits = true
 limit_target = NodePath("../../../Collision")
 noise_emitter_layer = 1
 
-[node name="AssignPlayer" type="Node" parent="Zones/Zone_1/PhantomCamera2D" unique_id=2044793035]
+[node name="AssignPlayer" type="Node" parent="Zones/Zone_1/PhantomCamera2D" unique_id=2044793035 node_paths=PackedStringArray("limit")]
 script = ExtResource("7_7qlgs")
+limit = NodePath("../../../CameraLimits")
 metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 
 [node name="AssignCameraLead" type="Node" parent="Zones/Zone_1/PhantomCamera2D" unique_id=1503716238]
 script = ExtResource("8_c6b5m")
 flat_y_offset = -300.0
 metadata/_custom_type_script = "uid://7qsfw4eqfblm"
+
+[node name="Zone_2" type="Area2D" parent="Zones" unique_id=1425769205]
+z_index = 1
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("4_ksba5")
+metadata/_custom_type_script = "uid://dukqn0hyev23g"
+
+[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_2" unique_id=418268902]
+position = Vector2(3376, 688)
+shape = SubResource("RectangleShape2D_ola3l")
+
+[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_2" unique_id=709121153]
+position = Vector2(1006, -107)
+script = ExtResource("5_fhevc")
+zoom = Vector2(0.2, 0.2)
+tween_resource = SubResource("Resource_pddvf")
+tween_on_load = false
+inactive_update_mode = 1
+draw_limits = true
+limit_target = NodePath("../../../Collision")
+noise_emitter_layer = 1
+
+[node name="AssignPlayer" type="Node" parent="Zones/Zone_2/PhantomCamera2D" unique_id=144577663 node_paths=PackedStringArray("limit")]
+script = ExtResource("7_7qlgs")
+follow_offset = false
+limit = NodePath("../../../CameraLimits")
+metadata/_custom_type_script = "uid://cobb1ipksi4ot"
+
+[node name="Zone_3" type="Area2D" parent="Zones" unique_id=2061223784]
+z_index = 1
+position = Vector2(544, 11488)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("4_ksba5")
+metadata/_custom_type_script = "uid://dukqn0hyev23g"
+
+[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_3" unique_id=472829271]
+position = Vector2(-232, 1136)
+shape = SubResource("RectangleShape2D_ksba5")
+
+[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_3" unique_id=1321860509]
+position = Vector2(1006, -107)
+script = ExtResource("5_fhevc")
+zoom = Vector2(0.2, 0.2)
+tween_resource = SubResource("Resource_pddvf")
+tween_on_load = false
+inactive_update_mode = 1
+draw_limits = true
+limit_target = NodePath("../../../Collision")
+noise_emitter_layer = 1
+
+[node name="AssignPlayer" type="Node" parent="Zones/Zone_3/PhantomCamera2D" unique_id=769587994]
+script = ExtResource("7_7qlgs")
+metadata/_custom_type_script = "uid://cobb1ipksi4ot"
+
+[node name="AssignCameraLead" type="Node" parent="Zones/Zone_3/PhantomCamera2D" unique_id=1738415093]
+script = ExtResource("8_c6b5m")
+flat_y_offset = -300.0
+force_offset = true
+metadata/_custom_type_script = "uid://7qsfw4eqfblm"
+
+[node name="PhantomCollison2" type="CollisionShape2D" parent="Zones/Zone_3" unique_id=1994144179]
+position = Vector2(-44160, 1312)
+shape = SubResource("RectangleShape2D_o28bs")
 
 [node name="Gateways" type="Node2D" parent="." unique_id=782467819]
 
@@ -139,3 +231,19 @@ metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayRight" unique_id=782488031]
 position = Vector2(-199, -848)
 shape = SubResource("RectangleShape2D_7qlgs")
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1772740441]
+
+[node name="CheckPoint_1" type="Area2D" parent="Checkpoints" unique_id=356961302]
+position = Vector2(2528, 12928)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("10_ksba5")
+info = SubResource("Resource_fhevc")
+metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_1" unique_id=801433781]
+position = Vector2(960, -2288)
+shape = SubResource("RectangleShape2D_uifku")
+debug_color = Color(0.95482665, 2.887845e-06, 0.5489354, 0.41960785)

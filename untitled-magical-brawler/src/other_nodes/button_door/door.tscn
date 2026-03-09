@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cwdds8bykt7ec"]
+
+[ext_resource type="Script" uid="uid://dyrcu64hwxelb" path="res://src/other_nodes/button_door/door.gd" id="1_2j5kw"]
+[ext_resource type="Texture2D" uid="uid://b7aa8s5xk8mw" path="res://assets/sprites/other/door_and_button/DoorframeBack.tres" id="1_blbmo"]
+[ext_resource type="Texture2D" uid="uid://bp46yjapfgx23" path="res://assets/sprites/other/door_and_button/DoorframeFront.tres" id="2_l0qik"]
+[ext_resource type="Texture2D" uid="uid://bocjsvygvymo0" path="res://assets/sprites/other/door_and_button/DoorClosed.tres" id="2_oj12s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2j5kw"]
+size = Vector2(220, 606)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2j5kw"]
+radius = 105.0
+height = 400.0
+
+[node name="Door" type="Node2D" unique_id=1232218874]
+script = ExtResource("1_2j5kw")
+
+[node name="BackFrame" type="Sprite2D" parent="." unique_id=2028136833]
+texture_filter = 1
+position = Vector2(0, -404)
+scale = Vector2(8, 8)
+texture = ExtResource("1_blbmo")
+
+[node name="Door" type="Sprite2D" parent="." unique_id=736787274]
+unique_name_in_owner = true
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -404)
+scale = Vector2(8, 8)
+texture = ExtResource("2_oj12s")
+
+[node name="FrontFrame" type="Sprite2D" parent="." unique_id=2002345280]
+unique_name_in_owner = true
+z_index = 2
+texture_filter = 1
+position = Vector2(0, -404)
+scale = Vector2(8, 8)
+texture = ExtResource("2_l0qik")
+
+[node name="DoorStopper" type="StaticBody2D" parent="." unique_id=254133339]
+z_index = 2
+collision_layer = 2
+collision_mask = 0
+
+[node name="DoorStopper" type="CollisionShape2D" parent="DoorStopper" unique_id=14081133]
+unique_name_in_owner = true
+position = Vector2(12, -293)
+shape = SubResource("RectangleShape2D_2j5kw")
+
+[node name="FrameStopper" type="CollisionShape2D" parent="DoorStopper" unique_id=772788307]
+position = Vector2(12, -701)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_2j5kw")

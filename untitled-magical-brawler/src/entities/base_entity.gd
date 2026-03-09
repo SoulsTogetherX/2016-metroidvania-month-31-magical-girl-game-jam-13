@@ -142,6 +142,9 @@ func has_velocity() -> bool:
 func get_velocity_component() -> VelocityComponent:
 	return _velocity_module
 
+func force_velocity(vel : Vector2) -> void:
+	_velocity_module.velocity = vel
+
 func get_entity_velocity() -> Vector2:
 	if !_velocity_module:
 		return Vector2.ZERO

@@ -12,9 +12,13 @@ extends HSMBranch
 #region Public Virtual Methods
 func action_finished(action_name : StringName) -> void:
 	if action_name == GlobalLabels.hsm_context.ACT_STUN:
-		var entity : CombatEntity = get_actor()
-		if entity.get_health_component().is_dead():
-			change_state(dead_state)
-			return
+		var control := Global.local_controller
+		if control is RoomManager:
+			control.reset_to_checkpoint()
+		
+		#var entity : CombatEntity = get_actor()
+		#if entity.get_health_component().is_dead():
+		#	change_state(dead_state)
+		#	return
 		change_state(normal_state)
 #endregion

@@ -1253,6 +1253,7 @@ offset = Vector2(0, -220)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VisualPivot/Sprite" unique_id=71332508]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_2cmg6")
+autoplay = &"RESET"
 
 [node name="HurtboxComponent" type="Area2D" parent="VisualPivot" unique_id=1143519473 node_paths=PackedStringArray("entity", "knockback_module", "health_module", "status_effect_module")]
 position = Vector2(0, -175)
@@ -1308,9 +1309,14 @@ position = Vector2(66, -160)
 shape = SubResource("RectangleShape2D_0xmtw")
 
 [node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=1157038368]
-position = Vector2(60, 0)
+position = Vector2(70, 0)
 enabled = false
-target_position = Vector2(32, 32)
+target_position = Vector2(0, 7)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="GroundRayCheck" type="RayCast2D" parent="VisualPivot" unique_id=388016992]
+target_position = Vector2(0, 7)
 collision_mask = 2
 hit_from_inside = true
 
@@ -1553,6 +1559,7 @@ bus = &"SFX"
 [node name="CombatComponents" type="Node" parent="." unique_id=1672935310]
 
 [node name="KnockbackComponent" type="Node" parent="CombatComponents" unique_id=1548867984 node_paths=PackedStringArray("velocity_module")]
+unique_name_in_owner = true
 script = ExtResource("4_dao75")
 velocity_module = NodePath("../../VelocityComponent")
 metadata/_custom_type_script = "uid://bhe0ii8bxo24u"
@@ -1573,7 +1580,6 @@ recevier = NodePath("..")
 [node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
 unique_name_in_owner = true
 script = ExtResource("14_kgtwq")
-abilties = Array[int]([0, 2])
 metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]

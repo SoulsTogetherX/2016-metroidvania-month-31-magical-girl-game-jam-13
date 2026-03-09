@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
 [sub_resource type="Curve2D" id="Curve2D_ahexj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -13568, 64, 0, 0, 0, 0, -17600, 64, 0, 0, 0, 0, -17600, 864, 0, 0, 0, 0, -13568, 864, 0, 0, 0, 0, -13568, 64)
+"points": PackedVector2Array(0, 0, 0, 0, -13568, 64, 0, 0, 0, 0, -13568, 864, 0, 0, 0, 0, -17600, 864, 0, 0, 0, 0, -17600, 64, 0, 0, 0, 0, -13568, 64)
 }
 point_count = 5
 
@@ -60,6 +60,9 @@ size = Vector2(256, 1056)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8n7vh"]
 size = Vector2(175.57104, 1351.5366)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyt6g"]
+size = Vector2(175.57104, 1351.5366)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61wdd"]
 size = Vector2(768, 448)
 
@@ -80,25 +83,26 @@ size = Vector2(256, 2176)
 
 [sub_resource type="Resource" id="Resource_qgd7x"]
 script = ExtResource("6_h3wdk")
+duration = 0.4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ptvh"]
-size = Vector2(256, 1248)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ogop"]
-size = Vector2(416, 1248)
+size = Vector2(256, 1552)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4nu5"]
 size = Vector2(7264, 3960)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ldjn"]
-size = Vector2(256, 272)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ogop"]
+size = Vector2(256, 2176)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n7nu"]
-size = Vector2(3936, 4352)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45cux"]
+size = Vector2(512, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ldjn"]
+size = Vector2(512, 192)
 
 [sub_resource type="Resource" id="Resource_acbgi"]
 script = ExtResource("3_50eu2")
-exit_pos = Vector2(-20928, 1664)
+exit_pos = Vector2(-21376, 1664)
 metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47u6f"]
@@ -135,10 +139,13 @@ size = Vector2(96, 1216)
 
 [sub_resource type="Resource" id="Resource_257eb"]
 script = ExtResource("3_50eu2")
-exit_pos = Vector2(-8704, -768)
+exit_pos = Vector2(-8544, -768)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7winl"]
-size = Vector2(512, 32)
+size = Vector2(512, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7scn"]
+size = Vector2(256, 304)
 
 [sub_resource type="Resource" id="Resource_6yj62"]
 script = ExtResource("3_50eu2")
@@ -196,7 +203,6 @@ position = Vector2(1312, 448)
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
@@ -241,7 +247,6 @@ shape = SubResource("RectangleShape2D_acbgi")
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
@@ -273,7 +278,6 @@ shape = SubResource("RectangleShape2D_bpysq")
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
@@ -297,7 +301,6 @@ noise_emitter_layer = 1
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
@@ -309,7 +312,7 @@ shape = SubResource("RectangleShape2D_6yj62")
 [node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_4" unique_id=770578060]
 position = Vector2(-7232, -3392)
 script = ExtResource("5_47u6f")
-zoom = Vector2(0.4, 0.4)
+zoom = Vector2(0.3, 0.3)
 tween_resource = SubResource("Resource_61wdd")
 tween_on_load = false
 inactive_update_mode = 1
@@ -323,7 +326,7 @@ metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 
 [node name="AssignCameraLead" type="Node" parent="Zones/Zone_4/PhantomCamera2D" unique_id=422206382]
 script = ExtResource("8_ahexj")
-flat_y_offset = -200.0
+flat_y_offset = 0.0
 force_offset = true
 metadata/_custom_type_script = "uid://7qsfw4eqfblm"
 
@@ -331,18 +334,17 @@ metadata/_custom_type_script = "uid://7qsfw4eqfblm"
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
 
-[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_5" unique_id=702529651]
-position = Vector2(-9746.093, -2303.6948)
-rotation = -0.6042577
+[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_5" unique_id=922386349]
+position = Vector2(-9056, -2879.9998)
+rotation = -0.8102215
 shape = SubResource("RectangleShape2D_8n7vh")
 
-[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_5" unique_id=759249560]
-position = Vector2(-7232, -3392)
+[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_5" unique_id=1749690288]
+position = Vector2(-9568, -2048)
 script = ExtResource("5_47u6f")
 zoom = Vector2(0.4, 0.4)
 tween_resource = SubResource("Resource_61wdd")
@@ -352,49 +354,15 @@ draw_limits = true
 limit_target = NodePath("../../../Collision")
 noise_emitter_layer = 1
 
-[node name="AssignPlayer" type="Node" parent="Zones/Zone_5/PhantomCamera2D" unique_id=1481744957]
-script = ExtResource("7_iuutb")
-follow_offset = false
-metadata/_custom_type_script = "uid://cobb1ipksi4ot"
-
-[node name="Zone_9" type="Area2D" parent="Zones" unique_id=752325346]
-z_index = 1
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-script = ExtResource("4_acbgi")
-metadata/_custom_type_script = "uid://dukqn0hyev23g"
-
-[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_9" unique_id=922386349]
-position = Vector2(-9440.001, -2560.0002)
-rotation = -0.6042577
-shape = SubResource("RectangleShape2D_8n7vh")
-
-[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_9" unique_id=1749690288]
-position = Vector2(-7232, -3392)
-script = ExtResource("5_47u6f")
-zoom = Vector2(0.4, 0.4)
-tween_resource = SubResource("Resource_61wdd")
-tween_on_load = false
-inactive_update_mode = 1
-draw_limits = true
-limit_target = NodePath("../../../Collision")
-noise_emitter_layer = 1
-
-[node name="AssignPlayer" type="Node" parent="Zones/Zone_9/PhantomCamera2D" unique_id=1435530706]
-script = ExtResource("7_iuutb")
-metadata/_custom_type_script = "uid://cobb1ipksi4ot"
-
-[node name="AssignCameraLead" type="Node" parent="Zones/Zone_9/PhantomCamera2D" unique_id=712418096]
-script = ExtResource("8_ahexj")
-flat_y_offset = -400.0
-metadata/_custom_type_script = "uid://7qsfw4eqfblm"
+[node name="PhantomCollison2" type="CollisionShape2D" parent="Zones/Zone_5" unique_id=1601312954]
+position = Vector2(-9696, -2432)
+rotation = -0.8102215
+shape = SubResource("RectangleShape2D_eyt6g")
 
 [node name="Zone_6" type="Area2D" parent="Zones" unique_id=839180061]
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
@@ -442,7 +410,6 @@ disabled = true
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
@@ -470,12 +437,8 @@ flat_y_offset = -300.0
 metadata/_custom_type_script = "uid://7qsfw4eqfblm"
 
 [node name="PhantomCollison2" type="CollisionShape2D" parent="Zones/Zone_7" unique_id=1815487946]
-position = Vector2(-24192, -560)
+position = Vector2(-22752, -768)
 shape = SubResource("RectangleShape2D_7ptvh")
-
-[node name="PhantomCollison3" type="CollisionShape2D" parent="Zones/Zone_7" unique_id=1982670002]
-position = Vector2(-24560, 672)
-shape = SubResource("RectangleShape2D_4ogop")
 
 [node name="CameraLimits" type="CollisionShape2D" parent="Zones/Zone_7" unique_id=442989775]
 visible = false
@@ -483,48 +446,40 @@ position = Vector2(-22240, -1116)
 shape = SubResource("RectangleShape2D_j4nu5")
 disabled = true
 
-[node name="Zone_8" type="Area2D" parent="Zones" unique_id=2056839029]
+[node name="Zone_8" type="Area2D" parent="Zones" unique_id=326917164]
 z_index = 1
 collision_layer = 0
 collision_mask = 4
-monitoring = false
 monitorable = false
 script = ExtResource("4_acbgi")
 metadata/_custom_type_script = "uid://dukqn0hyev23g"
 
-[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_8" unique_id=621294783]
-position = Vector2(-22304, 1160)
-shape = SubResource("RectangleShape2D_2ldjn")
+[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_8" unique_id=1136846834]
+position = Vector2(-23168, -1056)
+shape = SubResource("RectangleShape2D_4ogop")
 
-[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_8" unique_id=619856652]
+[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_8" unique_id=1626552397]
+position = Vector2(-24160, 416)
 script = ExtResource("5_47u6f")
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.4, 0.4)
 tween_resource = SubResource("Resource_qgd7x")
 tween_on_load = false
 inactive_update_mode = 1
 draw_limits = true
 noise_emitter_layer = 1
 
-[node name="AssignPlayer" type="Node" parent="Zones/Zone_8/PhantomCamera2D" unique_id=516312993 node_paths=PackedStringArray("limit")]
-script = ExtResource("7_iuutb")
-limit = NodePath("../../CameraLimits")
-metadata/_custom_type_script = "uid://cobb1ipksi4ot"
+[node name="PhantomCollison2" type="CollisionShape2D" parent="Zones/Zone_8" unique_id=1090910910]
+position = Vector2(-24544, 0)
+shape = SubResource("RectangleShape2D_45cux")
 
-[node name="AssignCameraLead" type="Node" parent="Zones/Zone_8/PhantomCamera2D" unique_id=147765150]
-script = ExtResource("8_ahexj")
-flat_y_offset = -300.0
-metadata/_custom_type_script = "uid://7qsfw4eqfblm"
-
-[node name="CameraLimits" type="CollisionShape2D" parent="Zones/Zone_8" unique_id=211774877]
-visible = false
-position = Vector2(-23888, -192)
-shape = SubResource("RectangleShape2D_1n7nu")
-disabled = true
+[node name="PhantomCollison3" type="CollisionShape2D" parent="Zones/Zone_8" unique_id=1134510909]
+position = Vector2(-22816, 1152)
+shape = SubResource("RectangleShape2D_2ldjn")
 
 [node name="Gateways" type="Node2D" parent="." unique_id=246137663]
 
 [node name="GatewayLeft" type="Area2D" parent="Gateways" unique_id=1016480451]
-position = Vector2(-20928, 1664)
+position = Vector2(-21376, 1664)
 collision_layer = 0
 collision_mask = 4
 monitoring = false
@@ -599,7 +554,7 @@ shape = SubResource("RectangleShape2D_qgd7x")
 debug_color = Color(0.95482665, 2.887845e-06, 0.5489354, 0.41960785)
 
 [node name="CheckPoint_3" type="Area2D" parent="Checkpoints" unique_id=1417648600]
-position = Vector2(-8704, -768)
+position = Vector2(-8544, -768)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -608,8 +563,13 @@ info = SubResource("Resource_257eb")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_3" unique_id=945190320]
-position = Vector2(0, -16)
+position = Vector2(-160, -8)
 shape = SubResource("RectangleShape2D_7winl")
+debug_color = Color(0.95482665, 2.887845e-06, 0.5489354, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Checkpoints/CheckPoint_3" unique_id=535195155]
+position = Vector2(224, -128)
+shape = SubResource("RectangleShape2D_y7scn")
 debug_color = Color(0.95482665, 2.887845e-06, 0.5489354, 0.41960785)
 
 [node name="CheckPoint_5" type="Area2D" parent="Checkpoints" unique_id=1317227744]

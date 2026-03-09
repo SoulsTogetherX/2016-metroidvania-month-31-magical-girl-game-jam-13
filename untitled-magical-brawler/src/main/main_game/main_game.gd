@@ -1,8 +1,13 @@
 class_name RoomManager extends SceneControllerManager
 
 
+#region Signals
+signal events_changed
+#endregion
+
+
 #region Constants
-const START_ROOM_PATH := "res://src/main/main_game/rooms/room_14/room.tscn"
+const START_ROOM_PATH := "res://src/main/main_game/rooms/room_1/room.tscn"
 #endregion
 
 
@@ -19,6 +24,8 @@ var _current_path : String
 var _checkpoint : PlayerPositionResource
 var _fail_back : PlayerPositionResource
 var _gateways : Array[Gateway]
+
+var _events : Dictionary[StringName, bool]
 #endregion
 
 
@@ -61,15 +68,15 @@ func _get_gateway_pos(to_id : int) -> PlayerPositionResource:
 			return gateway.info
 	return _fail_back
 
-func _start_transition(path : String) -> void:
-	await fade_cover()
+func _start_transition(path : String, duration : float = 0.2) -> void:
+	Global.player.set_deferred(
+		"process_mode", Node.PROCESS_MODE_DISABLED
+	)
+	await fade_cover(duration)
 	_fail_back = null
 	_gateways.clear()
 	
 	_current_path = path
-	Global.player.set_deferred(
-		"process_mode", Node.PROCESS_MODE_DISABLED
-	)
 	Global.player.global_position = Vector2(
 		99999999999, 99999999999
 	)
@@ -80,10 +87,10 @@ func _start_transition(path : String) -> void:
 		true
 	)).ready
 	_update_room_cache()
-func _end_transition() -> void:
+func _end_transition(duration : float = 0.2) -> void:
 	player.force_current_offset()
 	Global.player.process_mode = Node.PROCESS_MODE_INHERIT
-	await unfade_cover()
+	await unfade_cover(duration)
 #endregion
 
 
@@ -104,7 +111,18 @@ func change_room_to_path(
 	_end_transition()
 
 func reset_to_checkpoint() -> void:
+	Global.player.no_spike_hit = true
+	
 	await _start_transition(_current_path)
 	_set_player_position(_checkpoint)
-	_end_transition()
+	
+	Global.player.force_velocity(Vector2.ZERO)
+	Global.player.no_spike_hit = false
+	_end_transition(1.2)
+
+func flag_event(event : StringName) -> void:
+	_events.set(event, true)
+	events_changed.emit()
+func saw_event(event : StringName) -> bool:
+	return _events.get(event, false)
 #endregion

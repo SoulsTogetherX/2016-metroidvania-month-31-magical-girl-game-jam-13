@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dawijwjjvb4nl"]
+
+[ext_resource type="Script" uid="uid://cpkd1jte8lctf" path="res://src/other_nodes/button_door/button.gd" id="1_dm3df"]
+[ext_resource type="Texture2D" uid="uid://83t78v7iovf0" path="res://assets/sprites/other/door_and_button/ButtonMount.tres" id="2_jw03r"]
+[ext_resource type="Texture2D" uid="uid://bp6sda6hpd4jg" path="res://assets/sprites/other/door_and_button/ButtonShellUnpressed.tres" id="3_jw03r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jw03r"]
+size = Vector2(18.125, 6.875)
+
+[node name="Button" type="Node2D" unique_id=347201777]
+script = ExtResource("1_dm3df")
+
+[node name="Shell" type="Sprite2D" parent="." unique_id=993306731]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(0, -87)
+scale = Vector2(8, 8)
+texture = ExtResource("3_jw03r")
+
+[node name="Mount" type="Sprite2D" parent="." unique_id=2099811998]
+texture_filter = 1
+position = Vector2(0, -63)
+scale = Vector2(8, 8)
+texture = ExtResource("2_jw03r")
+
+[node name="MountCollision" type="StaticBody2D" parent="." unique_id=1095834174]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MountCollision" unique_id=1548330826]
+polygon = PackedVector2Array(100, 0, 83, -23, -83, -23, -100, 1)
+
+[node name="PressArea" type="Area2D" parent="." unique_id=1199286368]
+position = Vector2(0, -87)
+scale = Vector2(8, 8)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PressArea" unique_id=1627961211]
+unique_name_in_owner = true
+position = Vector2(0.0625, 4.4375)
+shape = SubResource("RectangleShape2D_jw03r")
+
+[connection signal="body_entered" from="PressArea" to="." method="_press_button" unbinds=1]

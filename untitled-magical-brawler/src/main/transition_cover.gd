@@ -42,6 +42,8 @@ func _toggle_cover(toggle : bool, duration : float) -> void:
 	
 	_expected_state = toggle
 	_transition_tween = create_tween()
+	_transition_tween.set_ease(Tween.EASE_IN)
+	_transition_tween.set_trans(Tween.TRANS_SINE)
 	_transition_tween.tween_property(
 		_cover, "modulate:a",
 		float(_expected_state), duration

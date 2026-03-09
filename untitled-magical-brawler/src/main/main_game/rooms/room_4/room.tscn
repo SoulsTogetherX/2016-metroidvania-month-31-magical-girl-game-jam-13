@@ -92,7 +92,10 @@ size = Vector2(528, 2304)
 size = Vector2(312, 960)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfwh0"]
-size = Vector2(800, 758.75)
+size = Vector2(3936, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1i2c3"]
+size = Vector2(860, 448)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kys4"]
 size = Vector2(447, 1929.25)
@@ -521,11 +524,40 @@ metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 [node name="AssignCameraLead" type="Node" parent="Zones/Zone_8/PhantomCamera2D" unique_id=238548548]
 script = ExtResource("8_e8lod")
 flat_y_offset = -300.0
+force_offset = true
 metadata/_custom_type_script = "uid://7qsfw4eqfblm"
 
 [node name="PhantomCollison2" type="CollisionShape2D" parent="Zones/Zone_8" unique_id=881386598]
-position = Vector2(27216, -4164.625)
+position = Vector2(27696, -256)
 shape = SubResource("RectangleShape2D_vfwh0")
+
+[node name="Zone_11" type="Area2D" parent="Zones" unique_id=856917007]
+z_index = 1
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("4_dw6x1")
+metadata/_custom_type_script = "uid://dukqn0hyev23g"
+
+[node name="PhantomCollison" type="CollisionShape2D" parent="Zones/Zone_11" unique_id=253131130]
+position = Vector2(27218, -4352)
+shape = SubResource("RectangleShape2D_1i2c3")
+
+[node name="PhantomCamera2D" type="Node2D" parent="Zones/Zone_11" unique_id=1412917428]
+position = Vector2(28224, -704)
+script = ExtResource("5_5jn36")
+zoom = Vector2(0.3, 0.3)
+tween_resource = SubResource("Resource_khr1d")
+tween_on_load = false
+inactive_update_mode = 1
+draw_limits = true
+noise_emitter_layer = 1
+
+[node name="AssignPlayer" type="Node" parent="Zones/Zone_11/PhantomCamera2D" unique_id=1381541451 node_paths=PackedStringArray("limit")]
+script = ExtResource("7_48fou")
+follow_offset = false
+limit = NodePath("../../../../Collision")
+metadata/_custom_type_script = "uid://cobb1ipksi4ot"
 
 [node name="Zone_9" type="Area2D" parent="Zones" unique_id=102057720]
 z_index = 1

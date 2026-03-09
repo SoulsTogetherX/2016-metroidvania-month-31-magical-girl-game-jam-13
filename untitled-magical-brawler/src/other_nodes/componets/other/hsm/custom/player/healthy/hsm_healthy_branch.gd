@@ -7,13 +7,15 @@ extends HSMBranch
 @export var grounded_state : HSMBranch
 #endregion
 
-
+@onready var ray := $"../../../VisualPivot/GroundRayCheck"
 
 #region Public Virtual Methods
 func action_started(action_name : StringName) -> void:
 	match action_name:
 		GlobalLabels.hsm_context.ACT_IN_AIR:
 			var ctx := get_context()
+			if ray.is_colliding():
+				return
 			
 			if !ctx.is_action(
 				GlobalLabels.hsm_context.ACT_JUMPING

@@ -25,25 +25,25 @@ metadata/_custom_type_script = "uid://rhiaalko61sv"
 
 [sub_resource type="Curve2D" id="Curve2D_470to"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -7168, -256, 0, 0, 0, 0, -7168, 1536)
+"points": PackedVector2Array(0, 0, 0, 0, -7168, 1536, 0, 0, 0, 0, -7168, -256)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_l0ham"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -9728, 0, 0, 0, 0, 0, -9728, 1824)
+"points": PackedVector2Array(0, 0, 0, 0, -9728, 1824, 0, 0, 0, 0, -9728, 0)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_oebvn"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -12032, 256, 0, 0, 0, 0, -12032, 2048)
+"points": PackedVector2Array(0, 0, 0, 0, -12032, 2048, 0, 0, 0, 0, -12032, 256)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_pk5yi"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -14336, 256, 0, 0, 0, 0, -14336, 2048)
+"points": PackedVector2Array(0, 0, 0, 0, -14336, 2048, 0, 0, 0, 0, -14336, 256)
 }
 point_count = 2
 
@@ -135,32 +135,32 @@ position = Vector2(0, 256)
 curve = SubResource("Curve2D_470to")
 
 [node name="MovingPlatform" parent="MovingPlats/Path_1" unique_id=194716149 instance=ExtResource("4_l0ham")]
-position = Vector2(-7168, 1536)
-progress = 1792.0005
+position = Vector2(-7168, -256)
+progress = 1792.0
 
 [node name="Path_2" type="Path2D" parent="MovingPlats" unique_id=1236916483]
 position = Vector2(0, 256)
 curve = SubResource("Curve2D_l0ham")
 
 [node name="MovingPlatform" parent="MovingPlats/Path_2" unique_id=1884747914 instance=ExtResource("4_l0ham")]
-position = Vector2(-9728, 1792.007)
-progress = 1792.0
+position = Vector2(-9728, 0)
+progress = 1824.0005
 
 [node name="Path_3" type="Path2D" parent="MovingPlats" unique_id=548981249]
 position = Vector2(0, 256)
 curve = SubResource("Curve2D_oebvn")
 
 [node name="MovingPlatform" parent="MovingPlats/Path_3" unique_id=1789004434 instance=ExtResource("4_l0ham")]
-position = Vector2(-12032, 2048)
-progress = 1792.0
+position = Vector2(-12032, 256)
+progress = 1792.0002
 
 [node name="Path_4" type="Path2D" parent="MovingPlats" unique_id=1073500574]
 position = Vector2(0, 256)
 curve = SubResource("Curve2D_pk5yi")
 
 [node name="MovingPlatform" parent="MovingPlats/Path_4" unique_id=1285962005 instance=ExtResource("4_l0ham")]
-position = Vector2(-14336, 2048)
-progress = 1792.0
+position = Vector2(-14336, 256)
+progress = 1791.9993
 
 [node name="Zones" type="Node2D" parent="." unique_id=1819323542]
 

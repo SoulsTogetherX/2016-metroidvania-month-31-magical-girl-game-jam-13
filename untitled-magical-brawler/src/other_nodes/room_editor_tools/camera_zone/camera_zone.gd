@@ -44,6 +44,9 @@ func _ready() -> void:
 		_settup_phantom_camera,
 		1
 	)
+	
+	if Engine.is_editor_hint():
+		return
 	_after_ready()
 
 func _after_ready() -> void:

@@ -18,6 +18,12 @@ class_name Player extends CombatEntity
 @onready var _camera_lead: CameraLead = $CameraLead
 
 @onready var _context_task: Node = %UpdateContextTask
+@onready var _knockback_component: KnockbackComponent = %KnockbackComponent
+#endregion
+
+
+#region Public Variables
+var no_spike_hit : bool = false
 #endregion
 
 
@@ -84,7 +90,21 @@ func _on_spike_detect(
 	_body_rid: RID, _body: Node2D, _body_shape_index: int,
 	_local_shape_index: int
 ) -> void:
-	var control := Global.local_controller
-	if control is RoomManager:
-		control.reset_to_checkpoint()
+	if no_spike_hit:
+		return
+	if _status_effect_receiver.has_effect_type(
+		StatusEffect.STATUS_TYPE.STUN
+	):
+		return
+	
+	var status := StatusEffect.new()
+	status.type = StatusEffect.STATUS_TYPE.STUN
+	status.duration = 0.3
+	_status_effect_receiver.apply_effect(
+		status
+	)
+	_knockback_component.enact_knockback(
+		-(_velocity_module.velocity * 0.5).minf(400.0),
+		true, true
+	)
 #endregion
