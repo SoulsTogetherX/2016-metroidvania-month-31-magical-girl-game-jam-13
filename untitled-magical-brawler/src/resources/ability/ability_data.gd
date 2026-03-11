@@ -20,9 +20,9 @@ var type : ABILITY_TYPE
 
 #region Public Methods (Access)
 @abstract
-func get_ability_name() -> StringName
+func get_ability_name() -> String
 @abstract
-func get_description() -> StringName
+func get_description() -> String
 
 @abstract
 func get_icon() -> Texture2D

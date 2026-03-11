@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://du23l04aecl0c" path="res://src/UI/pause_menu/pause_menu.gd" id="1_dvare"]
 [ext_resource type="Script" uid="uid://qyynh24u37dl" path="res://addons/FreeControl/src/CustomClasses/SizeController/MaxSizeContainer.gd" id="1_rs85n"]
-[ext_resource type="Texture2D" uid="uid://bgn37sxodxqd6" path="res://assets/UI/UI_background_prototype.png" id="3_81gm5"]
+[ext_resource type="Texture2D" uid="uid://bx8vwxq5c4loj" path="res://assets/sprites/UI/UI_background_prototype.png" id="3_81gm5"]
 [ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="3_va7ec"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81gm5"]
@@ -21,7 +21,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="MaxSizeContainer" type="Container" unique_id=961009455]
+[node name="PauseMenu" type="Container" unique_id=961009455]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

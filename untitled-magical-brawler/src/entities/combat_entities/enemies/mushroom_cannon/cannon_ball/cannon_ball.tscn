@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="5_8i0yl"]
 [ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="6_dff5x"]
 [ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="7_1k08o"]
-[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/particles/one_shot_particles.gd" id="8_gs0l8"]
+[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/particles/oneshot_particles.gd" id="8_gs0l8"]
 
 [sub_resource type="Resource" id="Resource_dqm6s"]
 script = ExtResource("5_8i0yl")

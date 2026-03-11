@@ -9,10 +9,10 @@ func _init() -> void:
 
 
 #region Public Methods (Access)
-func get_ability_name() -> StringName:
-	return &"Snek Wall Jump"
-func get_description() -> StringName:
-	return &"Jump on a wall to scale heigher."
+func get_ability_name() -> String:
+	return "Snek Wall Jump"
+func get_description() -> String:
+	return "Jump up walls to reach the sky."
 
 func get_icon() -> Texture2D:
 	return preload("uid://chwljnx2nsoh5")

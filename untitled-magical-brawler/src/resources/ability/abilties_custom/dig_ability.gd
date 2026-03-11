@@ -64,10 +64,10 @@ static func can_end(arg : Dictionary = {}) -> bool:
 
 
 #region Public Methods (Access)
-func get_ability_name() -> StringName:
-	return &"Snek Dig"
-func get_description() -> StringName:
-	return &"Press S to burrow under your troubles."
+func get_ability_name() -> String:
+	return "Snek Dig"
+func get_description() -> String:
+	return "Press S to burrow under your troubles."
 
 func get_icon() -> Texture2D:
 	return preload("uid://chwljnx2nsoh5")

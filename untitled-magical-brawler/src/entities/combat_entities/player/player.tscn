@@ -1595,7 +1595,7 @@ recevier = NodePath("..")
 [node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
 unique_name_in_owner = true
 script = ExtResource("14_kgtwq")
-abilties = Array[int]([0, 1, 2])
+abilties = Array[int]([2])
 metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
@@ -1694,7 +1694,7 @@ animation = 1
 
 [node name="CoyoteWallTimer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=1792861049]
 process_callback = 0
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=546628607]

@@ -7,7 +7,7 @@ class_name Gateway extends Area2D
 @export var info : PlayerPositionResource
 
 @export_group("Music")
-@export_file_path var music_path : String = "res://assets/music/1. Mushroom Dungeon.ogg"
+@export_file_path("*.ogg") var music_path : String = "res://assets/music/1. Mushroom Dungeon.ogg"
 
 @export_group("Ids")
 @export var id : int

@@ -180,6 +180,7 @@ stream = SubResource("AudioStreamRandomizer_cmp2p")
 max_distance = 10000.0
 attenuation = 0.4204482
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="PivotPoint" type="Node2D" parent="." unique_id=805035841]
 

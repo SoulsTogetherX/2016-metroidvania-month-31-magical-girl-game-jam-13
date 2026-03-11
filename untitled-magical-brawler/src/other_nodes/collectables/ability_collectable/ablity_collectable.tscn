@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://jsanxybvkimk" path="res://src/other_nodes/collectables/ability_collectable/ablity_collectable.gd" id="1_bfv2b"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="1_xmjyj"]
 [ext_resource type="Texture2D" uid="uid://cmrbwr8pkunel" path="res://assets/sprites/particles/transform_particles.png" id="4_2mb31"]
+[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/particles/oneshot_particles.gd" id="5_bfv2b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8l63h"]
 radius = 84.0238
@@ -46,6 +47,7 @@ shape = SubResource("CircleShape2D_8l63h")
 debug_color = Color(1, 0, 0, 0.3)
 
 [node name="CollectableParticles" type="CPUParticles2D" parent="." unique_id=1644651748]
+unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_bfv2b")
 amount = 60
 texture = ExtResource("4_2mb31")
@@ -71,3 +73,4 @@ scale_amount_curve = SubResource("Curve_2mb31")
 color_ramp = SubResource("Gradient_bfv2b")
 color_initial_ramp = SubResource("Gradient_2mb31")
 anim_offset_max = 1.0
+script = ExtResource("5_bfv2b")

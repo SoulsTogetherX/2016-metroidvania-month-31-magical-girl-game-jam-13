@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bqd7gwpt24j66" path="res://src/other_nodes/room_editor_tools/enemy_ai/wander_area.gd" id="15_7p73a"]
 [ext_resource type="PackedScene" uid="uid://dawijwjjvb4nl" path="res://src/other_nodes/button_door/button.tscn" id="15_ojeba"]
 [ext_resource type="PackedScene" uid="uid://ggu8kemt8cb3" path="res://src/entities/combat_entities/enemies/mushroom_guy/mushroom_guy.tscn" id="16_3aksl"]
+[ext_resource type="PackedScene" uid="uid://bc3i1nvlm5p2p" path="res://src/other_nodes/cutscenes/fall_manager.tscn" id="20_frk2g"]
 
 [sub_resource type="Resource" id="Resource_ojeba"]
 script = ExtResource("3_mggik")
@@ -156,6 +157,12 @@ size = Vector2(5040, 734)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wsudg"]
 size = Vector2(2976, 274)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tptv8"]
+size = Vector2(3466, 2218)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lt1mg"]
+size = Vector2(5184, 2005)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7p73a"]
 size = Vector2(6880, 25760)
@@ -433,7 +440,6 @@ shape = SubResource("RectangleShape2D_cj024")
 curve = SubResource("Curve2D_81wsd")
 
 [node name="Gateways" type="Node2D" parent="." unique_id=392823616]
-visible = false
 
 [node name="GatewayTopFall" type="Area2D" parent="Gateways" unique_id=946800595]
 position = Vector2(0, 416)
@@ -443,7 +449,7 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_mggik")
 info = SubResource("Resource_os5oe")
-music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
+music_path = ""
 exit_id = 7
 exit_path = "res://src/main/main_game/rooms/room_4/room.tscn"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
@@ -685,6 +691,17 @@ event_name = &"OrangeEvent"
 position = Vector2(19168, 29760)
 pre_pressed = true
 
+[node name="FallManager" parent="Objects" unique_id=1473090270 instance=ExtResource("20_frk2g")]
+position = Vector2(128, 29440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/FallManager/FallCheck" parent_id_path=PackedInt32Array(1473090270, 1053088025) index="0" unique_id=791630772]
+position = Vector2(160, -10176)
+shape = SubResource("RectangleShape2D_tptv8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/FallManager/LandCheck" parent_id_path=PackedInt32Array(1473090270, 883926373) index="0" unique_id=164258879]
+position = Vector2(256, -629.5)
+shape = SubResource("RectangleShape2D_lt1mg")
+
 [node name="Limits" type="Node2D" parent="." unique_id=528183397]
 visible = false
 
@@ -720,3 +737,5 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [connection signal="body_entered" from="Cutscene/Area2D" to="Cutscene" method="begin_cutscene" unbinds=1]
+
+[editable path="Objects/FallManager"]

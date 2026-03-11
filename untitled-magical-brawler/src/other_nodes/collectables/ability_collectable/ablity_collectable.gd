@@ -14,6 +14,8 @@ extends Node2D
 
 
 #region OnReady Variables
+@onready var _particles: OneshotParticles = %CollectableParticles
+
 @onready var _sprite: Sprite2D = %Sprite2D
 @onready var _hitbox: HitboxComponent = %Hitbox
 #endregion
@@ -43,5 +45,11 @@ func _load_texture() -> void:
 func _on_collect() -> void:
 	if ability != null:
 		Global.player.register_ability(ability.type)
+	
+	var control := Global.local_controller
+	if control is RoomManager:
+		control.display_ability(ability)
+	
+	_particles.start_final_emit(owner)
 	queue_free()
 #endregion

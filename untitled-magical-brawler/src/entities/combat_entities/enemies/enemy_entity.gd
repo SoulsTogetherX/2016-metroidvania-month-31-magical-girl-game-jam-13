@@ -44,7 +44,7 @@ func _ready() -> void:
 		return
 	
 	if !player_detect:
-		push_error("Enemy has no way to detect player")
+		push_warning("Enemy has no way to detect player")
 		return
 	player_detect.body_entered.connect(_player_entered)
 	player_detect.body_exited.connect(_player_exited)

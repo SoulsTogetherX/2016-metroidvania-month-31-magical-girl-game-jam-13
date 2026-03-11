@@ -7,7 +7,7 @@ signal events_changed
 
 
 #region Constants
-const START_ROOM_PATH := "res://src/main/main_game/rooms/room_19/room.tscn"
+const START_ROOM_PATH := "res://src/main/main_game/rooms/room_4/room.tscn"
 const START_MUSIC_PATH := "res://assets/music/1. Mushroom Dungeon.ogg"
 #endregion
 
@@ -16,6 +16,7 @@ const START_MUSIC_PATH := "res://assets/music/1. Mushroom Dungeon.ogg"
 @export_group("Internal")
 @export var player : Player
 @export var camera : GlobalCamera
+@export var ability_ui : AbilityUIDisplay
 #endregion
 
 
@@ -60,7 +61,7 @@ func _on_ready_load() -> void:
 	change_room_to_path(
 		START_ROOM_PATH, -1
 	)
-	_play_music(START_MUSIC_PATH)
+	play_music(START_MUSIC_PATH)
 func _update_room_cache() -> void:
 	scene_controller.clear_cache()
 	for gateway : Gateway in _gateways:
@@ -117,20 +118,15 @@ func _end_transition(duration : float = 0.2) -> void:
 	Global.player.process_mode = Node.PROCESS_MODE_INHERIT
 	await unfade_cover(duration)
 
-func _play_music(music_path : String) -> void:
-	if music_path.is_empty():
-		return
-	if _current_music && music_path == _current_music.get_resource_path():
-		return
-	_current_music = BackgroundLoader.request_resource(
-		music_path, "AudioStream", get_tree().process_frame
-	)
-	_current_music.finished.connect(_play_music_helper)
 
 func _play_music_helper() -> void:
 	SoundManager.swap_music(
 		_current_music.get_resource(),
 		1.0, 0.0, 4.0
+	)
+func _fade_out(time : float = 1.0) -> void:
+	SoundManager.swap_music(
+		null, 1.0, 0.0, time
 	)
 #endregion
 
@@ -151,7 +147,7 @@ func change_room_to_path(
 	var gateway := _get_gateway(to_id)
 	
 	if gateway:
-		_play_music(gateway.music_path)
+		play_music(gateway.music_path)
 	
 	_set_player_position(_get_gateway_pos(gateway))
 	_end_transition()
@@ -171,4 +167,23 @@ func flag_event(event : StringName) -> void:
 	events_changed.emit()
 func saw_event(event : StringName) -> bool:
 	return _events.get(event, false)
+
+func display_ability(ability : AbilityData) -> void:
+	ability_ui.display_ability(ability)
+
+
+func play_music(music_path : String) -> void:
+	if music_path.is_empty():
+		_fade_out()
+		
+		if _current_music.finished.is_connected(_play_music_helper):
+			_current_music.finished.disconnect(_play_music_helper)
+		_current_music = null
+		return
+	if _current_music && music_path == _current_music.get_resource_path():
+		return
+	_current_music = BackgroundLoader.request_resource(
+		music_path, "AudioStream", get_tree().process_frame
+	)
+	_current_music.finished.connect(_play_music_helper)
 #endregion

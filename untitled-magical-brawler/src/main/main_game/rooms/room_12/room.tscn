@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dcpljg42srlbk" path="res://src/other_nodes/room_editor_tools/enemy_ai/player_detecter.gd" id="11_5h6mf"]
 [ext_resource type="PackedScene" uid="uid://ggu8kemt8cb3" path="res://src/entities/combat_entities/enemies/mushroom_guy/mushroom_guy.tscn" id="12_5h6mf"]
 [ext_resource type="PackedScene" uid="uid://djybylcteqr6b" path="res://src/entities/combat_entities/enemies/mushroom_cannon/cannon/cannon.tscn" id="14_0ocvj"]
+[ext_resource type="PackedScene" uid="uid://bc3i1nvlm5p2p" path="res://src/other_nodes/cutscenes/fall_manager.tscn" id="15_u06a5"]
 
 [sub_resource type="Resource" id="Resource_u06a5"]
 script = ExtResource("3_awelk")
@@ -141,21 +142,21 @@ metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2iao"]
 size = Vector2(96, 1536)
 
-[sub_resource type="Resource" id="Resource_0ocvj"]
+[sub_resource type="Resource" id="Resource_grg73"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-10304, 13824)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8h6m"]
 size = Vector2(92.785645, 2640.4453)
 
-[sub_resource type="Resource" id="Resource_grg73"]
+[sub_resource type="Resource" id="Resource_d83o7"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-11808, 11648)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4b4bq"]
 size = Vector2(960.0001, 287.9995)
 
-[sub_resource type="Resource" id="Resource_d83o7"]
+[sub_resource type="Resource" id="Resource_diq47"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-736, 14720)
 
@@ -165,28 +166,28 @@ size = Vector2(3360, 1023.9999)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6ydc"]
 size = Vector2(5456, 1023.9999)
 
-[sub_resource type="Resource" id="Resource_diq47"]
+[sub_resource type="Resource" id="Resource_cetsq"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-10752, 8448)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xa04s"]
 size = Vector2(512.00006, 64)
 
-[sub_resource type="Resource" id="Resource_cetsq"]
+[sub_resource type="Resource" id="Resource_cgoka"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-12704, 5888)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnceh"]
 size = Vector2(1280, 96)
 
-[sub_resource type="Resource" id="Resource_cgoka"]
+[sub_resource type="Resource" id="Resource_fml86"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-15200, 7424)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k070a"]
 size = Vector2(472, 1888)
 
-[sub_resource type="Resource" id="Resource_6180s"]
+[sub_resource type="Resource" id="Resource_gubve"]
 script = ExtResource("3_awelk")
 exit_pos = Vector2(-16256, 12800)
 
@@ -198,6 +199,15 @@ size = Vector2(896, 470)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xpkc"]
 size = Vector2(5184, 1104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6180s"]
+size = Vector2(3909, 2218)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tihbp"]
+size = Vector2(12384, 1728)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_et655"]
+size = Vector2(7545.983, 1728)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_735bh"]
 size = Vector2(7968, 16256)
@@ -839,7 +849,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_0ocvj")
+info = SubResource("Resource_grg73")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_1" unique_id=109539191]
@@ -854,7 +864,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_grg73")
+info = SubResource("Resource_d83o7")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_6" unique_id=1546020234]
@@ -868,7 +878,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_d83o7")
+info = SubResource("Resource_diq47")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_7" unique_id=1482614726]
@@ -887,7 +897,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_diq47")
+info = SubResource("Resource_cetsq")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_2" unique_id=628486799]
@@ -900,7 +910,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_cetsq")
+info = SubResource("Resource_cgoka")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_3" unique_id=1206676440]
@@ -914,7 +924,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_cgoka")
+info = SubResource("Resource_fml86")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_4" unique_id=1273918726]
@@ -928,7 +938,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_in1qs")
-info = SubResource("Resource_6180s")
+info = SubResource("Resource_gubve")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_5" unique_id=430897051]
@@ -997,6 +1007,24 @@ start_delay = 2.5
 shoot_delay = 5.0
 shoot_speed = 1400.0
 
+[node name="Objects" type="Node2D" parent="." unique_id=274832104]
+
+[node name="FallManager" parent="Objects" unique_id=1473090270 instance=ExtResource("15_u06a5")]
+position = Vector2(-1984, 14784)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/FallManager/FallCheck" parent_id_path=PackedInt32Array(1473090270, 1053088025) index="0" unique_id=1139198836]
+position = Vector2(1853.5, -13824)
+shape = SubResource("RectangleShape2D_6180s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/FallManager/LandCheck" parent_id_path=PackedInt32Array(1473090270, 883926373) index="0" unique_id=397760579]
+position = Vector2(-384, -384)
+shape = SubResource("RectangleShape2D_tihbp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Objects/FallManager/LandCheck" parent_id_path=PackedInt32Array(1473090270, 883926373) index="1" unique_id=1293306313]
+position = Vector2(5509.2837, -2394.5254)
+rotation = 2.3763041
+shape = SubResource("RectangleShape2D_et655")
+
 [node name="Limits" type="Node2D" parent="." unique_id=748762451]
 visible = false
 
@@ -1029,3 +1057,5 @@ Secret 3/4"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[editable path="Objects/FallManager"]
