@@ -1,12 +1,9 @@
 [gd_scene format=3 uid="uid://dlqd0kfevoa7n"]
 
 [ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/main_menu_subscreen.gd" id="1_g5twi"]
-[ext_resource type="Texture2D" uid="uid://cssrp3q0uw35g" path="res://assets/sprites/UI/BackButton.tres" id="2_vynai"]
+[ext_resource type="Texture2D" uid="uid://cssrp3q0uw35g" path="res://assets/sprites/UI/start_screen/BackButton.tres" id="2_vynai"]
 [ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="3_vckw6"]
-[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/PaddingContainer/PaddingContainer.gd" id="3_vynai"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vckw6"]
-bg_color = Color(0, 0, 0, 1)
+[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/PaddingContainer.gd" id="3_vynai"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_vckw6"]
 file = "res://assets/videos/game_lore.ogv"
@@ -23,9 +20,9 @@ script = ExtResource("1_g5twi")
 one_shot = true
 autostart = true
 
-[node name="Panel" type="Panel" parent="." unique_id=1759359793]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=211686493]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vckw6")
+color = Color(0, 0, 0, 1)
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1154008328]
 layout_mode = 2

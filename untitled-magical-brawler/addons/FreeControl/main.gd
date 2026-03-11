@@ -62,7 +62,15 @@ func _enter_tree() -> void:
 		load(ICON_FOLDER + "StyleTransitionButton.svg")
 	)
 	
-	# PaddingContainer
+	# SizingContainer
+		# ExtrudeContainer
+	add_custom_type(
+		"ExtrudeContainer",
+		"Container",
+		load("uid://cced4hkdpi2nc"),
+		null #load(ICON_FOLDER + "PaddingContainer.svg")
+	)
+		# PaddingContainer
 	add_custom_type(
 		"PaddingContainer",
 		"Container",

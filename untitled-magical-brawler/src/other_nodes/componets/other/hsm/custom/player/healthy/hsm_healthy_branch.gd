@@ -11,6 +11,9 @@ extends HSMBranch
 
 #region Public Virtual Methods
 func action_started(action_name : StringName) -> void:
+	if get_actor().is_digging:
+		return
+	
 	match action_name:
 		GlobalLabels.hsm_context.ACT_IN_AIR:
 			var ctx := get_context()
@@ -22,6 +25,9 @@ func action_started(action_name : StringName) -> void:
 			):
 				change_state(airborn_state)
 func action_finished(action_name : StringName) -> void:
+	if get_actor().is_digging:
+		return
+	
 	match action_name:
 		GlobalLabels.hsm_context.ACT_IN_AIR:
 			var ctx := get_context()

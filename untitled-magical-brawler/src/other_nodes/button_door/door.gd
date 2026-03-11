@@ -15,6 +15,8 @@ const DOOR_OPEN_Z := 2
 
 
 #region External Variable
+@export var debug_open : bool = false
+
 @export var color : Color = Color.WHITE:
 	set(val):
 		if val == color:
@@ -42,6 +44,9 @@ func _ready() -> void:
 	_update_door()
 	
 	if Engine.is_editor_hint():
+		return
+	if debug_open:
+		queue_free()
 		return
 	
 	var control := Global.local_controller

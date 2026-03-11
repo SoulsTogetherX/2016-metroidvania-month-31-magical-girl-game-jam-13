@@ -7,7 +7,8 @@ signal events_changed
 
 
 #region Constants
-const START_ROOM_PATH := "res://src/main/main_game/rooms/room_1/room.tscn"
+const START_ROOM_PATH := "res://src/main/main_game/rooms/room_19/room.tscn"
+const START_MUSIC_PATH := "res://assets/music/1. Mushroom Dungeon.ogg"
 #endregion
 
 
@@ -20,17 +21,30 @@ const START_ROOM_PATH := "res://src/main/main_game/rooms/room_1/room.tscn"
 
 #region Private Variables
 var _current_path : String
+var _current_music : BackgroundLoader.Task
 
 var _checkpoint : PlayerPositionResource
 var _fail_back : PlayerPositionResource
 var _gateways : Array[Gateway]
 
 var _events : Dictionary[StringName, bool]
+
+var phan_cam : PhantomCamera2D
+var current_room : Node2D
 #endregion
 
 
 
 #region Virtual Methods
+func _init() -> void:
+	phan_cam = PhantomCamera2D.new()
+	
+	phan_cam.follow_mode = PhantomCamera2D.FollowMode.GLUED
+	phan_cam.zoom = Vector2.ONE * 0.3
+	phan_cam.tween_duration = 0.0
+	phan_cam.inactive_update_mode = PhantomCamera2D.InactiveUpdateMode.NEVER
+	
+	add_child(phan_cam)
 func _ready() -> void:
 	super()
 	_checkpoint = PlayerPositionResource.new()
@@ -46,6 +60,7 @@ func _on_ready_load() -> void:
 	change_room_to_path(
 		START_ROOM_PATH, -1
 	)
+	_play_music(START_MUSIC_PATH)
 func _update_room_cache() -> void:
 	scene_controller.clear_cache()
 	for gateway : Gateway in _gateways:
@@ -62,10 +77,14 @@ func _set_player_position(player_pos : PlayerPositionResource) -> void:
 	_checkpoint.exit_pos = player_pos.exit_pos
 	player.global_position = player_pos.exit_pos
 
-func _get_gateway_pos(to_id : int) -> PlayerPositionResource:
+func _get_gateway(to_id : int) -> Gateway:
 	for gateway : Gateway in _gateways:
 		if gateway.id == to_id:
-			return gateway.info
+			return gateway
+	return null
+func _get_gateway_pos(gateway : Gateway) -> PlayerPositionResource:
+	if gateway:
+		return gateway.info
 	return _fail_back
 
 func _start_transition(path : String, duration : float = 0.2) -> void:
@@ -73,6 +92,7 @@ func _start_transition(path : String, duration : float = 0.2) -> void:
 		"process_mode", Node.PROCESS_MODE_DISABLED
 	)
 	await fade_cover(duration)
+	CameraZoneManager.focus_camera(phan_cam)
 	_fail_back = null
 	_gateways.clear()
 	
@@ -81,16 +101,37 @@ func _start_transition(path : String, duration : float = 0.2) -> void:
 		99999999999, 99999999999
 	)
 	
-	CameraZoneManager.requested_snap = true
-	await (await scene_controller.change_scene_to_path(
+	current_room = await scene_controller.change_scene_to_path(
 		path, SceneController.UNMOUNT_TYPE.DELETE,
 		true
-	)).ready
+	)
+	await current_room.ready
 	_update_room_cache()
 func _end_transition(duration : float = 0.2) -> void:
 	player.force_current_offset()
+	phan_cam.follow_target = player
+	phan_cam.limit_target = phan_cam.get_path_to(
+		current_room.get_node("Collision")
+	)
+	
 	Global.player.process_mode = Node.PROCESS_MODE_INHERIT
 	await unfade_cover(duration)
+
+func _play_music(music_path : String) -> void:
+	if music_path.is_empty():
+		return
+	if _current_music && music_path == _current_music.get_resource_path():
+		return
+	_current_music = BackgroundLoader.request_resource(
+		music_path, "AudioStream", get_tree().process_frame
+	)
+	_current_music.finished.connect(_play_music_helper)
+
+func _play_music_helper() -> void:
+	SoundManager.swap_music(
+		_current_music.get_resource(),
+		1.0, 0.0, 4.0
+	)
 #endregion
 
 
@@ -107,7 +148,12 @@ func change_room_to_path(
 	path : String, to_id : int
 ) -> void:
 	await _start_transition(path)
-	_set_player_position(_get_gateway_pos(to_id))
+	var gateway := _get_gateway(to_id)
+	
+	if gateway:
+		_play_music(gateway.music_path)
+	
+	_set_player_position(_get_gateway_pos(gateway))
 	_end_transition()
 
 func reset_to_checkpoint() -> void:

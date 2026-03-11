@@ -15,7 +15,11 @@ func _ready() -> void:
 	monitoring = true
 	
 	collision_layer = 0
-	collision_mask = Constants.COLLISION.PLAYER
+	collision_mask = 0
+	
+	if !Engine.is_editor_hint():
+		_after_ready()
+		return
 	
 	EditorUtilities.confirmed_child.call_deferred(
 		self,
@@ -25,6 +29,11 @@ func _ready() -> void:
 		func(_node): pass,
 		0
 	)
+
+func _after_ready() -> void:
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	collision_mask = Constants.COLLISION.PLAYER_ENEMY_DETECT
 #endregion
 
 

@@ -14,7 +14,6 @@ const DEBUG_COLOR := Color(1, 0, 0, 0.3)
 
 
 #region External Variables
-@export_group("Collison Info")
 @export var entity : BaseEntity
 
 @export_group("Destroy")

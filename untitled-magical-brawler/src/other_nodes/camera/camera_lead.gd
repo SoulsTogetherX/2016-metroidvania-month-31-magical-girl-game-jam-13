@@ -38,7 +38,7 @@ func _physics_process(_delta: float) -> void:
 
 
 #region Private Methods
-func _update_y_tween(duration := 1.5) -> void:
+func _update_y_tween(duration := 0.7) -> void:
 	if _y_tween:
 		_y_tween.kill()
 	
@@ -51,7 +51,7 @@ func _update_y_tween(duration := 1.5) -> void:
 		y_pos + direction.y * y_bias,
 		duration
 	)
-func _update_x_tween(duration := 2.0) -> void:
+func _update_x_tween(duration := 1.0) -> void:
 	if is_zero_approx(direction.x):
 		return
 	if _x_tween:

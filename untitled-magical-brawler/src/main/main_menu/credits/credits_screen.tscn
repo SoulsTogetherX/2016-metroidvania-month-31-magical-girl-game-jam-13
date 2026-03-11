@@ -1,26 +1,10 @@
 [gd_scene format=3 uid="uid://cl5jdr7b2mjon"]
 
 [ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/main_menu_subscreen.gd" id="1_eenkr"]
-[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_px76g"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70kv5"]
-bg_color = Color(0, 0.685277, 0.69611114, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4pv8"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="Texture2D" uid="uid://ckblsgk8h7mjh" path="res://assets/sprites/UI/credits/Game_Credits.png" id="2_uykqi"]
+[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/PaddingContainer.gd" id="3_hngq2"]
+[ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="4_jgml3"]
+[ext_resource type="Texture2D" uid="uid://cssrp3q0uw35g" path="res://assets/sprites/UI/start_screen/BackButton.tres" id="5_8dl8u"]
 
 [node name="CreditsScreen" type="MarginContainer" unique_id=253963022]
 anchors_preset = 15
@@ -30,33 +14,43 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eenkr")
 
-[node name="Panel" type="Panel" parent="." unique_id=2016025214]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1298700257]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_70kv5")
+color = Color(0, 0, 0, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1268163415]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=462052861]
+layout_mode = 2
+texture = ExtResource("2_uykqi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackMargin" type="Container" parent="." unique_id=596313244]
+layout_mode = 2
+script = ExtResource("3_hngq2")
+child_anchor_left = 0.92
+child_anchor_top = 0.9
+child_anchor_right = 1.0
+child_anchor_bottom = 0.98
+child_offset_left = 0
+child_offset_top = 0
+child_offset_right = 0
+child_offset_bottom = 0
+metadata/_custom_type_script = "uid://dube6kmp8e6dk"
+
+[node name="AspectRatioBtn" type="AspectRatioContainer" parent="BackMargin" unique_id=1092893023]
 layout_mode = 2
 
-[node name="BackBtn" type="Container" parent="CenterContainer" unique_id=400667776]
+[node name="ModulateTransitionBtn" type="Container" parent="BackMargin/AspectRatioBtn" unique_id=5711210]
 layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_px76g")
-background = SubResource("StyleBoxFlat_w4pv8")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_jgml3")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/BackBtn" unique_id=1084633472]
+[node name="TextureRect" type="TextureRect" parent="BackMargin/AspectRatioBtn/ModulateTransitionBtn" unique_id=1573042710]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+texture = ExtResource("5_8dl8u")
+expand_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/BackBtn/Margin" unique_id=687777312]
-layout_mode = 2
-text = "Back"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="press_vaild" from="CenterContainer/BackBtn" to="." method="_on_back"]
+[connection signal="press_vaild" from="BackMargin/AspectRatioBtn/ModulateTransitionBtn" to="." method="_on_back"]

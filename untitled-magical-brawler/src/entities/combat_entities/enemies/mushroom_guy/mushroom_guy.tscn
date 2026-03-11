@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_4wjxv"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="4_3pfdt"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="5_lu1um"]
-[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_u7tq1"]
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_gbnxp"]
 [ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_t51hq"]
 [ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="9_5utyv"]
@@ -274,9 +273,6 @@ _data = {
 &"STUN": SubResource("Animation_1l634")
 }
 
-[sub_resource type="Resource" id="Resource_q18rv"]
-script = ExtResource("6_u7tq1")
-
 [sub_resource type="Resource" id="Resource_0thg1"]
 script = ExtResource("7_gbnxp")
 
@@ -310,6 +306,7 @@ size = Vector2(5, 233)
 size = Vector2(146.5, 234)
 
 [node name="MushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
+z_index = 1
 material = SubResource("ShaderMaterial_28vbj")
 collision_layer = 8
 collision_mask = 2
@@ -320,6 +317,10 @@ _visual_pivot = NodePath("VisualPivot")
 _velocity_module = NodePath("VelocityComponent")
 _task_manager = NodePath("TaskManager")
 _animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1908494970]
+rect = Rect2(-750, -897, 1500, 1647)
+show_rect = false
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=604135442]
 
@@ -343,7 +344,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("4_3pfdt")
 entity = NodePath("../..")
-effects = Array[ExtResource("5_lu1um")]([SubResource("Resource_q18rv"), SubResource("Resource_0thg1"), SubResource("Resource_01ptr"), SubResource("Resource_3631v")])
+effects = Array[ExtResource("5_lu1um")]([SubResource("Resource_0thg1"), SubResource("Resource_01ptr"), SubResource("Resource_3631v")])
 
 [node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/HitboxComponent" unique_id=1831438425]
 position = Vector2(0, 10.5)

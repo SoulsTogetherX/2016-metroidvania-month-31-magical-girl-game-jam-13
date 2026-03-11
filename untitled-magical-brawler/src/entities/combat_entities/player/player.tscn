@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://bpmrtop7fxtgp" path="res://assets/sounds/Character SFX/Dig/Dig Transform.wav" id="25_y1dhi"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="26_8h0p6"]
 [ext_resource type="AudioStream" uid="uid://ctfi00anab537" path="res://assets/sounds/Character SFX/Player Death.wav" id="26_etaub"]
+[ext_resource type="AudioStream" uid="uid://x348yns43214" path="res://assets/sounds/Character SFX/Incur Dmg 1.wav" id="27_s0yi0"]
 [ext_resource type="AudioStream" uid="uid://cu3wskwyxuh30" path="res://assets/sounds/Character SFX/Punch!!.wav" id="27_y1dhi"]
 [ext_resource type="Script" uid="uid://crubykxav651n" path="res://src/other_nodes/componets/other/hsm/modules/move_task_module.gd" id="28_txpw3"]
 [ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="29_iamtb"]
@@ -55,6 +56,7 @@
 [ext_resource type="Script" uid="uid://8eitfm2qkex7" path="res://src/other_nodes/componets/other/hsm/modules/wall_jump_task_module.gd" id="34_0xmtw"]
 [ext_resource type="Script" uid="uid://cn1lche2a867t" path="res://src/other_nodes/componets/other/hsm/base/HSMMaster.gd" id="41_iamtb"]
 [ext_resource type="Script" uid="uid://cu77b7j2pivmq" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/leafs/hsm_dead.gd" id="43_d0oxh"]
+[ext_resource type="Script" uid="uid://c4l10sshbs6cy" path="res://src/other_nodes/componets/other/hsm/modules/sound_module.gd" id="43_s0yi0"]
 [ext_resource type="Script" uid="uid://bqwidr1pm2ims" path="res://src/other_nodes/componets/other/hsm/custom/player/injured/leafs/hsm_stunned.gd" id="44_7yy2l"]
 [ext_resource type="Script" uid="uid://b3qq0uta0dnch" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/hsm_healthy_branch.gd" id="45_ja238"]
 [ext_resource type="Script" uid="uid://d3lbx6x36g5lm" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/airborn/hsm_airborn_branch.gd" id="46_wixch"]
@@ -402,7 +404,7 @@ tracks/12/keys = {
 "times": PackedFloat32Array(0.75),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [132]
 }
 tracks/13/type = "method"
 tracks/13/imported = false
@@ -972,7 +974,7 @@ tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [132]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
@@ -1199,7 +1201,7 @@ size = Vector2(105, 365)
 size = Vector2(105, 5)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ewf5"]
-random_pitch = 1.3348398
+random_pitch = 1.1553527
 streams_count = 3
 stream_0/stream = ExtResource("13_wixch")
 stream_1/stream = ExtResource("14_llr1v")
@@ -1216,6 +1218,16 @@ stream_4/stream = ExtResource("21_y1dhi")
 stream_5/stream = ExtResource("22_s0yi0")
 stream_6/stream = ExtResource("23_00eij")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s0yi0"]
+random_pitch = 1.005793
+streams_count = 1
+stream_0/stream = ExtResource("27_y1dhi")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y1dhi"]
+random_pitch = 1.1553527
+streams_count = 1
+stream_0/stream = ExtResource("27_s0yi0")
+
 [sub_resource type="Resource" id="Resource_d0oxh"]
 script = ExtResource("26_8h0p6")
 amplitude = 250.0
@@ -1224,7 +1236,7 @@ metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [node name="Player" type="CharacterBody2D" unique_id=539542931 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
 z_index = 1
-collision_layer = 4
+collision_layer = 132
 collision_mask = 66
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -1272,13 +1284,12 @@ position = Vector2(1.5, 12.5)
 shape = SubResource("RectangleShape2D_d0oxh")
 debug_color = Color(0, 1, 0, 0.3)
 
-[node name="PunchHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=2087121274 node_paths=PackedStringArray("entity")]
+[node name="PunchHitboxComponent" type="Area2D" parent="VisualPivot" unique_id=2087121274]
 position = Vector2(163, -138)
 collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("3_33dyk")
-entity = NodePath("../..")
 effects = Array[ExtResource("5_kgtwq")]([SubResource("Resource_8h0p6"), SubResource("Resource_7yy2l"), SubResource("Resource_wixch")])
 disabled = true
 faction = 8
@@ -1553,7 +1564,11 @@ stream = ExtResource("26_etaub")
 bus = &"SFX"
 
 [node name="Punch" type="AudioStreamPlayer" parent="SoundSFX" unique_id=575252708]
-stream = ExtResource("27_y1dhi")
+stream = SubResource("AudioStreamRandomizer_s0yi0")
+bus = &"SFX"
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="SoundSFX" unique_id=1747043845]
+stream = SubResource("AudioStreamRandomizer_y1dhi")
 bus = &"SFX"
 
 [node name="CombatComponents" type="Node" parent="." unique_id=1672935310]
@@ -1580,6 +1595,7 @@ recevier = NodePath("..")
 [node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
 unique_name_in_owner = true
 script = ExtResource("14_kgtwq")
+abilties = Array[int]([0, 1, 2])
 metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
@@ -1625,6 +1641,10 @@ animation = 7
 script = ExtResource("25_axxsh")
 noise = SubResource("Resource_d0oxh")
 
+[node name="SoundModule" type="Node" parent="HSMMaster/Master/Stunned" unique_id=1831079206 node_paths=PackedStringArray("sound_effect")]
+script = ExtResource("43_s0yi0")
+sound_effect = NodePath("../../../../SoundSFX/HurtSound")
+
 [node name="Dead" type="Node" parent="HSMMaster/Master/Stunned" unique_id=1808724823]
 script = ExtResource("43_d0oxh")
 need_action_finished = true
@@ -1648,7 +1668,7 @@ need_action_changed = true
 
 [node name="CoyoteTimer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn" unique_id=1373262917]
 process_callback = 0
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [node name="AirMoveTaskModule" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=441882860 node_paths=PackedStringArray("task")]
@@ -1659,7 +1679,7 @@ task = NodePath("../../../../../TaskManager/AirMoveTask")
 script = ExtResource("47_llr1v")
 jump_state = NodePath("../Jumping/Jump")
 wall_jump_state = NodePath("../Jumping/WallJump")
-ground_state = NodePath("../../Grounded/Normal")
+ground_state = NodePath("../..")
 wall_detect = NodePath("../../../../../VisualPivot/WallDetect")
 ability_cache = NodePath("../../../../../AbilityCacheModule")
 coyote_timer = NodePath("../CoyoteTimer")
@@ -1808,6 +1828,8 @@ sfx = NodePath("../../SoundSFX/JumpSoundEffect")
 
 [node name="SlowdownTask" type="Node" parent="TaskManager" unique_id=1703085196]
 script = ExtResource("10_ogtao")
+slowdown_flat = 500.0
+slowdown_weight = 30.0
 hard_stop = false
 need_physics = true
 

@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://djybylcteqr6b"]
+
+[ext_resource type="Texture2D" uid="uid://1k2xup4kmex3" path="res://assets/sprites/entities/enemies/cannon/cannon.png" id="1_afdmo"]
+[ext_resource type="Script" uid="uid://gya2bbrh6lcr" path="res://src/entities/combat_entities/enemies/mushroom_cannon/cannon/cannon.gd" id="1_nikkw"]
+[ext_resource type="AudioStream" uid="uid://bb47deit3u2ao" path="res://assets/sounds/Cannon Shroomie Blast/Cannon Shroomie Blast 1.wav" id="2_b4ujj"]
+[ext_resource type="AudioStream" uid="uid://nbv4r7wrcvbp" path="res://assets/sounds/Cannon Shroomie Blast/Cannon Shroomie Blast 2.wav" id="3_vtl48"]
+[ext_resource type="AudioStream" uid="uid://dya0f2q1kt306" path="res://assets/sounds/Cannon Shroomie Blast/Cannon Shroomie Blast 3.wav" id="4_np87o"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cmp2p"]
+random_pitch = 1.1553527
+streams_count = 3
+stream_0/stream = ExtResource("2_b4ujj")
+stream_1/stream = ExtResource("3_vtl48")
+stream_2/stream = ExtResource("4_np87o")
+
+[sub_resource type="Curve" id="Curve_byd50"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.02537489), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_m0fmi"]
+_data = [Vector2(0, 0.41522485), 0.0, 0.0, 0, 0, Vector2(0.06593407, 1), 0.0, 0.0, 0, 0, Vector2(0.68864465, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_udyni"]
+offsets = PackedFloat32Array(0, 0.49791667, 0.82708335, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.6507289, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_afdmo"]
+resource_name = "ATTACK"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PivotPoint/CannonSprite:scale:x")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.2, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PivotPoint/CannonSprite:scale:y")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.8, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint/CannonSprite:offset:y")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 2.5, 0.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_bullet"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PivotPoint/CannonSprite/ShootParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nikkw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PivotPoint/CannonSprite:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PivotPoint/CannonSprite:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint/CannonSprite:offset:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PivotPoint/CannonSprite/ShootParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nikkw"]
+_data = {
+&"ATTACK": SubResource("Animation_afdmo"),
+&"RESET": SubResource("Animation_nikkw")
+}
+
+[node name="Cannon" type="Node2D" unique_id=1094345924]
+z_index = 1
+scale = Vector2(8, 8)
+script = ExtResource("1_nikkw")
+shoot_delay = 2.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1877767088]
+unique_name_in_owner = true
+rect = Rect2(-100, -100, 200, 200)
+show_rect = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=23461438]
+stream = SubResource("AudioStreamRandomizer_cmp2p")
+max_distance = 10000.0
+attenuation = 0.4204482
+max_polyphony = 10
+
+[node name="PivotPoint" type="Node2D" parent="." unique_id=805035841]
+
+[node name="CannonSprite" type="Sprite2D" parent="PivotPoint" unique_id=1687031399]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(0, -11)
+texture = ExtResource("1_afdmo")
+
+[node name="ShootPos" type="Marker2D" parent="PivotPoint/CannonSprite" unique_id=510820169]
+unique_name_in_owner = true
+position = Vector2(-10.0468855, 3.4136052)
+
+[node name="ShootParticles" type="CPUParticles2D" parent="PivotPoint/CannonSprite" unique_id=1585602169]
+unique_name_in_owner = true
+position = Vector2(-10, 3.5)
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 0.6
+lifetime_randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+linear_accel_min = -500.0
+linear_accel_max = -500.0
+damping_min = 50.0
+damping_max = 50.0
+angle_min = -45.0
+angle_max = 45.0
+angle_curve = SubResource("Curve_byd50")
+scale_amount_min = 12.0
+scale_amount_max = 24.0
+scale_amount_curve = SubResource("Curve_m0fmi")
+color_ramp = SubResource("Gradient_udyni")
+
+[node name="CannnonAnimationPlayer" type="AnimationPlayer" parent="." unique_id=716408568]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_nikkw")
+autoplay = &"RESET"
+
+[node name="Timer" type="Timer" parent="." unique_id=1751484858]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 2.0

@@ -24,6 +24,7 @@ class_name Player extends CombatEntity
 
 #region Public Variables
 var no_spike_hit : bool = false
+var is_digging : bool = false
 #endregion
 
 
@@ -96,6 +97,7 @@ func _on_spike_detect(
 		StatusEffect.STATUS_TYPE.STUN
 	):
 		return
+	is_digging = false
 	
 	var status := StatusEffect.new()
 	status.type = StatusEffect.STATUS_TYPE.STUN

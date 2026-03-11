@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://d4frh4mqr77xo" path="res://src/other_nodes/componets/combat/damage_detection/hurtbox_component.gd" id="3_u3vkn"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="4_aosrb"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="5_8fh7g"]
-[ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_besge"]
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_j4u2l"]
 [ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_krdy4"]
 [ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="9_msv2j"]
@@ -446,9 +445,6 @@ _data = {
 &"STUN": SubResource("Animation_3pfdt")
 }
 
-[sub_resource type="Resource" id="Resource_1mio5"]
-script = ExtResource("6_besge")
-
 [sub_resource type="Resource" id="Resource_vrvvp"]
 script = ExtResource("7_j4u2l")
 
@@ -471,10 +467,6 @@ status = SubResource("Resource_f2ipb")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hps4"]
 size = Vector2(135, 292)
-
-[sub_resource type="Resource" id="Resource_iih32"]
-script = ExtResource("6_besge")
-damage = 2
 
 [sub_resource type="Resource" id="Resource_5gpq8"]
 script = ExtResource("7_j4u2l")
@@ -511,6 +503,7 @@ size = Vector2(11, 293)
 size = Vector2(93.5, 328)
 
 [node name="SwordMushroomGuy" type="CharacterBody2D" unique_id=1524637940 node_paths=PackedStringArray("_health_module", "_status_effect_receiver", "_visual_pivot", "_velocity_module", "_task_manager", "_animation_player")]
+z_index = 1
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_sobtd")
@@ -520,6 +513,10 @@ _visual_pivot = NodePath("VisualPivot")
 _velocity_module = NodePath("VelocityComponent")
 _task_manager = NodePath("TaskManager")
 _animation_player = NodePath("VisualPivot/Sprite/AnimationPlayer")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=279498549]
+rect = Rect2(-750, -897, 1500, 1647)
+show_rect = false
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=604135442]
 
@@ -542,7 +539,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("4_aosrb")
 entity = NodePath("../..")
-effects = Array[ExtResource("5_8fh7g")]([SubResource("Resource_1mio5"), SubResource("Resource_vrvvp"), SubResource("Resource_as5v6"), SubResource("Resource_qsfyd")])
+effects = Array[ExtResource("5_8fh7g")]([SubResource("Resource_vrvvp"), SubResource("Resource_as5v6"), SubResource("Resource_qsfyd")])
 
 [node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/BodyHitboxComponent" unique_id=1102514135]
 position = Vector2(0, -22)
@@ -556,7 +553,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("4_aosrb")
 entity = NodePath("../..")
-effects = Array[ExtResource("5_8fh7g")]([SubResource("Resource_iih32"), SubResource("Resource_5gpq8"), SubResource("Resource_elvao"), SubResource("Resource_igp0m")])
+effects = Array[ExtResource("5_8fh7g")]([SubResource("Resource_5gpq8"), SubResource("Resource_elvao"), SubResource("Resource_igp0m")])
 disabled = true
 
 [node name="FactionDetectionArea" type="CollisionShape2D" parent="VisualPivot/SwordHitboxComponent" unique_id=2019717725]
@@ -590,7 +587,7 @@ debug_color = Color(0.80883354, 3.1766297e-06, 0.49389768, 0.3019608)
 [node name="GroundRayCast" type="RayCast2D" parent="VisualPivot" unique_id=772671663]
 position = Vector2(47, -3)
 enabled = false
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 22)
 collision_mask = 2
 hit_from_inside = true
 
@@ -689,6 +686,7 @@ behavioral_tree = NodePath("PursueTree")
 
 [node name="PursueTree" type="Node" parent="HSMMaster/Master/PursueWander/Pursue/BHTreeModule" unique_id=1872996484 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("26_e2ens")
+enabled = false
 actor_node_path = NodePath("../../../../../..")
 blackboard = NodePath("../../../../../../Blackboard")
 actor = NodePath("../../../../../..")
@@ -828,6 +826,7 @@ behavioral_tree = NodePath("WanderTree")
 
 [node name="WanderTree" type="Node" parent="HSMMaster/Master/PursueWander/Wander/BHTreeModule" unique_id=1281596142 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("26_e2ens")
+enabled = false
 actor_node_path = NodePath("../../../../../..")
 blackboard = NodePath("../../../../../../Blackboard")
 actor = NodePath("../../../../../..")

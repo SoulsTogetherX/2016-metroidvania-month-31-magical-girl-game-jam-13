@@ -27,7 +27,10 @@ enum COLLISION {
 	GROUND = 1 << 1,
 	PLAYER = 1 << 2,
 	ENEMY  = 1 << 3,
-	COLLECTABLE  = 1 << 3
+	COLLECTABLE  = 1 << 4,
+	SPIKES  = 1 << 5,
+	MOVINGPlATFORMS  = 1 << 6,
+	PLAYER_ENEMY_DETECT  = 1 << 7
 }
 
 enum FACTION {

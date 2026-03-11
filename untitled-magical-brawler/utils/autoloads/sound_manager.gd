@@ -54,7 +54,7 @@ func _finish_audio(idx : int) -> void:
 	if _free_index.size() == _sound_effects.size():
 		_free_index.clear()
 		_sound_effects.clear()
-func _set_audio_linear(audio : AudioStreamPlayer, volume : float) -> void:
+func _set_audio_linear(volume : float, audio : AudioStreamPlayer) -> void:
 	audio.volume_db = linear_to_db(volume)
 #endregion
 

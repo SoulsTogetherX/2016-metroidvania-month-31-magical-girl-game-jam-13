@@ -65,6 +65,7 @@ func action_started(action_name : StringName) -> void:
 #region Public Methods (State Change)
 func enter_state(act : Node, _ctx : HSMContext) -> void:
 	var entity : BaseEntity = act
+	act.is_digging = true
 	ground_ray_cast.enabled = true
 	
 	entity.play_animation(GlobalLabels.animations.DIG_START)
@@ -75,6 +76,7 @@ func enter_state(act : Node, _ctx : HSMContext) -> void:
 func exit_state(act : Node, _ctx : HSMContext) -> void:
 	var entity : BaseEntity = act
 	var player := entity.get_animation_player()
+	act.is_digging = false
 	
 	if player.animation_finished.is_connected(_dig_start):
 		player.animation_finished.disconnect(

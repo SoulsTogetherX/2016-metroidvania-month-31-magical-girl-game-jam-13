@@ -67,7 +67,7 @@ func play() -> void:
 func pause() -> void:
 	toggle_tween(false)
 func toggle_tween(toggle : bool = false) -> void:
-	if !_path_tween:
+	if !_path_tween || !_path_tween.is_valid():
 		return
 	if toggle:
 		_path_tween.play()

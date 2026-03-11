@@ -74,3 +74,13 @@ func _is_touching_wall() -> bool:
 		return true
 	return !coyote_wall_timer.is_stopped()
 #endregion
+
+
+#region Public State Change Methods
+func passthrough_state(_act : Node, ctx : HSMContext) -> HSMBranch:
+	if ctx.is_action(
+		GlobalLabels.hsm_context.ACT_IN_AIR
+	):
+		return null
+	return ground_state
+#endregion

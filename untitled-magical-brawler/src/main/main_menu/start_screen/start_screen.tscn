@@ -1,29 +1,16 @@
 [gd_scene format=3 uid="uid://blqrc4cbv78eb"]
 
 [ext_resource type="Script" uid="uid://dnlec3owfo2sk" path="res://src/main/main_menu/start_screen/start_screen.gd" id="1_m6ypo"]
-[ext_resource type="Texture2D" uid="uid://cee5s31nr7bcb" path="res://assets/sprites/UI/Title.tres" id="2_57gqb"]
-[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_aqrop"]
-[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/PaddingContainer/PaddingContainer.gd" id="5_b6ri3"]
-[ext_resource type="Texture2D" uid="uid://ccf43ah076pwc" path="res://assets/sprites/UI/Credits.tres" id="6_7jtmt"]
+[ext_resource type="Texture2D" uid="uid://dtuog4hoaxj51" path="res://assets/sprites/background/mushroom_area/Background Image.png" id="2_3jpgh"]
+[ext_resource type="Texture2D" uid="uid://cee5s31nr7bcb" path="res://assets/sprites/UI/start_screen/Title.tres" id="2_57gqb"]
+[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/PaddingContainer.gd" id="5_b6ri3"]
+[ext_resource type="Texture2D" uid="uid://fveery8jigvg" path="res://assets/sprites/UI/start_screen/quit_button.tres" id="5_nyqmk"]
+[ext_resource type="Texture2D" uid="uid://c0ginpcnlrbrk" path="res://assets/sprites/UI/start_screen/start_button.tres" id="5_o161a"]
+[ext_resource type="Texture2D" uid="uid://di4pmitn4j78e" path="res://assets/sprites/UI/start_screen/story_button.tres" id="5_ysdbc"]
+[ext_resource type="Texture2D" uid="uid://ccf43ah076pwc" path="res://assets/sprites/UI/start_screen/Credits.tres" id="6_7jtmt"]
 [ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="6_o161a"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c72ae"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lwn7"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="Script" uid="uid://cced4hkdpi2nc" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/ExtrudeContainer.gd" id="7_fh40q"]
+[ext_resource type="Texture2D" uid="uid://c0p3dmvupqucl" path="res://assets/sprites/UI/start_screen/Gear.tres" id="8_ysdbc"]
 
 [node name="StartScreen" type="MarginContainer" unique_id=1783423359]
 anchors_preset = 15
@@ -33,177 +20,156 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m6ypo")
 
-[node name="Panel" type="Panel" parent="." unique_id=1231907799]
+[node name="BG" type="TextureRect" parent="." unique_id=886894721]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c72ae")
+texture = ExtResource("2_3jpgh")
+expand_mode = 1
 
 [node name="PaddingContainer" type="Container" parent="." unique_id=979806770]
 layout_mode = 2
 script = ExtResource("5_b6ri3")
 child_anchor_left = 0.05
 child_anchor_top = 0.05
-child_anchor_right = 0.95
-child_anchor_bottom = 0.95
+child_anchor_right = 0.98
+child_anchor_bottom = 0.98
 child_offset_left = 0
 child_offset_top = 0
 child_offset_right = 0
 child_offset_bottom = 0
 metadata/_custom_type_script = "uid://dube6kmp8e6dk"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PaddingContainer" unique_id=1927694137]
+[node name="HBox" type="HBoxContainer" parent="PaddingContainer" unique_id=1927694137]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PaddingContainer/HBoxContainer" unique_id=897893406]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_stretch_ratio = 3.37
-theme_override_constants/separation = 50
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer" unique_id=1779479659]
-layout_mode = 2
-
-[node name="Title" type="TextureRect" parent="PaddingContainer/HBoxContainer/VBoxContainer/AspectRatioContainer" unique_id=811863898]
-layout_mode = 2
-texture = ExtResource("2_57gqb")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer" unique_id=355598848]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 15
-
-[node name="StartMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=480748034]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-
-[node name="StartGameBtn" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin" unique_id=1765517855]
-layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_aqrop")
-background = SubResource("StyleBoxFlat_7lwn7")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
-
-[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin/StartGameBtn" unique_id=1861832116]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin/StartGameBtn/Margin" unique_id=260002022]
-layout_mode = 2
-text = "Start Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SettingsMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=1262241396]
-layout_mode = 2
-theme_override_constants/margin_right = 20
-
-[node name="SettingsBtn" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin" unique_id=1321540934]
-layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_aqrop")
-background = SubResource("StyleBoxFlat_7lwn7")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
-
-[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn" unique_id=112560732]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn/Margin" unique_id=743383483]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn/Margin/HBoxContainer" unique_id=1925692438]
-layout_mode = 2
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StoryMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=855580489]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-
-[node name="StoryBtn" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin" unique_id=2111832948]
-layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_aqrop")
-background = SubResource("StyleBoxFlat_7lwn7")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
-
-[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin/StoryBtn" unique_id=671060643]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin/StoryBtn/Margin" unique_id=57292576]
-layout_mode = 2
-text = "Story"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="QuitMargin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=673314135]
-layout_mode = 2
-theme_override_constants/margin_right = 20
-
-[node name="Quit" type="Container" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin" unique_id=1068917767]
-layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_aqrop")
-background = SubResource("StyleBoxFlat_7lwn7")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
-
-[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin/Quit" unique_id=1310010320]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="Label" parent="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin/Quit/Margin" unique_id=1478476113]
-layout_mode = 2
-text = "Quit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ModulateTransitionButton" type="Container" parent="PaddingContainer/HBoxContainer" unique_id=1602911835]
+[node name="Left" type="VBoxContainer" parent="PaddingContainer/HBox" unique_id=897893406]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = 20
+
+[node name="Title" type="TextureRect" parent="PaddingContainer/HBox/Left" unique_id=811863898]
+layout_mode = 2
+texture = ExtResource("2_57gqb")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PaddingContainer/HBox/Left" unique_id=355598848]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="StartBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=1891805868]
+layout_mode = 2
 script = ExtResource("6_o161a")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="Margin" type="MarginContainer" parent="PaddingContainer/HBoxContainer/ModulateTransitionButton" unique_id=1080776824]
+[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtn" unique_id=981433439]
+layout_mode = 2
+script = ExtResource("7_fh40q")
+extrude_left = 30
+extrude_top = 25
+extrude_right = 30
+extrude_bottom = 25
+metadata/_custom_type_script = "uid://cced4hkdpi2nc"
+
+[node name="StartBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtn/ExtrudeContainer" unique_id=1694680475]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_o161a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StoryBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=1106823841]
+layout_mode = 2
+script = ExtResource("6_o161a")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
+
+[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtn" unique_id=1351679810]
+layout_mode = 2
+script = ExtResource("7_fh40q")
+extrude_left = 30
+extrude_top = 25
+extrude_right = 30
+extrude_bottom = 25
+metadata/_custom_type_script = "uid://cced4hkdpi2nc"
+
+[node name="StoryBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtn/ExtrudeContainer" unique_id=1975751262]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_ysdbc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuitBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=414236627]
+layout_mode = 2
+script = ExtResource("6_o161a")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
+
+[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtn" unique_id=415668380]
+layout_mode = 2
+script = ExtResource("7_fh40q")
+extrude_left = 30
+extrude_top = 25
+extrude_right = 30
+extrude_bottom = 25
+metadata/_custom_type_script = "uid://cced4hkdpi2nc"
+
+[node name="QuitBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtn/ExtrudeContainer" unique_id=1939292480]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_nyqmk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Right" type="HBoxContainer" parent="PaddingContainer/HBox" unique_id=2122867947]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PaddingContainer/HBoxContainer/ModulateTransitionButton/Margin" unique_id=692705870]
+[node name="SettingsBtn" type="AspectRatioContainer" parent="PaddingContainer/HBox/Right" unique_id=587338640]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-ratio = 1.9231
-stretch_mode = 0
-alignment_vertical = 2
+size_flags_horizontal = 3
+ratio = 1.1667
 
-[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBoxContainer/ModulateTransitionButton/Margin/AspectRatioContainer" unique_id=2053072215]
+[node name="SettingsBtn" type="Container" parent="PaddingContainer/HBox/Right/SettingsBtn" unique_id=1450563593]
 layout_mode = 2
-texture = ExtResource("6_7jtmt")
-expand_mode = 2
+script = ExtResource("6_o161a")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
+
+[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtn" unique_id=1636200156]
+layout_mode = 2
+texture = ExtResource("8_ysdbc")
+expand_mode = 1
 stretch_mode = 4
 
-[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StartMargin/StartGameBtn" to="." method="_start_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/SettingsMargin/SettingsBtn" to="." method="_settings_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/StoryMargin/StoryBtn" to="." method="_story_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/VBoxContainer/VBoxContainer/QuitMargin/Quit" to="." method="_quit_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBoxContainer/ModulateTransitionButton" to="." method="_credits_game_pressed"]
+[node name="CreditsBtn" type="AspectRatioContainer" parent="PaddingContainer/HBox/Right" unique_id=1225445635]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+ratio = 2.8333
+
+[node name="CreditsBtn" type="Container" parent="PaddingContainer/HBox/Right/CreditsBtn" unique_id=1602911835]
+layout_mode = 2
+script = ExtResource("6_o161a")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
+
+[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtn" unique_id=2053072215]
+layout_mode = 2
+texture = ExtResource("6_7jtmt")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/StartBtn" to="." method="_start_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/StoryBtn" to="." method="_story_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/QuitBtn" to="." method="_quit_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtn" to="." method="_settings_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtn" to="." method="_credits_game_pressed"]

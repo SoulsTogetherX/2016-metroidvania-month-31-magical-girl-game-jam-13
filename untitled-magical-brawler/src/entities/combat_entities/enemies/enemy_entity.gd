@@ -121,6 +121,7 @@ func _player_entered(body : Node2D) -> void:
 func _player_exited(body : Node2D) -> void:
 	if !(body is Player):
 		return
+	
 	_hsm_context.set_action(GlobalLabels.hsm_context.ACT_SPOTTED_PLAYER, false)
 #endregion
 
