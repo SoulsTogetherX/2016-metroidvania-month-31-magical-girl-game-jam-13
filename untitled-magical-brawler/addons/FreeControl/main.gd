@@ -5,6 +5,52 @@ extends EditorPlugin
 const ICON_FOLDER := "res://addons/FreeControl/assets/icons/CustomType/"
 
 func _enter_tree() -> void:
+	# AnimatableControls
+		# Control
+	add_custom_type(
+		"AnimatableControl",
+		"Container",
+		load("uid://bdebqplr7au8q"),
+		load(ICON_FOLDER + "AnimatableControl.svg")
+	)
+	add_custom_type(
+		"AnimatablePositionalControl",
+		"Container",
+		load("uid://0i5secg3em7k"),
+		load(ICON_FOLDER + "AnimatablePositionalControl.svg")
+	)
+	add_custom_type(
+		"AnimatableScrollControl",
+		"Container",
+		load("uid://c7in16lfr4lx6"),
+		load(ICON_FOLDER + "AnimatableScrollControl.svg")
+	)
+	add_custom_type(
+		"AnimatableZoneControl",
+		"Container",
+		load("uid://c1bjrg3xbnp1f"),
+		load(ICON_FOLDER + "AnimatableZoneControl.svg")
+	)
+	add_custom_type(
+		"AnimatableVisibleControl",
+		"Container",
+		load("uid://bhcb3ijflvfwj"),
+		load(ICON_FOLDER + "AnimatableVisibleControl.svg")
+	)
+		# Mount
+	add_custom_type(
+		"AnimatableMount",
+		"Control",
+		load("uid://bikr31ssqqgxe"),
+		load(ICON_FOLDER + "AnimatableMount.svg")
+	)
+	add_custom_type(
+		"AnimatableTransformationMount",
+		"Control",
+		load("uid://clu5ifocno1fc"),
+		load(ICON_FOLDER + "AnimatableTransformationMount.svg")
+	)
+	
 	# AutoSizeLabels
 		# AutoSizeLabel
 	add_custom_type(
@@ -115,6 +161,17 @@ func _enter_tree() -> void:
 	)
 
 func _exit_tree() -> void:
+	# AnimatableControls
+		# Control
+	remove_custom_type("AnimatableControl")
+	remove_custom_type("AnimatablePositionalControl")
+	remove_custom_type("AnimatableScrollControl")
+	remove_custom_type("AnimatableZoneControl")
+	remove_custom_type("AnimatableVisibleControl")
+		# Mount
+	remove_custom_type("AnimatableMount")
+	remove_custom_type("AnimatableTransformationMount")
+
 	# AutoSizeLabel
 	remove_custom_type("AutoSizeLabel")
 	

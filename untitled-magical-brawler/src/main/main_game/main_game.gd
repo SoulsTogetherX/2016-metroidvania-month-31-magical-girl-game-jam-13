@@ -7,7 +7,7 @@ signal events_changed
 
 
 #region Constants
-const START_ROOM_PATH := "res://src/main/main_game/rooms/room_4/room.tscn"
+const START_ROOM_PATH := "res://src/main/main_game/rooms/room_1/room.tscn"
 const START_MUSIC_PATH := "res://assets/music/1. Mushroom Dungeon.ogg"
 #endregion
 
@@ -16,6 +16,11 @@ const START_MUSIC_PATH := "res://assets/music/1. Mushroom Dungeon.ogg"
 @export_group("Internal")
 @export var player : Player
 @export var camera : GlobalCamera
+
+@export_group("Modules")
+@export var environment_controller : WorldEnvironment
+@export var background_controller : SceneController
+
 @export var ability_ui : AbilityUIDisplay
 #endregion
 
@@ -31,7 +36,7 @@ var _gateways : Array[Gateway]
 var _events : Dictionary[StringName, bool]
 
 var phan_cam : PhantomCamera2D
-var current_room : Node2D
+var current_room : Room
 #endregion
 
 
@@ -58,9 +63,12 @@ func _ready() -> void:
 
 #region Private Methods
 func _on_ready_load() -> void:
-	change_room_to_path(
-		START_ROOM_PATH, -1
-	)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	
+	change_room_to_path(START_ROOM_PATH, -1)
 	play_music(START_MUSIC_PATH)
 func _update_room_cache() -> void:
 	scene_controller.clear_cache()
@@ -144,12 +152,12 @@ func change_room_to_path(
 	path : String, to_id : int
 ) -> void:
 	await _start_transition(path)
-	var gateway := _get_gateway(to_id)
 	
-	if gateway:
-		play_music(gateway.music_path)
+	await change_background(current_room.background)
+	environment_controller.environment = current_room.env
+	play_music(current_room.music)
 	
-	_set_player_position(_get_gateway_pos(gateway))
+	_set_player_position(_get_gateway_pos(_get_gateway(to_id)))
 	_end_transition()
 
 func reset_to_checkpoint() -> void:
@@ -172,6 +180,10 @@ func display_ability(ability : AbilityData) -> void:
 	ability_ui.display_ability(ability)
 
 
+func change_background(background_path : String) -> void:
+	await background_controller.change_scene_to_path(
+		background_path, SceneController.UNMOUNT_TYPE.REMOVE
+	)
 func play_music(music_path : String) -> void:
 	if music_path.is_empty():
 		_fade_out()

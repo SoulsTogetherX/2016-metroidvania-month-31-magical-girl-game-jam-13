@@ -63,7 +63,6 @@ func _get_minimum_size() -> Vector2:
 		extrude_right + extrude_top
 	)).maxf(0.0)
 	
-	
 	return min_size
 
 func _notification(what : int) -> void:

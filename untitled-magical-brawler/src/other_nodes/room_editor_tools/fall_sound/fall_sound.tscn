@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dyqbw3p6h5vbr"]
+
+[ext_resource type="Script" uid="uid://df3frrwbdt2ir" path="res://src/other_nodes/room_editor_tools/fall_sound/fall_sound.gd" id="1_m8w52"]
+[ext_resource type="AudioStream" uid="uid://cnlkorm2ldwkl" path="res://assets/sounds/Falling/Falling Wind.wav" id="2_qeuck"]
+[ext_resource type="AudioStream" uid="uid://dqhjkb16ohvob" path="res://assets/sounds/Falling/Fall Landing Impact.wav" id="3_q70q6"]
+
+[node name="FallSound" type="Node2D" unique_id=153236664]
+script = ExtResource("1_m8w52")
+
+[node name="StartFall" type="Area2D" parent="." unique_id=673218969]
+
+[node name="EndFall" type="Area2D" parent="." unique_id=1242022702]
+
+[node name="FallingSound" type="AudioStreamPlayer" parent="." unique_id=1430002723]
+stream = ExtResource("2_qeuck")
+
+[node name="ImpactSound" type="AudioStreamPlayer" parent="." unique_id=427448090]
+stream = ExtResource("3_q70q6")
+pitch_scale = 0.5

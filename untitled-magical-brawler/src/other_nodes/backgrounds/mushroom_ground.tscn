@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bmdmq5fu1e0yv"]
+
+[ext_resource type="Texture2D" uid="uid://cbouapniganej" path="res://assets/sprites/background/SkyBackground.png" id="1_y60k4"]
+
+[sub_resource type="Gradient" id="Gradient_qkiet"]
+offsets = PackedFloat32Array(0, 0.31613755, 1)
+colors = PackedColorArray(0.4977886, 0.4977886, 0.4977886, 0.757, 0.16527107, 0.16527107, 0.16527107, 0.25133198, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mbqb5"]
+gradient = SubResource("Gradient_qkiet")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[node name="MushroomDimention" type="ParallaxBackground" unique_id=114227865]
+scroll_ignore_camera_zoom = true
+
+[node name="Sky" type="ParallaxLayer" parent="." unique_id=885059298]
+position = Vector2(310, 170)
+motion_scale = Vector2(0.05, 0.05)
+
+[node name="SkyTexture" type="TextureRect" parent="Sky" unique_id=137187944]
+modulate = Color(0.8810723, 0.8810722, 0.8810722, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 1600.0
+offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_y60k4")
+
+[node name="Fog" type="ParallaxLayer" parent="." unique_id=437089344]
+visible = false
+
+[node name="FogTexture" type="TextureRect" parent="Fog" unique_id=767821114]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mbqb5")

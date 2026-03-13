@@ -1,12 +1,23 @@
 [gd_scene format=3 uid="uid://dml2x3x23anfg"]
 
 [ext_resource type="Script" uid="uid://cmwd7k1yy04nr" path="res://src/other_nodes/moving_platform/moving_platform.gd" id="1_5nkii"]
-[ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="1_b6tp2"]
+[ext_resource type="Texture2D" uid="uid://c5dn6u76l2xxm" path="res://assets/sprites/tilesets/spritesheets/Kira_Kira_Cloud.png" id="2_5nkii"]
+
+[sub_resource type="Curve" id="Curve_5nkii"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.08130081, 1), 0.0, 0.0, 0, 0, Vector2(0.8617886, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_6qtkt"]
+offsets = PackedFloat32Array(0, 0.79577464, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.83632696, 0.83632696, 0.83632696, 1, 0.8352941, 0.8352941, 0.8352941, 0)
+
+[sub_resource type="Gradient" id="Gradient_2litf"]
+colors = PackedColorArray(1, 1, 1, 1, 0.78860694, 0.78860694, 0.7886069, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nkii"]
-size = Vector2(512, 64)
+size = Vector2(512, 93)
 
-[node name="MovingPlatform" type="PathFollow2D" unique_id=194716149]
+[node name="MovingCloudPlatform" type="PathFollow2D" unique_id=194716149]
 rotates = false
 loop = false
 script = ExtResource("1_5nkii")
@@ -14,15 +25,41 @@ duration = 3.0
 trans_type = 1
 ease_type = 2
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1969734197]
+position = Vector2(0, 35)
+amount = 20
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(200, 0)
+direction = Vector2(0, -1)
+spread = 71.58
+gravity = Vector2(0, 200)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 15.0
+scale_amount_max = 45.0
+scale_amount_curve = SubResource("Curve_5nkii")
+color = Color(0.7372549, 0.2901961, 0.60784316, 1)
+color_ramp = SubResource("Gradient_6qtkt")
+color_initial_ramp = SubResource("Gradient_2litf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1365893297]
+offset_left = -256.0
+offset_top = -47.0
+offset_bottom = -0.5
+scale = Vector2(2, 2)
+texture = ExtResource("2_5nkii")
+expand_mode = 2
+stretch_mode = 1
+
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=238825281]
 unique_name_in_owner = true
+position = Vector2(0, -15)
 collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=995740383]
+position = Vector2(0, 14.5)
 shape = SubResource("RectangleShape2D_5nkii")
-
-[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D/CollisionShape2D" unique_id=1937829457]
-position = Vector2(0, 9.536743e-07)
-scale = Vector2(4, 0.5)
-texture = ExtResource("1_b6tp2")

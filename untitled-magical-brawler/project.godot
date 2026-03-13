@@ -34,6 +34,7 @@ SaveManager="*uid://bxajorf1s246a"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+SettingsHolder="*uid://bjlr20ud7ky05"
 
 [display]
 

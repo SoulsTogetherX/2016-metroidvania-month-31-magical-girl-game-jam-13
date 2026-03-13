@@ -6,15 +6,15 @@ class_name Gateway extends Area2D
 @export_group("Entering Player")
 @export var info : PlayerPositionResource
 
-@export_group("Music")
-@export_file_path("*.ogg") var music_path : String = "res://assets/music/1. Mushroom Dungeon.ogg"
-
 @export_group("Ids")
 @export var id : int
 
 @export_subgroup("Exit")
 @export var exit_id : int
 @export_file_path("*.tscn") var exit_path: String
+
+@export_group("Music")
+@export_file_path("*.ogg") var music_path : String = "res://assets/music/1. Mushroom Dungeon.ogg"
 #endregion
 
 

@@ -1,62 +1,240 @@
-[gd_scene format=3 uid="uid://dseep5auuyr1q"]
+[gd_scene format=3 uid="uid://c61uednn81ej5"]
 
-[ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/main_menu_subscreen.gd" id="1_mhkue"]
-[ext_resource type="Script" uid="uid://8jyk6thl41yx" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/StyleTransitionButton.gd" id="2_etgi0"]
+[ext_resource type="Script" uid="uid://bnupsvr3lwii4" path="res://src/main/main_menu/settings/settings_screen.gd" id="1_6l77s"]
+[ext_resource type="Texture2D" uid="uid://dtuog4hoaxj51" path="res://assets/sprites/background/mushroom_area/Background Image.png" id="2_8vl38"]
+[ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/PaddingContainer.gd" id="3_07a43"]
+[ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="4_cg5nx"]
+[ext_resource type="Script" uid="uid://bikr31ssqqgxe" path="res://addons/FreeControl/src/CustomClasses/AnimatableControl/mount/AnimatableMount.gd" id="4_grdll"]
+[ext_resource type="Script" uid="uid://c7w6023qk7v1n" path="res://src/main/main_menu/scripts/button_hover.gd" id="5_ou0b7"]
+[ext_resource type="Texture2D" uid="uid://cssrp3q0uw35g" path="res://assets/sprites/UI/start_screen/BackButton.tres" id="5_pbmrv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwrn3"]
-bg_color = Color(0.9154528, 0.45313865, 9.62615e-07, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hc2wr"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_b6ri3"]
 content_margin_left = 4.0
-content_margin_top = 4.0
+content_margin_top = 0.0
 content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+content_margin_bottom = 0.0
+grow_begin = -10.0
+grow_end = -10.0
+thickness = 3
 
-[node name="SettingsScreen" type="MarginContainer" unique_id=1056288311]
+[sub_resource type="DPITexture" id="DPITexture_b6ri3"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"2.333\"/><path fill=\"#1a1a1a\" d=\"m11.5 3.75-5.6 5.6-1.7-1.7-1.5 1.5 3.2 3.2 7.1-7.1z\"/></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="DPITexture" id="DPITexture_7jtmt"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" fill-opacity=\".5\" rx=\"2.333\"/></svg>
+"
+base_scale = 2.0
+
+[node name="SettingsScreen" type="MarginContainer" unique_id=1783423359]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mhkue")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_6l77s")
 
-[node name="Panel" type="Panel" parent="." unique_id=234451201]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gwrn3")
-
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1298332145]
-layout_mode = 2
-
-[node name="BackBtn" type="Container" parent="CenterContainer" unique_id=1348106912]
-layout_mode = 2
-mouse_filter = 0
-script = ExtResource("2_etgi0")
-background = SubResource("StyleBoxFlat_hc2wr")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
-
-[node name="Margin" type="MarginContainer" parent="CenterContainer/BackBtn" unique_id=2137609818]
+[node name="BG" type="TextureRect" parent="." unique_id=886894721]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+texture = ExtResource("2_8vl38")
+expand_mode = 1
 
-[node name="Label" type="Label" parent="CenterContainer/BackBtn/Margin" unique_id=449380952]
+[node name="ScreenPadding" type="Container" parent="." unique_id=309366477]
 layout_mode = 2
-text = "Back"
+mouse_filter = 2
+script = ExtResource("3_07a43")
+child_anchor_left = 0.2
+child_anchor_top = 0.2
+child_anchor_right = 0.8
+child_anchor_bottom = 0.8
+child_offset_left = 0
+child_offset_top = 0
+child_offset_right = 0
+child_offset_bottom = 0
+metadata/_custom_type_script = "uid://dube6kmp8e6dk"
+
+[node name="Divide" type="HBoxContainer" parent="ScreenPadding" unique_id=1052018374]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Left" type="VBoxContainer" parent="ScreenPadding/Divide" unique_id=1809530476]
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScreenPadding/Divide/Left" unique_id=748194578]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Accessibility"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="press_vaild" from="CenterContainer/BackBtn" to="." method="_on_back"]
+[node name="HSeparator" type="HSeparator" parent="ScreenPadding/Divide/Left" unique_id=350862895]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxLine_b6ri3")
+
+[node name="ScreenShake" type="HBoxContainer" parent="ScreenPadding/Divide/Left" unique_id=384268472]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScreenPadding/Divide/Left/ScreenShake" unique_id=1695454863]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Screen Shake"
+
+[node name="CheckboxMargins" type="MarginContainer" parent="ScreenPadding/Divide/Left/ScreenShake" unique_id=1298990267]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 10
+
+[node name="ScreenShakeCheckBox" type="CheckBox" parent="ScreenPadding/Divide/Left/ScreenShake/CheckboxMargins" unique_id=1371816015]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_icons/checked = SubResource("DPITexture_b6ri3")
+theme_override_icons/unchecked = SubResource("DPITexture_7jtmt")
+
+[node name="Right" type="VBoxContainer" parent="ScreenPadding/Divide" unique_id=1020568269]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScreenPadding/Divide/Right" unique_id=1035213640]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Audio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ScreenPadding/Divide/Right" unique_id=1735908301]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxLine_b6ri3")
+
+[node name="MasterAudio" type="VBoxContainer" parent="ScreenPadding/Divide/Right" unique_id=1064875265]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScreenPadding/Divide/Right/MasterAudio" unique_id=1191181143]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Master"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterAudioSlider" type="HSlider" parent="ScreenPadding/Divide/Right/MasterAudio" unique_id=1156506153]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="Music" type="VBoxContainer" parent="ScreenPadding/Divide/Right" unique_id=759765615]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScreenPadding/Divide/Right/Music" unique_id=1462888924]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="ScreenPadding/Divide/Right/Music" unique_id=1600592591]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="SoundEffects" type="VBoxContainer" parent="ScreenPadding/Divide/Right" unique_id=1395841695]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScreenPadding/Divide/Right/SoundEffects" unique_id=2074403215]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="ScreenPadding/Divide/Right/SoundEffects" unique_id=1243514532]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="BackMargin" type="Container" parent="." unique_id=365484757]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_07a43")
+child_anchor_left = 0.92
+child_anchor_top = 0.9
+child_anchor_right = 1.0
+child_anchor_bottom = 0.98
+child_offset_left = 0
+child_offset_top = 0
+child_offset_right = 0
+child_offset_bottom = 0
+metadata/_custom_type_script = "uid://dube6kmp8e6dk"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="BackMargin" unique_id=1090379594]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BackBtnMount" type="Control" parent="BackMargin/AspectRatioContainer" unique_id=771667808]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("4_grdll")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="AnimatableControl" type="Container" parent="BackMargin/AspectRatioContainer/BackBtnMount" unique_id=1357804365]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = ExtResource("5_ou0b7")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="BackBtn" type="Container" parent="BackMargin/AspectRatioContainer/BackBtnMount/AnimatableControl" unique_id=1550784567]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_cg5nx")
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
+metadata/_custom_type_script = "uid://cbavvc7w51o1e"
+
+[node name="BackBtnTexture" type="TextureRect" parent="BackMargin/AspectRatioContainer/BackBtnMount/AnimatableControl/BackBtn" unique_id=1880681263]
+layout_mode = 2
+texture = ExtResource("5_pbmrv")
+expand_mode = 2
+
+[connection signal="pressed" from="ScreenPadding/Divide/Left/ScreenShake/CheckboxMargins/ScreenShakeCheckBox" to="." method="_on_screen_shake_check_box_pressed"]
+[connection signal="press_vaild" from="BackMargin/AspectRatioContainer/BackBtnMount/AnimatableControl/BackBtn" to="." method="_on_back"]
+[connection signal="press_vaild" from="BackMargin/AspectRatioContainer/BackBtnMount/AnimatableControl/BackBtn" to="." method="_update_settings"]

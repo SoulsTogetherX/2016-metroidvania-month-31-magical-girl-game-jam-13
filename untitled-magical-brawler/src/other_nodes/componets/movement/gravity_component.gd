@@ -2,6 +2,8 @@ class_name GravityComponent extends Node
 
 
 #region External Variables
+@export var disabled : bool = false
+
 @export_group("Settings")
 @export var gravity : float = 8000
 @export var gravity_max_speed : float = 16000
@@ -76,6 +78,8 @@ func handle_gravity(
 	velocity : VelocityComponent,
 	delta: float
 ) -> void:
+	if disabled:
+		return
 	velocity.flat_ver_change(gravity, delta)
 	
 	if velocity.attempting_fall() && velocity.get_velocity().y > gravity_max_speed:

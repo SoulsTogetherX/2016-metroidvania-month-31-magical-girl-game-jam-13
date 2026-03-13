@@ -89,8 +89,14 @@ func _press_button() -> void:
 	var control := Global.local_controller
 	if control is RoomManager:
 		if !control.saw_event(event_name):
-			_press_sfx.play()
-			_emitter_2d.emit()
+			play_effect()
 			button_pressed.emit()
 		control.flag_event(event_name)
+#endregion
+
+
+#region Public Methods
+func play_effect() -> void:
+	_press_sfx.play()
+	_emitter_2d.emit()
 #endregion

@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cl5jdr7b2mjon"]
 
-[ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/main_menu_subscreen.gd" id="1_eenkr"]
+[ext_resource type="Script" uid="uid://cx5ncjk1jhjot" path="res://src/main/main_menu/scripts/main_menu_subscreen.gd" id="1_eenkr"]
 [ext_resource type="Texture2D" uid="uid://ckblsgk8h7mjh" path="res://assets/sprites/UI/credits/Game_Credits.png" id="2_uykqi"]
 [ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/PaddingContainer.gd" id="3_hngq2"]
+[ext_resource type="Script" uid="uid://bikr31ssqqgxe" path="res://addons/FreeControl/src/CustomClasses/AnimatableControl/mount/AnimatableMount.gd" id="4_8dl8u"]
 [ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="4_jgml3"]
 [ext_resource type="Texture2D" uid="uid://cssrp3q0uw35g" path="res://assets/sprites/UI/start_screen/BackButton.tres" id="5_8dl8u"]
+[ext_resource type="Script" uid="uid://c7w6023qk7v1n" path="res://src/main/main_menu/scripts/button_hover.gd" id="5_uw52b"]
 
 [node name="CreditsScreen" type="MarginContainer" unique_id=253963022]
 anchors_preset = 15
@@ -40,7 +42,24 @@ metadata/_custom_type_script = "uid://dube6kmp8e6dk"
 [node name="AspectRatioBtn" type="AspectRatioContainer" parent="BackMargin" unique_id=1092893023]
 layout_mode = 2
 
-[node name="ModulateTransitionBtn" type="Container" parent="BackMargin/AspectRatioBtn" unique_id=5711210]
+[node name="BackBtnMount" type="Control" parent="BackMargin/AspectRatioBtn" unique_id=1305107279]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_8dl8u")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="AnimatableControl" type="Container" parent="BackMargin/AspectRatioBtn/BackBtnMount" unique_id=1289379103]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("5_uw52b")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="BackBtn" type="Container" parent="BackMargin/AspectRatioBtn/BackBtnMount/AnimatableControl" unique_id=5711210]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -48,9 +67,9 @@ script = ExtResource("4_jgml3")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="TextureRect" type="TextureRect" parent="BackMargin/AspectRatioBtn/ModulateTransitionBtn" unique_id=1573042710]
+[node name="BackBtnTexture" type="TextureRect" parent="BackMargin/AspectRatioBtn/BackBtnMount/AnimatableControl/BackBtn" unique_id=1573042710]
 layout_mode = 2
 texture = ExtResource("5_8dl8u")
 expand_mode = 2
 
-[connection signal="press_vaild" from="BackMargin/AspectRatioBtn/ModulateTransitionBtn" to="." method="_on_back"]
+[connection signal="press_vaild" from="BackMargin/AspectRatioBtn/BackBtnMount/AnimatableControl/BackBtn" to="." method="_on_back"]

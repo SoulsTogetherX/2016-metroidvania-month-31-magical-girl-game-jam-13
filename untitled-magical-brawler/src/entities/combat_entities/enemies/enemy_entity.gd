@@ -13,6 +13,7 @@ enum PATROL_TYPE {
 
 
 #region External Variables
+@export var no_animation : bool = false
 @export var player_detect : PlayerDetecter
 @export var patrol_type : PATROL_TYPE:
 	set(val):
@@ -42,6 +43,10 @@ var _patrol_point : Vector2
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	
+	if no_animation:
+		%HSMMaster.disabled = true
+		%AnimationPlayer.speed_scale = 0.0
 	
 	if !player_detect:
 		push_warning("Enemy has no way to detect player")

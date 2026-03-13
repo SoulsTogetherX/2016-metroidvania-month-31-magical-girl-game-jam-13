@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://chm6od3s3vqgv"]
 
 [ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/sprites/tilesets/tilesets/light_tileset.tres" id="1_bpkdr"]
+[ext_resource type="Environment" uid="uid://ciof866enxu8x" path="res://assets/resources/environments/dark_cave.tres" id="1_ediwf"]
+[ext_resource type="Script" uid="uid://s873gdple5vt" path="res://src/main/main_game/scripts/room.gd" id="1_iw01r"]
 [ext_resource type="Script" uid="uid://dukqn0hyev23g" path="res://src/other_nodes/room_editor_tools/camera_zone/camera_zone.gd" id="2_2d5an"]
 [ext_resource type="PackedScene" uid="uid://dawijwjjvb4nl" path="res://src/other_nodes/button_door/button.tscn" id="2_gwdby"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_c61nw"]
@@ -53,14 +55,14 @@ metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ediwf"]
 size = Vector2(96, 2976)
 
-[sub_resource type="Resource" id="Resource_ediwf"]
+[sub_resource type="Resource" id="Resource_iw01r"]
 script = ExtResource("8_lsc14")
 exit_pos = Vector2(-3648, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sen6r"]
 size = Vector2(416, 3008)
 
-[sub_resource type="Resource" id="Resource_iw01r"]
+[sub_resource type="Resource" id="Resource_sen6r"]
 script = ExtResource("8_lsc14")
 exit_pos = Vector2(-23680, 224)
 
@@ -74,6 +76,9 @@ size = Vector2(27040, 6400)
 script = ExtResource("4_oljdq")
 
 [node name="Room" type="Node2D" unique_id=539753159]
+script = ExtResource("1_iw01r")
+env = ExtResource("1_ediwf")
+music = "uid://b2x130osbl4e3"
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=414894912]
 z_index = -1
@@ -168,9 +173,9 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_lsc14")
 info = SubResource("Resource_gwdby")
-music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 exit_id = 1
 exit_path = "res://src/main/main_game/rooms/room_11/room.tscn"
+music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayLeft" unique_id=114025404]
@@ -185,9 +190,9 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_lsc14")
 info = SubResource("Resource_gik1j")
-music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 id = 1
 exit_path = "res://src/main/main_game/rooms/room_9/room.tscn"
+music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayRight" unique_id=1740260080]
@@ -203,7 +208,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_t1a4i")
-info = SubResource("Resource_ediwf")
+info = SubResource("Resource_iw01r")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_1" unique_id=1954282508]
@@ -217,7 +222,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_t1a4i")
-info = SubResource("Resource_iw01r")
+info = SubResource("Resource_sen6r")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_2" unique_id=1758483416]
@@ -232,7 +237,6 @@ position = Vector2(-448, 2112)
 position = Vector2(-25056, -1856)
 color = Color(1, 0.49803922, 0.050980393, 1)
 event_name = &"OrangeEvent"
-pre_pressed = false
 
 [node name="Enemies" type="Node2D" parent="." unique_id=66582982]
 

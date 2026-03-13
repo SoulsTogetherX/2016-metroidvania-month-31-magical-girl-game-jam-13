@@ -6,11 +6,298 @@
 [ext_resource type="Script" uid="uid://dube6kmp8e6dk" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/PaddingContainer.gd" id="5_b6ri3"]
 [ext_resource type="Texture2D" uid="uid://fveery8jigvg" path="res://assets/sprites/UI/start_screen/quit_button.tres" id="5_nyqmk"]
 [ext_resource type="Texture2D" uid="uid://c0ginpcnlrbrk" path="res://assets/sprites/UI/start_screen/start_button.tres" id="5_o161a"]
+[ext_resource type="Script" uid="uid://bikr31ssqqgxe" path="res://addons/FreeControl/src/CustomClasses/AnimatableControl/mount/AnimatableMount.gd" id="5_wu21l"]
 [ext_resource type="Texture2D" uid="uid://di4pmitn4j78e" path="res://assets/sprites/UI/start_screen/story_button.tres" id="5_ysdbc"]
 [ext_resource type="Texture2D" uid="uid://ccf43ah076pwc" path="res://assets/sprites/UI/start_screen/Credits.tres" id="6_7jtmt"]
 [ext_resource type="Script" uid="uid://cbavvc7w51o1e" path="res://addons/FreeControl/src/CustomClasses/Buttons/Complex/ModulateTransitionButton.gd" id="6_o161a"]
+[ext_resource type="Script" uid="uid://c7w6023qk7v1n" path="res://src/main/main_menu/scripts/button_hover.gd" id="6_sugr7"]
 [ext_resource type="Script" uid="uid://cced4hkdpi2nc" path="res://addons/FreeControl/src/CustomClasses/SizingContainer/ExtrudeContainer.gd" id="7_fh40q"]
 [ext_resource type="Texture2D" uid="uid://c0p3dmvupqucl" path="res://assets/sprites/UI/start_screen/Gear.tres" id="8_ysdbc"]
+[ext_resource type="AudioStream" uid="uid://51s3xertyupg" path="res://assets/sounds/UI SFX/select.wav" id="14_wam44"]
+
+[sub_resource type="Animation" id="Animation_wu21l"]
+resource_name = "ON_LOAD"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable:position:x")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-900.0, 0.0, 40.0, 0.0, 5.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable:position:x")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1, 1.1, 1.1999999, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-800.0, 0.0, 40.0, 0.0, 5.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable:position:x")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9, 1, 1.0999999, 1.1999999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-700.0, 0.0, 40.0, 0.0, 5.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaddingContainer/HBox/Left/TitleMount/TitleAnimatable:position:y")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-500.0, 0.0, 40.0, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable:position:y")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.70000005, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [200.0, 0.0, -30.0, 10.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable:position:y")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [350.0, 0.0, -30.0, 10.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable:scale")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PaddingContainer/HBox/Left/TitleMount/TitleAnimatable:scale")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.85, 1.15), Vector2(1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wam44"]
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-800.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-700.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaddingContainer/HBox/Left/TitleMount/TitleAnimatable:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-500.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [200.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [200.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-900.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PaddingContainer/HBox/Left/TitleMount/TitleAnimatable:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wam44"]
+_data = {
+&"ON_LOAD": SubResource("Animation_wu21l"),
+&"RESET": SubResource("Animation_wam44")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wam44"]
+random_pitch = 1.3348398
+streams_count = 1
+stream_0/stream = ExtResource("14_wam44")
 
 [node name="StartScreen" type="MarginContainer" unique_id=1783423359]
 anchors_preset = 15
@@ -24,6 +311,10 @@ script = ExtResource("1_m6ypo")
 layout_mode = 2
 texture = ExtResource("2_3jpgh")
 expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1455865412]
+libraries/ = SubResource("AnimationLibrary_wam44")
+autoplay = &"ON_LOAD"
 
 [node name="PaddingContainer" type="Container" parent="." unique_id=979806770]
 layout_mode = 2
@@ -45,9 +336,28 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-theme_override_constants/separation = 20
+theme_override_constants/separation = 40
 
-[node name="Title" type="TextureRect" parent="PaddingContainer/HBox/Left" unique_id=811863898]
+[node name="TitleMount" type="Control" parent="PaddingContainer/HBox/Left" unique_id=1772408613]
+layout_mode = 2
+script = ExtResource("5_wu21l")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="TitleAnimatable" type="Container" parent="PaddingContainer/HBox/Left/TitleMount" unique_id=1890628149 node_paths=PackedStringArray("sound_effect")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -500.0
+offset_bottom = -500.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("6_sugr7")
+sound_effect = NodePath("../../../../../AudioStreamPlayer")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="Title" type="TextureRect" parent="PaddingContainer/HBox/Left/TitleMount/TitleAnimatable" unique_id=811863898]
 layout_mode = 2
 texture = ExtResource("2_57gqb")
 stretch_mode = 5
@@ -57,13 +367,34 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 40
 
-[node name="StartBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=1891805868]
+[node name="StartBtnMount" type="Control" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=425240900]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_wu21l")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="StartBtnAnimatable" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount" unique_id=189267249 node_paths=PackedStringArray("sound_effect")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -900.0
+offset_right = -900.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("6_sugr7")
+sound_effect = NodePath("../../../../../../AudioStreamPlayer")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="StartBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable" unique_id=1105611742]
 layout_mode = 2
 script = ExtResource("6_o161a")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtn" unique_id=981433439]
+[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable/StartBtn" unique_id=700084693]
 layout_mode = 2
 script = ExtResource("7_fh40q")
 extrude_left = 30
@@ -72,7 +403,7 @@ extrude_right = 30
 extrude_bottom = 25
 metadata/_custom_type_script = "uid://cced4hkdpi2nc"
 
-[node name="StartBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtn/ExtrudeContainer" unique_id=1694680475]
+[node name="StartBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable/StartBtn/ExtrudeContainer" unique_id=98855720]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -81,13 +412,34 @@ texture = ExtResource("5_o161a")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StoryBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=1106823841]
+[node name="StoryBtnMount" type="Control" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=58248408]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_wu21l")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="StoryBtnAnimatable" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount" unique_id=571684048 node_paths=PackedStringArray("sound_effect")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_right = -800.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("6_sugr7")
+sound_effect = NodePath("../../../../../../AudioStreamPlayer")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="StoryBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable" unique_id=1106823841]
 layout_mode = 2
 script = ExtResource("6_o161a")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtn" unique_id=1351679810]
+[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable/StoryBtn" unique_id=1351679810]
 layout_mode = 2
 script = ExtResource("7_fh40q")
 extrude_left = 30
@@ -96,7 +448,7 @@ extrude_right = 30
 extrude_bottom = 25
 metadata/_custom_type_script = "uid://cced4hkdpi2nc"
 
-[node name="StoryBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtn/ExtrudeContainer" unique_id=1975751262]
+[node name="StoryBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable/StoryBtn/ExtrudeContainer" unique_id=1975751262]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 4
@@ -104,13 +456,34 @@ texture = ExtResource("5_ysdbc")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="QuitBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=414236627]
+[node name="QuitBtnMount" type="Control" parent="PaddingContainer/HBox/Left/VBoxContainer" unique_id=1526677146]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_wu21l")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="QuitBtnAnimatable" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount" unique_id=547239066 node_paths=PackedStringArray("sound_effect")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -700.0
+offset_right = -700.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("6_sugr7")
+sound_effect = NodePath("../../../../../../AudioStreamPlayer")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="QuitBtn" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable" unique_id=414236627]
 layout_mode = 2
 script = ExtResource("6_o161a")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtn" unique_id=415668380]
+[node name="ExtrudeContainer" type="Container" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable/QuitBtn" unique_id=415668380]
 layout_mode = 2
 script = ExtResource("7_fh40q")
 extrude_left = 30
@@ -119,7 +492,7 @@ extrude_right = 30
 extrude_bottom = 25
 metadata/_custom_type_script = "uid://cced4hkdpi2nc"
 
-[node name="QuitBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtn/ExtrudeContainer" unique_id=1939292480]
+[node name="QuitBtnTexture" type="TextureRect" parent="PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable/QuitBtn/ExtrudeContainer" unique_id=1939292480]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 4
@@ -138,13 +511,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 ratio = 1.1667
 
-[node name="SettingsBtn" type="Container" parent="PaddingContainer/HBox/Right/SettingsBtn" unique_id=1450563593]
+[node name="SettingsBtnMount" type="Control" parent="PaddingContainer/HBox/Right/SettingsBtn" unique_id=681434148]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_wu21l")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="SettingsAnimatable" type="Container" parent="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount" unique_id=2081628284 node_paths=PackedStringArray("sound_effect")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("6_sugr7")
+sound_effect = NodePath("../../../../../../AudioStreamPlayer")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="SettingsBtn" type="Container" parent="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable" unique_id=1450563593]
 layout_mode = 2
 script = ExtResource("6_o161a")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtn" unique_id=1636200156]
+[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable/SettingsBtn" unique_id=1636200156]
 layout_mode = 2
 texture = ExtResource("8_ysdbc")
 expand_mode = 1
@@ -156,20 +549,47 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 ratio = 2.8333
 
-[node name="CreditsBtn" type="Container" parent="PaddingContainer/HBox/Right/CreditsBtn" unique_id=1602911835]
+[node name="CreditsBtnMount" type="Control" parent="PaddingContainer/HBox/Right/CreditsBtn" unique_id=989094800]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_wu21l")
+metadata/_custom_type_script = "uid://bikr31ssqqgxe"
+
+[node name="CreditsAnimatable" type="Container" parent="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount" unique_id=873678971 node_paths=PackedStringArray("sound_effect")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("6_sugr7")
+sound_effect = NodePath("../../../../../../AudioStreamPlayer")
+metadata/_custom_type_script = "uid://bdebqplr7au8q"
+
+[node name="CreditsBtn" type="Container" parent="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable" unique_id=1602911835]
 layout_mode = 2
 script = ExtResource("6_o161a")
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.5)
 metadata/_custom_type_script = "uid://cbavvc7w51o1e"
 
-[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtn" unique_id=2053072215]
+[node name="TextureRect" type="TextureRect" parent="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable/CreditsBtn" unique_id=2053072215]
 layout_mode = 2
 texture = ExtResource("6_7jtmt")
 expand_mode = 1
 stretch_mode = 4
 
-[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/StartBtn" to="." method="_start_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/StoryBtn" to="." method="_story_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/QuitBtn" to="." method="_quit_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtn" to="." method="_settings_game_pressed"]
-[connection signal="press_vaild" from="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtn" to="." method="_credits_game_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=328304784]
+stream = SubResource("AudioStreamRandomizer_wam44")
+volume_db = -7.0
+pitch_scale = 0.2
+max_polyphony = 2
+bus = &"SFX"
+
+[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/StartBtnMount/StartBtnAnimatable/StartBtn" to="." method="_start_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/StoryBtnMount/StoryBtnAnimatable/StoryBtn" to="." method="_story_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Left/VBoxContainer/QuitBtnMount/QuitBtnAnimatable/QuitBtn" to="." method="_quit_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Right/SettingsBtn/SettingsBtnMount/SettingsAnimatable/SettingsBtn" to="." method="_settings_game_pressed"]
+[connection signal="press_vaild" from="PaddingContainer/HBox/Right/CreditsBtn/CreditsBtnMount/CreditsAnimatable/CreditsBtn" to="." method="_credits_game_pressed"]

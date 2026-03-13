@@ -71,25 +71,31 @@ uppercase = true
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("1_rs85n")
-max_size = Vector2(250, -1)
+max_size = Vector2(300, -1)
 metadata/_custom_type_script = "uid://qyynh24u37dl"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer" unique_id=1582199546]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer" unique_id=369976173]
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 6
 alignment = 2
 
-[node name="ResumeGameBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=267373742]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=1625970460]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="ResumeGameBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer" unique_id=267373742]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 0
 script = ExtResource("3_va7ec")
 background = SubResource("StyleBoxFlat_81gm5")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/ResumeGameBtn" unique_id=1910388344]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/ResumeGameBtn" unique_id=1910388344]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -97,21 +103,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/ResumeGameBtn/Margin" unique_id=541170948]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/ResumeGameBtn/Margin" unique_id=541170948]
 layout_mode = 2
-text = "Resume Game"
+text = "Resume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=1437245593]
+[node name="MainMenuBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer" unique_id=1437245593]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 0
 script = ExtResource("3_va7ec")
 background = SubResource("StyleBoxFlat_81gm5")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/MainMenuBtn" unique_id=1826007627]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/MainMenuBtn" unique_id=1826007627]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -119,34 +126,54 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/MainMenuBtn/Margin" unique_id=1593911032]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/MainMenuBtn/Margin" unique_id=1593911032]
 layout_mode = 2
 text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitGameBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=1642249134]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer" unique_id=1738625769]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-mouse_filter = 0
-script = ExtResource("3_va7ec")
-background = SubResource("StyleBoxFlat_81gm5")
-colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
-metadata/_custom_type_script = "uid://8jyk6thl41yx"
+size_flags_horizontal = 6
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/QuitGameBtn" unique_id=1431092132]
+[node name="Music" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/VBoxContainer" unique_id=2136363459]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/QuitGameBtn/Margin" unique_id=169896878]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/VBoxContainer/Music" unique_id=613591192]
 layout_mode = 2
-text = "Quit Game"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/ResumeGameBtn" to="." method="_on_resume_game_btn_pressed"]
-[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
-[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/QuitGameBtn" to="." method="_on_quit_game_btn_pressed"]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/VBoxContainer/Music" unique_id=616637895]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="SFX" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/VBoxContainer" unique_id=717770564]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/VBoxContainer/SFX" unique_id=839667207]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/VBoxContainer/SFX" unique_id=1651436270]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/ResumeGameBtn" to="." method="_on_resume_game_btn_pressed"]
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]

@@ -10,6 +10,7 @@ extends HSMBranch
 @export_group("Other")
 @export var wall_detect : Area2D
 @export var ability_cache : AbilityCacheModule
+
 @export_subgroup("Timers")
 @export var coyote_timer : Timer
 @export var coyote_wall_timer : Timer
@@ -65,6 +66,10 @@ func action_finished(action_name : StringName) -> void:
 				GlobalLabels.hsm_context.ACT_IN_AIR
 			):
 				coyote_wall_timer.start()
+		GlobalLabels.hsm_context.ACT_IN_AIR:
+			if !jump_buffer.is_stopped():
+				jump_buffer.stop()
+				change_state(jump_state)
 
 func _is_touching_wall() -> bool:
 	var ctx := get_context()

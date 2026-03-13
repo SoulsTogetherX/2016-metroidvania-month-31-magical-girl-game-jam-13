@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://o0bnkbvr6k55" path="res://src/resources/combat/effects/combat_effects/attack_effects/flat_health_effect.gd" id="6_ed3ja"]
 [ext_resource type="Script" uid="uid://b7uwg4w8qnsld" path="res://src/other_nodes/componets/movement/gravity_component.gd" id="6_iw6ud"]
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="7_0r3kn"]
+[ext_resource type="Shader" uid="uid://c4pwni02nxw7f" path="res://assets/shaders/soild_color_shader.gdshader" id="8_00eij"]
 [ext_resource type="Script" uid="uid://clhcvayfse4aa" path="res://src/other_nodes/componets/other/task_manager/base/extra/velocity_task_manager.gd" id="8_5qgjf"]
 [ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="8_ljr7w"]
 [ext_resource type="Script" uid="uid://rri6coc67k58" path="res://src/other_nodes/componets/other/task_manager/tasks/actions/jump_task.gd" id="9_0tyfe"]
@@ -42,8 +43,8 @@
 [ext_resource type="AudioStream" uid="uid://bpmrtop7fxtgp" path="res://assets/sounds/Character SFX/Dig/Dig Transform.wav" id="25_y1dhi"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="26_8h0p6"]
 [ext_resource type="AudioStream" uid="uid://ctfi00anab537" path="res://assets/sounds/Character SFX/Player Death.wav" id="26_etaub"]
+[ext_resource type="AudioStream" uid="uid://cfarmseryvkhj" path="res://assets/sounds/Character SFX/Punch Windup.wav" id="27_00eij"]
 [ext_resource type="AudioStream" uid="uid://x348yns43214" path="res://assets/sounds/Character SFX/Incur Dmg 1.wav" id="27_s0yi0"]
-[ext_resource type="AudioStream" uid="uid://cu3wskwyxuh30" path="res://assets/sounds/Character SFX/Punch!!.wav" id="27_y1dhi"]
 [ext_resource type="Script" uid="uid://crubykxav651n" path="res://src/other_nodes/componets/other/hsm/modules/move_task_module.gd" id="28_txpw3"]
 [ext_resource type="Script" uid="uid://bid0qrw4igl4n" path="res://src/other_nodes/componets/other/hsm/modules/animation_module.gd" id="29_iamtb"]
 [ext_resource type="Script" uid="uid://f52ik2jq0j3c" path="res://src/other_nodes/componets/other/hsm/custom/player/healthy/grounded/normal/stationary/hsm_stationary_branch.gd" id="29_wjrm0"]
@@ -87,6 +88,39 @@ metadata/_custom_type_script = "uid://di60apr8dmypo"
 script = ExtResource("8_ljr7w")
 status = SubResource("Resource_s0yi0")
 metadata/_custom_type_script = "uid://cok0d6p3i1fv2"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hw5c7"]
+shader = ExtResource("8_00eij")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/precentage = 0.0
+
+[sub_resource type="Animation" id="Animation_00eij"]
+resource_name = "ABILITY_GET"
+length = 4.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/precentage")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.8, -0.050000004, -0.050000004, 0.11666667, 0.11666667, 0.4, -0.03333333, 0, 0.03333333, 0, 0.9, -0.06666666, -0.09523809, 0.050000004, 0.07142858, 0.45, -0.13333334, 0, 0, 0, 1, -0.13333333, 0.16666667, 0, 0, 1, -0.20833334, 0.16666667, 0, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25, 1, 1.25, 2, 2.25, 3, 4)
+}
 
 [sub_resource type="Animation" id="Animation_45rvh"]
 resource_name = "ATTACK"
@@ -1000,6 +1034,29 @@ tracks/18/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/19/type = "bezier"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath(".:material:shader_parameter/precentage")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath(".:material:shader_parameter/color")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_tvulh"]
 resource_name = "RUNNING"
@@ -1127,6 +1184,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cmg6"]
 _data = {
+&"ABILITY_GET": SubResource("Animation_00eij"),
 &"ATTACK": SubResource("Animation_45rvh"),
 &"DEAD": SubResource("Animation_snams"),
 &"DIG_END": SubResource("Animation_akx0o"),
@@ -1208,7 +1266,7 @@ stream_1/stream = ExtResource("14_llr1v")
 stream_2/stream = ExtResource("16_hp8j0")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hw5c7"]
-random_pitch = 1.0116194
+random_pitch = 1.0594631
 streams_count = 7
 stream_0/stream = ExtResource("17_fjhij")
 stream_1/stream = ExtResource("18_2nlrk")
@@ -1221,7 +1279,7 @@ stream_6/stream = ExtResource("23_00eij")
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s0yi0"]
 random_pitch = 1.005793
 streams_count = 1
-stream_0/stream = ExtResource("27_y1dhi")
+stream_0/stream = ExtResource("27_00eij")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y1dhi"]
 random_pitch = 1.1553527
@@ -1258,6 +1316,7 @@ follow = NodePath("..")
 [node name="VisualPivot" type="Node2D" parent="." unique_id=1229646187]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="VisualPivot" unique_id=1133366217]
+material = SubResource("ShaderMaterial_hw5c7")
 sprite_frames = ExtResource("2_3xcyv")
 animation = &"idle"
 offset = Vector2(0, -220)
@@ -1595,7 +1654,7 @@ recevier = NodePath("..")
 [node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
 unique_name_in_owner = true
 script = ExtResource("14_kgtwq")
-abilties = Array[int]([2])
+abilties = Array[int]([0, 1, 2])
 metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
@@ -1603,14 +1662,17 @@ script = ExtResource("5_uym1e")
 metadata/_custom_type_script = "uid://ui8sa21uexr7"
 
 [node name="GravityComponent" type="Node" parent="." unique_id=1508736019]
+unique_name_in_owner = true
 script = ExtResource("6_iw6ud")
 metadata/_custom_type_script = "uid://b7uwg4w8qnsld"
 
 [node name="HSMContext" type="Node" parent="." unique_id=69866376]
+unique_name_in_owner = true
 script = ExtResource("16_1fgyy")
 metadata/_custom_type_script = "uid://6hg6o4escfno"
 
 [node name="HSMMaster" type="Node" parent="." unique_id=1860324189 node_paths=PackedStringArray("starting_state", "context", "actor")]
+unique_name_in_owner = true
 script = ExtResource("41_iamtb")
 starting_state = NodePath("Master/Healthy/Grounded/Normal/Stationary/Idle")
 context = NodePath("../HSMContext")
@@ -1699,7 +1761,7 @@ one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=546628607]
 process_callback = 0
-wait_time = 0.2
+wait_time = 0.05
 one_shot = true
 
 [node name="Jumping" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=624786871 node_paths=PackedStringArray("fall_state", "ground_state", "jump_state")]
@@ -1858,9 +1920,9 @@ gravity_module = NodePath("../../GravityComponent")
 need_physics = true
 
 [node name="VelocityApplyTask" type="Node" parent="TaskManager" unique_id=473670275 node_paths=PackedStringArray("actor")]
+unique_name_in_owner = true
 script = ExtResource("13_a31ob")
 actor = NodePath("../..")
-auto_start = true
 need_physics = true
 
 [node name="UpdateCameraLeadTask" type="Node" parent="TaskManager" unique_id=1235855302 node_paths=PackedStringArray("context", "actor")]

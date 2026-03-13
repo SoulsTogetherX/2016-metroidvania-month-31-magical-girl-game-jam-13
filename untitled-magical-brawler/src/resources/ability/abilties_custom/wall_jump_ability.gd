@@ -10,10 +10,10 @@ func _init() -> void:
 
 #region Public Methods (Access)
 func get_ability_name() -> String:
-	return "Snek Wall Jump"
+	return "Spare Foot of Snek"
 func get_description() -> String:
-	return "Jump up walls to reach the sky."
+	return "A creepy method to jump off walls."
 
 func get_icon() -> Texture2D:
-	return preload("uid://chwljnx2nsoh5")
+	return preload("res://assets/sprites/other/upgrades/wall_jump_upgrade.tres")
 #endregion

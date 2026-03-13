@@ -7,22 +7,31 @@
 [ext_resource type="PackedScene" uid="uid://d1nkmg3v1wckv" path="res://src/UI/ability_display/ability_display.tscn" id="5_uw7ok"]
 [ext_resource type="PackedScene" uid="uid://pe70we2oe3xe" path="res://src/UI/pause_menu/pause_menu.tscn" id="6_d2ks1"]
 
-[node name="RoomManager" type="Node" unique_id=1024841699 node_paths=PackedStringArray("player", "camera", "ability_ui", "scene_controller")]
+[node name="RoomManager" type="Node" unique_id=1024841699 node_paths=PackedStringArray("player", "camera", "environment_controller", "background_controller", "ability_ui", "scene_controller")]
 script = ExtResource("1_7uoq4")
 player = NodePath("Player")
 camera = NodePath("GlobalCamera")
+environment_controller = NodePath("WorldEnvironment")
+background_controller = NodePath("BackgroundController")
 ability_ui = NodePath("UILayer/AbilityDisplay")
 scene_controller = NodePath("SceneController")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=438136566]
+
+[node name="BackgroundController" type="Node" parent="." unique_id=356122035]
+script = ExtResource("2_tthvn")
 
 [node name="SceneController" type="Node" parent="." unique_id=164924445]
 script = ExtResource("2_tthvn")
 
 [node name="Player" parent="." unique_id=539542931 instance=ExtResource("2_rw1eq")]
+z_index = 0
 
 [node name="GlobalCamera" parent="." unique_id=1580514438 instance=ExtResource("3_tthvn")]
 process_callback = 1
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1532755660]
+layer = 3
 
 [node name="AbilityDisplay" parent="UILayer" unique_id=803906741 instance=ExtResource("5_uw7ok")]
 modulate = Color(1, 1, 1, 0)

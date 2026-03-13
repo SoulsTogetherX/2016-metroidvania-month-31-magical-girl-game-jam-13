@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://dlk6edf0fssdd"]
 
+[ext_resource type="Environment" uid="uid://c4kd0mv4bxng1" path="res://assets/resources/environments/light_area.tres" id="1_g3y4n"]
+[ext_resource type="Script" uid="uid://s873gdple5vt" path="res://src/main/main_game/scripts/room.gd" id="1_uuuli"]
 [ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/sprites/tilesets/tilesets/light_tileset.tres" id="1_yb3sh"]
 [ext_resource type="Script" uid="uid://cpduwb8f22nmd" path="res://src/other_nodes/room_editor_tools/player_fallback/player_fallback.gd" id="2_48jpf"]
 [ext_resource type="Script" uid="uid://ugwgsarbcpxm" path="res://src/other_nodes/room_editor_tools/gateway/player_position_resource.gd" id="3_g3y4n"]
@@ -44,6 +46,10 @@ size = Vector2(64, 192)
 size = Vector2(16640, 5184)
 
 [node name="Room" type="Node2D" unique_id=539753159]
+script = ExtResource("1_uuuli")
+env = ExtResource("1_g3y4n")
+music = "uid://blu44am6qgrh1"
+background = "uid://cr24v51pr0pdg"
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=414894912]
 z_index = -1
@@ -120,9 +126,9 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_uswq7")
 info = SubResource("Resource_i8ee3")
-music_path = "res://assets/music/3. Chords of the Cave.ogg"
 exit_id = 6
 exit_path = "res://src/main/main_game/rooms/room_4/room.tscn"
+music_path = "res://assets/music/3. Chords of the Cave.ogg"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayLeftFall" unique_id=378892767]
@@ -137,9 +143,9 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_uswq7")
 info = SubResource("Resource_a3c0h")
-music_path = "res://assets/music/3. Chords of the Cave.ogg"
 id = 1
 exit_path = "res://src/main/main_game/rooms/room_18/room.tscn"
+music_path = "res://assets/music/3. Chords of the Cave.ogg"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayRight" unique_id=354499011]

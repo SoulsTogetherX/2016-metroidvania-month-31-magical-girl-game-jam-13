@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://cisvfbtqrfx6r"]
 
+[ext_resource type="Script" uid="uid://s873gdple5vt" path="res://src/main/main_game/scripts/room.gd" id="1_fs0xn"]
 [ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/sprites/tilesets/tilesets/light_tileset.tres" id="1_fyrm0"]
+[ext_resource type="Environment" uid="uid://ciof866enxu8x" path="res://assets/resources/environments/dark_cave.tres" id="1_mcfq4"]
 [ext_resource type="Script" uid="uid://dukqn0hyev23g" path="res://src/other_nodes/room_editor_tools/camera_zone/camera_zone.gd" id="2_cdow6"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_0n7d0"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_73owo"]
@@ -9,6 +11,7 @@
 [ext_resource type="Script" uid="uid://basvtpxmelo7e" path="res://src/resources/ability/abilties_custom/double_jump_ability.gd" id="5_mcfq4"]
 [ext_resource type="Script" uid="uid://7qsfw4eqfblm" path="res://src/other_nodes/componets/other/assign_camera_lead.gd" id="6_mcfq4"]
 [ext_resource type="Script" uid="uid://cpduwb8f22nmd" path="res://src/other_nodes/room_editor_tools/player_fallback/player_fallback.gd" id="7_1spqf"]
+[ext_resource type="Texture2D" uid="uid://4yh1hgbehvt" path="res://assets/sprites/other/upgrades/double_jump_upgrade.tres" id="7_fs0xn"]
 [ext_resource type="Script" uid="uid://ugwgsarbcpxm" path="res://src/other_nodes/room_editor_tools/gateway/player_position_resource.gd" id="8_fs0xn"]
 [ext_resource type="Script" uid="uid://8wbxs64d5ccc" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="9_0n7d0"]
 
@@ -59,6 +62,9 @@ size = Vector2(13408, 3072)
 size = Vector2(12544, 3968)
 
 [node name="Room" type="Node2D" unique_id=539753159]
+script = ExtResource("1_fs0xn")
+env = ExtResource("1_mcfq4")
+music = "uid://b2x130osbl4e3"
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=414894912]
 texture_filter = 1
@@ -87,6 +93,9 @@ metadata/_custom_type_script = "uid://cpduwb8f22nmd"
 [node name="AblityCollectable" parent="." unique_id=370613763 instance=ExtResource("4_bcmrb")]
 position = Vector2(-6080, 0)
 ability = SubResource("Resource_1spqf")
+
+[node name="Icon" parent="AblityCollectable" index="0" unique_id=1155619885]
+texture = ExtResource("7_fs0xn")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1458903850]
 visible = false
@@ -172,8 +181,8 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_0n7d0")
 info = SubResource("Resource_73owo")
-music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 exit_path = "res://src/main/main_game/rooms/room_14/room.tscn"
+music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayLeft" unique_id=1326585432]
@@ -188,9 +197,9 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_0n7d0")
 info = SubResource("Resource_mcfq4")
-music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 id = 1
 exit_path = "res://src/main/main_game/rooms/room_10/room.tscn"
+music_path = "res://assets/music/2. Magic Mushroom Shards.ogg"
 metadata/_custom_type_script = "uid://8wbxs64d5ccc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gateways/GatewayRight" unique_id=1963037857]
@@ -211,3 +220,5 @@ z_index = 100
 position = Vector2(-6336, -608)
 shape = SubResource("RectangleShape2D_fs0xn")
 disabled = true
+
+[editable path="AblityCollectable"]

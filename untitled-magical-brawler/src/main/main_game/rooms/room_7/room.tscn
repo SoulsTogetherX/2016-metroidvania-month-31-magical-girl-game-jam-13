@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://b2iiyc62kso4s"]
 
 [ext_resource type="TileSet" uid="uid://c3oofpoefke86" path="res://assets/sprites/tilesets/tilesets/light_tileset.tres" id="1_1fitn"]
+[ext_resource type="Script" uid="uid://s873gdple5vt" path="res://src/main/main_game/scripts/room.gd" id="1_8604f"]
+[ext_resource type="Environment" uid="uid://c4kd0mv4bxng1" path="res://assets/resources/environments/light_area.tres" id="1_pdoel"]
 [ext_resource type="Script" uid="uid://cpduwb8f22nmd" path="res://src/other_nodes/room_editor_tools/player_fallback/player_fallback.gd" id="2_hf3qr"]
 [ext_resource type="Script" uid="uid://ugwgsarbcpxm" path="res://src/other_nodes/room_editor_tools/gateway/player_position_resource.gd" id="3_te0iy"]
 [ext_resource type="Script" uid="uid://dukqn0hyev23g" path="res://src/other_nodes/room_editor_tools/camera_zone/camera_zone.gd" id="4_470to"]
@@ -13,10 +15,11 @@
 [ext_resource type="Script" uid="uid://7qsfw4eqfblm" path="res://src/other_nodes/componets/other/assign_camera_lead.gd" id="8_mawqk"]
 [ext_resource type="Script" uid="uid://8wbxs64d5ccc" path="res://src/other_nodes/room_editor_tools/gateway/gateway.gd" id="9_te0iy"]
 [ext_resource type="Script" uid="uid://dwwm5nsjrqj7v" path="res://src/other_nodes/room_editor_tools/safe_area/checkpoint.gd" id="10_470to"]
+[ext_resource type="Texture2D" uid="uid://bs7m4cs3av32e" path="res://assets/sprites/other/upgrades/wall_jump_upgrade.tres" id="14_mawqk"]
 
 [sub_resource type="Resource" id="Resource_pdoel"]
 script = ExtResource("3_te0iy")
-exit_pos = Vector2(-256, 0)
+exit_pos = Vector2(-16096, 320)
 metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 
 [sub_resource type="Curve2D" id="Curve2D_470to"]
@@ -76,14 +79,14 @@ metadata/_custom_type_script = "uid://ugwgsarbcpxm"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ham"]
 size = Vector2(64, 1376)
 
-[sub_resource type="Resource" id="Resource_mawqk"]
+[sub_resource type="Resource" id="Resource_8604f"]
 script = ExtResource("3_te0iy")
 exit_pos = Vector2(-5472, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6idf"]
 size = Vector2(448, 1728)
 
-[sub_resource type="Resource" id="Resource_8604f"]
+[sub_resource type="Resource" id="Resource_b1h84"]
 script = ExtResource("3_te0iy")
 exit_pos = Vector2(-16064, 512)
 
@@ -98,6 +101,10 @@ metadata/_custom_type_script = "uid://rhiaalko61sv"
 size = Vector2(21440, 7520)
 
 [node name="Room" type="Node2D" unique_id=539753159]
+script = ExtResource("1_8604f")
+env = ExtResource("1_pdoel")
+music = "uid://ch3ojbugdg2je"
+background = "uid://cq7ho5ym5ern3"
 metadata/_edit_horizontal_guides_ = [-3931.0]
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=414894912]
@@ -123,6 +130,12 @@ collision_enabled = false
 
 [node name="PlayerFallback" type="Marker2D" parent="." unique_id=1884330626]
 position = Vector2(-256, 0)
+script = ExtResource("2_hf3qr")
+info = SubResource("Resource_pdoel")
+metadata/_custom_type_script = "uid://cpduwb8f22nmd"
+
+[node name="PlayerFallback2" type="Marker2D" parent="." unique_id=1719529975]
+position = Vector2(-16096, 320)
 script = ExtResource("2_hf3qr")
 info = SubResource("Resource_pdoel")
 metadata/_custom_type_script = "uid://cpduwb8f22nmd"
@@ -331,7 +344,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_470to")
-info = SubResource("Resource_mawqk")
+info = SubResource("Resource_8604f")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_1" unique_id=872127744]
@@ -345,7 +358,7 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("10_470to")
-info = SubResource("Resource_8604f")
+info = SubResource("Resource_b1h84")
 metadata/_custom_type_script = "uid://dwwm5nsjrqj7v"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CheckPoint_2" unique_id=432525331]
@@ -358,6 +371,12 @@ debug_color = Color(0.95482665, 2.887845e-06, 0.5489354, 0.41960785)
 [node name="AblityCollectable" parent="Objects" unique_id=370613763 instance=ExtResource("4_pk5yi")]
 position = Vector2(-18176, 1536)
 ability = SubResource("Resource_pk5yi")
+
+[node name="Icon" parent="Objects/AblityCollectable" index="0" unique_id=1155619885]
+texture = ExtResource("14_mawqk")
+
+[node name="Light" parent="Objects/AblityCollectable" index="1" unique_id=1393679278]
+modulate = Color(1, 0.4353445, 0.8586215, 0.39100003)
 
 [node name="Limits" type="Node2D" parent="." unique_id=2070732087]
 visible = false
@@ -376,7 +395,9 @@ offset_right = -2880.0
 offset_bottom = -2611.0
 theme_override_font_sizes/font_size = 100
 text = "Making good use of that wall jump.
-Secret 2/4"
+Secret 1/4"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[editable path="Objects/AblityCollectable"]

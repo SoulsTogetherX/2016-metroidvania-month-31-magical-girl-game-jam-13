@@ -7,6 +7,12 @@ var _fade_tween : Tween
 #endregion
 
 
+#region OnReady Variables
+@onready var _music_slider: HSlider = %MusicSlider
+@onready var _sfx_slider: HSlider = %SFXSlider
+#endregion
+
+
 
 #region Virtual Methods
 func _ready() -> void:
@@ -42,10 +48,25 @@ func _on_resume_game_btn_pressed() -> void:
 	set_paused(false)
 
 func _on_main_menu_btn_pressed() -> void:
-	pass
+	Global.main_controller.load_main_menu()
+#endregion
 
-func _on_quit_game_btn_pressed() -> void:
-	get_tree().quit()
+
+#region Private Methods (Helper)
+func _load_settings() -> void:
+	_music_slider.value = SettingsHolder.get_bus_volume(
+		SettingsHolder.BUS.MUSIC
+	)
+	_sfx_slider.value = SettingsHolder.get_bus_volume(
+		SettingsHolder.BUS.SFX
+	)
+func _save_settings() -> void:
+	SettingsHolder.set_bus_volume(
+		SettingsHolder.BUS.MUSIC, _music_slider.value
+	)
+	SettingsHolder.set_bus_volume(
+		SettingsHolder.BUS.SFX, _sfx_slider.value
+	)
 #endregion
 
 
@@ -53,6 +74,11 @@ func _on_quit_game_btn_pressed() -> void:
 func set_paused(pause : bool) -> void:
 	if !get_tree() || get_tree().paused == pause:
 		return
+	
+	if pause:
+		_load_settings()
+	else:
+		_save_settings()
 	
 	get_tree().paused = pause
 	_create_fade_tween(pause)

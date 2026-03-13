@@ -16,6 +16,7 @@ height = 400.0
 script = ExtResource("1_2j5kw")
 
 [node name="BackFrame" type="Sprite2D" parent="." unique_id=2028136833]
+z_index = -1
 texture_filter = 1
 position = Vector2(0, -404)
 scale = Vector2(8, 8)
@@ -23,6 +24,7 @@ texture = ExtResource("1_blbmo")
 
 [node name="Door" type="Sprite2D" parent="." unique_id=736787274]
 unique_name_in_owner = true
+z_index = -1
 texture_filter = 1
 position = Vector2(0, -404)
 scale = Vector2(8, 8)
@@ -30,6 +32,7 @@ texture = ExtResource("2_oj12s")
 
 [node name="FrontFrame" type="Sprite2D" parent="." unique_id=2002345280]
 unique_name_in_owner = true
+z_index = 1
 texture_filter = 1
 position = Vector2(0, -404)
 scale = Vector2(8, 8)

@@ -10,10 +10,10 @@ func _init() -> void:
 
 #region Public Methods (Access)
 func get_ability_name() -> String:
-	return "Sneky Jump"
+	return "Sneky Boots"
 func get_description() -> String:
-	return "Jump on magic clouds to gain extra height."
+	return "Use fashion to jump on clouds."
 
 func get_icon() -> Texture2D:
-	return preload("uid://chwljnx2nsoh5")
+	return preload("res://assets/sprites/other/upgrades/double_jump_upgrade.tres")
 #endregion

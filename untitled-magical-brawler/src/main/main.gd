@@ -24,6 +24,9 @@ func _ready() -> void:
 
 #region Public Methods
 func load_main_menu() -> void:
+	SoundManager.swap_music(null)
+	get_tree().paused = false
+	
 	await fade_cover()
 	scene_controller.change_scene_to_path(
 		MAIN_MENU_PATH

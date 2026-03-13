@@ -2,6 +2,11 @@
 extends Node2D
 
 
+#region Constants
+const ABILITY_GET_ANIMATION_NAME := "ABILITY_GET"
+#endregion
+
+
 #region External Variables
 @export var ability : AbilityData:
 	set(val):
@@ -15,8 +20,9 @@ extends Node2D
 
 #region OnReady Variables
 @onready var _particles: OneshotParticles = %CollectableParticles
+@onready var _player: AnimationPlayer = %AnimationPlayer
 
-@onready var _sprite: Sprite2D = %Sprite2D
+@onready var _icon: Sprite2D = %Icon
 @onready var _hitbox: HitboxComponent = %Hitbox
 #endregion
 
@@ -38,18 +44,21 @@ func _ready() -> void:
 
 #region Private Methods
 func _load_texture() -> void:
-	if ability == null || _sprite == null:
+	if ability == null || _icon == null:
 		return
-	_sprite.texture = ability.get_icon()
+	_icon.texture = ability.get_icon()
 
 func _on_collect() -> void:
-	if ability != null:
-		Global.player.register_ability(ability.type)
-	
-	var control := Global.local_controller
-	if control is RoomManager:
-		control.display_ability(ability)
-	
 	_particles.start_final_emit(owner)
+	
+	if ability != null:
+		_player.play(ABILITY_GET_ANIMATION_NAME)
+		Global.player.register_ability(ability.type)
+		await Global.player.play_ability_gain_animation()
+		
+		var control := Global.local_controller
+		if control is RoomManager:
+			control.display_ability(ability)
+	
 	queue_free()
 #endregion

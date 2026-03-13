@@ -17,7 +17,8 @@ var _fade_tween : Tween
 
 #region Virtual Methods
 func _ready() -> void:
-	_force_fade(false)
+	if !Engine.is_editor_hint():
+		_force_fade(false)
 	_update_info(null)
 #endregion
 

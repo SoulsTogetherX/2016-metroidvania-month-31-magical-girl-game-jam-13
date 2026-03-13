@@ -65,10 +65,10 @@ static func can_end(arg : Dictionary = {}) -> bool:
 
 #region Public Methods (Access)
 func get_ability_name() -> String:
-	return "Snek Dig"
+	return "Snek Mirror"
 func get_description() -> String:
-	return "Press S to burrow under your troubles."
+	return "Press S to reveal your true self."
 
 func get_icon() -> Texture2D:
-	return preload("uid://chwljnx2nsoh5")
+	return preload("res://assets/sprites/other/upgrades/dig_upgrade.tres")
 #endregion
