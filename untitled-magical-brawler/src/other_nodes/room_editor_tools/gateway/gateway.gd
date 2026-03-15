@@ -3,9 +3,6 @@ class_name Gateway extends Area2D
 
 
 #region External Variables
-@export_group("Entering Player")
-@export var info : PlayerPositionResource
-
 @export_group("Ids")
 @export var id : int
 
@@ -13,18 +10,17 @@ class_name Gateway extends Area2D
 @export var exit_id : int
 @export_file_path("*.tscn") var exit_path: String
 
-@export_group("Music")
-@export_file_path("*.ogg") var music_path : String = "res://assets/music/1. Mushroom Dungeon.ogg"
+@export_group("Other")
+@export var pause_music : bool = false
 #endregion
 
 
 
 #region Virtual Methods
-func _ready() -> void:
-	info.exit_pos = global_position
+func _init() -> void:
 	monitoring = false
 	monitorable = false
-	
+func _ready() -> void:
 	collision_layer = 0
 	collision_mask = Constants.COLLISION.PLAYER
 	
@@ -37,8 +33,7 @@ func _ready() -> void:
 
 func _after_ready() -> void:
 	monitoring = false
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	await get_tree().create_timer(0.2).timeout
 	monitoring = true
 #endregion
 

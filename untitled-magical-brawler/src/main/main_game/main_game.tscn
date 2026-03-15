@@ -28,6 +28,8 @@ script = ExtResource("2_tthvn")
 z_index = 0
 
 [node name="GlobalCamera" parent="." unique_id=1580514438 instance=ExtResource("3_tthvn")]
+position = Vector2(59808, -228)
+zoom = Vector2(0.3, 0.3)
 process_callback = 1
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1532755660]

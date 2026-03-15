@@ -189,97 +189,6 @@ tracks/4/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_snams"]
-resource_name = "DEAD"
-length = 0.7
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.35, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 6, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"dead"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.35, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -220), Vector2(0, -220), Vector2(0, -210)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Particles/DeathParticles:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.35),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:scale")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.35, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.1, 1.2), Vector2(1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../..:collision_layer")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../../SoundSFX/Death")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.35),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [0.0],
-"method": &"play"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_akx0o"]
 resource_name = "DIG_END"
 length = 0.9
@@ -953,67 +862,67 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("../Particles/DeathParticles:emitting")
+tracks/12/path = NodePath(".:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath(".:scale")
+tracks/13/path = NodePath(".:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [0.0]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath(".:rotation")
+tracks/14/path = NodePath("../WallDetect:monitoring")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("../WallDetect:monitoring")
+tracks/15/path = NodePath("../..:collision_layer")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [132]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("../..:collision_layer")
+tracks/16/path = NodePath("../../SoundSFX/DigLoop:playing")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [132]
+"values": [false]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("../../SoundSFX/DigLoop:playing")
+tracks/17/path = NodePath("../SpikeDetect/SpikeDetectionArea:disabled")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -1022,36 +931,24 @@ tracks/17/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/18/type = "value"
+tracks/18/type = "bezier"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("../SpikeDetect/SpikeDetectionArea:disabled")
+tracks/18/path = NodePath(".:material:shader_parameter/precentage")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/19/type = "bezier"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath(".:material:shader_parameter/precentage")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath(".:material:shader_parameter/color")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath(".:material:shader_parameter/color")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -1186,7 +1083,6 @@ tracks/2/keys = {
 _data = {
 &"ABILITY_GET": SubResource("Animation_00eij"),
 &"ATTACK": SubResource("Animation_45rvh"),
-&"DEAD": SubResource("Animation_snams"),
 &"DIG_END": SubResource("Animation_akx0o"),
 &"DIG_START": SubResource("Animation_fbnv4"),
 &"FALL": SubResource("Animation_2cmg6"),
@@ -1233,11 +1129,8 @@ point_count = 3
 offsets = PackedFloat32Array(0.09394904, 0.30732483, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62038666, 1, 1, 1, 0)
 
-[sub_resource type="Curve" id="Curve_ljr7w"]
-_data = [Vector2(0, 0.22193098), 0.0, 0.0, 0, 0, Vector2(0.14121038, 1), 0.0, 0.0, 0, 0, Vector2(0.24207492, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ljr7w"]
+blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
@@ -1394,7 +1287,6 @@ hit_from_inside = true
 
 [node name="DigStartEndParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=679902570]
 modulate = Color(0.5019608, 0.3529412, 0, 1)
-z_index = -1
 position = Vector2(0, -1)
 emitting = false
 amount = 40
@@ -1415,7 +1307,6 @@ color_ramp = SubResource("Gradient_i78gy")
 
 [node name="DigParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=926756774]
 modulate = Color(0.5019608, 0.3529412, 0, 1)
-z_index = -1
 position = Vector2(0, -1)
 emitting = false
 amount = 100
@@ -1429,35 +1320,6 @@ angle_min = -25.0
 angle_max = 25.0
 scale_amount_min = 15.0
 scale_amount_max = 35.0
-color_ramp = SubResource("Gradient_i78gy")
-
-[node name="DeathParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=573906165]
-z_index = 1
-position = Vector2(0, -132)
-emitting = false
-amount = 50
-lifetime = 5.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-lifetime_randomness = 0.1
-draw_order = 1
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 1000.0
-initial_velocity_max = 3000.0
-radial_accel_min = -300.0
-radial_accel_max = 500.0
-tangential_accel_min = -300.0
-tangential_accel_max = 300.0
-damping_min = 1500.0
-damping_max = 2000.0
-angle_min = -25.0
-angle_max = 25.0
-scale_amount_min = 30.0
-scale_amount_max = 50.0
-scale_amount_curve = SubResource("Curve_ljr7w")
-color = Color(0.41960785, 0.7372549, 0.7764706, 1)
 color_ramp = SubResource("Gradient_i78gy")
 
 [node name="TransformPaticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=227839210]
@@ -1488,7 +1350,6 @@ color_ramp = SubResource("Gradient_evk2k")
 anim_offset_max = 1.0
 
 [node name="WalkParticles" type="CPUParticles2D" parent="VisualPivot/Particles" unique_id=981171770]
-z_index = -1
 position = Vector2(97, -1)
 emitting = false
 amount = 30
@@ -1654,7 +1515,6 @@ recevier = NodePath("..")
 [node name="AbilityCacheModule" type="Node" parent="." unique_id=1405290710]
 unique_name_in_owner = true
 script = ExtResource("14_kgtwq")
-abilties = Array[int]([0, 1, 2])
 metadata/_custom_type_script = "uid://bcqjmffcvd5p1"
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=704960730]
@@ -1761,7 +1621,7 @@ one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="HSMMaster/Master/Healthy/Airborn/Fall" unique_id=546628607]
 process_callback = 0
-wait_time = 0.05
+wait_time = 0.07
 one_shot = true
 
 [node name="Jumping" type="Node" parent="HSMMaster/Master/Healthy/Airborn" unique_id=624786871 node_paths=PackedStringArray("fall_state", "ground_state", "jump_state")]

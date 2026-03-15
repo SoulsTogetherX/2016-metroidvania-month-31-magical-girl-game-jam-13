@@ -1,6 +1,5 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://b3bftuwc7kx51"]
 
-[ext_resource type="Texture2D" uid="uid://c4opt8v0siiuy" path="res://assets/sprites/entities/player/spritesheets/Death_Sheet.png" id="1_drn7s"]
 [ext_resource type="Texture2D" uid="uid://g78ocrbh08p" path="res://assets/sprites/entities/player/spritesheets/Hurt Sheet.png" id="1_m5pgj"]
 [ext_resource type="Texture2D" uid="uid://oyfugfht228f" path="res://assets/sprites/entities/player/spritesheets/Dig_End_Sheet.png" id="2_rwky6"]
 [ext_resource type="Texture2D" uid="uid://dnym7i2mrc0ed" path="res://assets/sprites/entities/player/spritesheets/Idle Sheet.png" id="2_yg0vm"]
@@ -8,34 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://v5cw5bj1li2o" path="res://assets/sprites/entities/player/spritesheets/Jump Sheet.png" id="3_drn7s"]
 [ext_resource type="Texture2D" uid="uid://ch1c30h8h6m2b" path="res://assets/sprites/entities/player/spritesheets/Running Sheet.png" id="4_ogcc1"]
 [ext_resource type="Texture2D" uid="uid://c0gigg57fulvg" path="res://assets/sprites/entities/player/spritesheets/Punch_Sheet.png" id="5_ogcc1"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lq70k"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(0, 0, 680, 550)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_grcv1"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(680, 0, 680, 550)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qf7h4"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(1360, 0, 680, 550)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pv243"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(2040, 0, 680, 550)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ths66"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(2720, 0, 680, 550)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3aueb"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(3400, 0, 680, 550)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yqg2e"]
-atlas = ExtResource("1_drn7s")
-region = Rect2(4080, 0, 680, 550)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x7kc"]
 atlas = ExtResource("2_rwky6")
@@ -223,32 +194,6 @@ region = Rect2(3400, 0, 680, 550)
 
 [resource]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lq70k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_grcv1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qf7h4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pv243")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ths66")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3aueb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yqg2e")
-}],
-"loop": true,
-"name": &"dead",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7x7kc")

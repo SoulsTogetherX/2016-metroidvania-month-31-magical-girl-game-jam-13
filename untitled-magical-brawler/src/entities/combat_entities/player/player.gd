@@ -154,4 +154,8 @@ func play_ability_gain_animation() -> void:
 	_gravity_component.disabled = false
 	_hsm_master.disabled = false
 	toggle_player(true)
+	
+	play_animation(
+		GlobalLabels.animations.get_label(GlobalLabels.animations.ACTIONS.IDLE)
+	)
 #endregion

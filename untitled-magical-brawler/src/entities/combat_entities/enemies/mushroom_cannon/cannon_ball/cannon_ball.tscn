@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://c0hi4lgg1uifw"]
 
-[ext_resource type="Texture2D" uid="uid://c0xg7j70qyiji" path="res://assets/icon.svg" id="1_rddx4"]
 [ext_resource type="Script" uid="uid://bbbxgim1sqo7c" path="res://src/entities/combat_entities/enemies/mushroom_cannon/cannon_ball/cannon_ball.gd" id="1_u8cwf"]
+[ext_resource type="Texture2D" uid="uid://dbd4j8wl7nc4d" path="res://assets/sprites/entities/enemies/cannon/Cannon_Ball.png" id="2_3h7re"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="2_ndodm"]
 [ext_resource type="Script" uid="uid://bqoimkovje44w" path="res://src/resources/combat/effects/base_effect.gd" id="4_0ijl2"]
 [ext_resource type="Script" uid="uid://55qwwlruit51" path="res://src/resources/combat/effects/combat_effects/knockback_effect/knockback_effect.gd" id="5_8i0yl"]
 [ext_resource type="Script" uid="uid://cok0d6p3i1fv2" path="res://src/resources/combat/effects/combat_effects/status_effect_effects/apply_status_effect.gd" id="6_dff5x"]
 [ext_resource type="Script" uid="uid://di60apr8dmypo" path="res://src/resources/combat/status_effect/status_effect.gd" id="7_1k08o"]
-[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/particles/oneshot_particles.gd" id="8_gs0l8"]
+[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/additions/oneshot_particles.gd" id="8_gs0l8"]
+[ext_resource type="Script" uid="uid://d0o5yix33abf8" path="res://src/other_nodes/additions/trails.gd" id="9_c2yx5"]
 
 [sub_resource type="Resource" id="Resource_dqm6s"]
 script = ExtResource("5_8i0yl")
@@ -30,10 +31,10 @@ script = ExtResource("6_dff5x")
 status = SubResource("Resource_iwjlg")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ilc4"]
-radius = 62.002018
+radius = 51.156624
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8i0yl"]
-radius = 29.052753
+radius = 10.770329
 
 [sub_resource type="Curve" id="Curve_u8cwf"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
@@ -48,12 +49,24 @@ point_count = 4
 offsets = PackedFloat32Array(0, 0.49791667, 0.82708335, 1)
 colors = PackedColorArray(1, 1, 0, 1, 1, 0.6507289, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0)
 
+[sub_resource type="Curve" id="Curve_3h7re"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_c2yx5"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
+
 [node name="CannonBall" type="Node2D" unique_id=1047017174]
 z_index = 1
 script = ExtResource("1_u8cwf")
 
-[node name="CannonSprite" type="Sprite2D" parent="." unique_id=1248743300]
-texture = ExtResource("1_rddx4")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1248743300]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_3h7re")
+offset = Vector2(-1, 1)
+hframes = 5
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1667105107]
 collision_layer = 4
@@ -76,20 +89,17 @@ shape = SubResource("CircleShape2D_8i0yl")
 
 [node name="ExplodeParticles" type="CPUParticles2D" parent="." unique_id=1781907461]
 unique_name_in_owner = true
-position = Vector2(-10, 3.5)
 emitting = false
-amount = 50
+amount = 500
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 randomness = 0.6
 lifetime_randomness = 0.6
-emission_shape = 1
-emission_sphere_radius = 10.0
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 100.0
-initial_velocity_max = 200.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
 linear_accel_min = -300.0
 linear_accel_max = -200.0
 damping_min = 50.0
@@ -103,4 +113,17 @@ scale_amount_curve = SubResource("Curve_gs0l8")
 color_ramp = SubResource("Gradient_wd6lp")
 script = ExtResource("8_gs0l8")
 
-[connection signal="body_entered" from="Ground Collide" to="." method="_on_ground_collide" unbinds=1]
+[node name="Trail" type="Line2D" parent="." unique_id=1934540914 node_paths=PackedStringArray("root_path")]
+top_level = true
+z_index = -1
+width = 50.0
+width_curve = SubResource("Curve_3h7re")
+gradient = SubResource("Gradient_c2yx5")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("9_c2yx5")
+root_path = NodePath("..")
+
+[connection signal="collision_found" from="HitboxComponent" to="." method="_on_collide"]
+[connection signal="body_entered" from="Ground Collide" to="." method="_on_collide" unbinds=1]

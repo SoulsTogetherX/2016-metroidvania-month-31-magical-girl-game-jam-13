@@ -4,6 +4,7 @@
 background_mode = 3
 tonemap_mode = 1
 tonemap_white = 2.0
+glow_enabled = true
 adjustment_enabled = true
-adjustment_brightness = 0.9
+adjustment_brightness = 1.1
 adjustment_contrast = 1.25

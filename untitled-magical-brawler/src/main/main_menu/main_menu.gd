@@ -2,6 +2,7 @@ extends SceneControllerManager
 
 
 #region Constants
+const MENU_MUSIC_PRELOAD = preload("uid://cyq0r057op4qo")
 const START_SCENE_PATH := "res://src/main/main_menu/start_screen/start_screen.tscn"
 #endregion
 
@@ -11,6 +12,7 @@ const START_SCENE_PATH := "res://src/main/main_menu/start_screen/start_screen.ts
 func _ready() -> void:
 	super()
 	_on_ready_load()
+	SoundManager.swap_music(MENU_MUSIC_PRELOAD)
 #endregion
 
 

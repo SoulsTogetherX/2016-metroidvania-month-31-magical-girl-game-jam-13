@@ -431,6 +431,7 @@ material = SubResource("ShaderMaterial_28vbj")
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_axkgu")
+force_run = null
 _health_module = NodePath("CombatComponents/HealthComponent")
 _status_effect_receiver = NodePath("CombatComponents/StatusEffectReceiver")
 _visual_pivot = NodePath("VisualPivot")

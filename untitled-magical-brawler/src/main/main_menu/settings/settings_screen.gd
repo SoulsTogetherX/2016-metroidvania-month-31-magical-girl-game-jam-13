@@ -22,6 +22,10 @@ enum BUS {
 #region Virtual Methods
 func _ready() -> void:
 	_init_settings()
+	
+	_master_audio_slider.value_changed.connect(_master_changes)
+	_music_slider.value_changed.connect(_music_changes)
+	_sfx_slider.value_changed.connect(_sfx_changes)
 #endregion
 
 
@@ -47,6 +51,19 @@ func _update_settings() -> void:
 	SettingsHolder.set_bus_volume(
 		SettingsHolder.BUS.MUSIC, _music_slider.value
 	)
+	SettingsHolder.set_bus_volume(
+		SettingsHolder.BUS.SFX, _sfx_slider.value
+	)
+
+func _master_changes(val : float) -> void:
+	SettingsHolder.set_bus_volume(
+		SettingsHolder.BUS.MASTER, _master_audio_slider.value
+	)
+func _music_changes(val : float) -> void:
+	SettingsHolder.set_bus_volume(
+		SettingsHolder.BUS.MUSIC, _music_slider.value
+	)
+func _sfx_changes(val : float) -> void:
 	SettingsHolder.set_bus_volume(
 		SettingsHolder.BUS.SFX, _sfx_slider.value
 	)

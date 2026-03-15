@@ -5,6 +5,7 @@ extends Area2D
 @export var env : Environment
 
 @export var expected : float = 1.1
+@export var instant : bool = false
 #endregion
 
 
@@ -34,6 +35,10 @@ func _notification(what: int) -> void:
 #region Private Methods
 func _player_detects() -> void:
 	if _tween:
+		return
+	
+	if instant:
+		env.adjustment_brightness = expected
 		return
 	
 	_tween = create_tween()

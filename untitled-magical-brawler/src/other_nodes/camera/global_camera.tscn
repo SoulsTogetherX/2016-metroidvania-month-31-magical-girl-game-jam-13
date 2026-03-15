@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cx6ju7g612bk7" path="res://src/other_nodes/camera/global_camera.gd" id="1_bgehv"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_y2co5"]
-[ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="3_oc081"]
+[ext_resource type="Script" uid="uid://bcvtyf17lwt7q" path="res://src/other_nodes/room_editor_tools/noise_emitter/noise_emitter_2d.gd" id="3_xddie"]
 
 [node name="GlobalCamera" type="Camera2D" unique_id=1580514438]
 top_level = true
@@ -21,5 +21,5 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="NoiseEmitter2D" type="Node2D" parent="." unique_id=238130607]
 unique_name_in_owner = true
-script = ExtResource("3_oc081")
+script = ExtResource("3_xddie")
 metadata/_custom_type_script = "uid://bhd4nuiu23e7l"

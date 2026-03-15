@@ -134,7 +134,7 @@ func swap_music(
 	)
 
 func toggle_music(pause : bool) -> void:
-	_music_node.stream_paused = pause
+	_music_node.playing = !pause
 #endregion
 
 

@@ -45,9 +45,15 @@ func _force_fade(paused : bool) -> void:
 
 #region Private Methods (On Button Press)
 func _on_resume_game_btn_pressed() -> void:
-	set_paused(false)
+	SaveManager.clear_save_file(
+		SaveManager.DEFAULT_FILE_NAME
+	)
+	Global.main_controller.load_main_menu()
 
 func _on_main_menu_btn_pressed() -> void:
+	SaveManager.gather_save_file(
+		SaveManager.DEFAULT_FILE_NAME
+	)
 	Global.main_controller.load_main_menu()
 #endregion
 

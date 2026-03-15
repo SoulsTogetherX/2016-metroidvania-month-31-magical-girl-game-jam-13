@@ -5,15 +5,12 @@
 [ext_resource type="Shader" uid="uid://c4pwni02nxw7f" path="res://assets/shaders/soild_color_shader.gdshader" id="1_xh2ao"]
 [ext_resource type="Script" uid="uid://cxla1cqkag8lu" path="res://src/other_nodes/componets/combat/damage_detection/hitbox_component.gd" id="1_xmjyj"]
 [ext_resource type="Texture2D" uid="uid://cmrbwr8pkunel" path="res://assets/sprites/particles/transform_particles.png" id="4_2mb31"]
-[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/particles/oneshot_particles.gd" id="5_bfv2b"]
+[ext_resource type="Script" uid="uid://ds30xp8x2m74j" path="res://src/other_nodes/additions/oneshot_particles.gd" id="5_bfv2b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xh2ao"]
 shader = ExtResource("1_xh2ao")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/precentage = 0.0
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xh2ao"]
-blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_2lgox"]
 interpolation_mode = 2
@@ -220,7 +217,6 @@ offset = Vector2(0, 19.716978)
 [node name="Light" type="TextureRect" parent="." unique_id=1393679278]
 modulate = Color(1, 0.43529412, 0.85882354, 1)
 z_index = 1
-material = SubResource("CanvasItemMaterial_xh2ao")
 offset_left = -49.999
 offset_top = -49.999
 offset_right = 150.001

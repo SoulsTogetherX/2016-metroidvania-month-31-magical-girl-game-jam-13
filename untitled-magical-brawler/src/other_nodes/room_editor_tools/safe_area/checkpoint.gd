@@ -2,16 +2,9 @@
 class_name CheckPoint extends Area2D
 
 
-#region External Variables
-@export var info : PlayerPositionResource
-#endregion
-
-
 
 #region Virtual Methods
 func _ready() -> void:
-	info = PlayerPositionResource.new()
-	info.exit_pos = global_position
 	monitoring = true
 	monitorable = false
 	
@@ -31,5 +24,5 @@ func _on_player_enter(player : Node2D) -> void:
 	
 	var room_manager : RoomManager = (Global.local_controller as RoomManager)
 	if room_manager != null:
-		room_manager.register_checkpoint(info)
+		room_manager.register_checkpoint(global_position)
 #endregion

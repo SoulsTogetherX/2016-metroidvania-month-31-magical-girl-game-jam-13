@@ -12,6 +12,32 @@ const ABILITY_TYPE := AbilityData.ABILITY_TYPE
 
 
 
+#region Virtual Methods
+func _ready() -> void:
+	add_to_group(
+		GlobalLabels.groups.SAVEABLE_GROUP_NAME
+	)
+#endregion
+
+
+#region Private Methods (Save/Load)
+func _request_save() -> void:
+	SaveManager.set_key(
+		SaveManager.SAVE_KEYS.ABLITIES,
+		abilties
+	)
+func _request_load() -> void:
+	var loaded = SaveManager.get_key(
+		SaveManager.SAVE_KEYS.ABLITIES
+	)
+	
+	if loaded == null:
+		abilties = []
+		return
+	abilties = loaded
+#endregion
+
+
 #region Public Methods
 func register_ability(ability : ABILITY_TYPE) -> void:
 	if ability in abilties:

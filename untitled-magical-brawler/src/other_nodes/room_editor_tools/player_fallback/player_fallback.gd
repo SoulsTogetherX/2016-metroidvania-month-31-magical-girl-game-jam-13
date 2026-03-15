@@ -2,19 +2,11 @@
 class_name PlayerFallback extends Marker2D
 
 
-#region External Variables
-@export_group("Entering Player")
-@export var info : PlayerPositionResource
-#endregion
-
-
 
 #region Virtual Methods
 func _ready() -> void:
-	info.exit_pos = global_position
 	if Engine.is_editor_hint():
 		return
-	
 	_register_self()
 #endregion
 
@@ -23,5 +15,5 @@ func _ready() -> void:
 func _register_self() -> void:
 	var room_manager : RoomManager = (Global.local_controller as RoomManager)
 	if room_manager != null:
-		room_manager.register_failback(info)
+		room_manager.register_fail_back(global_position)
 #endregion

@@ -6,19 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://c7rwt55t1fy25" path="res://assets/sprites/background/light_background/MidGround.png" id="7_icspa"]
 [ext_resource type="Texture2D" uid="uid://cmiku532lgr0g" path="res://assets/sprites/background/light_background/ForeGround.png" id="8_85hdr"]
 
-[sub_resource type="Gradient" id="Gradient_grdt1"]
+[sub_resource type="Gradient" id="Gradient_cbxrw"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_raj1b"]
-gradient = SubResource("Gradient_grdt1")
+gradient = SubResource("Gradient_cbxrw")
 fill_from = Vector2(1, 0)
 fill_to = Vector2(0.7709402, 0.6786325)
 
-[sub_resource type="Gradient" id="Gradient_raj1b"]
+[sub_resource type="Gradient" id="Gradient_slmfv"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_aipk8"]
-gradient = SubResource("Gradient_raj1b")
+gradient = SubResource("Gradient_slmfv")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
@@ -46,18 +46,15 @@ z_index = -3
 [node name="Sky" type="Parallax2D" parent="." unique_id=170141071]
 texture_filter = 1
 scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(15360, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=1808094265]
 modulate = Color(0, 0.6666667, 0.94509804, 1)
-position = Vector2(0, -700)
-scale = Vector2(4, 4)
+position = Vector2(3840, -704)
+scale = Vector2(8, 4)
 texture = ExtResource("1_5gtmr")
 
-[node name="SkyObjects" type="Parallax2D" parent="." unique_id=1086948004]
-texture_filter = 1
-scroll_scale = Vector2(0, 0)
-
-[node name="TextureRect" type="TextureRect" parent="SkyObjects" unique_id=1992083216]
+[node name="TopDitter" type="TextureRect" parent="Sky" unique_id=1992083216]
 modulate = Color(0, 0, 0, 0.272)
 offset_left = -3840.0
 offset_top = -2860.0
@@ -66,15 +63,19 @@ offset_bottom = -1780.0
 scale = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_raj1b")
 
-[node name="SkyDitter" type="Parallax2D" parent="." unique_id=1210153374]
-texture_filter = 1
-scroll_scale = Vector2(0, 0)
+[node name="TopDitterFliped" type="TextureRect" parent="Sky" unique_id=1249166896]
+modulate = Color(0, 0, 0, 0.272)
+offset_left = 11520.0
+offset_top = -2860.0
+offset_right = 13440.0
+offset_bottom = -1780.0
+scale = Vector2(-4, 4)
+texture = SubResource("GradientTexture2D_raj1b")
 
-[node name="TextureRect" type="TextureRect" parent="SkyDitter" unique_id=81745402]
+[node name="BottomDitter" type="TextureRect" parent="Sky" unique_id=81745402]
 modulate = Color(1, 1, 1, 0.4)
 offset_left = -3840.0
 offset_top = -2860.0
-offset_right = -1920.0
 offset_bottom = -1780.0
 scale = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_aipk8")
@@ -103,7 +104,7 @@ texture = ExtResource("5_3w01p")
 
 [node name="Cloud Ditter" type="Parallax2D" parent="." unique_id=168937923]
 texture_filter = 1
-scroll_scale = Vector2(0.1, 0.1)
+scroll_scale = Vector2(0.1, 0.12)
 repeat_size = Vector2(7680, 0)
 
 [node name="TextureRect" type="TextureRect" parent="Cloud Ditter" unique_id=1358637165]
@@ -130,6 +131,13 @@ texture = ExtResource("7_icspa")
 texture_filter = 1
 scroll_scale = Vector2(0.2, 0.15)
 repeat_size = Vector2(7680, 0)
+
+[node name="ColorRect" type="ColorRect" parent="ForeGround" unique_id=630435228]
+offset_left = -3840.0
+offset_top = 1460.0
+offset_right = 4192.0
+offset_bottom = 5056.0
+color = Color(0.24985075, 0.24985075, 0.24985075, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="ForeGround" unique_id=669512501]
 modulate = Color(0, 0, 0, 1)

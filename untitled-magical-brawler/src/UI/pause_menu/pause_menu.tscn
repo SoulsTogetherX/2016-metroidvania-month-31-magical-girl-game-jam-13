@@ -86,7 +86,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="ResumeGameBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer" unique_id=267373742]
+[node name="Quit&Save" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer" unique_id=1437245593]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
@@ -95,7 +95,7 @@ background = SubResource("StyleBoxFlat_81gm5")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/ResumeGameBtn" unique_id=1910388344]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/Quit&Save" unique_id=1826007627]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -103,13 +103,14 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/ResumeGameBtn/Margin" unique_id=541170948]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/Quit&Save/Margin" unique_id=1593911032]
+texture_filter = 1
 layout_mode = 2
-text = "Resume"
+text = "Quit & Save"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuBtn" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer" unique_id=1437245593]
+[node name="EraseSave" type="Container" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer" unique_id=267373742]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
@@ -118,7 +119,7 @@ background = SubResource("StyleBoxFlat_81gm5")
 colors = PackedColorArray(0.525, 0.329, 0.808, 1, 0.611, 0.441, 0.886, 1, 0.318, 0.247, 0.565, 1)
 metadata/_custom_type_script = "uid://8jyk6thl41yx"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/MainMenuBtn" unique_id=1826007627]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/EraseSave" unique_id=1910388344]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -126,9 +127,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/MainMenuBtn/Margin" unique_id=1593911032]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/EraseSave/Margin" unique_id=541170948]
+texture_filter = 1
 layout_mode = 2
-text = "Main Menu"
+text = "Erase Save"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -175,5 +177,5 @@ mouse_default_cursor_shape = 2
 max_value = 1.0
 step = 0.01
 
-[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/ResumeGameBtn" to="." method="_on_resume_game_btn_pressed"]
-[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/Quit&Save" to="." method="_on_main_menu_btn_pressed"]
+[connection signal="press_vaild" from="MarginContainer/VBoxContainer/MaxSizeContainer/VBoxContainer/HBoxContainer/EraseSave" to="." method="_on_resume_game_btn_pressed"]

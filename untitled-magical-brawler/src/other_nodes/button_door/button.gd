@@ -35,13 +35,14 @@ const BUTTON_SHELL_UNPRESSED_Y := -87.0
 @onready var _shell: Sprite2D = %Shell
 
 @onready var _press_sfx := %PressSFX
-@onready var _emitter_2d: PhantomCameraNoiseEmitter2D = %NoiseEmitter2D
+@onready var _press_area: Area2D = %PressArea
 #endregion
 
 
 
 #region Virtual Methods
 func _ready() -> void:
+	_press_area.monitoring = false
 	_update_color()
 	_update_shell()
 	
@@ -53,6 +54,14 @@ func _ready() -> void:
 	var control := Global.local_controller
 	if control is RoomManager:
 		control.events_changed.connect(_update_shell)
+	
+	_after_ready()
+
+func _after_ready() -> void:
+	_press_area.monitoring = false
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	_press_area.monitoring = true
 #endregion
 
 
@@ -98,5 +107,10 @@ func _press_button() -> void:
 #region Public Methods
 func play_effect() -> void:
 	_press_sfx.play()
-	_emitter_2d.emit()
+	Global.camera.screen_shake(
+		GlobalCamera.create_noise(
+			100, 100
+		),
+		1.0, 0.0, 0.7
+	)
 #endregion

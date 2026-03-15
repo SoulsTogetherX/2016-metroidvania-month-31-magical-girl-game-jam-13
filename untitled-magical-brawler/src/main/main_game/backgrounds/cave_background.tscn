@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://cp65gw8xmfivl"]
+
+[ext_resource type="Texture2D" uid="uid://c1hvfjxa8njcx" path="res://assets/sprites/background/cave_background/back_color.png" id="1_brerb"]
+[ext_resource type="Texture2D" uid="uid://uuvcob05kndc" path="res://assets/sprites/background/cave_background/cave_layer_1.png" id="2_6yvio"]
+[ext_resource type="Texture2D" uid="uid://c0kw0e14msu34" path="res://assets/sprites/background/cave_background/cave_layer_2.png" id="3_1cekc"]
+[ext_resource type="Texture2D" uid="uid://2hgsrp2vxuoq" path="res://assets/sprites/background/cave_background/cave_layer_3.png" id="4_31lrx"]
+[ext_resource type="Texture2D" uid="uid://xewersuyjbs" path="res://assets/sprites/background/cave_background/cave_layer_4.png" id="5_ntks2"]
+[ext_resource type="Texture2D" uid="uid://cldvcqtf3bora" path="res://assets/sprites/background/cave_background/foreground.png" id="6_al7m2"]
+
+[sub_resource type="Gradient" id="Gradient_grdt1"]
+offsets = PackedFloat32Array(0, 0.31978798, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.78621906, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6yvio"]
+gradient = SubResource("Gradient_grdt1")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0.7709402, 0.6786325)
+
+[sub_resource type="Gradient" id="Gradient_raj1b"]
+colors = PackedColorArray(0.21230498, 0.2123048, 0.21230483, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1cekc"]
+gradient = SubResource("Gradient_raj1b")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_31lrx"]
+gradient = SubResource("Gradient_grdt1")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+repeat = 2
+
+[sub_resource type="Gradient" id="Gradient_6yvio"]
+offsets = PackedFloat32Array(0, 0.28798586, 0.75795054)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ntks2"]
+gradient = SubResource("Gradient_6yvio")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+repeat = 2
+
+[sub_resource type="Gradient" id="Gradient_1cekc"]
+offsets = PackedFloat32Array(0, 0.49646643, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_al7m2"]
+gradient = SubResource("Gradient_1cekc")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+repeat = 2
+
+[node name="CaveBackground" type="Node2D" unique_id=1684794925]
+z_index = -3
+
+[node name="BackColor" type="Parallax2D" parent="." unique_id=2022688707]
+texture_filter = 1
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(7680, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackColor" unique_id=350813650]
+modulate = Color(0.008406031, 0.012328845, 0.018493269, 1)
+position = Vector2(0, -700)
+scale = Vector2(4, 4)
+texture = ExtResource("1_brerb")
+
+[node name="TopDitter" type="TextureRect" parent="BackColor" unique_id=2013598439]
+modulate = Color(0, 0, 0, 0.272)
+offset_left = -3840.0
+offset_top = -2860.0
+offset_right = -1920.0
+offset_bottom = -1780.0
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_6yvio")
+
+[node name="BottomDitter" type="TextureRect" parent="BackColor" unique_id=6191119]
+modulate = Color(1, 1, 1, 0.4)
+offset_left = -3840.0
+offset_top = -2860.0
+offset_right = -1920.0
+offset_bottom = -1780.0
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_1cekc")
+
+[node name="CaveLayer1" type="Parallax2D" parent="." unique_id=2012623369]
+texture_filter = 1
+scroll_scale = Vector2(0.05, 0.02)
+repeat_size = Vector2(7680, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CaveLayer1" unique_id=1882743274]
+modulate = Color(0.20677769, 0.25637352, 0.31219447, 1)
+position = Vector2(0, -700)
+scale = Vector2(4, 4)
+texture = ExtResource("2_6yvio")
+
+[node name="CaveLayer2" type="Parallax2D" parent="." unique_id=1155261096]
+texture_filter = 1
+scroll_scale = Vector2(0.1, 0.04)
+repeat_size = Vector2(7680, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CaveLayer2" unique_id=341569677]
+modulate = Color(0.14407916, 0.18179625, 0.22424749, 1)
+position = Vector2(0, -700)
+scale = Vector2(4, 4)
+texture = ExtResource("3_1cekc")
+
+[node name="DitterLayer1" type="Parallax2D" parent="." unique_id=144654719]
+texture_filter = 1
+scroll_scale = Vector2(0.1, 0.04)
+repeat_size = Vector2(7680, 0)
+
+[node name="TextureRect" type="TextureRect" parent="DitterLayer1" unique_id=2102560185]
+modulate = Color(0.30544624, 0.3054462, 0.3054462, 0.44313726)
+offset_left = -3840.0
+offset_top = -2860.0
+offset_right = -1920.0
+offset_bottom = -1780.0
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_31lrx")
+
+[node name="CaveLayer3" type="Parallax2D" parent="." unique_id=1077030355]
+texture_filter = 1
+scroll_scale = Vector2(0.15, 0.06)
+repeat_size = Vector2(7680, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CaveLayer3" unique_id=1214048879]
+modulate = Color(0.2591076, 0.31861773, 0.3855974, 1)
+position = Vector2(0, -700)
+scale = Vector2(4, 4)
+texture = ExtResource("4_31lrx")
+
+[node name="CaveLayer4" type="Parallax2D" parent="." unique_id=109390090]
+texture_filter = 1
+scroll_scale = Vector2(0.2, 0.08)
+repeat_size = Vector2(7680, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CaveLayer4" unique_id=5943078]
+modulate = Color(0.33361515, 0.4072413, 0.49010885, 1)
+position = Vector2(0, -700)
+scale = Vector2(4, 4)
+texture = ExtResource("5_ntks2")
+
+[node name="DitterLayer2" type="Parallax2D" parent="." unique_id=824470751]
+texture_filter = 1
+scroll_scale = Vector2(0.1, 0.04)
+repeat_size = Vector2(7680, 0)
+
+[node name="TextureRect" type="TextureRect" parent="DitterLayer2" unique_id=2044741099]
+modulate = Color(0, 0, 0, 0.634)
+offset_left = -3840.0
+offset_top = -2860.0
+offset_right = -1920.0
+offset_bottom = -1780.0
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_ntks2")
+
+[node name="Foreground" type="Parallax2D" parent="." unique_id=1427683935]
+texture_filter = 1
+scroll_scale = Vector2(0.25, 0.05)
+repeat_size = Vector2(7680, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=1027933026]
+modulate = Color(0.08323205, 0.10942119, 0.13889752, 1)
+position = Vector2(0, -700)
+scale = Vector2(4, 4)
+texture = ExtResource("6_al7m2")
+
+[node name="ColorRect" type="ColorRect" parent="Foreground" unique_id=1692820029]
+offset_left = -3843.0
+offset_top = 1460.0
+offset_right = 3840.0
+offset_bottom = 4985.0
+color = Color(0.08235294, 0.10980392, 0.13725491, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Foreground" unique_id=308531577]
+offset_left = -3843.0
+offset_top = -6385.0
+offset_right = 3840.0
+offset_bottom = -2860.0
+color = Color(0, 0, 0, 1)
+
+[node name="DitterLayer3" type="Parallax2D" parent="." unique_id=446872877]
+texture_filter = 1
+scroll_scale = Vector2(0.1, 0.04)
+repeat_size = Vector2(7680, 0)
+
+[node name="TextureRect" type="TextureRect" parent="DitterLayer3" unique_id=1569240122]
+modulate = Color(0.10224319, 0.10224321, 0.10224321, 0.12941177)
+offset_left = -3840.0
+offset_top = -2860.0
+offset_right = -1920.0
+offset_bottom = -1780.0
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_al7m2")

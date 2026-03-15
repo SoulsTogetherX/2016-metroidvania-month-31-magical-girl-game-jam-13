@@ -12,7 +12,7 @@ func _init() -> void:
 func get_ability_name() -> String:
 	return "Spare Foot of Snek"
 func get_description() -> String:
-	return "A creepy method to jump off walls."
+	return "Three toed, three use, walljump. \n...creepy."
 
 func get_icon() -> Texture2D:
 	return preload("res://assets/sprites/other/upgrades/wall_jump_upgrade.tres")
