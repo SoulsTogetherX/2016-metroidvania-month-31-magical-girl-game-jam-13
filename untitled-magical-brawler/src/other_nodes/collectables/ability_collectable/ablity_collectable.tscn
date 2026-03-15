@@ -212,7 +212,7 @@ unique_name_in_owner = true
 z_index = 2
 material = SubResource("ShaderMaterial_xh2ao")
 texture = ExtResource("1_2mb31")
-offset = Vector2(0, 19.716978)
+offset = Vector2(0, 20)
 
 [node name="Light" type="TextureRect" parent="." unique_id=1393679278]
 modulate = Color(1, 0.43529412, 0.85882354, 1)

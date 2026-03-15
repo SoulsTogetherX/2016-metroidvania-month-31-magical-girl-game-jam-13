@@ -57,6 +57,7 @@ size = Vector2(27040, 6400)
 [node name="Room" type="Node2D" unique_id=539753159]
 script = ExtResource("1_iw01r")
 env = ExtResource("1_ediwf")
+echo = true
 music = "uid://c4jq76dpm7t2i"
 background = "uid://cp65gw8xmfivl"
 

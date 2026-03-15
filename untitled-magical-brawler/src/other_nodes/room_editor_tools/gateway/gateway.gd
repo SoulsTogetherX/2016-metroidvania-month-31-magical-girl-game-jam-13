@@ -33,7 +33,14 @@ func _ready() -> void:
 
 func _after_ready() -> void:
 	monitoring = false
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	monitoring = true
 #endregion
 

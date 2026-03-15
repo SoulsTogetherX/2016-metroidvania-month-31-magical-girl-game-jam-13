@@ -57,14 +57,14 @@ func _update_settings() -> void:
 
 func _master_changes(val : float) -> void:
 	SettingsHolder.set_bus_volume(
-		SettingsHolder.BUS.MASTER, _master_audio_slider.value
+		SettingsHolder.BUS.MASTER, val
 	)
 func _music_changes(val : float) -> void:
 	SettingsHolder.set_bus_volume(
-		SettingsHolder.BUS.MUSIC, _music_slider.value
+		SettingsHolder.BUS.MUSIC, val
 	)
 func _sfx_changes(val : float) -> void:
 	SettingsHolder.set_bus_volume(
-		SettingsHolder.BUS.SFX, _sfx_slider.value
+		SettingsHolder.BUS.SFX, val
 	)
 #endregion

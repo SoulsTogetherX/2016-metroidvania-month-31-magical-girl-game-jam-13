@@ -61,10 +61,10 @@ fill_to = Vector2(0.571, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbv0u"]
 shader = ExtResource("5_b2700")
-shader_parameter/angle = 1.4849999999999999
+shader_parameter/angle = 1.485
 shader_parameter/position = 0.53
 shader_parameter/spread = 0.5
-shader_parameter/cutoff = 0.18700005638250006
+shader_parameter/cutoff = 0.18700005638250008
 shader_parameter/falloff = 0.3190000151525
 shader_parameter/edge_fade = 0.15
 shader_parameter/speed = 1.0
@@ -183,6 +183,7 @@ size = Vector2(14592, 8000)
 [node name="Room" type="Node2D" unique_id=539753159]
 script = ExtResource("1_pfccr")
 env = ExtResource("20_pfccr")
+echo = true
 music = "uid://c4jq76dpm7t2i"
 background = "uid://cp65gw8xmfivl"
 

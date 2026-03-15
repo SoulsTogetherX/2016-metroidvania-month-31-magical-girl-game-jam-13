@@ -3,9 +3,10 @@ extends Node
 
 #region Bus Names
 enum BUS_TYPE {
-	MASTER,
-	MUSIC,
-	SFX
+	MASTER = 0,
+	MUSIC = 1,
+	SFXWithoutEffects = 2,
+	SFX = 3
 }
 #endregion
 
@@ -35,6 +36,8 @@ func _get_bus_name(bus : BUS_TYPE) -> StringName:
 			return &"Master"
 		BUS_TYPE.MUSIC:
 			return &"Music"
+		BUS_TYPE.SFXWithoutEffects:
+			return &"SFXWithoutEffects"
 		BUS_TYPE.SFX:
 			return &"SFX"
 	return &""
@@ -43,6 +46,12 @@ func _get_index() -> int:
 	if _free_index.is_empty():
 		return _sound_effects.size()
 	return _free_index.pop_back()
+
+func _create_echo() -> AudioEffectDelay:
+	var effect := AudioEffectDelay.new()
+	effect.tap1_delay_ms = 100
+	effect.tap2_delay_ms = 250
+	return effect
 
 func _finish_audio(idx : int) -> void:
 	var audio : AudioStreamPlayer = _sound_effects.get(idx)
@@ -122,8 +131,7 @@ func swap_music(
 	old_tw.tween_method(
 		_set_audio_linear.bind(old_music),
 		db_to_linear(old_music.volume_db),
-		0.0,
-		trans_time
+		0.0, trans_time
 	)
 	old_tw.tween_callback(old_music.queue_free)
 	
@@ -182,4 +190,21 @@ func pitch_music(
 		pitch,
 		trans_time
 	)
+
+func toggle_echo(toggle : bool = false) -> void:
+	var has_effect := (AudioServer.get_bus_effect_count(
+		BUS_TYPE.SFX
+	) > 0)
+	
+	if toggle:
+		if !has_effect:
+			AudioServer.add_bus_effect(
+				BUS_TYPE.SFX,
+				_create_echo(), 0
+			)
+		return
+	elif has_effect:
+		AudioServer.remove_bus_effect(
+			BUS_TYPE.SFX, 0
+		)
 #endregion

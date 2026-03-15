@@ -13,7 +13,8 @@ enum SAVE_KEYS {
 	ROOM,
 	ABLITIES,
 	POSITION	,
-	EVENTS	
+	EVENTS,
+	SETTINGS
 }
 #endregion
 
@@ -24,10 +25,12 @@ var _loaded_data : Dictionary
 
 
 
+#region Virtual Methods
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_WM_CLOSE_REQUEST:
 			gather_save_file(DEFAULT_FILE_NAME)
+#endregion
 
 
 #region Private Methods
@@ -48,6 +51,10 @@ func _request_load() -> void:
 
 
 #region Public Methods (FileAccess)
+func file_exists(save_name : String) -> bool:
+	var file_path := "%s/%s.save" % [FILE_FOLDER, save_name]
+	return FileAccess.file_exists(file_path)
+
 func load_file(save_name : String) -> void:
 	var file_path := "%s/%s.save" % [FILE_FOLDER, save_name]
 	

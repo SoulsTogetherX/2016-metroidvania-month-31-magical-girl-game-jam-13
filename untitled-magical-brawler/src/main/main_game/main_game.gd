@@ -188,6 +188,8 @@ func change_room_to_path(
 	else:
 		clear_music()
 	
+	SoundManager.toggle_echo(current_room.echo)
+	
 	var pos : Vector2 
 	if to_id != -1:
 		pos = _get_gateway_pos(gateway)

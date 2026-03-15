@@ -16,10 +16,10 @@ collision_mask = 4
 unique_name_in_owner = true
 stream = ExtResource("2_qeuck")
 volume_db = 10.0
-bus = &"SFX"
+bus = &"SFXWithoutEffects"
 
 [node name="ImpactSound" type="AudioStreamPlayer" parent="." unique_id=427448090]
 unique_name_in_owner = true
 stream = ExtResource("3_q70q6")
 pitch_scale = 0.8
-bus = &"SFX"
+bus = &"SFXWithoutEffects"

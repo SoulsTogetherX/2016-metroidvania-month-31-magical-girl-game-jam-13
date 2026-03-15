@@ -12,7 +12,16 @@ const START_SCENE_PATH := "res://src/main/main_menu/start_screen/start_screen.ts
 func _ready() -> void:
 	super()
 	_on_ready_load()
+	
 	SoundManager.swap_music(MENU_MUSIC_PRELOAD)
+	SoundManager.toggle_echo(false)
+	
+	await get_tree().physics_frame
+	
+	if SaveManager.file_exists(SaveManager.DEFAULT_FILE_NAME):
+		SaveManager.load_file(SaveManager.DEFAULT_FILE_NAME)
+		return
+	SaveManager.clear_save_file(SaveManager.DEFAULT_FILE_NAME)
 #endregion
 
 
